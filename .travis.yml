@@ -6,10 +6,10 @@ script: ant integracion-continua
 
 notifications:
     email:
-    recipients:
-        - cefernandez@fi.uba.ar
-        - gim.andr26@gmail.com
-        - johnny69m.22@gmail.com
-        - ignacio27garcia@gmail.com
-    on_success: never
-    on_failure: always
+        recipients:
+            - cefernandez@fi.uba.ar
+            - gim.andr26@gmail.com
+            - johnny69m.22@gmail.com
+            - ignacio27garcia@gmail.com
+        on_success: never
+        on_failure: always
