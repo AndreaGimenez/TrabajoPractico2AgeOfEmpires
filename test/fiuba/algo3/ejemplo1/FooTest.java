@@ -25,7 +25,7 @@ public class FooTest {
 	public void failure(){
         Foo foo = new Foo();
         String result = foo.doBar();
-        assertEquals("Bar", result);
+        assertEquals("mar", result);
 	}
 	
 
