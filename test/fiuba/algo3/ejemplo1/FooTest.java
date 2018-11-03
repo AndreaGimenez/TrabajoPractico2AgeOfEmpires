@@ -12,21 +12,4 @@ public class FooTest {
         String result = foo.doFoo();
         assertEquals("Foo", result);
 	}
-	
-	
-	@Test
-	public void doBarShouldReturnBar(){
-        Foo foo = new Foo();
-        String result = foo.doBar();
-        assertEquals("Bar", result);
-	}
-	
-	@Test
-	public void failure(){
-        Foo foo = new Foo();
-        String result = foo.doBar();
-        assertEquals("mar", result);
-	}
-	
-
 }
