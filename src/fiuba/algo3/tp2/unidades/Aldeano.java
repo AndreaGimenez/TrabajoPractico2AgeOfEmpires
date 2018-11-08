@@ -5,14 +5,19 @@ import fiuba.algo3.tp2.espacio.punto.Punto;
 import fiuba.algo3.tp2.movimiento.Direccion;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.movimiento.Movimiento;
+import fiuba.algo3.tp2.movimiento.Posicionable;
 
 
-public class Aldeano extends Unidad implements Movible{
+public class Aldeano extends Unidad implements Movible,Posicionable{
 	
 	private Movimiento movimiento;
 	
 	public Aldeano(Movimiento movimiento) {
 		this.movimiento = movimiento;
+	}
+
+	public Aldeano() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
