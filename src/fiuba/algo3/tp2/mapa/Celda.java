@@ -2,27 +2,36 @@ package fiuba.algo3.tp2.mapa;
 
 public class Celda {
 	
-	private boolean estaOcupada;
+	private Posicionable posicionable;
 	
 	public Celda() {
-		estaOcupada = false;
+		posicionable = null;
+	}
+	
+	private Posicionable getPosicionable() {
+		return posicionable;
 	}
 
 	public boolean estaOcupada() {
-		return estaOcupada;
+		return (posicionable != null);
 	}
 
-	public void ocupar() throws CeldaOcupadaException {
+	public void ocupar(Posicionable posicionable) throws CeldaOcupadaException {
 		
 		if (estaOcupada()) {
 			throw new CeldaOcupadaException();
 		}
 		
-		estaOcupada = true;
+		this.posicionable = posicionable;
+	}
+	
+	public void ocupar(Celda celda) throws CeldaOcupadaException {
+		
+		ocupar(celda.getPosicionable());
 	}
 
 	public void liberar() {
 		
-		estaOcupada = false;
+		posicionable = null;
 	}
 }

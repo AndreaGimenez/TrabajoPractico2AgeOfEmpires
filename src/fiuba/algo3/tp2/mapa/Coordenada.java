@@ -18,4 +18,12 @@ public class Coordenada {
 	public int getY() {
 		return coordenadaY;
 	}
+
+	public Coordenada sumar(Coordenada coordenadaOrigen) {
+		
+		Integer coordenadaX = this.coordenadaX + coordenadaOrigen.getX();
+		Integer coordenadaY = this.coordenadaY + coordenadaOrigen.getY();
+		
+		return new Coordenada(coordenadaX, coordenadaY);
+	}
 }

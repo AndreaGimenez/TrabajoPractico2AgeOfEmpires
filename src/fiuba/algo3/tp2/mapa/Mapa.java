@@ -26,12 +26,12 @@ public class Mapa {
 		}
 	}
 	
-	public void posicionar(Aldeano aldeano, Coordenada coordenada) throws CeldaOcupadaException, CeldaInexistenteException{
+	public void posicionar(Posicionable posicionable, Coordenada coordenada) throws CeldaOcupadaException, CeldaInexistenteException{
 		
 		verificarCelda(coordenada);
 		
 		Celda celda = obtenerCelda(coordenada);		
-		celda.ocupar();
+		celda.ocupar(posicionable);
 	}
 
 	private void verificarCelda(Coordenada coordenada) throws CeldaInexistenteException {
@@ -55,7 +55,7 @@ public class Mapa {
 		Celda origen = celdas[coordenadaOrigen.getX()][coordenadaOrigen.getY()];
 		Celda destino = celdas[coordenadaDestino.getX()][coordenadaDestino.getY()];
 		
-		destino.ocupar();
+		destino.ocupar(origen);
 		origen.liberar();
 	}
 }

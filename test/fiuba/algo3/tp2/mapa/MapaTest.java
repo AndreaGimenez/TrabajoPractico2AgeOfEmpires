@@ -1,4 +1,4 @@
-package MapaTest;
+package fiuba.algo3.tp2.mapa;
 
 import static org.junit.Assert.assertTrue;
 
