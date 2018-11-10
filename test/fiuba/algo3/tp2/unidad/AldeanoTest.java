@@ -24,11 +24,10 @@ public class AldeanoTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Aldeano aldeano = new Aldeano();
-		aldeano.posicionar(new Coordenada(5, 2), mapa);
+		Aldeano aldeano = new Aldeano(new Coordenada(5, 2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		aldeano.posicionar(new Coordenada(5, 2), mapa);
+		Aldeano otroAldeano = new Aldeano(new Coordenada(5, 2), mapa);
 	}
 	
 	@Test
@@ -36,16 +35,12 @@ public class AldeanoTest {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano();
-		Aldeano otroAldeano = new Aldeano();
-		
-		aldeano.posicionar(new Coordenada(2,1), mapa);
+		Aldeano aldeano = new Aldeano(new Coordenada(2,1), mapa);
 		
 		aldeano.mover(new DireccionDerecha(),mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		otroAldeano.posicionar(new Coordenada(2,1), mapa);
-		
+		Aldeano otroAldeano = new Aldeano(new Coordenada(2,1), mapa);
 	}
 	
 	@Test
@@ -53,14 +48,12 @@ public class AldeanoTest {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano();
-		Aldeano otroAldeano = new Aldeano();
+		Aldeano aldeano = new Aldeano(new Coordenada(2,1), mapa);
 		
-		aldeano.posicionar(new Coordenada(2,1), mapa);
 		aldeano.mover(new DireccionIzquierda(),mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		otroAldeano.posicionar(new Coordenada(1,1), mapa);
+		Aldeano otroAldeano = new Aldeano(new Coordenada(1,1), mapa);
 	}
 	
 	@Test
@@ -68,14 +61,12 @@ public class AldeanoTest {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano();
-		Aldeano otroAldeano = new Aldeano();
+		Aldeano aldeano = new Aldeano(new Coordenada(2,1), mapa);
 		
-		aldeano.posicionar(new Coordenada(2,1), mapa);
 		aldeano.mover(new DireccionArriba(),mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		otroAldeano.posicionar(new Coordenada(2,2), mapa);
+		Aldeano otroAldeano = new Aldeano(new Coordenada(2,2), mapa);
 	}
 	
 	@Test
@@ -83,14 +74,12 @@ public class AldeanoTest {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano();
-		Aldeano otroAldeano = new Aldeano();
+		Aldeano aldeano = new Aldeano(new Coordenada(2,1), mapa);
 		
-		aldeano.posicionar(new Coordenada(2,1), mapa);
 		aldeano.mover(new DireccionAbajo(),mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		otroAldeano.posicionar(new Coordenada(2,0), mapa);
+		Aldeano otroAldeano = new Aldeano(new Coordenada(2,0), mapa);
 	}
 	
 	@Test
@@ -98,14 +87,12 @@ public class AldeanoTest {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano();
-		Aldeano otroAldeano = new Aldeano();
+		Aldeano aldeano = new Aldeano(new Coordenada(2,1), mapa);
 		
-		aldeano.posicionar(new Coordenada(2,1), mapa);
 		aldeano.mover(new DireccionArribaDerecha(),mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		otroAldeano.posicionar(new Coordenada(3,2), mapa);
+		Aldeano otroAldeano = new Aldeano(new Coordenada(3,2), mapa);
 	}
 	
 	@Test
@@ -113,14 +100,12 @@ public class AldeanoTest {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano();
-		Aldeano otroAldeano = new Aldeano();
+		Aldeano aldeano = new Aldeano(new Coordenada(2,1), mapa);
 		
-		aldeano.posicionar(new Coordenada(2,1), mapa);
 		aldeano.mover(new DireccionAbajoDerecha(),mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		otroAldeano.posicionar(new Coordenada(1,2), mapa);
+		Aldeano otroAldeano = new Aldeano(new Coordenada(1,2), mapa);
 	}
 	
 	@Test
@@ -128,14 +113,12 @@ public class AldeanoTest {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano();
-		Aldeano otroAldeano = new Aldeano();
+		Aldeano aldeano = new Aldeano(new Coordenada(2,1), mapa);
 		
-		aldeano.posicionar(new Coordenada(2,1), mapa);
 		aldeano.mover(new DireccionAbajoIzquierda(),mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		otroAldeano.posicionar(new Coordenada(1,0), mapa);
+		Aldeano otroAldeano = new Aldeano(new Coordenada(1,0), mapa);
 	}
 	
 	@Test
@@ -143,13 +126,11 @@ public class AldeanoTest {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano();
-		Aldeano otroAldeano = new Aldeano();
+		Aldeano aldeano = new Aldeano(new Coordenada(2,1), mapa);
 		
-		aldeano.posicionar(new Coordenada(2,1), mapa);
 		aldeano.mover(new DireccionArribaIzquierda(),mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		otroAldeano.posicionar(new Coordenada(1,2), mapa);
+		Aldeano otroAldeano = new Aldeano(new Coordenada(1,2), mapa);
 	}
 }

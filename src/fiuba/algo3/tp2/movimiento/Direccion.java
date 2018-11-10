@@ -9,5 +9,11 @@ public class Direccion extends Coordenada {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	public Coordenada multiplicar(int velocidadMovimiento) {
+		
+		int coordenadaX = this.coordenadaX * velocidadMovimiento;
+		int coordenadaY = this.coordenadaY * velocidadMovimiento;
+		
+		return new Coordenada(coordenadaX, coordenadaY);
+	}
 }

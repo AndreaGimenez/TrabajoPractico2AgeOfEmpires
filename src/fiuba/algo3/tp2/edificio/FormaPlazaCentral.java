@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import fiuba.algo3.tp2.mapa.Coordenada;
 
-public class FormaPlazaCentral {
+public class FormaPlazaCentral extends Forma {
 
 	 private static final Integer LARGO = 2;
 	 private static final Integer ANCHO = 2;
@@ -23,6 +23,7 @@ public class FormaPlazaCentral {
 		 }
 	 }
 	 
+	 @Override
 	 public Collection<Coordenada> obtenerCoordenadas(Coordenada coordenadaOrigen){
 		 
 		 Collection<Coordenada> posicionesADevolver = new ArrayList<Coordenada>();

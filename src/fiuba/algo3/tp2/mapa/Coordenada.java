@@ -2,8 +2,8 @@ package fiuba.algo3.tp2.mapa;
 
 public class Coordenada {
 
-	private int coordenadaX;
-	private int coordenadaY;
+	protected int coordenadaX;
+	protected int coordenadaY;
 	
 	public Coordenada(Integer coordenadaX, Integer coordenadaY) {
 		

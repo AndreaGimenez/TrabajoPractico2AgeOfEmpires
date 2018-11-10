@@ -22,12 +22,10 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Aldeano aldeano = new Aldeano();
-		PlazaCentral plazaCentral = new PlazaCentral();
-		plazaCentral.posicionar(new Coordenada(5, 2), mapa);
+		PlazaCentral plazaCentral = new PlazaCentral(new Coordenada(5, 2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		aldeano.posicionar(new Coordenada(5, 2), mapa);
+		new Aldeano(new Coordenada(5, 2), mapa);
 	}
 	
 	@Test
@@ -36,12 +34,10 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Aldeano aldeano = new Aldeano();
-		PlazaCentral plazaCentral = new PlazaCentral();
-		plazaCentral.posicionar(new Coordenada(5, 2), mapa);
+		PlazaCentral plazaCentral = new PlazaCentral(new Coordenada(5, 2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		aldeano.posicionar(new Coordenada(6, 2), mapa);
+		new Aldeano(new Coordenada(6, 2), mapa);
 	}
 	
 	@Test
@@ -50,12 +46,10 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Aldeano aldeano = new Aldeano();
-		PlazaCentral plazaCentral = new PlazaCentral();
-		plazaCentral.posicionar(new Coordenada(5, 2), mapa);
+		PlazaCentral plazaCentral = new PlazaCentral(new Coordenada(5, 2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		aldeano.posicionar(new Coordenada(6, 3), mapa);
+		new Aldeano(new Coordenada(6, 3), mapa);
 	}
 	
 	@Test
@@ -64,11 +58,9 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Aldeano aldeano = new Aldeano();
-		PlazaCentral plazaCentral = new PlazaCentral();
-		plazaCentral.posicionar(new Coordenada(5, 2), mapa);
+		PlazaCentral plazaCentral = new PlazaCentral(new Coordenada(5, 2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		aldeano.posicionar(new Coordenada(5, 3), mapa);
+		new Aldeano(new Coordenada(5, 3), mapa);
 	}
 }

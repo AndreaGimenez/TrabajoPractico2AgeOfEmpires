@@ -23,12 +23,10 @@ public class CastilloTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Aldeano aldeano = new Aldeano();
-		Castillo castillo = new Castillo();
-		castillo.posicionar(new Coordenada(5, 2), mapa);
+		Castillo castillo = new Castillo(new Coordenada(5, 2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		aldeano.posicionar(new Coordenada(5, 2), mapa);
+		Aldeano aldeano = new Aldeano(new Coordenada(5, 2), mapa);
 	}
 	
 	@Test
@@ -37,12 +35,10 @@ public class CastilloTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Aldeano aldeano = new Aldeano();
-		Castillo castillo = new Castillo();
-		castillo.posicionar(new Coordenada(5, 2), mapa);
+		Castillo castillo = new Castillo(new Coordenada(5, 2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		aldeano.posicionar(new Coordenada(8, 2), mapa);
+		Aldeano aldeano = new Aldeano(new Coordenada(8, 2), mapa);
 	}
 	
 	@Test
@@ -51,12 +47,10 @@ public class CastilloTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Aldeano aldeano = new Aldeano();
-		Castillo castillo = new Castillo();
-		castillo.posicionar(new Coordenada(5, 2), mapa);
+		Castillo castillo = new Castillo(new Coordenada(5, 2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		aldeano.posicionar(new Coordenada(8, 5), mapa);
+		Aldeano aldeano = new Aldeano(new Coordenada(8, 5), mapa);
 	}
 	
 	@Test
@@ -65,11 +59,9 @@ public class CastilloTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Aldeano aldeano = new Aldeano();
-		Castillo castillo = new Castillo();
-		castillo.posicionar(new Coordenada(5, 2), mapa);
+		Castillo castillo = new Castillo(new Coordenada(5, 2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		aldeano.posicionar(new Coordenada(5, 5), mapa);
+		Aldeano aldeano = new Aldeano(new Coordenada(5, 5), mapa);
 	}
 }

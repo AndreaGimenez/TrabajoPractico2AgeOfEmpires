@@ -6,7 +6,5 @@ public class DireccionArribaIzquierda extends Direccion {
 
 	public DireccionArribaIzquierda() {
 		super(-1,1);
-		// TODO Auto-generated constructor stub
 	}
-
 }
