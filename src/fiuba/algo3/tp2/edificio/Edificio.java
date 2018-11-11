@@ -4,36 +4,39 @@ import java.util.Collection;
 
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.Coordenada;
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicionable;
 
 public abstract class Edificio implements Posicionable {
 
-	private Coordenada posicion;
+	private Posicion posicion;
 	private Forma forma;
+	private Mapa mapa;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
 	 */
-	public Edificio(Coordenada posicion, Forma forma, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Edificio(Posicion posicion, Forma forma, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+		
+		this.mapa = mapa;
 		this.forma = forma;
 		posicionar(posicion, mapa);
 	}
 	
 	@Override
-	public void posicionar(Coordenada coordenada, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public void posicionar(Posicion coordenada, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		
-		Collection<Coordenada> coordenadasAOcuparEnMapa = forma.obtenerCoordenadas(coordenada);
+		Collection<Posicion> coordenadasAOcuparEnMapa = forma.obtenerCoordenadas(coordenada);
 		
-		for(Coordenada coordenadaPosicion : coordenadasAOcuparEnMapa) {
+		for(Posicion coordenadaPosicion : coordenadasAOcuparEnMapa) {
 			mapa.posicionar(this, coordenadaPosicion);
 		}
 		this.posicion = coordenada;
 	}
 	
 	@Override
-	public Coordenada obtenerPosicion() {
+	public Posicion obtenerPosicion() {
 		return posicion;
 	}	
 }

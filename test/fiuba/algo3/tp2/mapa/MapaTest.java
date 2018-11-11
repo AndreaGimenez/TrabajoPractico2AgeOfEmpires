@@ -9,7 +9,7 @@ import org.junit.rules.ExpectedException;
 
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.Coordenada;
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.Direccion;
@@ -40,10 +40,10 @@ public class MapaTest {
 			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 		
 		Mapa mapa = new Mapa(5, 5);
-		Aldeano aldeano = new Aldeano(new Coordenada(1,1), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		Aldeano otroAldeano = new Aldeano(new Coordenada(1,1), mapa);
+		Aldeano otroAldeano = new Aldeano(new Posicion(1,1), mapa);
 	}
 	
 	@Test
@@ -52,8 +52,8 @@ public class MapaTest {
 		
 		Mapa mapa = new Mapa(5, 5);
 		
-		Aldeano aldeano = new Aldeano(new Coordenada(1,1), mapa);
-		Aldeano otroAldeano = new Aldeano(new Coordenada(1,2), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+		Aldeano otroAldeano = new Aldeano(new Posicion(1,2), mapa);
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class MapaTest {
 		
 		Mapa mapa = new Mapa(5, 5);
 		exceptionRule.expect(CeldaInexistenteException.class);
-		Aldeano aldeano = new Aldeano(new Coordenada(6,1), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(6,1), mapa);
 	}
 	
 	@Test
@@ -72,7 +72,7 @@ public class MapaTest {
 		Mapa mapa = new Mapa(5, 5);
 		
 		exceptionRule.expect(CeldaInexistenteException.class);
-		Aldeano aldeano = new Aldeano(new Coordenada(-1,1), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(-1,1), mapa);
 		
 	}
 	
@@ -83,7 +83,7 @@ public class MapaTest {
 		Mapa mapa = new Mapa(5, 5);
 		
 		exceptionRule.expect(CeldaInexistenteException.class);
-		Aldeano aldeano = new Aldeano(new Coordenada(1,6), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(1,6), mapa);
 		
 	}
 	
@@ -94,7 +94,7 @@ public class MapaTest {
 		Mapa mapa = new Mapa(5, 5);
 		
 		exceptionRule.expect(CeldaInexistenteException.class);
-		Aldeano aldeano = new Aldeano(new Coordenada(1,-1), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(1,-1), mapa);
 	}
 	
 	@Test
@@ -102,10 +102,10 @@ public class MapaTest {
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 		
 		Mapa mapa = new Mapa(5, 5);
-		Aldeano aldeano = new Aldeano(new Coordenada(1,2), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(1,2), mapa);
 	
-		mapa.desplazar(new Coordenada(1,2), new Coordenada(2,2));
-		mapa.posicionar(aldeano, new Coordenada(1,2));
+		mapa.desplazar(new Posicion(1,2), new Posicion(2,2));
+		mapa.posicionar(aldeano, new Posicion(1,2));
 	}
 	
 	@Test
@@ -113,12 +113,12 @@ public class MapaTest {
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 		
 		Mapa mapa = new Mapa(5, 5);
-		Aldeano aldeano = new Aldeano(new Coordenada(1,2), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(1,2), mapa);
 		
-		mapa.desplazar(new Coordenada(1,2), new Coordenada(2,2));
+		mapa.desplazar(new Posicion(1,2), new Posicion(2,2));
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		mapa.posicionar(aldeano, new Coordenada(2,2));
+		mapa.posicionar(aldeano, new Posicion(2,2));
 	}
 	
 	

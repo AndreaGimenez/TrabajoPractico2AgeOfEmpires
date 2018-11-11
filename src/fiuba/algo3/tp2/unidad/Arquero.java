@@ -5,9 +5,11 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Mapa;
 
-public class Aldeano extends Unidad {
-	
-	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+public class Arquero extends Unidad {
+
+	public Arquero(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+		
 		super(posicion, mapa, new MovimientoBasico());
 	}
+
 }

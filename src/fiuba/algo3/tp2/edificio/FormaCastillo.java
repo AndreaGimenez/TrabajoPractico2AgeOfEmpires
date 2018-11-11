@@ -3,32 +3,32 @@ package fiuba.algo3.tp2.edificio;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import fiuba.algo3.tp2.mapa.Coordenada;
+import fiuba.algo3.tp2.mapa.Posicion;
 
 public class FormaCastillo extends Forma {
 	 
 	 private static final Integer LARGO = 4;
 	 private static final Integer ANCHO = 4;
 	 
-	 private Collection<Coordenada> forma;
+	 private Collection<Posicion> forma;
 	 
 	 public FormaCastillo(){
 		 
-		 forma = new ArrayList<Coordenada>();
+		 forma = new ArrayList<Posicion>();
 		 
 		 for(int i = 0 ; i < LARGO ; i++) {
 			 for(int j = 0; j < ANCHO ; j++) {
-				 forma.add(new Coordenada(i,j));
+				 forma.add(new Posicion(i,j));
 			 }
 		 }
 	 }
 	 
 	 @Override
-	 public Collection<Coordenada> obtenerCoordenadas(Coordenada coordenadaOrigen){
+	 public Collection<Posicion> obtenerCoordenadas(Posicion coordenadaOrigen){
 		 
-		 Collection<Coordenada> posicionesADevolver = new ArrayList<Coordenada>();
+		 Collection<Posicion> posicionesADevolver = new ArrayList<Posicion>();
 		 
-		 for(Coordenada coordenada : forma) {
+		 for(Posicion coordenada : forma) {
 			 posicionesADevolver.add(coordenada.sumar(coordenadaOrigen));
 		 }
 		 return posicionesADevolver;

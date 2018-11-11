@@ -24,7 +24,7 @@ public class Mapa {
 		}
 	}
 	
-	public void posicionar(Posicionable posicionable, Coordenada coordenada) throws CeldaOcupadaException, CeldaInexistenteException{
+	public void posicionar(Posicionable posicionable, Posicion coordenada) throws CeldaOcupadaException, CeldaInexistenteException{
 		
 		verificarCelda(coordenada);
 		
@@ -32,18 +32,18 @@ public class Mapa {
 		celda.ocupar(posicionable);
 	}
 
-	private void verificarCelda(Coordenada coordenada) throws CeldaInexistenteException {
+	private void verificarCelda(Posicion coordenada) throws CeldaInexistenteException {
 		if(coordenada.getX() < 0 || coordenada.getX() >= tamanioX
 		   || coordenada.getY() < 0 || coordenada.getY() >= tamanioY) {
 			throw new CeldaInexistenteException();
 		}
 	}
 
-	private Celda obtenerCelda(Coordenada coordenada) {
+	private Celda obtenerCelda(Posicion coordenada) {
 		return celdas[coordenada.getX()][coordenada.getY()];
 	}
 
-	public void desplazar(Coordenada coordenadaOrigen, Coordenada coordenadaDestino) throws CeldaOcupadaException {
+	public void desplazar(Posicion coordenadaOrigen, Posicion coordenadaDestino) throws CeldaOcupadaException {
 		
 		Celda origen = celdas[coordenadaOrigen.getX()][coordenadaOrigen.getY()];
 		Celda destino = celdas[coordenadaDestino.getX()][coordenadaDestino.getY()];
