@@ -14,6 +14,6 @@ public class MovimientoBasico implements Movimiento {
 	public void mover(Movible movible, Direccion direccion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		Coordenada coordenada = direccion.multiplicar(velocidadMovimiento);
-		movible.posicionar(movible.getPosicion().sumar(coordenada), mapa);
+		movible.desplazar(movible.obtenerPosicion().sumar(coordenada), mapa);
 	}
 }

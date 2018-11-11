@@ -24,7 +24,14 @@ public abstract class Unidad implements Movible {
 	}
 	
 	@Override
-	public Coordenada getPosicion() {
+	public void desplazar(Coordenada posicion, Mapa mapa) throws CeldaOcupadaException {
+		mapa.desplazar(obtenerPosicion(), posicion);
+		this.posicion = posicion;
+	}
+	
+	
+	@Override
+	public Coordenada obtenerPosicion() {
 		return posicion;
 	}
 	

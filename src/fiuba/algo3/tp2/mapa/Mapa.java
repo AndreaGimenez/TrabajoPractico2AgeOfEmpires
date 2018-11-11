@@ -43,11 +43,6 @@ public class Mapa {
 		return celdas[coordenada.getX()][coordenada.getY()];
 	}
 
-	public Boolean estaOcupadaCelda(Coordenada coordenada) {
-		
-		return obtenerCelda(coordenada).estaOcupada();
-	}
-
 	public void desplazar(Coordenada coordenadaOrigen, Coordenada coordenadaDestino) throws CeldaOcupadaException {
 		
 		Celda origen = celdas[coordenadaOrigen.getX()][coordenadaOrigen.getY()];
