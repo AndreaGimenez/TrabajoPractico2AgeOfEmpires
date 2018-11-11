@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.mapa;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
@@ -11,6 +12,8 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Coordenada;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.movimiento.Direccion;
+import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class MapaTest {
@@ -48,12 +51,9 @@ public class MapaTest {
 			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 		
 		Mapa mapa = new Mapa(5, 5);
+		
 		Aldeano aldeano = new Aldeano(new Coordenada(1,1), mapa);
-		
 		Aldeano otroAldeano = new Aldeano(new Coordenada(1,2), mapa);
-		
-		assertTrue(mapa.estaOcupadaCelda(new Coordenada(1,1)));
-		assertTrue(mapa.estaOcupadaCelda(new Coordenada(1,2)));
 	}
 	
 	@Test
@@ -105,10 +105,7 @@ public class MapaTest {
 		Aldeano aldeano = new Aldeano(new Coordenada(1,2), mapa);
 	
 		mapa.desplazar(new Coordenada(1,2), new Coordenada(2,2));
-		
 		mapa.posicionar(aldeano, new Coordenada(1,2));
-		
-		assertTrue(mapa.estaOcupadaCelda(new Coordenada(1,2)));
 	}
 	
 	@Test
@@ -123,4 +120,9 @@ public class MapaTest {
 		exceptionRule.expect(CeldaOcupadaException.class);
 		mapa.posicionar(aldeano, new Coordenada(2,2));
 	}
+	
+	
+	
+	
 }
+

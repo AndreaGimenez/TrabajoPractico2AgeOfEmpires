@@ -40,7 +40,7 @@ public class AldeanoTest {
 		aldeano.mover(new DireccionDerecha(),mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		Aldeano otroAldeano = new Aldeano(new Coordenada(2,1), mapa);
+		Aldeano otroAldeano = new Aldeano(new Coordenada(3,1), mapa);
 	}
 	
 	@Test

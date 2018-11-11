@@ -33,7 +33,7 @@ public abstract class Edificio implements Posicionable {
 	}
 	
 	@Override
-	public Coordenada getPosicion() {
+	public Coordenada obtenerPosicion() {
 		return posicion;
 	}	
 }
