@@ -10,8 +10,8 @@ public class Direccion extends Posicion {
 
 	public Posicion multiplicar(int velocidadMovimiento) {
 		
-		int coordenadaX = this.coordenadaX * velocidadMovimiento;
-		int coordenadaY = this.coordenadaY * velocidadMovimiento;
+		int coordenadaX = (this.coordenadaX * velocidadMovimiento);
+		int coordenadaY = (this.coordenadaY * velocidadMovimiento);
 		
 		return new Posicion(coordenadaX, coordenadaY);
 	}

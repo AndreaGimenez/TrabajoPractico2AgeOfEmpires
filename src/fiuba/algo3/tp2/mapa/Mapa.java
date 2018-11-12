@@ -45,7 +45,6 @@ public class Mapa {
 
 	public void desplazar(Posicion posicionOrigen, Posicion posicionDestino) throws CeldaOcupadaException, CeldaInexistenteException {
 		
-		
 		verificarCelda(posicionDestino);
 		
 		Celda origen = obtenerCelda(posicionOrigen);
