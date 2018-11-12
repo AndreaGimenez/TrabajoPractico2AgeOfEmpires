@@ -8,6 +8,6 @@ import fiuba.algo3.tp2.mapa.Mapa;
 public class PlazaCentral extends Edificio {
 	
 	public PlazaCentral(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, new FormaPlazaCentral(), mapa);
+		super(posicion, new FormaPlazaCentralRectangulo(), mapa);
 	}
 }
