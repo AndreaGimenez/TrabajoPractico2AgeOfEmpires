@@ -2,26 +2,31 @@ package fiuba.algo3.tp2.edificio;
 
 import java.util.Collection;
 
+
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.unidad.Unidad;
 
 public abstract class Edificio implements Posicionable {
 
 	private Posicion posicion;
 	private Forma forma;
 	private Mapa mapa;
+	private TipoDeEdificio tipo;
+	private GeneradorDeUnidades generadorDeUnidades;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
 	 */
-	public Edificio(Posicion posicion, Forma forma, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Edificio(Posicion posicion, Forma forma, TipoDeEdificio tipo, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.forma = forma;
 		posicionar(posicion);
+		this.tipo = tipo;
 	}
 	
 	@Override
@@ -43,5 +48,11 @@ public abstract class Edificio implements Posicionable {
 	@Override
 	public void iniciar() {
 		
+	}
+	
+	
+	public void generarUnidad(Unidad unaUnidad) throws EdificioNoGeneraUnidadException {
+		
+		generadorDeUnidades.generar(unaUnidad, tipo);
 	}
 }
