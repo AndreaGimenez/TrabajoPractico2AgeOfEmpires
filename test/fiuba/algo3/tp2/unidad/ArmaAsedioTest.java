@@ -9,7 +9,11 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.movimiento.DireccionAbajoDerecha;
+import fiuba.algo3.tp2.movimiento.DireccionAbajoIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionArriba;
+import fiuba.algo3.tp2.movimiento.DireccionArribaDerecha;
+import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
 
