@@ -6,7 +6,6 @@ public class Direccion extends Posicion {
 
 	public Direccion(Integer coordenadaX, Integer coordenadaY) {
 		super(coordenadaX, coordenadaY);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Posicion multiplicar(int velocidadMovimiento) {

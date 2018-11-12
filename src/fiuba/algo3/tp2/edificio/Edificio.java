@@ -21,11 +21,11 @@ public abstract class Edificio implements Posicionable {
 		
 		this.mapa = mapa;
 		this.forma = forma;
-		posicionar(posicion, mapa);
+		posicionar(posicion);
 	}
 	
 	@Override
-	public void posicionar(Posicion coordenada, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public void posicionar(Posicion coordenada) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		Collection<Posicion> coordenadasAOcuparEnMapa = forma.obtenerCoordenadas(coordenada);
 		
@@ -38,5 +38,10 @@ public abstract class Edificio implements Posicionable {
 	@Override
 	public Posicion obtenerPosicion() {
 		return posicion;
-	}	
+	}
+	
+	@Override
+	public void iniciar() {
+		
+	}
 }

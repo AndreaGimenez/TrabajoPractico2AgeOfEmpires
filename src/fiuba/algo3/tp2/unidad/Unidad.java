@@ -9,29 +9,30 @@ import fiuba.algo3.tp2.movimiento.Direccion;
 public abstract class Unidad implements Movible {
 
 	private Posicion posicion;
-	private Movimiento movimiento;
+	protected Movimiento movimiento;
 	private Mapa mapa;
 	
 	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
-		posicionar(posicion, mapa);
 		this.movimiento = movimiento;
+		
+		posicionar(posicion);
 	}
 	
 	@Override
-	public void posicionar(Posicion coordenada, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public void posicionar(Posicion coordenada) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		mapa.posicionar(this, coordenada);
 		this.posicion = coordenada;
 	}
 	
 	@Override
-	public void desplazar(Posicion posicion, Mapa mapa) throws CeldaOcupadaException {
+	public void desplazar(Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException {
+		
 		mapa.desplazar(obtenerPosicion(), posicion);
 		this.posicion = posicion;
 	}
-	
 	
 	@Override
 	public Posicion obtenerPosicion() {
@@ -39,8 +40,13 @@ public abstract class Unidad implements Movible {
 	}
 	
 	@Override
-	public void mover(Direccion direccion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-
+	public void mover(Direccion direccion) throws MovimientoInvalidoException {
 		movimiento.mover(this, direccion, mapa);
+		movimiento = new MovimientoNulo();
+	}
+	
+	@Override
+	public void iniciar() {
+		movimiento = new MovimientoBasico();
 	}
 }

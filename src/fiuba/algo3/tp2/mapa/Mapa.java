@@ -43,10 +43,13 @@ public class Mapa {
 		return celdas[coordenada.getX()][coordenada.getY()];
 	}
 
-	public void desplazar(Posicion coordenadaOrigen, Posicion coordenadaDestino) throws CeldaOcupadaException {
+	public void desplazar(Posicion posicionOrigen, Posicion posicionDestino) throws CeldaOcupadaException, CeldaInexistenteException {
 		
-		Celda origen = celdas[coordenadaOrigen.getX()][coordenadaOrigen.getY()];
-		Celda destino = celdas[coordenadaDestino.getX()][coordenadaDestino.getY()];
+		
+		verificarCelda(posicionDestino);
+		
+		Celda origen = obtenerCelda(posicionOrigen);
+		Celda destino = obtenerCelda(posicionDestino);
 		
 		destino.ocupar(origen);
 		origen.liberar();
