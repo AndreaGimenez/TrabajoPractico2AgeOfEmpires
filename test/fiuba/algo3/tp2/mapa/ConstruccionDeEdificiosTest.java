@@ -154,7 +154,7 @@ public class ConstruccionDeEdificiosTest {
     }
 
     @Test
-    public void test07AldeanoDeberiaConstruirUnCuartelAbajoSiSuDerechaYArribaEstanOcupados() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public void test07AldeanoDeberiaLanzarEspacioDeConstruccionOcupadoErrorSiSuDerechaYArribaEstanOcupados() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -166,10 +166,8 @@ public class ConstruccionDeEdificiosTest {
 
         Aldeano pablo = new Aldeano(new Posicion(5, 4), mapa);
 
+        exceptionRule.expect(EspacioDeConstruccionOcupadoError.class);
         juan.construirCuartel();
-
-        exceptionRule.expect(CeldaOcupadaException.class);
-        Aldeano jose = new Aldeano(new Posicion(5,6), mapa);
 
     }
 
