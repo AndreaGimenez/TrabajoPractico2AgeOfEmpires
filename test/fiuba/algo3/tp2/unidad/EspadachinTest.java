@@ -104,7 +104,7 @@ public class EspadachinTest {
 	}
 	
 	@Test
-	public void testUnEspadachinEnLaPosicionX2Y1SeMueveHaciaAbajoDerechaDeberiaEstarEnX1Y2() 
+	public void testUnEspadachinEnLaPosicionX2Y1SeMueveHaciaAbajoDerechaDeberiaEstarEnX3Y0() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
@@ -114,7 +114,7 @@ public class EspadachinTest {
 		espadachin.mover(new DireccionAbajoDerecha());
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		Espadachin otroEspadachin = new Espadachin(new Posicion(1,2), mapa);
+		Espadachin otroEspadachin = new Espadachin(new Posicion(3,0), mapa);
 	}
 	
 	@Test
@@ -170,31 +170,30 @@ public class EspadachinTest {
 		espadachinAMover.mover(new DireccionDerecha());
 	}
 	
-	/*
 	@Test
-	public void testDadoUnArqueroEnLaPosicionX1Y2YUnArqueroEnLaPosicionX0Y2CuandoElPrimeroSeMueveHaciaIzquierdaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnEspadachinEnLaPosicionX1Y2YUnEspadachinEnLaPosicionX0Y2CuandoElPrimeroSeMueveHaciaIzquierdaDeberiaLanzarMovimientoInvalidoException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
-		Arquero arquero = new Arquero(new Posicion(0,2), mapa);
-		Arquero arqueroAMover = new Arquero(new Posicion(1,2), mapa);
+		Espadachin espadachin = new Espadachin(new Posicion(0,2), mapa);
+		Espadachin espadachinAMover = new Espadachin(new Posicion(1,2), mapa);
 		
 		exceptionRule.expect(MovimientoInvalidoException.class);
-		arqueroAMover.mover(new DireccionIzquierda());
+		espadachinAMover.mover(new DireccionIzquierda());
 	}
 	
 	@Test
-	public void testDadoUnArqueroEnLaPosicionX1Y2YUnArqueroEnLaPosicionX1Y1CuandoElPrimeroSeMueveHaciaAbajoDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnespadachinEnLaPosicionX1Y2YUnespadachinEnLaPosicionX1Y1CuandoElPrimeroSeMueveHaciaAbajoDeberiaLanzarMovimientoInvalidoException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
-		Arquero arquero = new Arquero(new Posicion(1,1), mapa);
-		Arquero arqueroAMover = new Arquero(new Posicion(1,2), mapa);
+		Espadachin espadachin = new Espadachin(new Posicion(1,1), mapa);
+		Espadachin espadachinAMover = new Espadachin(new Posicion(1,2), mapa);
 		
 		exceptionRule.expect(MovimientoInvalidoException.class);
-		arqueroAMover.mover(new DireccionAbajo());
+		espadachinAMover.mover(new DireccionAbajo());
 	}
 	
 	@Test
@@ -203,62 +202,62 @@ public class EspadachinTest {
 		
 		Mapa mapa = new Mapa(5,5);
 		
-		Arquero arquero = new Arquero(new Posicion(1,3), mapa);
-		Arquero arqueroAMover = new Arquero(new Posicion(1,2), mapa);
+		Espadachin espadachin = new Espadachin(new Posicion(1,3), mapa);
+		Espadachin espadachinAMover = new Espadachin(new Posicion(1,2), mapa);
 		
 		exceptionRule.expect(MovimientoInvalidoException.class);
-		arqueroAMover.mover(new DireccionArriba());
+		espadachinAMover.mover(new DireccionArriba());
 	}
 	
 	@Test
-	public void testDadoUnArqueroEnLaPosicionX1Y2YUnArqueroEnLaPosicionX2Y3CuandoElPrimeroSeMueveHaciaArribaDerechaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnEspadachinEnLaPosicionX1Y2YUnEspadachinEnLaPosicionX2Y3CuandoElPrimeroSeMueveHaciaArribaDerechaDeberiaLanzarMovimientoInvalidoException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
-		Arquero arquero = new Arquero(new Posicion(2,3), mapa);
-		Arquero arqueroAMover = new Arquero(new Posicion(1,2), mapa);
+		Espadachin espadachin = new Espadachin(new Posicion(2,3), mapa);
+		Espadachin espadachinAMover = new Espadachin(new Posicion(1,2), mapa);
 		
 		exceptionRule.expect(MovimientoInvalidoException.class);
-		arqueroAMover.mover(new DireccionArribaDerecha());
+		espadachinAMover.mover(new DireccionArribaDerecha());
 	}
 	
 	@Test
-	public void testDadoUnArqueroEnLaPosicionX1Y2YUnArqueroEnLaPosicionX0Y3CuandoElPrimeroSeMueveHaciaArribaIzquierdaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnEspadachinEnLaPosicionX1Y2YUnEspadachinEnLaPosicionX0Y3CuandoElPrimeroSeMueveHaciaArribaIzquierdaDeberiaLanzarMovimientoInvalidoException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
-		Arquero arquero = new Arquero(new Posicion(0,3), mapa);
-		Arquero arqueroAMover = new Arquero(new Posicion(1,2), mapa);
+		Espadachin espadachin = new Espadachin(new Posicion(0,3), mapa);
+		Espadachin espadachinAMover = new Espadachin(new Posicion(1,2), mapa);
 		
 		exceptionRule.expect(MovimientoInvalidoException.class);
-		arqueroAMover.mover(new DireccionArribaIzquierda());
+		espadachinAMover.mover(new DireccionArribaIzquierda());
 	}
 	
 	@Test
-	public void testDadoUnArqueroEnLaPosicionX1Y2YUnArqueroEnLaPosicionX2Y1CuandoElPrimeroSeMueveHaciaAbajoDerechaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnEspadachinEnLaPosicionX1Y2YUnEspadachinEnLaPosicionX2Y1CuandoElPrimeroSeMueveHaciaAbajoDerechaDeberiaLanzarMovimientoInvalidoException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
-		Arquero arquero = new Arquero(new Posicion(2,1), mapa);
-		Arquero arqueroAMover = new Arquero(new Posicion(1,2), mapa);
+		Espadachin espadachin = new Espadachin(new Posicion(2,1), mapa);
+		Espadachin espadachinAMover = new Espadachin(new Posicion(1,2), mapa);
 		
 		exceptionRule.expect(MovimientoInvalidoException.class);
-		arqueroAMover.mover(new DireccionAbajoDerecha());
+		espadachinAMover.mover(new DireccionAbajoDerecha());
 	}
 	
 	@Test
-	public void testDadoUnArqueroEnLaPosicionX1Y2YUnArqueroEnLaPosicionX0Y1CuandoElPrimeroSeMueveHaciaAbajoIzquierdaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnEspadachinEnLaPosicionX1Y2YUnEspadachinEnLaPosicionX0Y1CuandoElPrimeroSeMueveHaciaAbajoIzquierdaDeberiaLanzarMovimientoInvalidoException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
-		Arquero arquero = new Arquero(new Posicion(0,1), mapa);
-		Arquero arqueroAMover = new Arquero(new Posicion(1,2), mapa);
+		Espadachin espadachin = new Espadachin(new Posicion(0,1), mapa);
+		Espadachin espadachinAMover = new Espadachin(new Posicion(1,2), mapa);
 		
 		exceptionRule.expect(MovimientoInvalidoException.class);
-		arqueroAMover.mover(new DireccionAbajoIzquierda());
-	}*/
+		espadachinAMover.mover(new DireccionAbajoIzquierda());
+	}
 }
