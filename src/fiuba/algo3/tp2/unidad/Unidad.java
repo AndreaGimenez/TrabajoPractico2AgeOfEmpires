@@ -38,6 +38,11 @@ public abstract class Unidad implements Movible {
 	public Posicion obtenerPosicion() {
 		return posicion;
 	}
+
+	public Mapa obtenerMapa(){
+
+		return this.mapa;
+	}
 	
 	@Override
 	public void mover(Direccion direccion) throws MovimientoInvalidoException {
