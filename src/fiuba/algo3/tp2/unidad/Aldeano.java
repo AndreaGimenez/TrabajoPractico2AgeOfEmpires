@@ -12,9 +12,21 @@ public class Aldeano extends Unidad {
 		super(posicion, mapa, new MovimientoBasico());
 	}
 
-	public void construirCuartel(Posicion posicionOrigen) throws CeldaOcupadaException, CeldaInexistenteException {
+	public void construirCuartel() throws CeldaOcupadaException, CeldaInexistenteException {
 
-		Cuartel cuartel = new Cuartel(posicionOrigen, super.obtenerMapa());
+	    try {
+
+            Posicion derecha = new Posicion(1, 0);
+
+            Cuartel cuartel = new Cuartel(super.obtenerPosicion().sumar(derecha), super.obtenerMapa());
+
+        } catch (Exception e) {
+
+            Posicion arriba = new Posicion(0, -1);
+
+            Cuartel cuartel = new Cuartel(super.obtenerPosicion().sumar(arriba), super.obtenerMapa());
+
+        }
 
 	}
 }

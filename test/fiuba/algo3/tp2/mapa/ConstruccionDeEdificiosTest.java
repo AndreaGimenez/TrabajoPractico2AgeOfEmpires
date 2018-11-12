@@ -62,7 +62,7 @@ public class ConstruccionDeEdificiosTest {
     }
 
     @Test
-    public void test03CastilloDeberiaMostrarUnCuadradoDeLadoDe4CeldasOcupado() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+    public void test03CastilloDeberiaMostrarUnCuadradoDeLado4CeldasOcupado() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -119,41 +119,61 @@ public class ConstruccionDeEdificiosTest {
     }
 
     @Test
-    public void test06AldeanoDeberiaCrearUnCuartelASuDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public void test06AldeanoDeberiaConstruirUnCuartelASuDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 
         Mapa mapa = new Mapa(250,250);
 
         Posicion nacimiento = new Posicion(5,5);
 
-        Posicion origenCuartel = new Posicion(6, 5);
-
         Aldeano juan = new Aldeano(nacimiento, mapa);
 
-        juan.construirCuartel(origenCuartel);
+        juan.construirCuartel();
 
         exceptionRule.expect(CeldaOcupadaException.class);
         Aldeano pedro = new Aldeano(new Posicion(6, 5), mapa);
 
     }
 
-    public void test07AldeanoDeberiaMoverseHastaUnaPosicionALaIzquierdaDelOrigenDelCuartelYConstruirlo() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    @Test
+    public void test06AldeanoDeberiaConstruirUnCuartelArribaSiSuDerechaEstaOcupada() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 
         Mapa mapa = new Mapa(250,250);
 
         Posicion nacimiento = new Posicion(5,5);
 
-        Posicion origenCuartel = new Posicion(10, 5);
+        Aldeano juan = new Aldeano(nacimiento, mapa);
+
+        Aldeano pedro = new Aldeano(new Posicion(6, 5), mapa);
+
+        /*exceptionRule.expect(CeldaOcupadaException.class); este tira la excepcion*/
+        juan.construirCuartel();
+
+        exceptionRule.expect(CeldaOcupadaException.class); /*este deberia tirar la excepcion*/
+        Aldeano jose = new Aldeano(new Posicion(5,4), mapa);
+
+    }
+
+    @Test
+    public void test07AldeanoDeberiaConstruirUnCuartelAbajoSiSuDerechaYArribaEstanOcupados() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+
+        Mapa mapa = new Mapa(250,250);
+
+        Posicion nacimiento = new Posicion(5,5);
 
         Aldeano juan = new Aldeano(nacimiento, mapa);
 
-        juan.construirCuartel(origenCuartel);
-
-
-
-        exceptionRule.expect(CeldaOcupadaException.class);
         Aldeano pedro = new Aldeano(new Posicion(6, 5), mapa);
 
+        Aldeano pablo = new Aldeano(new Posicion(5, 4), mapa);
+
+        juan.construirCuartel();
+
+        exceptionRule.expect(CeldaOcupadaException.class);
+        Aldeano jose = new Aldeano(new Posicion(5,6), mapa);
+
     }
+
+
 
 
 
