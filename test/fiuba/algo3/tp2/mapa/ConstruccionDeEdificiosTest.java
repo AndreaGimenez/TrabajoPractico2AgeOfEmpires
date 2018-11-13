@@ -16,7 +16,8 @@ public class ConstruccionDeEdificiosTest {
     public ExpectedException exceptionRule = ExpectedException.none();
 
     @Test
-    public void test01CuartelDeberiaMostrarCuatroCeldasOcupadasAlConstruirlo() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+    public void test01CuartelDeberiaMostrarCuatroCeldasOcupadasAlConstruirlo() 
+    		throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -39,7 +40,8 @@ public class ConstruccionDeEdificiosTest {
     }
 
     @Test
-    public void test02PlazaCentralDeberiaMostrarCuatroCeldasOcupadasAlConstruirla() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public void test02PlazaCentralDeberiaMostrarCuatroCeldasOcupadasAlConstruirla() 
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -62,7 +64,8 @@ public class ConstruccionDeEdificiosTest {
     }
 
     @Test
-    public void test03CastilloDeberiaMostrarUnCuadradoDeLado4CeldasOcupado() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+    public void test03CastilloDeberiaMostrarUnCuadradoDeLado4CeldasOcupado() 
+    		throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -88,7 +91,8 @@ public class ConstruccionDeEdificiosTest {
     }
 
     @Test
-    public void test04CrearUnCuartelAlLadoDeUnCastilloDeberiaSerValido() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public void test04CrearUnCuartelAlLadoDeUnCastilloDeberiaSerValido() 
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -103,7 +107,8 @@ public class ConstruccionDeEdificiosTest {
     }
 
     @Test
-    public void test05CrearUnCuartelEncimaDeUnCastilloNoDeberiaSerValido() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public void test05CrearUnCuartelEncimaDeUnCastilloNoDeberiaSerValido() 
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -119,7 +124,8 @@ public class ConstruccionDeEdificiosTest {
     }
 
     @Test
-    public void test06AldeanoDeberiaConstruirUnCuartelASuDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public void test06AldeanoDeberiaConstruirUnCuartelASuDerecha() 
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -133,9 +139,10 @@ public class ConstruccionDeEdificiosTest {
         Aldeano pedro = new Aldeano(new Posicion(6, 5), mapa);
 
     }
-    /*
+    
     @Test
-    public void test06AldeanoDeberiaConstruirUnCuartelArribaSiSuDerechaEstaOcupada() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public void test06AldeanoDeberiaConstruirUnCuartelArribaSiSuDerechaEstaOcupada() 
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -144,18 +151,46 @@ public class ConstruccionDeEdificiosTest {
         Aldeano juan = new Aldeano(nacimiento, mapa);
 
         Aldeano pedro = new Aldeano(new Posicion(6, 5), mapa);
-
-        //exceptionRule.expect(CeldaOcupadaException.class); este tira la excepcion
+        
         juan.construirCuartel();
 
-        exceptionRule.expect(CeldaOcupadaException.class); //este deberia tirar la excepcion
-        Aldeano jose = new Aldeano(new Posicion(5,4), mapa);
-
+        for(int i = 5; i < 7 ; i++) {
+     	   for(int j = 6 ; j < 8 ; j++) {
+     		   exceptionRule.expect(CeldaOcupadaException.class);
+     		   new Aldeano(new Posicion(i,j), mapa);
+     	   }
+        }
     }
-	*/
+    
+    @Test
+    public void test07AldeanoConstruyeCuartelLasPosicionesFronteraEstanLibresParaSerOcupadas() 
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    
+    	 Mapa mapa = new Mapa(250,250);
+
+         Posicion nacimiento = new Posicion(5,5);
+
+         Aldeano juan = new Aldeano(nacimiento, mapa);
+
+         Aldeano pedro = new Aldeano(new Posicion(6, 5), mapa);
+         
+         juan.construirCuartel();
+         
+         for(int i = 5 ; i < 9 ; i++) {
+        	 new Aldeano(new Posicion(4,i), mapa);
+         }
+         for(int i = 5 ; i < 8 ; i++) {
+        	 new Aldeano(new Posicion(i,8), mapa);
+         }
+         for(int i = 5 ; i < 8 ; i++) {
+        	 new Aldeano(new Posicion(7,i), mapa);
+         }
+    	
+    }
+	
     /*
     @Test
-    public void test07AldeanoDeberiaLanzarEspacioDeConstruccionOcupadoErrorSiSuDerechaYArribaEstanOcupados() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public void test08AldeanoDeberiaLanzarEspacioDeConstruccionOcupadoErrorSiSuDerechaYArribaEstanOcupados() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 
         Mapa mapa = new Mapa(250,250);
 
