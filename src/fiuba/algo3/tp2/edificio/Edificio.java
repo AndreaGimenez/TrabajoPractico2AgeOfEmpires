@@ -13,6 +13,7 @@ public abstract class Edificio implements Posicionable {
 	private Posicion posicion;
 	private Forma forma;
 	private Mapa mapa;
+	private int vida;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
@@ -43,5 +44,22 @@ public abstract class Edificio implements Posicionable {
 	@Override
 	public void iniciar() {
 		
+	}
+
+	@Override
+	public void recibirDanio(int danio){
+
+		this.vida = this.vida - danio;
+
+	}
+
+	public void reparar(){
+
+	}
+
+	protected void curarVida(int puntosDeSaludPorReparacion) {
+
+		this.vida = this.vida + puntosDeSaludPorReparacion;
+
 	}
 }

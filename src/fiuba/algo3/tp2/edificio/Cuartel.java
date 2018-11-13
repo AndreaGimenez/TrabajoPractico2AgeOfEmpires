@@ -9,8 +9,23 @@ import java.util.ArrayList;
 
 public class Cuartel extends Edificio {
 
+    private int puntosDeSaludPorReparacion = 50;
+
     public Cuartel(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
         super(posicion, new FormaCuartel(), mapa);
     }
 
+    @Override
+    public void reparar(){
+
+        super.curarVida(puntosDeSaludPorReparacion);
+
+    }
+
+    @Override
+    public void iniciar(){
+
+
+
+    }
 }
