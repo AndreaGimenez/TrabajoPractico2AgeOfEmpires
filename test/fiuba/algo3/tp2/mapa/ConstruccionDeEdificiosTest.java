@@ -125,7 +125,7 @@ public class ConstruccionDeEdificiosTest {
 
     @Test
     public void test06AldeanoDeberiaConstruirUnCuartelASuDerecha() 
-    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EspacioDeConstruccionOcupadoError {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -142,7 +142,7 @@ public class ConstruccionDeEdificiosTest {
     
     @Test
     public void test06AldeanoDeberiaConstruirUnCuartelArribaSiSuDerechaEstaOcupada() 
-    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EspacioDeConstruccionOcupadoError {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -164,7 +164,7 @@ public class ConstruccionDeEdificiosTest {
     
     @Test
     public void test07AldeanoConstruyeCuartelLasPosicionesFronteraEstanLibresParaSerOcupadas() 
-    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EspacioDeConstruccionOcupadoError {
     
     	 Mapa mapa = new Mapa(250,250);
 
@@ -188,9 +188,9 @@ public class ConstruccionDeEdificiosTest {
     	
     }
 	
-    /*
     @Test
-    public void test08AldeanoDeberiaLanzarEspacioDeConstruccionOcupadoErrorSiSuDerechaYArribaEstanOcupados() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public void test08AldeanoDeberiaLanzarEspacioDeConstruccionOcupadoErrorSiSuDerechaYArribaEstanOcupados() 
+    		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EspacioDeConstruccionOcupadoError {
 
         Mapa mapa = new Mapa(250,250);
 
@@ -200,12 +200,10 @@ public class ConstruccionDeEdificiosTest {
 
         Aldeano pedro = new Aldeano(new Posicion(6, 5), mapa);
 
-        Aldeano pablo = new Aldeano(new Posicion(5, 4), mapa);
+        Aldeano pablo = new Aldeano(new Posicion(5, 6), mapa);
 
         exceptionRule.expect(EspacioDeConstruccionOcupadoError.class);
         juan.construirCuartel();
 
     }
-    */
-
 }
