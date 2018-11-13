@@ -54,4 +54,9 @@ public abstract class Unidad implements Movible {
 	public void iniciar() {
 		movimiento = new MovimientoBasico();
 	}
+	
+	@Override
+	public void recibirDanio(int danio) {
+		
+	}
 }

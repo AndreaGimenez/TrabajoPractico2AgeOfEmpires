@@ -5,5 +5,5 @@ public interface Posicionable {
 	public void posicionar(Posicion coordenada) throws CeldaOcupadaException, CeldaInexistenteException;
 	public Posicion obtenerPosicion();
 	public void iniciar();
-    void recibirDanio(int danio);
+    public void recibirDanio(int danio);
 }
