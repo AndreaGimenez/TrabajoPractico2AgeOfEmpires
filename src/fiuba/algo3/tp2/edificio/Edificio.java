@@ -4,24 +4,28 @@ import java.util.Collection;
 
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.unidad.Unidad;
+import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 public abstract class Edificio implements Posicionable {
 
 	private Posicion posicion;
 	private Forma forma;
-	private Mapa mapa;
+	protected Mapa mapa;
 	private int vida;
+	private CreadorUnidad creadorUnidades;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
 	 */
-	public Edificio(Posicion posicion, Forma forma, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Edificio(Posicion posicion, CreadorUnidad creadorUnidades, Forma forma, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.forma = forma;
+		this.creadorUnidades = creadorUnidades;
 		posicionar(posicion);
 	}
 	
@@ -61,5 +65,11 @@ public abstract class Edificio implements Posicionable {
 
 		this.vida = this.vida + puntosDeSaludPorReparacion;
 
+	}
+	
+	public Unidad crear(TipoUnidad tipoUnidad) 
+			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+		
+		return creadorUnidades.crear(tipoUnidad);
 	}
 }
