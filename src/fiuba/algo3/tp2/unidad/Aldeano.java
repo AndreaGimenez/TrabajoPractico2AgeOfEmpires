@@ -19,12 +19,12 @@ public class Aldeano extends Unidad {
 		super(posicion, new CreadorEdificioAldeano(mapa), mapa, new MovimientoBasico());
 	}
 
-	public void construirCuartel() 
+/*	public void construirCuartel() 
 			throws CeldaOcupadaException, CeldaInexistenteException, EspacioDeConstruccionOcupadoError {
 
 	    try {
 
-           /* Posicion derecha = new Posicion(1, 0);*/
+          
 	    	Direccion derecha = new DireccionDerecha();
 	    	
             Cuartel cuartel = new Cuartel(super.obtenerPosicion().sumar(derecha), super.obtenerMapa());
@@ -32,7 +32,7 @@ public class Aldeano extends Unidad {
         } catch (Exception e) {
         	
         	try {
-        	/* Posicion arriba = new Posicion(0, -1);*/
+        	
         	Direccion arriba = new DireccionArriba();
         	
             Cuartel cuartel = new Cuartel(super.obtenerPosicion().sumar(arriba), super.obtenerMapa());
@@ -42,7 +42,7 @@ public class Aldeano extends Unidad {
         	}
         }
 
-	}
+	}*/
 
     public void reparar(Edificio cuartel) {
 	    cuartel.reparar();

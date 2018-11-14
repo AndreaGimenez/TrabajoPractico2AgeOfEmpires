@@ -1,7 +1,11 @@
 package fiuba.algo3.tp2.mapa;
 
 import fiuba.algo3.tp2.edificio.*;
+import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.unidad.MovimientoInvalidoException;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -122,7 +126,33 @@ public class ConstruccionDeEdificiosTest {
         Edificio cuartel = new Cuartel(pCuartel,mapa);
 
     }
-
+    
+    @Test
+ 	public void test06_DadoUnAldeanoEnLaPosicionX1Y1CuyasPosicionesAldedaniasSeEncuentranVacias_CuandoCreaUnaPlazaCentral_DeberiaCrearseEnLaPosicionX2Y1() 
+ 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdificioNoSoportadoException {
+ 		
+ 		Mapa mapa = new Mapa(250, 250);
+ 		Aldeano aldeano = new Aldeano(new Posicion(1, 1), mapa);
+ 		
+ 		PlazaCentral plazaCentral = (PlazaCentral)aldeano.crear(TipoEdificio.PLAZA_CENTRAL);
+ 		
+ 		exceptionRule.expect(CeldaOcupadaException.class);
+ 		new Aldeano(new Posicion(2, 1), mapa);
+ 	}
+    
+    @Test
+ 	public void test07_DadoUnAldeanoEnLaPosicionX1Y1CuyasPosicionesAldedaniasSeEncuentranVacias_CuandoCreaUnCuartel_DeberiaCrearseEnLaPosicionX2Y1() 
+ 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdificioNoSoportadoException {
+ 		
+ 		Mapa mapa = new Mapa(250, 250);
+ 		Aldeano aldeano = new Aldeano(new Posicion(1, 1), mapa);
+ 		
+ 		Cuartel cuartel = (Cuartel)aldeano.crear(TipoEdificio.CUARTEL);
+ 		
+ 		exceptionRule.expect(CeldaOcupadaException.class);
+ 		new Aldeano(new Posicion(2, 1), mapa);
+ 	}
+    /*
     @Test
     public void test06AldeanoDeberiaConstruirUnCuartelASuDerecha() 
     		throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EspacioDeConstruccionOcupadoError {
@@ -205,5 +235,5 @@ public class ConstruccionDeEdificiosTest {
         exceptionRule.expect(EspacioDeConstruccionOcupadoError.class);
         juan.construirCuartel();
 
-    }
+    }*/
 }

@@ -267,29 +267,5 @@ public class AldeanoTest {
 		aldeanoAMover.mover(new DireccionAbajoIzquierda());
 	}
 	
-   @Test
-	public void test_DadoUnAldeanoEnLaPosicionX1Y1CuyasPosicionesAldedaniasSeEncuentranVacias_CuandoCreaUnaPlazaCentral_DeberiaCrearseEnLaPosicionX2Y1() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdificioNoSoportadoException {
-		
-		Mapa mapa = new Mapa(250, 250);
-		Aldeano aldeano = new Aldeano(new Posicion(1, 1), mapa);
-		
-		PlazaCentral plazaCentral = (PlazaCentral)aldeano.crear(TipoEdificio.PLAZA_CENTRAL);
-		
-		exceptionRule.expect(CeldaOcupadaException.class);
-		new Aldeano(new Posicion(2, 1), mapa);
-	}
-   
-   @Test
-	public void test_DadoUnAldeanoEnLaPosicionX1Y1CuyasPosicionesAldedaniasSeEncuentranVacias_CuandoCreaUnCuartel_DeberiaCrearseEnLaPosicionX2Y1() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdificioNoSoportadoException {
-		
-		Mapa mapa = new Mapa(250, 250);
-		Aldeano aldeano = new Aldeano(new Posicion(1, 1), mapa);
-		
-		Cuartel cuartel = (Cuartel)aldeano.crear(TipoEdificio.CUARTEL);
-		
-		exceptionRule.expect(CeldaOcupadaException.class);
-		new Aldeano(new Posicion(2, 1), mapa);
-	}
+
 }
