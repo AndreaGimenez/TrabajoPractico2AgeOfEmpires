@@ -5,9 +5,34 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 
+<<<<<<< HEAD
 public class Cuartel extends Edificio{
 
 	public Cuartel(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, new FormaCuartel(), mapa);
 	}
 }
+=======
+public class Cuartel extends Edificio {
+
+    private int puntosDeSaludPorReparacion = 50;
+
+    public Cuartel(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+        super(posicion, new CreadorUnidadCuartel(mapa), new FormaCuartel(), mapa);
+    }
+
+    @Override
+    public void reparar(){
+
+        super.curarVida(puntosDeSaludPorReparacion);
+
+    }
+
+    @Override
+    public void iniciar(){
+
+
+
+    }
+}
+>>>>>>> develop

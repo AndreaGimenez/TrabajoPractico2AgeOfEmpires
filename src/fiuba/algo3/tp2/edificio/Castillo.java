@@ -8,6 +8,6 @@ import fiuba.algo3.tp2.mapa.Mapa;
 public class Castillo extends Edificio {
 	
 	public Castillo(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, new FormaCastillo(), mapa);
+		super(posicion, new CreadorUnidadCastillo(mapa), new FormaCastilloRectangulo(), mapa);
 	}
 }

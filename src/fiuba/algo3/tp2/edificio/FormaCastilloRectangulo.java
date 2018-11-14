@@ -5,14 +5,14 @@ import java.util.Collection;
 
 import fiuba.algo3.tp2.mapa.Posicion;
 
-public class FormaCastillo extends Forma {
+public class FormaCastilloRectangulo extends Forma {
 	 
 	 private static final Integer LARGO = 4;
 	 private static final Integer ANCHO = 4;
 	 
 	 private Collection<Posicion> forma;
 	 
-	 public FormaCastillo(){
+	 public FormaCastilloRectangulo(){
 		 
 		 forma = new ArrayList<Posicion>();
 		 

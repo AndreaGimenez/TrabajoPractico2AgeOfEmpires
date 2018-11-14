@@ -1,10 +1,8 @@
-package fiuba.algo3.tp2.unidad;
-
-import fiuba.algo3.tp2.movimiento.Direccion;
+package fiuba.algo3.tp2.movimiento;
 
 public class DireccionAbajoDerecha extends Direccion {
 
 	public DireccionAbajoDerecha() {
-		super(-1,1);
+		super(1,-1);
 	}
 }

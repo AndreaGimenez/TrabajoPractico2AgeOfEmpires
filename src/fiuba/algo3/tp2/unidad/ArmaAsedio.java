@@ -11,7 +11,7 @@ public class ArmaAsedio extends Unidad {
 	
 	public ArmaAsedio(Posicion posicion, Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, mapa, new MovimientoBasico());
+		super(posicion,null, mapa, new MovimientoBasico());
 	}
 
 	public void montar() {
