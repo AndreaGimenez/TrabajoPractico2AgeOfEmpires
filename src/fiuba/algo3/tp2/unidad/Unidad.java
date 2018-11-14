@@ -1,5 +1,9 @@
 package fiuba.algo3.tp2.unidad;
 
+import fiuba.algo3.tp2.edificio.CreadorUnidad;
+import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
+import fiuba.algo3.tp2.edificio.UnidadNoSoportadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -11,12 +15,13 @@ public abstract class Unidad implements Movible {
 	private Posicion posicion;
 	protected Movimiento movimiento;
 	private Mapa mapa;
+	private CreadorEdificio creadorEdificios;
 	
-	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Unidad(Posicion posicion,  CreadorEdificio creadorEdificios, Mapa mapa, Movimiento movimiento) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.movimiento = movimiento;
-		
+		this.creadorEdificios = creadorEdificios;
 		posicionar(posicion);
 	}
 	
@@ -53,6 +58,13 @@ public abstract class Unidad implements Movible {
 	@Override
 	public void iniciar() {
 		movimiento = new MovimientoBasico();
+	}
+	
+
+	public Edificio crear(TipoEdificio tipoEdificio) 
+			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdificioNoSoportadoException {
+		
+		return creadorEdificios.crear(tipoEdificio);
 	}
 	
 	@Override

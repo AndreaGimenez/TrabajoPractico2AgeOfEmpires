@@ -4,6 +4,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
+import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.edificio.UnidadNoSoportadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -16,6 +20,7 @@ import fiuba.algo3.tp2.movimiento.DireccionArribaDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
+import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 public class AldeanoTest {
 
@@ -260,5 +265,31 @@ public class AldeanoTest {
 		
 		exceptionRule.expect(MovimientoInvalidoException.class);
 		aldeanoAMover.mover(new DireccionAbajoIzquierda());
+	}
+	
+   @Test
+	public void test_DadoUnAldeanoEnLaPosicionX1Y1CuyasPosicionesAldedaniasSeEncuentranVacias_CuandoCreaUnaPlazaCentral_DeberiaCrearseEnLaPosicionX2Y1() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdificioNoSoportadoException {
+		
+		Mapa mapa = new Mapa(250, 250);
+		Aldeano aldeano = new Aldeano(new Posicion(1, 1), mapa);
+		
+		PlazaCentral plazaCentral = (PlazaCentral)aldeano.crear(TipoEdificio.PLAZA_CENTRAL);
+		
+		exceptionRule.expect(CeldaOcupadaException.class);
+		new Aldeano(new Posicion(2, 1), mapa);
+	}
+   
+   @Test
+	public void test_DadoUnAldeanoEnLaPosicionX1Y1CuyasPosicionesAldedaniasSeEncuentranVacias_CuandoCreaUnCuartel_DeberiaCrearseEnLaPosicionX2Y1() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdificioNoSoportadoException {
+		
+		Mapa mapa = new Mapa(250, 250);
+		Aldeano aldeano = new Aldeano(new Posicion(1, 1), mapa);
+		
+		Cuartel cuartel = (Cuartel)aldeano.crear(TipoEdificio.CUARTEL);
+		
+		exceptionRule.expect(CeldaOcupadaException.class);
+		new Aldeano(new Posicion(2, 1), mapa);
 	}
 }

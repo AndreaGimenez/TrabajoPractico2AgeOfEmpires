@@ -7,5 +7,6 @@ import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 public interface CreadorUnidad {
 
-	public Unidad crear(TipoUnidad tipoUnidad) throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException;
+	public Unidad crear(TipoUnidad tipoUnidad) 
+			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException;
 }

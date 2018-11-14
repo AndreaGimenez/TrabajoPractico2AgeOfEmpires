@@ -2,7 +2,9 @@ package fiuba.algo3.tp2.unidad;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.edificio.EspacioDeConstruccionOcupadoError;
+import fiuba.algo3.tp2.edificio.PlazaCentral;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -14,7 +16,7 @@ import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 public class Aldeano extends Unidad {
 	
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, mapa, new MovimientoBasico());
+		super(posicion, new CreadorEdificioAldeano(mapa), mapa, new MovimientoBasico());
 	}
 
 	public void construirCuartel() 
@@ -43,9 +45,7 @@ public class Aldeano extends Unidad {
 	}
 
     public void reparar(Edificio cuartel) {
-
 	    cuartel.reparar();
-
     }
 
     @Override
