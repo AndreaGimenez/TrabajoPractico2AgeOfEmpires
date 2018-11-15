@@ -1,9 +1,11 @@
 package fiuba.algo3.tp2.edificio;
 
+import fiuba.algo3.tp2.formas.FormaCuartelRectangulo;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
@@ -13,7 +15,7 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
     private CreadorUnidad creadorUnidades;
 
     public Cuartel(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-        super(posicion, new FormaCuartel(), mapa);
+        super(posicion, new FormaCuartelRectangulo(), mapa);
         this.creadorUnidades = new CreadorUnidadCuartel(mapa);
     }
     
@@ -24,10 +26,12 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
 	}
 
     @Override
-    public void reparar(){
-
-        super.curarVida(puntosDeSaludPorReparacion);
-
+    public void reparar() throws EdificioNoAptoParaReparacionException{
+        
+    	if(vida < EdificioConstants.VIDA_MAXIMA)
+    		super.curarVida(puntosDeSaludPorReparacion);
+    	else
+    		throw new EdificioNoAptoParaReparacionException();
     }
 
     @Override

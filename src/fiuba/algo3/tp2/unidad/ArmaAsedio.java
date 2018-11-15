@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.unidad;
 
+import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;
+import fiuba.algo3.tp2.formas.FormaArmaAsedioRectangulo;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -11,7 +13,7 @@ public class ArmaAsedio extends Unidad {
 	
 	public ArmaAsedio(Posicion posicion, Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, mapa, new MovimientoBasico());
+		super(posicion, mapa, new MovimientoBasico(), new FormaArmaAsedioRectangulo());
 	}
 
 	public void montar() {
