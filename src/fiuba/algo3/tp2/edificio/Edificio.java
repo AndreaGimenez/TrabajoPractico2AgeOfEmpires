@@ -16,16 +16,14 @@ public abstract class Edificio implements Posicionable {
 	private Forma forma;
 	protected Mapa mapa;
 	private int vida;
-	private CreadorUnidad creadorUnidades;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
 	 */
-	public Edificio(Posicion posicion, CreadorUnidad creadorUnidades, Forma forma, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Edificio(Posicion posicion, Forma forma, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.forma = forma;
-		this.creadorUnidades = creadorUnidades;
 		posicionar(posicion);
 	}
 	
@@ -65,11 +63,5 @@ public abstract class Edificio implements Posicionable {
 
 		this.vida = this.vida + puntosDeSaludPorReparacion;
 
-	}
-	
-	public Unidad crear(TipoUnidad tipoUnidad) 
-			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
-		
-		return creadorUnidades.crear(tipoUnidad);
 	}
 }

@@ -8,9 +8,19 @@ import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
-public class PlazaCentral extends Edificio {
+public class PlazaCentral extends Edificio implements GeneradorUnidades {
 	
+	private CreadorUnidad creadorUnidades;
+
 	public PlazaCentral(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, new CreadorUnidadPlazaCentral(mapa), new FormaPlazaCentralRectangulo(), mapa);
+		super(posicion, new FormaPlazaCentralRectangulo(), mapa);
+		this.creadorUnidades = new CreadorUnidadPlazaCentral(mapa);
+	}
+
+	@Override
+	public Unidad crear(TipoUnidad tipoUnidad) 
+			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+		
+		return this.creadorUnidades.crear(tipoUnidad);
 	}
 }
