@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.edificio;
 
+import fiuba.algo3.tp2.formas.FormaPlazaCentralRectangulo;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -11,7 +12,8 @@ import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 public class PlazaCentral extends Edificio implements GeneradorUnidades {
 	
 	private CreadorUnidad creadorUnidades;
-
+	private int puntosDeSaludPorReparacion = 25;
+	
 	public PlazaCentral(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, new FormaPlazaCentralRectangulo(), mapa);
 		this.creadorUnidades = new CreadorUnidadPlazaCentral(mapa);
@@ -22,5 +24,10 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
 		return this.creadorUnidades.crear(tipoUnidad);
+	}
+
+	@Override
+	public void reparar() {
+		 super.curarVida(puntosDeSaludPorReparacion);
 	}
 }

@@ -1,19 +1,21 @@
-package fiuba.algo3.tp2.edificio;
+package fiuba.algo3.tp2.formas;
 
 import fiuba.algo3.tp2.mapa.Posicion;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class FormaCuartel extends Forma {
+public class FormaCuartelRectangulo extends  FormaRectangulo  {
 
     private static final Integer LARGO = 2;
     private static final Integer ANCHO = 2;
 
     private Collection<Posicion> forma;
 
-    public FormaCuartel(){
-
+    public FormaCuartelRectangulo(){
+    	
+    	super(LARGO, ANCHO);
+    	 
         forma = new ArrayList<Posicion>();
 
         for(int i = 0 ; i < LARGO ; i++) {
@@ -33,4 +35,5 @@ public class FormaCuartel extends Forma {
         }
         return posicionesADevolver;
     }
+    
 }

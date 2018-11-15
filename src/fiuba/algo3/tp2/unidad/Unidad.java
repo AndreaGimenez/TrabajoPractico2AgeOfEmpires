@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.unidad;
 
+import fiuba.algo3.tp2.formas.Forma;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -8,14 +9,16 @@ import fiuba.algo3.tp2.movimiento.Direccion;
 
 public abstract class Unidad implements Movible {
 
-	private Posicion posicion;
+	protected Posicion posicion;
 	protected Movimiento movimiento;
+	protected Forma forma;
 	private Mapa mapa;
 	
-	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento, Forma forma) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.movimiento = movimiento;
+		this.forma = forma;
 		posicionar(posicion);
 	}
 	

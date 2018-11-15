@@ -1,9 +1,11 @@
-package fiuba.algo3.tp2.edificio;
+package fiuba.algo3.tp2.formas;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.edificio.Castillo;
+import fiuba.algo3.tp2.edificio.PlazaCentral;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -93,6 +95,27 @@ public class FormaTest {
 		}
 		for( int i = 1 ; i < 3 ; i++ ) {
 			new Aldeano(new Posicion(3,i), mapa);
+		}
+	}
+	
+	@Test 
+	public void testSeCreaUnAldeanoConFormaRectanguloDe1X1EnX1Y1DeberianPoderOcuaparseLasPosicionesAledanias() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+		
+		Mapa mapa = new Mapa(10,10);
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+		
+		for( int i = 0 ; i < 3 ; i++ ) {
+			new Aldeano(new Posicion(i,0), mapa);
+		}
+		for( int i = 1 ; i < 3 ; i++ ) {
+			new Aldeano(new Posicion(0,i), mapa);
+		}
+		for( int i = 1 ; i < 3 ; i++ ) {
+			new Aldeano(new Posicion(i,2), mapa);
+		}
+		for( int i = 1 ; i < 2 ; i++ ) {
+			new Aldeano(new Posicion(2,i), mapa);
 		}
 	}
 }
