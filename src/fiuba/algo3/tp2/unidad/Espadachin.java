@@ -9,7 +9,7 @@ public class Espadachin extends Unidad{
 
 	public Espadachin(Posicion posicion, Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, new CreadorEdificioCuartel(mapa), mapa, new MovimientoBasico());
+		super(posicion, mapa, new MovimientoBasico());
 	}
 
 }
