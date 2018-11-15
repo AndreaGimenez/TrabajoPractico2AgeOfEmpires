@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.unidad;
+package Construccion;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.Edificio;

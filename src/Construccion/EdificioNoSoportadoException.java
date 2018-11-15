@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.unidad;
+package Construccion;
 
 public class EdificioNoSoportadoException extends Exception {
 
