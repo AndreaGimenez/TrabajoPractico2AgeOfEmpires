@@ -20,6 +20,7 @@ import fiuba.algo3.tp2.movimiento.DireccionArribaDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
+import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
 import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 public class AldeanoTest {

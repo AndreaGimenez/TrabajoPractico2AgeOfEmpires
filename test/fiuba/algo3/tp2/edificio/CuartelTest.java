@@ -9,11 +9,11 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Espadachin;
-import fiuba.algo3.tp2.unidad.MovimientoInvalidoException;
 import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 public class CuartelTest {

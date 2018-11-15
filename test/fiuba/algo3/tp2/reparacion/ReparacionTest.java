@@ -47,11 +47,21 @@ public class ReparacionTest {
 	}
 	
 	/*@Test
-	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon75PorCientoDeVidaEnUnTurno() {
+	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanio() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
 		
-	}
+		Mapa mapa = new Mapa(250,250);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+		
+		Cuartel cuartel = new Cuartel(new Posicion(2,1), mapa);
+		
+		//cuartel.recibirDanio();
+		
+		aldeano.repararEdificio(cuartel);
+	}*/
 	
-	@Test
+	/*@Test
 	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurno() {
 		
 	}*/

@@ -10,7 +10,8 @@ public class ReparadorEdificioAldeano implements ReparadorEdificio {
 	}
 
 	@Override
-	public void repararEdificio(Edificio edificio) throws EdificioNoAptoParaReparacionException {
+	public void repararEdificio(Edificio edificio) 
+			throws EdificioNoAptoParaReparacionException {
 		edificio.reparar();
 	}
 }

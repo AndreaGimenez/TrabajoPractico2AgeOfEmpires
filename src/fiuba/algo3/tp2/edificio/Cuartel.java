@@ -11,11 +11,11 @@ import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 public class Cuartel extends Edificio implements GeneradorUnidades {
 
-    private int puntosDeSaludPorReparacion = 50;
+    //private int puntosDeSaludPorReparacion = 50;
     private CreadorUnidad creadorUnidades;
 
     public Cuartel(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-        super(posicion, new FormaCuartelRectangulo(), mapa);
+        super(posicion, new FormaCuartelRectangulo(), new ReparacionDesactivada(), mapa);
         this.creadorUnidades = new CreadorUnidadCuartel(mapa);
     }
     
@@ -26,18 +26,8 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
 	}
 
     @Override
-    public void reparar() throws EdificioNoAptoParaReparacionException{
-        
-    	if(vida < EdificioConstants.VIDA_MAXIMA)
-    		super.curarVida(puntosDeSaludPorReparacion);
-    	else
-    		throw new EdificioNoAptoParaReparacionException();
-    }
-
-    @Override
     public void iniciar(){
 
-
-
     }
+
 }

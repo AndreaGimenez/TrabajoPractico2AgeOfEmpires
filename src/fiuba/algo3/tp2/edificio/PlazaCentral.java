@@ -15,7 +15,7 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 	private int puntosDeSaludPorReparacion = 25;
 	
 	public PlazaCentral(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, new FormaPlazaCentralRectangulo(), mapa);
+		super(posicion, new FormaPlazaCentralRectangulo(), new ReparacionDesactivada(), mapa);
 		this.creadorUnidades = new CreadorUnidadPlazaCentral(mapa);
 	}
 
@@ -26,8 +26,4 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 		return this.creadorUnidades.crear(tipoUnidad);
 	}
 
-	@Override
-	public void reparar() {
-		 super.curarVida(puntosDeSaludPorReparacion);
-	}
 }

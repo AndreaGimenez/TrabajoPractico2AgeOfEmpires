@@ -6,6 +6,11 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.movimiento.Direccion;
+import fiuba.algo3.tp2.movimiento.Movible;
+import fiuba.algo3.tp2.movimiento.Movimiento;
+import fiuba.algo3.tp2.movimiento.MovimientoBasico;
+import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
+import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 
 public abstract class Unidad implements Movible {
 
@@ -56,9 +61,5 @@ public abstract class Unidad implements Movible {
 	public void iniciar() {
 		movimiento = new MovimientoBasico();
 	}
-	
-	@Override
-	public void recibirDanio(int danio) {
-		
-	}
+
 }

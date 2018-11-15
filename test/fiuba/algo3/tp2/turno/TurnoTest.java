@@ -16,8 +16,8 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
+import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
-import fiuba.algo3.tp2.unidad.MovimientoInvalidoException;
 
 public class TurnoTest {
 	

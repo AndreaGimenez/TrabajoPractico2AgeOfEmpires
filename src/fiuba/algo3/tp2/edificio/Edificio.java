@@ -16,6 +16,7 @@ import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 public abstract class Edificio implements Posicionable {
 
 	private Posicion posicion;
+	protected Reparacion reparacion;
 	private Forma forma;
 	protected Mapa mapa;
 	protected int vida;
@@ -23,11 +24,11 @@ public abstract class Edificio implements Posicionable {
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
 	 */
-	public Edificio(Posicion posicion, Forma forma, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Edificio(Posicion posicion, Forma forma, Reparacion reparacion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.forma = forma;
-		this.vida = EdificioConstants.VIDA_MAXIMA ;
+		this.reparacion = reparacion;
 		posicionar(posicion);
 	}
 	
@@ -51,15 +52,11 @@ public abstract class Edificio implements Posicionable {
 	public void iniciar() {
 		
 	}
+	
 
-	@Override
-	public void recibirDanio(int danio){
-
-		this.vida = this.vida - danio;
-
+	public void reparar() throws EdificioNoAptoParaReparacionException{
+		reparacion.reparar(this);
 	}
-
-	public abstract void reparar() throws EdificioNoAptoParaReparacionException;
 
 	protected void curarVida(int puntosDeSaludPorReparacion) {
 

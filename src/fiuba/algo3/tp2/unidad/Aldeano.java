@@ -6,14 +6,6 @@ import Construccion.ConstructorEdificios;
 import Construccion.CreadorEdificio;
 import Construccion.CreadorEdificioAldeano;
 import Construccion.EdificioNoSoportadoException;
-=======
-import java.util.Collection;
-
-import fiuba.algo3.tp2.construccion.ConstructorEdificios;
-import fiuba.algo3.tp2.construccion.CreadorEdificio;
-import fiuba.algo3.tp2.construccion.CreadorEdificioAldeano;
-import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
->>>>>>> Stashed changes
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;
@@ -21,6 +13,7 @@ import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
 import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.reparacion.Reparador;
@@ -37,11 +30,6 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 		this.creadorEdificio = new CreadorEdificioAldeano(mapa);
 		this.reparadorEdificio = new ReparadorEdificioAldeano(mapa);
 	}
-
-    @Override
-    public void recibirDanio(int danio) {
-        
-    }
 
 	@Override
 	public Edificio crear(TipoEdificio tipoEdificio) 

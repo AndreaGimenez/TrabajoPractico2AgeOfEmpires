@@ -16,6 +16,7 @@ import fiuba.algo3.tp2.movimiento.DireccionArribaDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
+import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
 
 public class EspadachinTest {
 	@Rule
