@@ -1,6 +1,6 @@
-package fiuba.algo3.tp2.edificio;
+package fiuba.algo3.tp2.reparacion;
 
-import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.edificio.Edificio;
 
 public interface Reparacion {
 
