@@ -6,6 +6,8 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.reparacion.ReparacionActivada;
+import fiuba.algo3.tp2.reparacion.ReparacionDesactivada;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
@@ -29,5 +31,9 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
     public void iniciar(){
 
     }
+
+	public void recibirDanio() {
+		this.reparacion = new ReparacionActivada();
+	}
 
 }
