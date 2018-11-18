@@ -26,4 +26,14 @@ public class Posicion {
 		
 		return new Posicion(coordenadaX, coordenadaY);
 	}
+
+	public void setX(Integer tamanioX) {
+		
+		this.coordenadaX = tamanioX;
+	}
+
+	public void setY(Integer tamanioY) {
+
+		this.coordenadaY = tamanioY;
+	}
 }
