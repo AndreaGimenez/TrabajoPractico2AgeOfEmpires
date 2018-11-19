@@ -7,6 +7,7 @@ import Construccion.CreadorEdificio;
 import Construccion.CreadorEdificioAldeano;
 import Construccion.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.edificio.EdificioConstants;
 import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
@@ -31,8 +32,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 		this.reparadorEdificio = new ReparadorEdificioAldeano(mapa);
 	}
 
-	@Override
-	public Edificio crear(TipoEdificio tipoEdificio) 
+	public Edificio crear(TipoEdificio tipoEdificio)
 			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException {
 		
 		return creadorEdificio.crear(tipoEdificio);
@@ -69,6 +69,12 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	public void siguienteAccion() {
 
 		this.reparadorEdificio.esPosibileVolverAReparar();
+
+	}
+
+	public void crearALaDerecha(TipoEdificio enumEdificio) {
+
+
 
 	}
 }

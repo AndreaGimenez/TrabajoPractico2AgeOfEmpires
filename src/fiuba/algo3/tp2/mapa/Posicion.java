@@ -36,4 +36,15 @@ public class Posicion {
 
 		this.coordenadaY = tamanioY;
 	}
+
+    public Posicion desplazarHorizontalmente(int i) {
+
+		return new Posicion(this.coordenadaX+i, this.coordenadaY);
+
+    }
+
+	public Posicion desplazarVerticalmente(int i) {
+
+		return new Posicion(this.coordenadaX, this.coordenadaY-i);
+	}
 }
