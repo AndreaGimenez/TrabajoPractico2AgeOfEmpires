@@ -25,4 +25,9 @@ public class Castillo extends Edificio implements GeneradorUnidades {
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		return generadorUnidades.crear(tipoUnidad, posicion);
 	}
+
+	@Override
+	public void siguienteAccion() {
+
+	}
 }

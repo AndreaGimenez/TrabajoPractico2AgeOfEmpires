@@ -15,4 +15,8 @@ public class Espadachin extends Unidad{
 		super(posicion, mapa, new MovimientoBasico(), new FormaEspadachinRectangulo());
 	}
 
+	@Override
+	public void siguienteAccion() {
+
+	}
 }

@@ -1,16 +1,12 @@
 package fiuba.algo3.tp2.juego;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.LinkedList;
 
 import fiuba.algo3.tp2.edificio.Castillo;
+import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
-import fiuba.algo3.tp2.mapa.Celda;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.*;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 
@@ -22,8 +18,8 @@ public class Jugador {
 	private static final Posicion POSICION_INICIAL_ALDEANO1_JUG_1 = new Posicion(4, 6);
 	
 	private int oro;
-	private Collection<Edificio> edificios;
-	private Collection<Unidad> unidades;
+	private LinkedList<Posicionable> edificios = new LinkedList<>();
+	private LinkedList<Posicionable> unidades = new LinkedList<>();
 
 	public void cargarCondicionesIniciales(Mapa mapa) 
 			throws CeldaOcupadaException, CeldaInexistenteException {
@@ -33,14 +29,13 @@ public class Jugador {
 		this.unidades = cargarUnidadesIniciales(mapa);
 	}
 
-	private Collection<Unidad> cargarUnidadesIniciales(Mapa mapa) 
+	private LinkedList<Posicionable> cargarUnidadesIniciales(Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		Aldeano aldeano1 = new Aldeano(buscarPosicionAldeano(mapa), mapa);
 		Aldeano aldeano2 = new Aldeano(buscarPosicionAldeano(mapa), mapa);
 		Aldeano aldeano3 = new Aldeano(buscarPosicionAldeano(mapa), mapa);
-		
-		Collection<Unidad> unidades = new ArrayList<Unidad>();
+
 		unidades.add(aldeano1);
 		unidades.add(aldeano2);
 		unidades.add(aldeano3);
@@ -54,13 +49,11 @@ public class Jugador {
 		return posicion;
 	}
 
-	private Collection<Edificio> cargarEdificiosIniciales(Mapa mapa) 
+	private LinkedList<Posicionable> cargarEdificiosIniciales(Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		Castillo castillo = new Castillo(buscarPosicionCastillo(mapa), mapa);
 		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(mapa), mapa);
-		
-		Collection<Edificio> edificios = new ArrayList<Edificio>();
 		edificios.add(castillo);
 		edificios.add(plazaCentral);
 		
@@ -106,4 +99,27 @@ public class Jugador {
 		return this.oro;		
 	}
 
+	public LinkedList<Posicionable> obtenerPosicionables() {
+
+		LinkedList<Posicionable> posicionables = new LinkedList<>();
+
+		posicionables.addAll(this.edificios);
+
+		posicionables.addAll(this.unidades);
+
+		return posicionables;
+
+	}
+
+	public void agregarUnidad(Unidad unidad) {
+
+		this.unidades.add(unidad);
+
+	}
+
+	public void agregarEdificio(Edificio edificio) {
+
+		this.edificios.add(edificio);
+
+	}
 }

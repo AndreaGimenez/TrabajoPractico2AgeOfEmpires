@@ -18,6 +18,7 @@ public abstract class Edificio implements Posicionable {
 
 	private Posicion posicion;
 	protected Reparacion reparacion;
+	private int vidaRecuperadaPorReparacion;
 	private Forma forma;
 	protected Mapa mapa;
 	protected int vida;
@@ -59,4 +60,35 @@ public abstract class Edificio implements Posicionable {
 		reparacion.reparar(this);
 	}
 
+    protected void puntosDeVida(int puntos) {
+
+		this.vida = puntos;
+    }
+
+	protected void daniar(int danio) {
+
+		this.vida = this.vida - danio;
+
+	}
+
+	public int obtenerVida(){
+
+		return this.vida;
+
+	}
+
+    public void curar(){
+
+	    if(this.vida > 200) this.vida = 250;
+
+        else
+            this.vida = this.vida + this.vidaRecuperadaPorReparacion;
+
+    }
+
+    protected void establecerSaludRecuperadaPorTurno(int puntosDeRecuperacion){
+
+        this.vidaRecuperadaPorReparacion = puntosDeRecuperacion;
+
+    }
 }

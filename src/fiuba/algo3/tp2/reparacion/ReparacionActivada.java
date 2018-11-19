@@ -6,7 +6,8 @@ public class ReparacionActivada implements Reparacion {
 
 	@Override
 	public void reparar(Edificio edificio) throws EdificioNoAptoParaReparacionException {
-		// TODO Auto-generated method stub
+
+		edificio.curar();
 
 	}
 

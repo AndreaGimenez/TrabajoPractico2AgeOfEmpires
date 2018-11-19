@@ -25,4 +25,9 @@ public class ArmaAsedio extends Unidad {
 	public void desmontar() {
 		this.movimiento = new MovimientoBasico();
 	}
+
+	@Override
+	public void siguienteAccion() {
+
+	}
 }

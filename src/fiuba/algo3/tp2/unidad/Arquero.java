@@ -14,4 +14,9 @@ public class Arquero extends Unidad {
 		
 		super(posicion, mapa, new MovimientoBasico(), new FormaArqueroRectangulo());
 	}
+
+	@Override
+	public void siguienteAccion() {
+
+	}
 }

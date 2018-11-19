@@ -27,4 +27,8 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 		return this.creadorUnidades.crear(tipoUnidad, posicion);
 	}
 
+	@Override
+	public void siguienteAccion() {
+
+	}
 }

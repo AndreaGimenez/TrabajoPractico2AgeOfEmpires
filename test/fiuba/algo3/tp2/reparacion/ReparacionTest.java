@@ -1,6 +1,9 @@
 package fiuba.algo3.tp2.reparacion;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.turno.Turno;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -26,31 +29,26 @@ public class ReparacionTest {
 		Mapa mapa = new Mapa(250,250);
 		
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
-		Cuartel cuartelMock =  mock(Cuartel.class);
-		
-		when(cuartelMock.obtenerPosicion()).thenReturn(new Posicion(3,1));
+		Cuartel cuartel = new Cuartel(new Posicion(3,1), mapa);
 		
 		exceptionRule.expect(EdificioFueraDeRangoException.class);
-		aldeano.repararEdificio(cuartelMock);
+		aldeano.repararEdificio(cuartel);
 	}
 	
-/*	@Test
+	@Test
 	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX2Y1PeroQueNoEsteDaniado() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);*/
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 		
-		/*Cuartel cuartel = new Cuartel(new Posicion(2,1), mapa);*/
-		/*Cuartel cuartelMock =  mock(Cuartel.class);
-		
-		when(cuartelMock.obtenerPosicion()).thenReturn(new Posicion(2,1));
+		Cuartel cuartel = new Cuartel(new Posicion(2,1), mapa);
 		
 		exceptionRule.expect(EdificioNoAptoParaReparacionException.class);
 		
-		aldeano.repararEdificio(cuartelMock);
-	}*/
+		aldeano.repararEdificio(cuartel);
+	}
 	
 	@Test
 	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanio() 
@@ -59,14 +57,12 @@ public class ReparacionTest {
 		Mapa mapa = new Mapa(250,250);
 		
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+
+		Cuartel cuartel = new Cuartel(new Posicion(2,2), mapa);
+
+		cuartel.recibirDanio(50);
 		
-		Cuartel cuartelMock =  mock(Cuartel.class);
-		doNothing().when(cuartelMock).reparar();
-		
-		when(cuartelMock.obtenerPosicion()).thenReturn(new Posicion(2,2));
-		cuartelMock.recibirDanio();
-		
-		aldeano.repararEdificio(cuartelMock);
+		aldeano.repararEdificio(cuartel);
 	}
 	
 	@Test
@@ -76,25 +72,56 @@ public class ReparacionTest {
 		Mapa mapa = new Mapa(250,250);
 		
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
-		
-		Cuartel cuartelMock =  mock(Cuartel.class);
-		doNothing().when(cuartelMock).reparar();
-		when(cuartelMock.obtenerPosicion()).thenReturn(new Posicion(2,2));
-		
-		 doNothing().
-		   doThrow(new EdificioNoAptoParaReparacionException())
-		   .when(cuartelMock).reparar();
+
+		Cuartel cuartel = new Cuartel(new Posicion(2,2), mapa);
 		 
-		cuartelMock.recibirDanio();
-		aldeano.repararEdificio(cuartelMock);
+		cuartel.recibirDanio(50);
+		aldeano.repararEdificio(cuartel);
 		exceptionRule.expect(EdificioNoAptoParaReparacionException.class);
-		aldeano.repararEdificio(cuartelMock);
+		aldeano.repararEdificio(cuartel);
 	}
 	
 	
-	/*@Test
-	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurno() {
-		
-	}*/
+	@Test
+	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurnos() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+
+		Mapa mapa = new Mapa(250,250);
+
+		Jugador ignacio = new Jugador();
+
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+
+		Cuartel cuartel = new Cuartel(new Posicion(2,1),mapa);
+
+		ignacio.agregarUnidad(aldeano);
+
+		ignacio.agregarEdificio(cuartel);
+
+		Turno turno = new Turno(ignacio.obtenerPosicionables());
+
+		turno.iniciar();
+
+		cuartel.recibirDanio(249);
+
+		aldeano.repararEdificio(cuartel);
+
+		assertEquals(51, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(101, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(151, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(201, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(250, cuartel.obtenerVida());
+	}
 	
 }

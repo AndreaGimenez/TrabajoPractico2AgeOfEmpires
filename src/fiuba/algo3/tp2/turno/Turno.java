@@ -18,4 +18,12 @@ public class Turno {
 			posicionable.iniciar();
 		}
 	}
+
+    public void avanzar() {
+
+		for(Posicionable posicionable : posicionablesJugador) {
+			posicionable.siguienteAccion();
+		}
+
+    }
 }

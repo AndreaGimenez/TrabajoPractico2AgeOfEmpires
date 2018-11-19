@@ -13,12 +13,13 @@ import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 public class Cuartel extends Edificio implements GeneradorUnidades {
 
-    //private int puntosDeSaludPorReparacion = 50;
     private CreadorUnidad creadorUnidades;
 
     public Cuartel(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
         super(posicion, new FormaCuartelRectangulo(), new ReparacionDesactivada(), mapa);
+        super.puntosDeVida(250);
         this.creadorUnidades = new CreadorUnidadCuartel(mapa);
+        super.establecerSaludRecuperadaPorTurno(50);
     }
     
 	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion) 
@@ -32,8 +33,22 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
 
     }
 
-	public void recibirDanio() {
-		this.reparacion = new ReparacionActivada();
+    @Override
+    public void siguienteAccion() {
+        this.curar();
+    }
+
+    public Posicion obtenerPosicion(){
+
+        return super.obtenerPosicion();
+
+    }
+
+	public void recibirDanio(int danio) {
+
+        this.reparacion = new ReparacionActivada();
+
+        super.daniar(danio);
 	}
 
 }
