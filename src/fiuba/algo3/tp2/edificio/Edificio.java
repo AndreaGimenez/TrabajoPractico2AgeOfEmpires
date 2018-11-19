@@ -10,6 +10,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.reparacion.Reparacion;
+import fiuba.algo3.tp2.reparacion.ReparacionActivada;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
@@ -20,16 +21,21 @@ public abstract class Edificio implements Posicionable {
 	protected Reparacion reparacion;
 	private Forma forma;
 	protected Mapa mapa;
-	protected int vida;
+	int vida;
+	int topeDeVida;
+	int puntosDeRecuperacion;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
 	 */
-	public Edificio(Posicion posicion, Forma forma, Reparacion reparacion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Edificio(Posicion posicion, Forma forma, Reparacion reparacion, int vidaMaxima, int saludRecuperadaPorTurno, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.forma = forma;
 		this.reparacion = reparacion;
+		this.vida = vidaMaxima;
+		this.topeDeVida = vidaMaxima;
+		this.puntosDeRecuperacion = saludRecuperadaPorTurno;
 		posicionar(posicion);
 	}
 	
@@ -53,10 +59,45 @@ public abstract class Edificio implements Posicionable {
 	public void iniciar() {
 		
 	}
-	
+
+	@Override
+    public void siguienteAccion() throws EdificioNoAptoParaReparacionException {
+
+	    try{
+
+            this.reparar();
+
+        } catch (EdificioNoAptoParaReparacionException e){
+
+        }
+
+    }
 
 	public void reparar() throws EdificioNoAptoParaReparacionException{
 		reparacion.reparar(this);
 	}
 
+
+	public void recibirDanio(int danio) {
+
+        this.reparacion = new ReparacionActivada();
+
+		this.vida = this.vida - danio;
+
+	}
+
+	public int obtenerVida(){
+
+		return this.vida;
+
+	}
+
+    public void curar(){
+
+	    if(this.vida > this.topeDeVida - this.puntosDeRecuperacion)
+	        this.vida = this.topeDeVida;
+	    else
+	        this.vida = this.vida + this.puntosDeRecuperacion;
+
+    }
 }

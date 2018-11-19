@@ -17,13 +17,17 @@ public abstract class Unidad implements Movible {
 	protected Posicion posicion;
 	protected Movimiento movimiento;
 	protected Forma forma;
+	protected int vida;
+	protected int topeDeVida;
 	private Mapa mapa;
 	
-	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento, Forma forma) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento, Forma forma, int vidaMaxima) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.movimiento = movimiento;
 		this.forma = forma;
+		this.vida = vidaMaxima;
+		this.topeDeVida = vidaMaxima;
 		posicionar(posicion);
 	}
 	

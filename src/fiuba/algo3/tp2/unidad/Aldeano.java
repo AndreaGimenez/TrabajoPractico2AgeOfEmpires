@@ -7,6 +7,7 @@ import Construccion.CreadorEdificio;
 import Construccion.CreadorEdificioAldeano;
 import Construccion.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.edificio.EdificioConstants;
 import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
@@ -22,17 +23,18 @@ import fiuba.algo3.tp2.reparacion.ReparadorEdificioAldeano;
 
 public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	
+	private static final int VIDA_MAXIMA = 50;
+	
 	private CreadorEdificio creadorEdificio;
 	private ReparadorEdificio reparadorEdificio;
 	
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo());
+		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA);
 		this.creadorEdificio = new CreadorEdificioAldeano(mapa);
 		this.reparadorEdificio = new ReparadorEdificioAldeano(mapa);
 	}
 
-	@Override
-	public Edificio crear(TipoEdificio tipoEdificio) 
+	public Edificio crear(TipoEdificio tipoEdificio)
 			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException {
 		
 		return creadorEdificio.crear(tipoEdificio);
@@ -63,5 +65,18 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	private Collection<Posicion> obtenerPosicionesAledanias() {
 		
 		return forma.obtenerPosicionesContorno(obtenerPosicion());
+	}
+
+	@Override
+	public void siguienteAccion() {
+
+		this.reparadorEdificio.esPosibileVolverAReparar();
+
+	}
+
+	public void recibirDanio(int danioRecibido) {
+		
+		vida -= danioRecibido;
+		
 	}
 }
