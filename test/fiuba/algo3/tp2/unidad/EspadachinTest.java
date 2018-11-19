@@ -261,4 +261,20 @@ public class EspadachinTest {
 		exceptionRule.expect(MovimientoInvalidoException.class);
 		espadachinAMover.mover(new DireccionAbajoIzquierda());
 	}
+	
+	//ATAQUE
+	
+	@Test
+	public void testCuandoUnEspadachinAtaqueUnAldeanoFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+		
+		Mapa mapa = new Mapa(250,250);
+		
+		Espadachin espadachin = new Espadachin(new Posicion(1,1), mapa);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(3,1), mapa);
+		
+		exceptionRule.expect(AtaqueFueraDeRangoException.class);
+		espadachin.atacar(aldeano);
+	}
 }

@@ -22,17 +22,20 @@ public abstract class Edificio implements Posicionable {
 	private Forma forma;
 	protected Mapa mapa;
 	int vida;
-	int puntosDeRecuperacion;
 	int topeDeVida;
+	int puntosDeRecuperacion;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
 	 */
-	public Edificio(Posicion posicion, Forma forma, Reparacion reparacion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Edificio(Posicion posicion, Forma forma, Reparacion reparacion, int vidaMaxima, int saludRecuperadaPorTurno, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.forma = forma;
 		this.reparacion = reparacion;
+		this.vida = vidaMaxima;
+		this.topeDeVida = vidaMaxima;
+		this.puntosDeRecuperacion = saludRecuperadaPorTurno;
 		posicionar(posicion);
 	}
 	
@@ -74,12 +77,6 @@ public abstract class Edificio implements Posicionable {
 		reparacion.reparar(this);
 	}
 
-    protected void puntosDeVida(int vidaMaxima) {
-
-		this.vida = vidaMaxima;
-
-		this.topeDeVida = this.vida;
-    }
 
 	public void recibirDanio(int danio) {
 
@@ -101,12 +98,6 @@ public abstract class Edificio implements Posicionable {
 	        this.vida = this.topeDeVida;
 	    else
 	        this.vida = this.vida + this.puntosDeRecuperacion;
-
-    }
-
-    protected void establecerSaludRecuperadaPorTurno(int puntosDeRecuperacion){
-
-        this.puntosDeRecuperacion = puntosDeRecuperacion;
 
     }
 }
