@@ -1,4 +1,5 @@
 package fiuba.algo3.tp2.reparacion;
+import static org.mockito.Mockito.*;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,28 +26,33 @@ public class ReparacionTest {
 		Mapa mapa = new Mapa(250,250);
 		
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+		Cuartel cuartelMock =  mock(Cuartel.class);
 		
-		Cuartel cuartel = new Cuartel(new Posicion(3,1), mapa);
+		when(cuartelMock.obtenerPosicion()).thenReturn(new Posicion(3,1));
 		
 		exceptionRule.expect(EdificioFueraDeRangoException.class);
-		aldeano.repararEdificio(cuartel);
+		aldeano.repararEdificio(cuartelMock);
 	}
 	
-	@Test
+/*	@Test
 	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX2Y1PeroQueNoEsteDaniado() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
-		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);*/
 		
-		Cuartel cuartel = new Cuartel(new Posicion(2,1), mapa);
+		/*Cuartel cuartel = new Cuartel(new Posicion(2,1), mapa);*/
+		/*Cuartel cuartelMock =  mock(Cuartel.class);
+		
+		when(cuartelMock.obtenerPosicion()).thenReturn(new Posicion(2,1));
 		
 		exceptionRule.expect(EdificioNoAptoParaReparacionException.class);
-		aldeano.repararEdificio(cuartel);
-	}
+		
+		aldeano.repararEdificio(cuartelMock);
+	}*/
 	
-	/*@Test
+	@Test
 	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanio() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
 		
@@ -54,12 +60,37 @@ public class ReparacionTest {
 		
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 		
-		Cuartel cuartel = new Cuartel(new Posicion(2,1), mapa);
+		Cuartel cuartelMock =  mock(Cuartel.class);
+		doNothing().when(cuartelMock).reparar();
 		
-		//cuartel.recibirDanio();
+		when(cuartelMock.obtenerPosicion()).thenReturn(new Posicion(2,2));
+		cuartelMock.recibirDanio();
 		
-		aldeano.repararEdificio(cuartel);
-	}*/
+		aldeano.repararEdificio(cuartelMock);
+	}
+	
+	@Test
+	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanioSoloUnaVezPorTurno() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+		
+		Mapa mapa = new Mapa(250,250);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+		
+		Cuartel cuartelMock =  mock(Cuartel.class);
+		doNothing().when(cuartelMock).reparar();
+		when(cuartelMock.obtenerPosicion()).thenReturn(new Posicion(2,2));
+		
+		 doNothing().
+		   doThrow(new EdificioNoAptoParaReparacionException())
+		   .when(cuartelMock).reparar();
+		 
+		cuartelMock.recibirDanio();
+		aldeano.repararEdificio(cuartelMock);
+		exceptionRule.expect(EdificioNoAptoParaReparacionException.class);
+		aldeano.repararEdificio(cuartelMock);
+	}
+	
 	
 	/*@Test
 	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurno() {

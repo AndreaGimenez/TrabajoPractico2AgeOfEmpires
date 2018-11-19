@@ -62,6 +62,6 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 
 	private Collection<Posicion> obtenerPosicionesAledanias() {
 		
-		return forma.obtenerPosicionesContorno(this.posicion);
+		return forma.obtenerPosicionesContorno(obtenerPosicion());
 	}
 }

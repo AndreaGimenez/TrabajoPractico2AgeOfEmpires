@@ -17,17 +17,14 @@ public class CreadorUnidadPlazaCentral implements CreadorUnidad {
 	}
 
 	@Override
-	public Unidad crear(TipoUnidad tipoUnidad)
+	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion)
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
-		Posicion posicion = determinarPosicionCreacion();
+		
 		if(!tipoUnidad.equals(TipoUnidad.ALDEANO)) {
 			throw new UnidadNoSoportadaException();
 		}
 		return new Aldeano(posicion, mapa);
 	}
 
-	private Posicion determinarPosicionCreacion() {
-		return new Posicion(3,1);
-	}
 }

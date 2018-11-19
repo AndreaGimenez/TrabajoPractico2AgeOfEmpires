@@ -18,11 +18,10 @@ public class CreadorUnidadCuartel implements CreadorUnidad {
 	}
 	
 	@Override
-	public Unidad crear(TipoUnidad tipoUnidad) 
+	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion) 
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
 		Unidad unidadADevolver = null;
-		Posicion posicion = determinarPosicionCreacion();
 		
 		switch(tipoUnidad) {
 		case ESPADACHIN:
@@ -38,7 +37,4 @@ public class CreadorUnidadCuartel implements CreadorUnidad {
 		return unidadADevolver;
 	}
 	
-	private Posicion determinarPosicionCreacion() {
-		return new Posicion(3,1);
-	}
 }

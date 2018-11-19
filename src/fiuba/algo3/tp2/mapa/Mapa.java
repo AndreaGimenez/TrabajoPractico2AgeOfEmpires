@@ -39,7 +39,7 @@ public class Mapa {
 		}
 	}
 
-	private Celda obtenerCelda(Posicion coordenada) {
+	public Celda obtenerCelda(Posicion coordenada) {
 		return celdas[coordenada.getX()][coordenada.getY()];
 	}
 
@@ -52,5 +52,15 @@ public class Mapa {
 		
 		destino.ocupar(origen);
 		origen.liberar();
+	}
+
+	public Integer getTamanioX() {
+		
+		return this.tamanioX;
+	}
+
+	public Integer getTamanioY() {
+		
+		return this.tamanioY;
 	}
 }
