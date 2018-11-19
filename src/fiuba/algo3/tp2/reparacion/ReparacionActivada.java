@@ -9,6 +9,8 @@ public class ReparacionActivada implements Reparacion {
 
 		edificio.curar();
 
+
+
 	}
 
 }

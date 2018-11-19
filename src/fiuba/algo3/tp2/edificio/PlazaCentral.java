@@ -13,11 +13,12 @@ import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 public class PlazaCentral extends Edificio implements GeneradorUnidades {
 	
 	private CreadorUnidad creadorUnidades;
-	private int puntosDeSaludPorReparacion = 25;
 	
 	public PlazaCentral(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, new FormaPlazaCentralRectangulo(), new ReparacionDesactivada(), mapa);
 		this.creadorUnidades = new CreadorUnidadPlazaCentral(mapa);
+		super.establecerSaludRecuperadaPorTurno(25);
+		super.puntosDeVida(450);
 	}
 
 	@Override
@@ -31,4 +32,5 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 	public void siguienteAccion() {
 
 	}
+
 }

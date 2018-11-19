@@ -10,6 +10,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.reparacion.Reparacion;
+import fiuba.algo3.tp2.reparacion.ReparacionActivada;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
@@ -18,10 +19,11 @@ public abstract class Edificio implements Posicionable {
 
 	private Posicion posicion;
 	protected Reparacion reparacion;
-	private int vidaRecuperadaPorReparacion;
 	private Forma forma;
 	protected Mapa mapa;
-	protected int vida;
+	int vida;
+	int puntosDeRecuperacion;
+	int topeDeVida;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
@@ -54,18 +56,34 @@ public abstract class Edificio implements Posicionable {
 	public void iniciar() {
 		
 	}
-	
+
+	@Override
+    public void siguienteAccion() throws EdificioNoAptoParaReparacionException {
+
+	    try{
+
+            this.reparar();
+
+        } catch (EdificioNoAptoParaReparacionException e){
+
+        }
+
+    }
 
 	public void reparar() throws EdificioNoAptoParaReparacionException{
 		reparacion.reparar(this);
 	}
 
-    protected void puntosDeVida(int puntos) {
+    protected void puntosDeVida(int vidaMaxima) {
 
-		this.vida = puntos;
+		this.vida = vidaMaxima;
+
+		this.topeDeVida = this.vida;
     }
 
-	protected void daniar(int danio) {
+	public void recibirDanio(int danio) {
+
+        this.reparacion = new ReparacionActivada();
 
 		this.vida = this.vida - danio;
 
@@ -79,16 +97,16 @@ public abstract class Edificio implements Posicionable {
 
     public void curar(){
 
-	    if(this.vida > 200) this.vida = 250;
-
-        else
-            this.vida = this.vida + this.vidaRecuperadaPorReparacion;
+	    if(this.vida > this.topeDeVida - this.puntosDeRecuperacion)
+	        this.vida = this.topeDeVida;
+	    else
+	        this.vida = this.vida + this.puntosDeRecuperacion;
 
     }
 
     protected void establecerSaludRecuperadaPorTurno(int puntosDeRecuperacion){
 
-        this.vidaRecuperadaPorReparacion = puntosDeRecuperacion;
+        this.puntosDeRecuperacion = puntosDeRecuperacion;
 
     }
 }

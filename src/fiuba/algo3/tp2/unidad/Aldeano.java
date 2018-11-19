@@ -71,10 +71,4 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 		this.reparadorEdificio.esPosibileVolverAReparar();
 
 	}
-
-	public void crearALaDerecha(TipoEdificio enumEdificio) {
-
-
-
-	}
 }

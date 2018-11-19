@@ -13,11 +13,12 @@ import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 public class Castillo extends Edificio implements GeneradorUnidades {
 	
 	private CreadorUnidad generadorUnidades;
-	private int puntosDeSaludPorReparacion = 15;
 
 	public Castillo(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, new FormaCastilloRectangulo(), new ReparacionDesactivada(), mapa);
 		this.generadorUnidades = new CreadorUnidadCastillo(mapa);
+		super.establecerSaludRecuperadaPorTurno(15);
+		super.puntosDeVida(1000);
 	}
 
 	@Override
@@ -30,4 +31,6 @@ public class Castillo extends Edificio implements GeneradorUnidades {
 	public void siguienteAccion() {
 
 	}
+
+
 }

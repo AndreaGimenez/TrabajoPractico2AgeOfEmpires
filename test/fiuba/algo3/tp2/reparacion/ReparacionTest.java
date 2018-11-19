@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.reparacion;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+import fiuba.algo3.tp2.edificio.Castillo;
+import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.turno.Turno;
 import org.junit.Rule;
@@ -123,5 +125,52 @@ public class ReparacionTest {
 
 		assertEquals(250, cuartel.obtenerVida());
 	}
-	
+
+	@Test
+	public void testRepararUnCastillo() throws CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, TamanioInvalidoException {
+
+		Mapa mapa = new Mapa(250,250);
+
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+
+		Edificio castillo = new Castillo(new Posicion(2,1),mapa);
+
+		castillo.recibirDanio(999);
+
+		aldeano.repararEdificio(castillo);
+
+		assertEquals(16, castillo.obtenerVida());
+
+	}
+
+	/*@Test
+	public void testDaniarUnCuartelDeberiaMostrarAlCuartelConLaMismaVidaAlAvanzarUnTurnoYNoFueReparado() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException {
+
+		Mapa mapa = new Mapa(250,250);
+
+		Jugador ignacio = new Jugador();
+
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+
+		Edificio cuartel = new Cuartel(new Posicion(2,1),mapa);
+
+		ignacio.agregarUnidad(aldeano);
+
+		ignacio.agregarEdificio(cuartel);
+
+		Turno turno = new Turno(ignacio.obtenerPosicionables());
+
+		turno.iniciar();
+
+		cuartel.recibirDanio(50);
+
+		assertEquals(200, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(200, cuartel.obtenerVida());
+
+	}*/
+
+
 }
