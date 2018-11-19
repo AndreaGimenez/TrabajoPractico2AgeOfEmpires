@@ -10,12 +10,13 @@ import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 
 public class ArmaAsedio extends Unidad {
-
+	
+	private static final int VIDA_MAXIMA = 150;
 	boolean montada;
 	
 	public ArmaAsedio(Posicion posicion, Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, mapa, new MovimientoBasico(), new FormaArmaAsedioRectangulo());
+		super(posicion, mapa, new MovimientoBasico(), new FormaArmaAsedioRectangulo(), VIDA_MAXIMA);
 	}
 
 	public void montar() {
@@ -24,5 +25,10 @@ public class ArmaAsedio extends Unidad {
 
 	public void desmontar() {
 		this.movimiento = new MovimientoBasico();
+	}
+
+	@Override
+	public void siguienteAccion() {
+
 	}
 }
