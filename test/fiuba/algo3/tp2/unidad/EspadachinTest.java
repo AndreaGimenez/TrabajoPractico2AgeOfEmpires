@@ -264,7 +264,7 @@ public class EspadachinTest {
 	
 	//ATAQUE
 	
-	@Test
+	/*@Test
 	public void testCuandoUnEspadachinAtaqueUnAldeanoFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() 
 			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
 		
@@ -276,5 +276,5 @@ public class EspadachinTest {
 		
 		exceptionRule.expect(AtaqueFueraDeRangoException.class);
 		espadachin.atacar(aldeano);
-	}
+	}*/
 }
