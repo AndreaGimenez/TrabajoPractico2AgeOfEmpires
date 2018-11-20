@@ -49,6 +49,7 @@ public class juegoTest {
 		exceptionRule.expect(CantidadDeJugadoresInvalidaException.class);
 		Juego juego = new Juego(jugadores, new Mapa(250, 250));
 	}
+
 	
 	@Test
 	public void test_alIniciarJuegoCadaJugadorDeberiaTener_100_Oro() 
