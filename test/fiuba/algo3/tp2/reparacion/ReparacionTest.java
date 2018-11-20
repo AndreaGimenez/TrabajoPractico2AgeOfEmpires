@@ -1,6 +1,5 @@
 package fiuba.algo3.tp2.reparacion;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
@@ -16,7 +15,6 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
-import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class ReparacionTest {
@@ -127,7 +125,7 @@ public class ReparacionTest {
 	}
 
 	@Test
-	public void testRepararUnCastillo() throws CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, TamanioInvalidoException {
+	public void testRepararUnCastilloDeberiaSumar15PuntosDeVida() throws CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, TamanioInvalidoException {
 
 		Mapa mapa = new Mapa(250,250);
 
@@ -143,7 +141,7 @@ public class ReparacionTest {
 
 	}
 
-	/*@Test
+	@Test
 	public void testDaniarUnCuartelDeberiaMostrarAlCuartelConLaMismaVidaAlAvanzarUnTurnoYNoFueReparado() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException {
 
 		Mapa mapa = new Mapa(250,250);
@@ -170,7 +168,7 @@ public class ReparacionTest {
 
 		assertEquals(200, cuartel.obtenerVida());
 
-	}*/
+	}
 
 
 }

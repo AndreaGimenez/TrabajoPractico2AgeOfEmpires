@@ -63,14 +63,6 @@ public abstract class Edificio implements Posicionable {
 	@Override
     public void siguienteAccion() throws EdificioNoAptoParaReparacionException {
 
-	    try{
-
-            this.reparar();
-
-        } catch (EdificioNoAptoParaReparacionException e){
-
-        }
-
     }
 
 	public void reparar() throws EdificioNoAptoParaReparacionException{
