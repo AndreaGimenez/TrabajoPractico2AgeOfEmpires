@@ -3,6 +3,7 @@ package fiuba.algo3.tp2.turno;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignado;
 import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 
 public class Turno {
@@ -20,7 +21,7 @@ public class Turno {
 		}
 	}
 
-    public void avanzar() throws EdificioNoAptoParaReparacionException {
+    public void avanzar() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
 
 		for(Posicionable posicionable : posicionablesJugador) {
 			posicionable.siguienteAccion();

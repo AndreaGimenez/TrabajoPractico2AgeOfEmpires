@@ -21,9 +21,10 @@ public abstract class Edificio implements Posicionable {
 	protected Reparacion reparacion;
 	private Forma forma;
 	protected Mapa mapa;
-	int vida;
-	int topeDeVida;
-	int puntosDeRecuperacion;
+	private boolean estaEnReparacion;
+	private int vida;
+	private int topeDeVida;
+	private int puntosDeRecuperacion;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
@@ -36,6 +37,7 @@ public abstract class Edificio implements Posicionable {
 		this.vida = vidaMaxima;
 		this.topeDeVida = vidaMaxima;
 		this.puntosDeRecuperacion = saludRecuperadaPorTurno;
+		this.estaEnReparacion = false;
 		posicionar(posicion);
 	}
 	
@@ -92,4 +94,16 @@ public abstract class Edificio implements Posicionable {
 	        this.vida = this.vida + this.puntosDeRecuperacion;
 
     }
+
+	public boolean yaEstaEnReparacion(){
+
+		return this.estaEnReparacion;
+
+	}
+
+	public void enReparacion(){
+
+		this.estaEnReparacion = true;
+
+	}
 }

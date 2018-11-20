@@ -23,8 +23,8 @@ public class ReparacionTest {
 	public ExpectedException exceptionRule = ExpectedException.none();
 	
 	@Test
-	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX3Y1() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX3Y1()
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -36,8 +36,8 @@ public class ReparacionTest {
 	}
 	
 	@Test
-	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX2Y1PeroQueNoEsteDaniado() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX2Y1PeroQueNoEsteDaniado()
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -51,8 +51,8 @@ public class ReparacionTest {
 	}
 	
 	@Test
-	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanio() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanio()
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -66,8 +66,8 @@ public class ReparacionTest {
 	}
 	
 	@Test
-	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanioSoloUnaVezPorTurno() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanioSoloUnaVezPorTurno()
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -83,7 +83,7 @@ public class ReparacionTest {
 	
 	
 	@Test
-	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurnos() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurnos() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
 
 		Mapa mapa = new Mapa(250,250);
 
@@ -125,7 +125,7 @@ public class ReparacionTest {
 	}
 
 	@Test
-	public void testRepararUnCastilloDeberiaSumar15PuntosDeVida() throws CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, TamanioInvalidoException {
+	public void testRepararUnCastilloDeberiaSumar15PuntosDeVida() throws CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, TamanioInvalidoException, EdificioConReparadorAsignado {
 
 		Mapa mapa = new Mapa(250,250);
 
@@ -142,7 +142,7 @@ public class ReparacionTest {
 	}
 
 	@Test
-	public void testDaniarUnCuartelDeberiaMostrarAlCuartelConLaMismaVidaAlAvanzarUnTurnoYNoFueReparado() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException {
+	public void testDaniarUnCuartelDeberiaMostrarAlCuartelConLaMismaVidaAlAvanzarUnTurnoYNoFueReparado() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
 
 		Mapa mapa = new Mapa(250,250);
 
@@ -167,6 +167,25 @@ public class ReparacionTest {
 		turno.avanzar();
 
 		assertEquals(200, cuartel.obtenerVida());
+
+	}
+
+	@Test(expected = EdificioConReparadorAsignado.class)
+	public void testDosAldeanosNoDeberianPoderRepararElMismoEdificio() throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioConReparadorAsignado {
+
+		Mapa mapa = new Mapa(250,250);
+
+		Aldeano juan = new Aldeano(new Posicion(1,1), mapa);
+
+		Aldeano pedro = new Aldeano(new Posicion(1,2), mapa);
+
+		Edificio castillo = new Castillo(new Posicion(2,1),mapa);
+
+		castillo.recibirDanio(999);
+
+		juan.repararEdificio(castillo);
+
+		pedro.repararEdificio(castillo);
 
 	}
 

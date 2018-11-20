@@ -4,6 +4,6 @@ import fiuba.algo3.tp2.edificio.Edificio;
 
 public interface Reparador {
 	
-	public void repararEdificio(Edificio edificio) 
-			throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException;
+	public void repararEdificio(Edificio edificio)
+            throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado;
 }
