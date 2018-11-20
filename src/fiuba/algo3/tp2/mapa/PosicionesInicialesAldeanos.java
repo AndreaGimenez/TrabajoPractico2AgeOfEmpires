@@ -5,9 +5,9 @@ import java.util.LinkedList;
 
 public class PosicionesInicialesAldeanos extends LinkedList{
 
-	private static final Posicion POSICION_INICIAL_1 = new Posicion(4, 6);
+	private static final Posicion POSICION_INICIAL_1 = new Posicion(6, 4);
 	private static final Posicion POSICION_INICIAL_2 = new Posicion(6, 6);
-	private static final Posicion POSICION_INICIAL_3 = new Posicion(6, 4);
+	private static final Posicion POSICION_INICIAL_3 = new Posicion(4, 6);
 	
 	private Mapa mapa;
 	private LinkedList<Posicion> posiciones;
@@ -25,9 +25,9 @@ public class PosicionesInicialesAldeanos extends LinkedList{
 		posiciones.add(POSICION_INICIAL_1);
 		posiciones.add(POSICION_INICIAL_2);
 		posiciones.add(POSICION_INICIAL_3);
-		posiciones.add(new Posicion(this.mapa.getTamanioX()-5, this.mapa.getTamanioY()-3));
-		posiciones.add(new Posicion(this.mapa.getTamanioX()-5, this.mapa.getTamanioY()-5));
-		posiciones.add(new Posicion(this.mapa.getTamanioX()-3, this.mapa.getTamanioY()-5));
+		posiciones.add(new Posicion(this.mapa.getTamanioX()-4, this.mapa.getTamanioY()-6));
+		posiciones.add(new Posicion(this.mapa.getTamanioX()-6, this.mapa.getTamanioY()-6));
+		posiciones.add(new Posicion(this.mapa.getTamanioX()-6, this.mapa.getTamanioY()-4));
 		
 		return posiciones;
 	}

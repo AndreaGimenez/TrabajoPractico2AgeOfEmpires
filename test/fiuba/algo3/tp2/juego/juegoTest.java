@@ -87,17 +87,34 @@ public class juegoTest {
 			
 			juego.iniciar();
 			
-			LinkedList<Posicionable> edificiosJugador1 = jugador1.obtenerPosicionables();
-			LinkedList<Posicionable> edificiosJugador2 = jugador2.obtenerPosicionables();
-			
-			Castillo castilloJugador1 = (Castillo) edificiosJugador1.getFirst();
-			Castillo castilloJugador2 = (Castillo) edificiosJugador2.getFirst();
+			Castillo castilloJugador1 = jugador1.obtenerCastillo();
+			Castillo castilloJugador2 = jugador2.obtenerCastillo();
 			
 			assertEquals(new Posicion(1, 1), castilloJugador1.obtenerPosicion());
 			assertEquals(new Posicion(245, 245), castilloJugador2.obtenerPosicion());
 		
 	}
-	*/
 	
+	
+	@Test
+	public void test_alIniciarJuegoElPrimerEdificioDelJugadorDeberiaSerElCastillo()
+			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+				
+				Mapa mapa = new Mapa(250, 250);
+				Jugador jugador1 = new Jugador();
+				Jugador jugador2 = new Jugador();
+				Collection<Jugador> jugadores = new ArrayList<Jugador>();
+				
+				jugadores.add(jugador1);jugadores.add(jugador2);
+				
+				Juego juego = new Juego(jugadores, mapa);
+				
+				juego.iniciar();
+				
+				assert(jugador1.obtenerCastillo() instanceof Castillo);
+				
+			
+		}
+	*/
 
 }

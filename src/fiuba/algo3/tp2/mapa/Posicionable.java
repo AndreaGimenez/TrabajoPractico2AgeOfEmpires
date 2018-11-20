@@ -1,6 +1,6 @@
 package fiuba.algo3.tp2.mapa;
 
-import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignado;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 
 public interface Posicionable {
@@ -9,5 +9,5 @@ public interface Posicionable {
 	public Posicion obtenerPosicion();
 	public void iniciar();
 
-    void siguienteAccion() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado;
+    void siguienteAccion() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException;
 }

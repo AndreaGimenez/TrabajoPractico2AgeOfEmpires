@@ -6,7 +6,7 @@ import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class ReparadorEdificioAldeano implements ReparadorEdificio {
 
-	private EdificioConReparadorAsignado EdificioConReparadorAsignado;
+	private EdificioConReparadorAsignadoException EdificioConReparadorAsignado;
 	private boolean yaRepareEsteTurno;
 	private EdificioNoAptoParaReparacionException EdificioNoAptoParaReparacionException;
 
@@ -14,15 +14,15 @@ public class ReparadorEdificioAldeano implements ReparadorEdificio {
 
 		this.yaRepareEsteTurno = false;
 
-		this.EdificioNoAptoParaReparacionException = new EdificioNoAptoParaReparacionException();
+		this.EdificioConReparadorAsignado = new EdificioConReparadorAsignadoException();
 
-		this.EdificioConReparadorAsignado = new EdificioConReparadorAsignado();
+		this.EdificioNoAptoParaReparacionException = new EdificioNoAptoParaReparacionException();
 
 	}
 
 	@Override
 	public void repararEdificio(Edificio edificio, Aldeano aldeano)
-			throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
+			throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		if(yaRepareEsteTurno) throw EdificioNoAptoParaReparacionException;
 		if(!edificio.verificarReparador(aldeano) && !edificio.verificarReparador(null)) throw EdificioConReparadorAsignado;
 		edificio.reparar();

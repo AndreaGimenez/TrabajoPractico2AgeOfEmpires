@@ -39,7 +39,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 
 	@Override
 	public void repararEdificio(Edificio edificio)
-			throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
+			throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		estaEnElRango(edificio);
 		reparadorEdificio.repararEdificio(edificio, this);
@@ -66,7 +66,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	}
 
 	@Override
-	public void siguienteAccion() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
+	public void siguienteAccion() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 
 		this.reparadorEdificio.esPosibileVolverAReparar();
 

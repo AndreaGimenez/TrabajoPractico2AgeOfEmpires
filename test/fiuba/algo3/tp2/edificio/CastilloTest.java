@@ -69,7 +69,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnCastilloEnLaPosicionX1Y1_DebePoderCrearUnArmaDeAsedioEnLaPosicionSolicitada() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
@@ -80,7 +80,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnCastilloEnLaPosicionX1Y1_AlCrearUnArmaDeAsedioEnLaPosicionX3Y3_DebeLanzarCeldaOcupadaException() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
@@ -92,7 +92,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnCastilloEnLaPosicionX1Y1_NoDebePoderCrearUnAldeano_DebeLanzarUnidadNoSoportadaException() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
@@ -104,7 +104,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnCastilloEnLaPosicionX1Y1_NoDebePoderCrearUnEspadachin_DebeLanzarUnidadNoSoportadaException() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
@@ -116,7 +116,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnCastilloEnLaPosicionX1Y1_NoDebePoderCrearUnArquero_DebeLanzarUnidadNoSoportadaException() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
@@ -128,7 +128,7 @@ public class CastilloTest {
 	
 	@Test 
 	public void test_DadoUnCastillo_AlQuererCrearUnArmaDeAsedioEnUnaPosicionYaOcupada_DebeLanzarCeldaOcupadaException() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		

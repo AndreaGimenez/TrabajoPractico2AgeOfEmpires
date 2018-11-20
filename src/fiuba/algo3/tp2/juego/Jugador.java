@@ -35,8 +35,8 @@ public class Jugador {
 		Aldeano aldeano3 = new Aldeano(buscarPosicionAldeano(mapa), mapa);
 
 		unidades.add(aldeano1);
-		unidades.add(aldeano2);
-		unidades.add(aldeano3);
+		unidades.addLast(aldeano2);
+		unidades.addLast(aldeano3);
 		
 		return unidades;
 	}
@@ -55,7 +55,7 @@ public class Jugador {
 		Castillo castillo = new Castillo(buscarPosicionCastillo(mapa), mapa);
 		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(mapa), mapa);
 		edificios.add(castillo);
-		edificios.add(plazaCentral);
+		edificios.addLast(plazaCentral);
 		
 		return edificios;
 	}
@@ -71,8 +71,8 @@ public class Jugador {
 		Celda celda = mapa.obtenerCelda(posicion);
 		
 		if(celda.estaOcupada()) {
-			posicion.setX(mapa.getTamanioX()-2);
-			posicion.setY(mapa.getTamanioY()-7);
+			posicion.setX(mapa.getTamanioX()-7);
+			posicion.setY(mapa.getTamanioY()-2);
 		}
 		
 		return posicion;
@@ -122,5 +122,11 @@ public class Jugador {
 
 		this.edificios.add(edificio);
 
+	}
+
+	public Castillo obtenerCastillo() {
+			if(edificios.getFirst() instanceof Castillo)
+				return (Castillo) edificios.getFirst();
+		return null;
 	}
 }

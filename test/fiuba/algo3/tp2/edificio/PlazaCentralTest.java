@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.edificio;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -123,5 +125,26 @@ public class PlazaCentralTest {
 		
 		exceptionRule.expect(CeldaInexistenteException.class);
 		Aldeano unAldeano = (Aldeano)plazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(300, 300));
+	}
+	
+	@Test
+	public void test_AlPosicionarUnaPlazaCentral_DebeEstarEnConstruccion() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+		
+		Mapa mapa = new Mapa(250, 250);
+		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(5, 5), mapa);
+		
+		assertEquals(true, plazaCentral.estaEnConstruccion());
+	}
+	
+	@Test
+	public void test_AlEstarUnaPlazaCentralEnConstruccion_NoPuedeCrearUnidades() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+		
+		Mapa mapa = new Mapa(250, 250);
+		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(3, 3), mapa);
+		
+		exceptionRule.expect(EdifioNoAptoParaContruirException.class);
+		Aldeano unAldeano = (Aldeano)plazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(10, 10));
 	}
 }
