@@ -2,6 +2,7 @@ package fiuba.algo3.tp2.reparacion;
 
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class ReparadorEdificioAldeano implements ReparadorEdificio {
 
@@ -9,7 +10,7 @@ public class ReparadorEdificioAldeano implements ReparadorEdificio {
 	private boolean yaRepareEsteTurno;
 	private EdificioNoAptoParaReparacionException EdificioNoAptoParaReparacionException;
 
-	public ReparadorEdificioAldeano(Mapa mapa) {
+	public ReparadorEdificioAldeano() {
 
 		this.yaRepareEsteTurno = false;
 
@@ -20,12 +21,12 @@ public class ReparadorEdificioAldeano implements ReparadorEdificio {
 	}
 
 	@Override
-	public void repararEdificio(Edificio edificio)
+	public void repararEdificio(Edificio edificio, Aldeano aldeano)
 			throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
 		if(yaRepareEsteTurno) throw EdificioNoAptoParaReparacionException;
-		if(edificio.yaEstaEnReparacion()) throw EdificioConReparadorAsignado;
+		if(!edificio.verificarReparador(aldeano) && !edificio.verificarReparador(null)) throw EdificioConReparadorAsignado;
 		edificio.reparar();
-		edificio.enReparacion();
+		edificio.enReparacionPorAldeano(aldeano);
 		this.yaRepareEsteTurno = true;
 
 	}

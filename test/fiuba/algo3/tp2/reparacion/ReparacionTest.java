@@ -88,7 +88,7 @@ public class ReparacionTest {
 		Mapa mapa = new Mapa(250,250);
 
 		Jugador ignacio = new Jugador();
-
+		
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
 		Cuartel cuartel = new Cuartel(new Posicion(2,1),mapa);

@@ -7,7 +7,6 @@ import Construccion.CreadorEdificio;
 import Construccion.CreadorEdificioAldeano;
 import Construccion.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.Edificio;
-import fiuba.algo3.tp2.edificio.EdificioConstants;
 import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
@@ -28,7 +27,8 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA);
 		this.creadorEdificio = new CreadorEdificioAldeano(mapa);
-		this.reparadorEdificio = new ReparadorEdificioAldeano(mapa);
+		this.reparadorEdificio = new ReparadorEdificioAldeano();
+		this.edificioEnReparacion = null;
 	}
 
 	public Edificio crear(TipoEdificio tipoEdificio)
@@ -42,7 +42,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 			throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignado {
 		
 		estaEnElRango(edificio);
-		reparadorEdificio.repararEdificio(edificio);
+		reparadorEdificio.repararEdificio(edificio, this);
 		this.edificioEnReparacion = edificio;
 	}
 
@@ -71,7 +71,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 		this.reparadorEdificio.esPosibileVolverAReparar();
 
 		if(this.edificioEnReparacion != null)
-			this.reparadorEdificio.repararEdificio(this.edificioEnReparacion);
+			this.reparadorEdificio.repararEdificio(this.edificioEnReparacion, this);
 
 	}
 

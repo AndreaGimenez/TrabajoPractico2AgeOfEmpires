@@ -22,6 +22,7 @@ public abstract class Edificio implements Posicionable {
 	private Forma forma;
 	protected Mapa mapa;
 	private boolean estaEnReparacion;
+	private Aldeano aldeanoAsignadoParaReparar;
 	private int vida;
 	private int topeDeVida;
 	private int puntosDeRecuperacion;
@@ -95,15 +96,16 @@ public abstract class Edificio implements Posicionable {
 
     }
 
-	public boolean yaEstaEnReparacion(){
+	public void enReparacionPorAldeano(Aldeano aldeano){
 
-		return this.estaEnReparacion;
-
-	}
-
-	public void enReparacion(){
+	    this.aldeanoAsignadoParaReparar = aldeano;
 
 		this.estaEnReparacion = true;
 
 	}
+
+    public boolean verificarReparador(Aldeano aldeano){
+
+	    return (this.aldeanoAsignadoParaReparar == aldeano);
+    }
 }
