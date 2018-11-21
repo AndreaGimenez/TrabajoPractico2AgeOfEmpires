@@ -18,8 +18,9 @@ import fiuba.algo3.tp2.unidad.Aldeano;
 public class Juego {
 
 	private static final int ORO_INICIAL = 100;
-	private static final Posicion POSICION_INICIAL_CASTILLO_JUG_1 = new Posicion(1, 1);
-	private static final Posicion POSICION_INICIAL_PLAZACENTRAL_JUG_1 = new Posicion(1, 6);
+	private static final Posicion POSICION_INICIAL_CASTILLO_JUG_1 = new Posicion(0, 0);
+	private static final Posicion POSICION_INICIAL_PLAZACENTRAL_JUG_1 = new Posicion(5, 0);
+	private static final int CANTIDAD_DE_JUGADORES = 2;
 	
 	private LinkedList<Jugador> jugadores;
 	private Mapa mapa;
@@ -32,7 +33,10 @@ public class Juego {
 	}
 
 	public void iniciar() 
-			throws CeldaOcupadaException, CeldaInexistenteException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException {
+		
+		if(jugadores.size()!=CANTIDAD_DE_JUGADORES)
+			throw new CantidadDeJugadoresInvalidaException();
 		
 		cargarCondicionesIniciales(jugadores.get(0));
 		cargarCondicionesIniciales(jugadores.get(1));
@@ -72,7 +76,7 @@ public class Juego {
 		
 		Castillo castillo = new Castillo(buscarPosicionCastillo(), this.mapa);
 		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(), this.mapa);
-		jugador.agregarEdificio(castillo);
+		jugador.agregarEdificio(castillo); 
 		jugador.agregarEdificio(plazaCentral);
 		
 	}
@@ -84,7 +88,8 @@ public class Juego {
 	 */
 	private Posicion buscarPosicionPlazaCentral() {
 		
-		Posicion posicion = POSICION_INICIAL_PLAZACENTRAL_JUG_1;
+		Posicion posicion = new Posicion(POSICION_INICIAL_PLAZACENTRAL_JUG_1.getX(),
+				POSICION_INICIAL_PLAZACENTRAL_JUG_1.getY());
 		Celda celda = this.mapa.obtenerCelda(posicion);
 		
 		if(celda.estaOcupada()) {
@@ -102,7 +107,8 @@ public class Juego {
 	 */
 	private Posicion buscarPosicionCastillo() {
 		
-		Posicion posicion = POSICION_INICIAL_CASTILLO_JUG_1;
+		Posicion posicion = new Posicion(POSICION_INICIAL_CASTILLO_JUG_1.getX(),
+										POSICION_INICIAL_CASTILLO_JUG_1.getY());
 		Celda celda = this.mapa.obtenerCelda(posicion);
 		
 		if(celda.estaOcupada()) {
@@ -115,7 +121,7 @@ public class Juego {
 
 	public void agregarJugador() throws CantidadDeJugadoresInvalidaException {
 		
-		if(jugadores.size()==2)
+		if(jugadores.size()==CANTIDAD_DE_JUGADORES)
 			throw new CantidadDeJugadoresInvalidaException();
 		this.jugadores.add(new Jugador());
 		
@@ -125,5 +131,4 @@ public class Juego {
 		
 		return this.jugadores.get(numeroDeJugador);
 	}
-
 }
