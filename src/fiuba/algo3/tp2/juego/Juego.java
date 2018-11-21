@@ -84,7 +84,8 @@ public class Juego {
 	 */
 	private Posicion buscarPosicionPlazaCentral() {
 		
-		Posicion posicion = POSICION_INICIAL_PLAZACENTRAL_JUG_1;
+		Posicion posicion = new Posicion(POSICION_INICIAL_PLAZACENTRAL_JUG_1.getX(),
+				POSICION_INICIAL_PLAZACENTRAL_JUG_1.getY());
 		Celda celda = this.mapa.obtenerCelda(posicion);
 		
 		if(celda.estaOcupada()) {
@@ -102,7 +103,8 @@ public class Juego {
 	 */
 	private Posicion buscarPosicionCastillo() {
 		
-		Posicion posicion = POSICION_INICIAL_CASTILLO_JUG_1;
+		Posicion posicion = new Posicion(POSICION_INICIAL_CASTILLO_JUG_1.getX(),
+										POSICION_INICIAL_CASTILLO_JUG_1.getY());
 		Celda celda = this.mapa.obtenerCelda(posicion);
 		
 		if(celda.estaOcupada()) {
@@ -125,5 +127,4 @@ public class Juego {
 		
 		return this.jugadores.get(numeroDeJugador);
 	}
-
 }

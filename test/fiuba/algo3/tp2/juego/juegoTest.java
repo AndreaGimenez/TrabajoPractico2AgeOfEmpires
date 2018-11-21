@@ -45,14 +45,13 @@ public class juegoTest {
 		juego.agregarJugador();
 	}
 
-	/*
 	@Test
 	public void test_alIniciarJuegoCadaJugadorDeberiaTener_100_Oro() 
 			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 		
-		Mapa mapa = new Mapa(250, 250);
+		//Mapa mapa = new Mapa(250, 250);
 		
-		Juego juego = new Juego(mapa);
+		Juego juego = new Juego(new Mapa(250, 250));
 		
 		juego.agregarJugador();
 		juego.agregarJugador();
@@ -66,7 +65,7 @@ public class juegoTest {
 		assertEquals(100, jugador2.obtenerOro());
 		
 	}
-	*/
+	
 	
 	@Test
 	public void test_alIniciarJuegoCadaJugadorDeberiaTenerUnCastillo_YEstarPosicionadoUnoEnCadaEsquina()
@@ -85,8 +84,6 @@ public class juegoTest {
 			Celda celdaCastilloJugador2 = mapa.obtenerCelda(new Posicion(244, 244));
 			assertEquals(true, celdaCastilloJugador1.estaOcupada());
 			assertEquals(true, celdaCastilloJugador2.estaOcupada());
-		
-	}
-	
 
+	}
 }
