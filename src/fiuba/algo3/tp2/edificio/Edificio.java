@@ -113,6 +113,11 @@ public abstract class Edificio implements Posicionable {
     
     public boolean estaEnConstruccion() {
     	
-    	return this.estaEnConstruccion = true;
+    	return this.estaEnConstruccion == true;
+    }
+    
+    public void finalizarConstruccion() {
+    	
+    	this.estaEnConstruccion = false;
     }
 }

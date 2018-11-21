@@ -282,7 +282,7 @@ public class ConstruccionTest {
     
     @Test
     public void test12CuandoUnAldeanoCreaUnaPlazaCentral_EstaDebeEstarEnContruccion() 
-    		throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, UnidadNoSoportadaException {
+    		throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
     	
     	Mapa mapa = new Mapa(250, 250);
     	

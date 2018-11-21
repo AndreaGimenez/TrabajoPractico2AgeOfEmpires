@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import fiuba.algo3.tp2.edificio.Castillo;
+import fiuba.algo3.tp2.mapa.Celda;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -27,94 +28,65 @@ public class juegoTest {
 	public void test_crearJuegoConDosJugadoresDeberiaDarBien() 
 			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException {
 		
-		Jugador jugador1 = new Jugador();
-		Jugador jugador2 = new Jugador();
-		Collection<Jugador> jugadores = new ArrayList<Jugador>();
+		Juego juego = new Juego(new Mapa(250, 250));
+		juego.agregarJugador();
+		juego.agregarJugador();
 		
-		jugadores.add(jugador1);
-		jugadores.add(jugador2);
-		
-		Juego juego = new Juego(jugadores, new Mapa(250, 250));
 	}
 	
 	@Test
-	public void test_crearJuegoConUnJugador_DeberiaLanzarCantidadDeJugadoresInvalidaException() 
+	public void test_crearJuegoConMasDeDosJugadores_DeberiaLanzarCantidadDeJugadoresInvalidaException() 
 			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException {
 		
-		Jugador jugador = new Jugador();
-		Collection<Jugador> jugadores = new ArrayList<Jugador>();
-		
-		jugadores.add(jugador);
-		
+		Juego juego = new Juego(new Mapa(250, 250));
+		juego.agregarJugador();
+		juego.agregarJugador();
 		exceptionRule.expect(CantidadDeJugadoresInvalidaException.class);
-		Juego juego = new Juego(jugadores, new Mapa(250, 250));
+		juego.agregarJugador();
 	}
 
-	
+	/*
 	@Test
 	public void test_alIniciarJuegoCadaJugadorDeberiaTener_100_Oro() 
 			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 		
 		Mapa mapa = new Mapa(250, 250);
-		Jugador jugador1 = new Jugador();
-		Jugador jugador2 = new Jugador();
-		Collection<Jugador> jugadores = new ArrayList<Jugador>();
 		
-		jugadores.add(jugador1);jugadores.add(jugador2);
+		Juego juego = new Juego(mapa);
 		
-		Juego juego = new Juego(jugadores, mapa);
+		juego.agregarJugador();
+		juego.agregarJugador();
 		
 		juego.iniciar();
+		
+		Jugador jugador1 = juego.obtenerJugador(0);
+		Jugador jugador2 = juego.obtenerJugador(1);
 		
 		assertEquals(100, jugador1.obtenerOro());
 		assertEquals(100, jugador2.obtenerOro());
 		
 	}
+	*/
 	
-	/*
 	@Test
 	public void test_alIniciarJuegoCadaJugadorDeberiaTenerUnCastillo_YEstarPosicionadoUnoEnCadaEsquina()
 		throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 			
 			Mapa mapa = new Mapa(250, 250);
-			Jugador jugador1 = new Jugador();
-			Jugador jugador2 = new Jugador();
-			Collection<Jugador> jugadores = new ArrayList<Jugador>();
 			
-			jugadores.add(jugador1);jugadores.add(jugador2);
+			Juego juego = new Juego(mapa);
 			
-			Juego juego = new Juego(jugadores, mapa);
+			juego.agregarJugador();
+			juego.agregarJugador();
 			
 			juego.iniciar();
 			
-			Castillo castilloJugador1 = jugador1.obtenerCastillo();
-			Castillo castilloJugador2 = jugador2.obtenerCastillo();
-			
-			assertEquals(new Posicion(1, 1), castilloJugador1.obtenerPosicion());
-			assertEquals(new Posicion(245, 245), castilloJugador2.obtenerPosicion());
+			Celda celdaCastilloJugador1 = mapa.obtenerCelda(new Posicion(1, 1));
+			Celda celdaCastilloJugador2 = mapa.obtenerCelda(new Posicion(244, 244));
+			assertEquals(true, celdaCastilloJugador1.estaOcupada());
+			assertEquals(true, celdaCastilloJugador2.estaOcupada());
 		
 	}
 	
-	
-	@Test
-	public void test_alIniciarJuegoElPrimerEdificioDelJugadorDeberiaSerElCastillo()
-			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
-				
-				Mapa mapa = new Mapa(250, 250);
-				Jugador jugador1 = new Jugador();
-				Jugador jugador2 = new Jugador();
-				Collection<Jugador> jugadores = new ArrayList<Jugador>();
-				
-				jugadores.add(jugador1);jugadores.add(jugador2);
-				
-				Juego juego = new Juego(jugadores, mapa);
-				
-				juego.iniciar();
-				
-				assert(jugador1.obtenerCastillo() instanceof Castillo);
-				
-			
-		}
-	*/
 
 }

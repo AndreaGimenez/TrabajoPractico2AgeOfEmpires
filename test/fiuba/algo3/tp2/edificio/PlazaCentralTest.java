@@ -73,10 +73,11 @@ public class PlazaCentralTest {
 
 	@Test
 	public void test_DadaUnaPlazaCentral_CrearUnAldeanoEnLaPosicionElegidaDeberidaDarBien() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(1, 1), mapa);
+		plazaCentral.finalizarConstruccion();
 		
 		Aldeano aldeano = (Aldeano)plazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(3, 1));
 		
@@ -84,10 +85,11 @@ public class PlazaCentralTest {
 	
 	@Test
 	public void test_DadaUnaPlazaCentral_NoDeberiaPoderCrearEspadachin_DeberiaLazarUnidadNoSoportadaException() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(1, 1), mapa);
+		plazaCentral.finalizarConstruccion();
 		
 		exceptionRule.expect(UnidadNoSoportadaException.class);
 		Espadachin espadachin = (Espadachin)plazaCentral.crear(TipoUnidad.ESPADACHIN, new Posicion(3, 1));
@@ -95,10 +97,11 @@ public class PlazaCentralTest {
 	
 	@Test
 	public void test_DadaUnaPlazaCentral_NoDeberiaPoderCrearArquero_DeberiaLanzarUnidadNoSoportadaException() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(1, 1), mapa);
+		plazaCentral.finalizarConstruccion();
 		
 		exceptionRule.expect(UnidadNoSoportadaException.class);
 		Arquero arquero = (Arquero)plazaCentral.crear(TipoUnidad.ARQUERO, new Posicion(3, 1));
@@ -106,10 +109,11 @@ public class PlazaCentralTest {
 	
 	@Test
 	public void test_DadaUnaPlazaCentralEnLaPosicionX3Y3_AlCrearUnAldeanoEnUnaPosicionYaOcupadaDeberiaDarError() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(3, 3), mapa);
+		plazaCentral.finalizarConstruccion();
 		Aldeano unAldeano = new Aldeano(new Posicion(7, 7), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
@@ -118,10 +122,11 @@ public class PlazaCentralTest {
 	
 	@Test
 	public void test_DadaUnaPlazaCentralEnLaPosicionX3Y3_AlCrearUnAldeanoEnUnaPosicionFueraDelMapaDeberiaDarError() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(3, 3), mapa);
+		plazaCentral.finalizarConstruccion();
 		
 		exceptionRule.expect(CeldaInexistenteException.class);
 		Aldeano unAldeano = (Aldeano)plazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(300, 300));
@@ -139,7 +144,7 @@ public class PlazaCentralTest {
 	
 	@Test
 	public void test_AlEstarUnaPlazaCentralEnConstruccion_NoPuedeCrearUnidades() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(3, 3), mapa);
