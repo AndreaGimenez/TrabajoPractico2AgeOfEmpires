@@ -10,6 +10,8 @@ import java.util.Collection;
 
 import org.junit.Test;
 
+import Ataque.Atacador;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Posicion;
 
 public class RangoAtaqueEspadachinTest {
@@ -17,14 +19,14 @@ public class RangoAtaqueEspadachinTest {
 	@Test
 	public void testDadoUnRangoAtaqueEspadachinQueSeEncuentraEnLaPosicionX1Y1YUnAldeanoEnX3Y1NoDeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(3,1));
 		
 		when(aldeano.obtenerPosicionesOcupadasEnMapa()).thenReturn(posicionesOcupadasAldeano);
 		
-		Espadachin espadachin = mock(Espadachin.class);
+		Atacador espadachin = mock(Espadachin.class);
 		when(espadachin.obtenerPosicion()).thenReturn(new Posicion(1,1));
 		
 		RangoAtaque rango = new RangoAtaqueEspadachin();
@@ -34,14 +36,14 @@ public class RangoAtaqueEspadachinTest {
 	@Test
 	public void testDadoUnRangoAtaqueEspadachinQueSeEncuentraEnLaPosicionX1Y1YUnAldeanoEnX2Y1DeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(2,1));
 		
 		when(aldeano.obtenerPosicionesOcupadasEnMapa()).thenReturn(posicionesOcupadasAldeano);
 		
-		Espadachin espadachin = mock(Espadachin.class);
+		Atacador espadachin = mock(Espadachin.class);
 		when(espadachin.obtenerPosicion()).thenReturn(new Posicion(1,1));
 		
 		RangoAtaque rango = new RangoAtaqueEspadachin();
@@ -51,14 +53,14 @@ public class RangoAtaqueEspadachinTest {
 	@Test
 	public void testDadoUnRangoAtaqueEspadachinQueSeEncuentraEnLaPosicionX1Y1YUnAldeanoEnX2Y2NoDeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(2,2));
 		
 		when(aldeano.obtenerPosicionesOcupadasEnMapa()).thenReturn(posicionesOcupadasAldeano);
 		
-		Espadachin espadachin = mock(Espadachin.class);
+		Atacador espadachin = mock(Espadachin.class);
 		when(espadachin.obtenerPosicion()).thenReturn(new Posicion(1,1));
 		
 		RangoAtaque rango = new RangoAtaqueEspadachin();

@@ -1,9 +1,9 @@
 package fiuba.algo3.tp2.unidad;
 
 import Ataque.Atacador;
-import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
 import fiuba.algo3.tp2.formas.FormaArmaAsedioRectangulo;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -37,12 +37,7 @@ public class ArmaAsedio extends Unidad implements Atacador {
 	}
 
 	@Override
-	public void atacar(Unidad unidad) throws AtaqueFueraDeRangoException, UnidadMuertaException {
-		ataque.atacar(this, unidad);
-	}
-
-	@Override
-	public void atacar(Edificio edificio) throws AtaqueFueraDeRangoException, EdificioDestruidoException {
-		ataque.atacar(this, edificio);
+	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException {
+		ataque.atacar(this, atacable);
 	}
 }

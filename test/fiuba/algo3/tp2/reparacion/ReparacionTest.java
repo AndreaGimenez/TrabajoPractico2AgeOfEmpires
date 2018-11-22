@@ -1,22 +1,26 @@
 package fiuba.algo3.tp2.reparacion;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import fiuba.algo3.tp2.edificio.Castillo;
-import fiuba.algo3.tp2.edificio.Edificio;
-import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
-import fiuba.algo3.tp2.juego.Jugador;
-import fiuba.algo3.tp2.turno.Turno;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
+import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.Ataque;
+import fiuba.algo3.tp2.unidad.AtaqueEspadachin;
 
 public class ReparacionTest {
 	
@@ -58,10 +62,12 @@ public class ReparacionTest {
 		Mapa mapa = new Mapa(250,250);
 		
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
-
 		Cuartel cuartel = new Cuartel(new Posicion(2,2), mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(50);
 
-		cuartel.recibirDanio(50);
+		cuartel.recibirDanio(ataque);
 		
 		aldeano.repararEdificio(cuartel);
 	}
@@ -75,8 +81,11 @@ public class ReparacionTest {
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
 		Cuartel cuartel = new Cuartel(new Posicion(2,2), mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(50);
 		 
-		cuartel.recibirDanio(50);
+		cuartel.recibirDanio(ataque);
 		aldeano.repararEdificio(cuartel);
 		exceptionRule.expect(EdificioNoAptoParaReparacionException.class);
 		aldeano.repararEdificio(cuartel);
@@ -93,6 +102,9 @@ public class ReparacionTest {
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
 		Cuartel cuartel = new Cuartel(new Posicion(2,1),mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(249);
 
 		ignacio.agregarUnidad(aldeano);
 
@@ -102,7 +114,7 @@ public class ReparacionTest {
 
 		turno.iniciar();
 
-		cuartel.recibirDanio(249);
+		cuartel.recibirDanio(ataque);
 
 		aldeano.repararEdificio(cuartel);
 
@@ -133,8 +145,11 @@ public class ReparacionTest {
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
 		Edificio castillo = new Castillo(new Posicion(2,1),mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(999);
 
-		castillo.recibirDanio(999);
+		castillo.recibirDanio(ataque);
 
 		aldeano.repararEdificio(castillo);
 
@@ -152,6 +167,9 @@ public class ReparacionTest {
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
 		Edificio cuartel = new Cuartel(new Posicion(2,1),mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(50);
 
 		ignacio.agregarUnidad(aldeano);
 
@@ -161,7 +179,7 @@ public class ReparacionTest {
 
 		turno.iniciar();
 
-		cuartel.recibirDanio(50);
+		cuartel.recibirDanio(ataque);
 
 		assertEquals(200, cuartel.obtenerVida());
 
@@ -181,8 +199,11 @@ public class ReparacionTest {
 		Aldeano pedro = new Aldeano(new Posicion(1,2), mapa);
 
 		Edificio castillo = new Castillo(new Posicion(2,1),mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(999);
 
-		castillo.recibirDanio(999);
+		castillo.recibirDanio(ataque);
 
 		juan.repararEdificio(castillo);
 

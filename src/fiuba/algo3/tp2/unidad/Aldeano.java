@@ -20,7 +20,7 @@ import fiuba.algo3.tp2.reparacion.Reparador;
 import fiuba.algo3.tp2.reparacion.ReparadorEdificio;
 import fiuba.algo3.tp2.reparacion.ReparadorEdificioAldeano;
 
-public class Aldeano extends Unidad implements ConstructorEdificios, Reparador{
+public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	
 	private static final int VIDA_MAXIMA = 50;
 	

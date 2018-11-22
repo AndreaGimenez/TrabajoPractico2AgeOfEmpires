@@ -3,7 +3,9 @@ package fiuba.algo3.tp2.unidad;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import Ataque.Atacador;
 import fiuba.algo3.tp2.formas.Forma;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -16,7 +18,7 @@ import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
 import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 
-public abstract class Unidad implements Movible, Posicionable {
+public abstract class Unidad implements Movible, Posicionable, Atacable {
 
 	protected Posicion posicion;
 	protected Movimiento movimiento;
@@ -80,12 +82,11 @@ public abstract class Unidad implements Movible, Posicionable {
 	}
 	
 	@Override
-	public void recibirDanio(int danioRecibido) throws UnidadMuertaException {
-		
+	public void recibirDanio(Ataque ataque) {
 		if(vida == 0) {
 			throw new UnidadMuertaException();
 		}
-		vida -= danioRecibido;
+		vida -= ataque.obtenerDanioUnidad();
 		
 		if(vida < 0) {
 			vida = 0;

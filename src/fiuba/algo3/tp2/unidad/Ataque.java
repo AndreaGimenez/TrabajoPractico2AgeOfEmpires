@@ -1,12 +1,12 @@
 package fiuba.algo3.tp2.unidad;
 
 import Ataque.Atacador;
-import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
+import fiuba.algo3.tp2.mapa.Atacable;
 
-public abstract class Ataque {
+public interface Ataque {
 
-	public abstract void atacar(Atacador atacador, Unidad unidad) throws AtaqueFueraDeRangoException, UnidadMuertaException;
-	public abstract void atacar(Atacador atacador, Edificio edificio) throws AtaqueFueraDeRangoException, EdificioDestruidoException;
-
+	public void atacar(Atacador atacador, Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException;
+	public int obtenerDanioUnidad();
+	public int obtenerDanioEdificio();
 }

@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.unidad;
 
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -12,8 +13,8 @@ import org.junit.rules.ExpectedException;
 
 import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.Cuartel;
-import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -29,17 +30,17 @@ public class AtaqueArmaAsedioTest {
 	public void testCuandoUnAtaqueDeArmaAsedioAtacaUnAldeanoDeberiaLanzarUnidadNoAtacableException() 
 			throws AtaqueFueraDeRangoException, UnidadMuertaException {
 		
-		Unidad aldeano = mock(Aldeano.class);
-		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(6,1));
-		
-		when(aldeano.obtenerPosicionesOcupadasEnMapa()).thenReturn(posicionesOcupadasCuartel);
 		
 		Atacador armaAsedio = mock(ArmaAsedio.class);
 		when(armaAsedio.obtenerPosicion()).thenReturn(new Posicion(1,1));
 		
 		Ataque ataque = new AtaqueArmaAsedio();
+		
+		Atacable aldeano = mock(Aldeano.class);
+		when(aldeano.obtenerPosicionesOcupadasEnMapa()).thenReturn(posicionesOcupadasCuartel);
+		doThrow(new UnidadNoAtacableException()).when(aldeano).recibirDanio(ataque);
 		
 		exceptionRule.expect(UnidadNoAtacableException.class);
 		ataque.atacar(armaAsedio, aldeano);
@@ -49,7 +50,7 @@ public class AtaqueArmaAsedioTest {
 	public void testCuandoUnAtaqueDeArmaAsedioAtacaUnCuartelFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() 
 			throws AtaqueFueraDeRangoException, EdificioDestruidoException {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(7,1));
@@ -70,7 +71,7 @@ public class AtaqueArmaAsedioTest {
 			throws AtaqueFueraDeRangoException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioDestruidoException {
 		
 		Mapa mapa = new Mapa(250,250);
-		Edificio cuartel = new Cuartel(new Posicion(2,1), mapa);
+		Atacable cuartel = new Cuartel(new Posicion(2,1), mapa);
 		Atacador armaAsedio = new ArmaAsedio(new Posicion(1,1), mapa);
 		Ataque ataque = new AtaqueArmaAsedio();
 		

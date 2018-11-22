@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.unidad;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -11,7 +12,7 @@ import org.junit.Test;
 
 import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.Cuartel;
-import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Posicion;
 
 public class RangoAtaqueArmaAsedioTest {
@@ -19,7 +20,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX5Y5YUnCuartelEnX11Y5NoDeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(11,5));
@@ -36,7 +37,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX5Y5YUnCuartelEnX10Y5DeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(10,5));
@@ -53,7 +54,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX5Y5YUnCuartelEnX6Y5DeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(6,5));
@@ -70,7 +71,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX6Y6YUnCuartelEnX0Y6NoDeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(0,5));
@@ -87,7 +88,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX6Y6YUnCuartelEnX10Y6DeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(1,5));
@@ -104,7 +105,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX6Y6YUnCuartelEnX6Y6DeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(5,6));
@@ -121,7 +122,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX6Y6YUnCuartelEnX6Y12NoDeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(6,12));
@@ -138,7 +139,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX6Y6YUnCuartelEnX6Y11DeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(6,11));
@@ -155,7 +156,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX6Y6YUnCuartelEnX6Y7DeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(6,7));
@@ -172,7 +173,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX6Y6YUnCuartelEnX6Y0NoDeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(6,0));
@@ -189,7 +190,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX6Y6YUnCuartelEnX6Y1DeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(6,1));
@@ -206,7 +207,7 @@ public class RangoAtaqueArmaAsedioTest {
 	@Test
 	public void testDadoUnRangoAtaqueArmaAsedioQueSeEncuentraEnLaPosicionX6Y6YUnCuartelEnX6Y5DeberiaEstarEnElRango() {
 		
-		Edificio cuartel = mock(Cuartel.class);
+		Atacable cuartel = mock(Cuartel.class);
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(6,5));

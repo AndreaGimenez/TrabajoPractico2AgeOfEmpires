@@ -35,7 +35,5 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
     public Posicion obtenerPosicion(){
 
         return super.obtenerPosicion();
-
     }
-
 }
