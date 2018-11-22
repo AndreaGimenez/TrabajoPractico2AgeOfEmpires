@@ -1,9 +1,9 @@
 package fiuba.algo3.tp2.edificio;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.formas.Forma;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -13,10 +13,11 @@ import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.reparacion.Reparacion;
 import fiuba.algo3.tp2.reparacion.ReparacionActivada;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
-public abstract class Edificio implements Posicionable {
+public abstract class Edificio implements Posicionable, Atacable {
 
 	private Posicion posicion;
 	protected Reparacion reparacion;
@@ -47,7 +48,6 @@ public abstract class Edificio implements Posicionable {
 	public void posicionar(Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		Collection<Posicion> posicionesAOcuparEnMapa = forma.obtenerCoordenadas(posicion);
-		
 		for(Posicion posicionAOcupar : posicionesAOcuparEnMapa) {
 			mapa.posicionar(this, posicionAOcupar);
 		}
@@ -78,16 +78,16 @@ public abstract class Edificio implements Posicionable {
 	public void reparar() throws EdificioNoAptoParaReparacionException{
 		reparacion.reparar(this);
 	}
-
-
-	public void recibirDanio(int danio) throws EdificioDestruidoException {
-
+	
+	@Override
+	public void recibirDanio(Ataque ataque) {
+		
         this.reparacion = new ReparacionActivada();
         
         if(vida == 0) {
         	throw new EdificioDestruidoException();
         }
-		this.vida = this.vida - danio;
+		vida -= ataque.obtenerDanioEdificio();
 		
 		if(vida <= 0) {
 			vida = 0;

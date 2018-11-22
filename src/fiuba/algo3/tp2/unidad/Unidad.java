@@ -3,7 +3,6 @@ package fiuba.algo3.tp2.unidad;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import fiuba.algo3.tp2.edificio.EdificioConstants;
 import fiuba.algo3.tp2.formas.Forma;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
@@ -111,5 +110,4 @@ public abstract class Unidad implements Movible, Posicionable {
 		
 		return forma.obtenerPosicionesContorno(obtenerPosicion());
 	}
-
 }
