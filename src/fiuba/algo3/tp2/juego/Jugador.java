@@ -1,22 +1,27 @@
 package fiuba.algo3.tp2.juego;
 
+import java.util.Collection;
 import java.util.LinkedList;
 
 import fiuba.algo3.tp2.edificio.Edificio;
-import fiuba.algo3.tp2.mapa.*;
+import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Unidad;
 
 public class Jugador {
 	
 	private int oro;
-	private LinkedList<Posicionable> edificios = new LinkedList<>();
-	private LinkedList<Posicionable> unidades = new LinkedList<>();
+	private Collection<Posicionable> edificios = new LinkedList<>();
+	private Collection<Posicionable> unidades = new LinkedList<>();
+	private int poblacion;
 
 	public Jugador() {
 		
-		this.oro = 0;
+		//this.oro = 0;
 		this.edificios = new LinkedList<>();
 		this.unidades = new LinkedList<>();
+		this.poblacion = 0;
 	}
 
 	public int obtenerOro() {
@@ -38,6 +43,7 @@ public class Jugador {
 	public void agregarUnidad(Unidad unidad) {
 
 		this.unidades.add(unidad);
+		poblacion += 1;
 
 	}
 
@@ -50,6 +56,16 @@ public class Jugador {
 	public void setOro(int oroInicial) {
 		
 		this.oro = oroInicial;		
+	}
+
+	public int obtenerPoblacionActual() {
+		return poblacion;
+	}
+
+	public void removerUnidad(Unidad unidadARemover, Mapa mapa) {
+		unidades.remove(unidadARemover);
+		mapa.obtenerCelda(unidadARemover.obtenerPosicion()).liberar();
+		poblacion -=1;
 	}
 
 }

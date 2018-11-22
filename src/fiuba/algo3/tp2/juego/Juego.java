@@ -20,7 +20,7 @@ public class Juego {
 	private static final int ORO_INICIAL = 100;
 	private static final Posicion POSICION_INICIAL_CASTILLO_JUG_1 = new Posicion(0, 0);
 	private static final Posicion POSICION_INICIAL_PLAZACENTRAL_JUG_1 = new Posicion(5, 0);
-	private static final int CANTIDAD_DE_JUGADORES = 2;
+	public static final int CANTIDAD_DE_JUGADORES = 2;
 	
 	private LinkedList<Jugador> jugadores;
 	private Mapa mapa;

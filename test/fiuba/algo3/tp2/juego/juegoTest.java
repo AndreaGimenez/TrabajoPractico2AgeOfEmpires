@@ -19,22 +19,13 @@ public class juegoTest {
 	public ExpectedException exceptionRule = ExpectedException.none();
 	
 	@Test
-	public void test_crearJuegoConDosJugadoresDeberiaDarBien() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException {
-		
-		Juego juego = new Juego(new Mapa(250, 250));
-		juego.agregarJugador();
-		juego.agregarJugador();
-		
-	}
-	
-	@Test
 	public void test_crearJuegoConMasDeDosJugadores_DeberiaLanzarCantidadDeJugadoresInvalidaException() 
 			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException {
 		
 		Juego juego = new Juego(new Mapa(250, 250));
 		juego.agregarJugador();
 		juego.agregarJugador();
+		
 		exceptionRule.expect(CantidadDeJugadoresInvalidaException.class);
 		juego.agregarJugador();
 	}
@@ -57,7 +48,6 @@ public class juegoTest {
 		assertEquals(100, jugador2.obtenerOro());
 		
 	}
-	
 	
 	@Test
 	public void test_alIniciarJuegoCadaJugadorDeberiaTenerUnCastillo_YEstarPosicionadoUnoEnCadaEsquina()
@@ -143,6 +133,5 @@ public class juegoTest {
 			Celda celdaCastilloJugador2 = mapa.obtenerCelda(new Posicion(294, 244));
 			assertEquals(true, celdaCastilloJugador1.estaOcupada());
 			assertEquals(true, celdaCastilloJugador2.estaOcupada());
-
 	}
 }
