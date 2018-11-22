@@ -79,6 +79,7 @@ public abstract class Unidad implements Movible, Posicionable {
 		movimiento = new MovimientoBasico();
 	}
 	
+	@Override
 	public void recibirDanio(int danioRecibido) throws UnidadMuertaException {
 		
 		if(vida == 0) {

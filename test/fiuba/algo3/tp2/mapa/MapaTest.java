@@ -1,20 +1,18 @@
 package fiuba.algo3.tp2.mapa;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
-import fiuba.algo3.tp2.movimiento.Direccion;
-import fiuba.algo3.tp2.movimiento.DireccionDerecha;
+import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.Unidad;
 
 public class MapaTest {
 	
@@ -121,7 +119,22 @@ public class MapaTest {
 		mapa.posicionar(aldeano, new Posicion(2,2));
 	}
 	
-	
+	@Test
+	public void test_DadoUnMapaConUnAldeanoEnLaPosicionX1Y1YUnCuartelEnLaPosicionX2Y1_CuandoSeObtienenLosPosicionablesDeLasPosicionesX1Y1YX2Y1_DeberiaDevolverAlAldeanoYAlCuartel() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+		
+		Mapa mapa = new Mapa(250,250);
+		Unidad aldeano = new Aldeano(new Posicion(1,1), mapa);
+		Edificio cuartel = new Cuartel(new Posicion(2,1), mapa);
+		
+		Collection<Posicion> posiciones = new ArrayList<Posicion>();
+		posiciones.add(new Posicion(1,1));
+		posiciones.add(new Posicion(2,1));
+		Collection<Posicionable> posicionables = mapa.obtenerPosicionables(posiciones);
+		
+		assertTrue(posicionables.contains(aldeano));
+		assertTrue(posicionables.contains(cuartel));
+	}
 	
 	
 }

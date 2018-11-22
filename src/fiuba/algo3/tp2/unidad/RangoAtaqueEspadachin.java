@@ -12,7 +12,7 @@ public class RangoAtaqueEspadachin extends RangoAtaque {
 	private int largo = 1;
 	
 	@Override
-	protected Collection<Posicion> obtenerPosicionesRango(Posicionable atacante) {
+	public Collection<Posicion> obtenerPosicionesRango(Posicionable atacante) {
 		
 		Integer posicionInicialEnX = atacante.obtenerPosicion().getX();
 		Integer posicionInicialEnY = atacante.obtenerPosicion().getY();

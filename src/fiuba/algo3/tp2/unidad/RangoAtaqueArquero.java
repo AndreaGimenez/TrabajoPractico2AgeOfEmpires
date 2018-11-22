@@ -11,7 +11,7 @@ public class RangoAtaqueArquero extends RangoAtaque {
 	private int rango = 3;
 	
 	@Override
-	protected Collection<Posicion> obtenerPosicionesRango(Posicionable atacante) {
+	public Collection<Posicion> obtenerPosicionesRango(Posicionable atacante) {
 		
 		Collection<Posicion> posicionesRango = new ArrayList<Posicion>();
 		

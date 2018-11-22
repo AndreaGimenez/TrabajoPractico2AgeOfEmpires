@@ -8,7 +8,7 @@ import fiuba.algo3.tp2.mapa.Posicionable;
 
 public abstract class RangoAtaque {
 
-	protected abstract Collection<Posicion> obtenerPosicionesRango(Posicionable atacante);
+	public abstract Collection<Posicion> obtenerPosicionesRango(Posicionable atacante);
 	
 	public boolean estaEnRango(Posicionable atacante, Posicionable atacado) {
 		

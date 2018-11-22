@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.mapa;
 
-import fiuba.algo3.tp2.edificio.PlazaCentral;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Mapa {
 	
@@ -69,5 +70,17 @@ public class Mapa {
 	public Posicionable obtenerPosicionable(Posicion posicion) {
 
 		return obtenerCelda(posicion).obtenerPosicionable();
+	}
+
+	public Collection<Posicionable> obtenerPosicionables(Collection<Posicion> posiciones) {
+		
+		Collection<Posicionable> posicionables = new ArrayList<Posicionable>();
+		for(Posicion posicion : posiciones) {
+			Celda celda = obtenerCelda(posicion);
+			if(!posicionables.contains(celda.obtenerPosicionable())) {
+				posicionables.add(celda.obtenerPosicionable());
+			}
+		}
+		return posicionables;
 	}
 }

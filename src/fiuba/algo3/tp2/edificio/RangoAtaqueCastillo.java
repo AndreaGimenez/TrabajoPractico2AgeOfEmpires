@@ -1,14 +1,15 @@
-package fiuba.algo3.tp2.unidad;
+package fiuba.algo3.tp2.edificio;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.unidad.RangoAtaque;
 
-public class RangoAtaqueArmaAsedio extends RangoAtaque {
+public class RangoAtaqueCastillo extends RangoAtaque {
 
-	private int rango = 5;
+	private int rango = 3;
 	
 	@Override
 	public Collection<Posicion> obtenerPosicionesRango(Posicionable atacante) {
