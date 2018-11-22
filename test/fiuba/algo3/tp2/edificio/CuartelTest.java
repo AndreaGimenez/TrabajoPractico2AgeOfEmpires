@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.edificio;
 
+import Construccion.EdificioNoSoportadoException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -9,7 +10,6 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
-import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
@@ -20,7 +20,7 @@ public class CuartelTest {
 	
 	@Rule
 	public ExpectedException exceptionRule = ExpectedException.none();
-	
+
 	@Test
 	public void test_DadoUnCuartelEnlaPosicionX5Y2CuandoSePosicionaUnAldeanoEnLaPosicionX5Y2_DeberiaLanzarCeldaOcupadaException() 
 			throws CeldaOcupadaException, TamanioInvalidoException, CeldaInexistenteException {
@@ -34,20 +34,20 @@ public class CuartelTest {
 	}
 	
 	@Test
-	public void test_DadoUnCuartelEnLaPosicionX1Y1_SeDebePoderCrearUnEspadachinEnLaPosicionIndicada() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+	public void test_DadoUnCuartelEnLaPosicionX1Y1_SeDebePoderCrearUnEspadachinEnLaPosicionIndicada()
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Cuartel cuartel = new Cuartel(new Posicion(1, 1), mapa);
-		
+
 		Espadachin espadachin = (Espadachin)cuartel.crear(TipoUnidad.ESPADACHIN, new Posicion(3, 1));
 		
 	
 	}
 	
 	@Test
-	public void test_DadoUnCuartelEnLaPosicionX1Y1_SeDebePoderCrearUnArqueroEnLaPosicionIndicada() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+	public void test_DadoUnCuartelEnLaPosicionX1Y1_SeDebePoderCrearUnArqueroEnLaPosicionIndicada()
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Cuartel cuartel = new Cuartel(new Posicion(1, 1), mapa);
@@ -57,8 +57,8 @@ public class CuartelTest {
 	}
 	
 	@Test
-	public void test_DadoUnCuartelEnLaPosicionX1Y1_NoDebePoderCrearAldeano() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+	public void test_DadoUnCuartelEnLaPosicionX1Y1_NoDebePoderCrearAldeano()
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Cuartel cuartel = new Cuartel(new Posicion(1, 1), mapa);
@@ -69,8 +69,8 @@ public class CuartelTest {
 	}
 	
 	@Test
-	public void test_DadoUnCuartelEnLaPosicionX1Y1_NoDebePoderCrearArmaAsedio() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, UnidadNoSoportadaException {
+	public void test_DadoUnCuartelEnLaPosicionX1Y1_NoDebePoderCrearArmaAsedio()
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Cuartel cuartel = new Cuartel(new Posicion(1, 1), mapa);
@@ -81,14 +81,19 @@ public class CuartelTest {
 	}
 	
 	@Test
-	public void test_DadoUnCuartel_AlCrearUnEspadachinEnUnaPosicionYaOcupada_DebeLanzarCeldaOcupadaException() 
+	public void test_DadoUnCuartel_AlCrearUnEspadachinEnUnaPosicionYaOcupada_DebeLanzarCeldaOcupadaException()
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
 		Mapa mapa = new Mapa(250, 250);
-		Cuartel cuartel = new Cuartel(new Posicion(2, 2), mapa);
 		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
+		Cuartel cuartel = new Cuartel(new Posicion(2,2), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		Espadachin espadachin = (Espadachin)cuartel.crear(TipoUnidad.ESPADACHIN, new Posicion(5, 5));
+		cuartel.crear(TipoUnidad.ESPADACHIN, new Posicion(5, 5));
 	}
+
+
+
+
+
 }

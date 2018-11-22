@@ -21,7 +21,7 @@ public class CreadorEdificioAldeano implements CreadorEdificio  {
 	@Override
 	public Edificio crear(TipoEdificio tipoEdificio)
 			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException {
-		Edificio edificioADevolver = null;
+		Edificio edificioADevolver;
 		Posicion posicion = determinarPosicionCreacion();
 		
 		switch(tipoEdificio) {

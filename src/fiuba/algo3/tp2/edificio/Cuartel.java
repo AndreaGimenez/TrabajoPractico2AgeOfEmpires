@@ -21,8 +21,8 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
         this.creadorUnidades = new CreadorUnidadCuartel(mapa);
     }
     
-	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion) 
-			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
+	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion)
+            throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
 		return creadorUnidades.crear(tipoUnidad, posicion);
 	}

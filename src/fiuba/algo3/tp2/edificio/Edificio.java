@@ -120,4 +120,6 @@ public abstract class Edificio implements Posicionable {
     	
     	this.estaEnConstruccion = false;
     }
+
+    public abstract Unidad crear(TipoUnidad unidad, Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException;
 }

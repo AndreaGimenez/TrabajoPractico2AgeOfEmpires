@@ -8,5 +8,5 @@ import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 public interface GeneradorUnidades {
 	
-	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException;
+	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException, EdificioEnConstruccionException;
 }

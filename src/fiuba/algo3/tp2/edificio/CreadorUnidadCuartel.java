@@ -21,7 +21,7 @@ public class CreadorUnidadCuartel implements CreadorUnidad {
 	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion) 
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
-		Unidad unidadADevolver = null;
+		Unidad unidadADevolver;
 		
 		switch(tipoUnidad) {
 		case ESPADACHIN:
