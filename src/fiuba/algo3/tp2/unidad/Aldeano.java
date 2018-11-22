@@ -23,18 +23,24 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador{
 	private CreadorEdificio creadorEdificio;
 	private ReparadorEdificio reparadorEdificio;
 	private Edificio edificioEnReparacion;
+	private Edificio edificioEnConstruccion;
+	public int oroGeneradoEnTurno;
 
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA);
+		
 		this.creadorEdificio = new CreadorEdificioAldeano(mapa);
 		this.reparadorEdificio = new ReparadorEdificioAldeano();
 		this.edificioEnReparacion = null;
+		this.edificioEnConstruccion = null;
 	}
 
 	public Edificio crear(TipoEdificio tipoEdificio)
 			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException {
 		
-		return creadorEdificio.crear(tipoEdificio);
+		Edificio edificio = creadorEdificio.crear(tipoEdificio);
+		this.edificioEnConstruccion = edificio;
+		return edificio;
 	}
 
 	@Override
@@ -53,8 +59,20 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador{
 
 		this.reparadorEdificio.esPosibileVolverAReparar();
 
-		if(this.edificioEnReparacion != null)
+		if(this.edificioEnReparacion != null) {
 			this.reparadorEdificio.repararEdificio(this.edificioEnReparacion, this);
+		}
+		
+		calcularOroEnTurno();
+	}
 
+	private void calcularOroEnTurno() {
+		
+		if(this.edificioEnReparacion == null && this.edificioEnConstruccion == null) {
+			this.oroGeneradoEnTurno += 20;
+		}
+		else {
+			oroGeneradoEnTurno = 0;
+		}
 	}
 }

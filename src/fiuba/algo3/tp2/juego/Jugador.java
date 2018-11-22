@@ -18,7 +18,6 @@ public class Jugador {
 
 	public Jugador() {
 		
-		//this.oro = 0;
 		this.edificios = new LinkedList<>();
 		this.unidades = new LinkedList<>();
 		this.poblacion = 0;
@@ -66,6 +65,6 @@ public class Jugador {
 		unidades.remove(unidadARemover);
 		mapa.obtenerCelda(unidadARemover.obtenerPosicion()).liberar();
 		poblacion -=1;
-	}
+	} 
 
 }

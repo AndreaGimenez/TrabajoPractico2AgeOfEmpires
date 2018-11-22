@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.mapa;
 
+import fiuba.algo3.tp2.edificio.PlazaCentral;
+
 public class Mapa {
 	
 	private int tamanioX;
@@ -62,5 +64,10 @@ public class Mapa {
 	public Integer getTamanioY() {
 		
 		return this.tamanioY;
+	}
+
+	public Posicionable obtenerPosicionable(Posicion posicion) {
+
+		return obtenerCelda(posicion).obtenerPosicionable();
 	}
 }

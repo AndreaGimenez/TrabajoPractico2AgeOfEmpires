@@ -8,7 +8,7 @@ public class Celda {
 		posicionable = null;
 	}
 	
-	private Posicionable getPosicionable() {
+	public Posicionable obtenerPosicionable() {
 		return posicionable;
 	}
 
@@ -27,7 +27,7 @@ public class Celda {
 	
 	public void ocupar(Celda celda) throws CeldaOcupadaException {
 		
-		ocupar(celda.getPosicionable());
+		ocupar(celda.obtenerPosicionable());
 	}
 
 	public void liberar() {
