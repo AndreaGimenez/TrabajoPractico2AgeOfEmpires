@@ -28,7 +28,6 @@ public class Mapa {
 	}
 	
 	public void posicionar(Posicionable posicionable, Posicion coordenada) throws CeldaOcupadaException, CeldaInexistenteException{
-		
 		verificarCelda(coordenada);
 		
 		Celda celda = obtenerCelda(coordenada);		

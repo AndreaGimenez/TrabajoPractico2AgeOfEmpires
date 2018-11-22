@@ -49,7 +49,6 @@ public abstract class Edificio implements Posicionable {
 	public void posicionar(Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		Collection<Posicion> posicionesAOcuparEnMapa = forma.obtenerCoordenadas(posicion);
-		
 		for(Posicion posicionAOcupar : posicionesAOcuparEnMapa) {
 			mapa.posicionar(this, posicionAOcupar);
 		}
