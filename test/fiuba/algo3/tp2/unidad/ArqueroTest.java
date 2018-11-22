@@ -4,10 +4,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import Ataque.Atacador;
+import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoIzquierda;
@@ -262,4 +266,54 @@ public class ArqueroTest {
 		exceptionRule.expect(MovimientoInvalidoException.class);
 		arqueroAMover.mover(new DireccionAbajoIzquierda());
 	} 
+	
+	//ATAQUE
+	
+	@Test
+	public void testCuandoUnArqueroAtacaUnAldeanoFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+		
+		Mapa mapa = new Mapa(250,250);
+		
+		Atacador arquero = new Arquero(new Posicion(1,1), mapa);
+		Atacable aldeano = new Aldeano(new Posicion(5,1), mapa);
+		
+		exceptionRule.expect(AtaqueFueraDeRangoException.class);
+		arquero.atacar(aldeano);
+	}
+	
+	@Test
+	public void testCuandoUnArqueroAtaca5VecesAUnAldeanoDeberiaLanzarUnidadMuertaException() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+		
+		Mapa mapa = new Mapa(250,250);
+		
+		Atacador arquero = new Arquero(new Posicion(1,1), mapa);
+		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
+		
+		arquero.atacar(aldeano);
+		arquero.atacar(aldeano);
+		arquero.atacar(aldeano);
+		arquero.atacar(aldeano);
+		
+		exceptionRule.expect(UnidadMuertaException.class);
+		arquero.atacar(aldeano);
+	}
+	
+	@Test
+	public void testCuandoUnArqueroAtaca26VecesAUnCuartelElUltimoAtaqueDeberiaLanzarEdificioDestruidoException() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+		
+		Mapa mapa = new Mapa(250,250);
+		
+		Atacador arquero = new Arquero(new Posicion(1,1), mapa);
+		Atacable cuartel = new Cuartel(new Posicion(4,1), mapa);
+		
+		for(int i = 1; i < 26; i++) {
+			arquero.atacar(cuartel);
+		}
+		
+		exceptionRule.expect(EdificioDestruidoException.class);
+		arquero.atacar(cuartel);
+	}
 }

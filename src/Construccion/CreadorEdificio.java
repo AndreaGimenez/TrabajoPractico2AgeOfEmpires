@@ -9,6 +9,6 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 
 public interface CreadorEdificio {
 	
-	public Edificio crear(TipoEdificio tipoEdificio) 
+	Edificio crear(TipoEdificio tipoEdificio)
 			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException;
 }

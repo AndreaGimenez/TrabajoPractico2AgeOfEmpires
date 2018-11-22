@@ -26,4 +26,31 @@ public class Posicion {
 		
 		return new Posicion(coordenadaX, coordenadaY);
 	}
+
+	public void setX(Integer tamanioX) {
+		
+		this.coordenadaX = tamanioX;
+	}
+
+	public void setY(Integer tamanioY) {
+
+		this.coordenadaY = tamanioY;
+	}
+
+    public Posicion desplazarHorizontalmente(int i) {
+
+		return new Posicion(this.coordenadaX+i, this.coordenadaY);
+
+    }
+
+	public Posicion desplazarVerticalmente(int i) {
+
+		return new Posicion(this.coordenadaX, this.coordenadaY-i);
+	}
+
+	public boolean esIgualA(Posicion otraPosicion) {
+		
+		return (this.coordenadaX == otraPosicion.getX()
+				&& this.coordenadaY == otraPosicion.getY());
+	}
 }

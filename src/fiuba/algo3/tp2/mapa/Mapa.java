@@ -1,5 +1,8 @@
 package fiuba.algo3.tp2.mapa;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Mapa {
 	
 	private int tamanioX;
@@ -25,7 +28,6 @@ public class Mapa {
 	}
 	
 	public void posicionar(Posicionable posicionable, Posicion coordenada) throws CeldaOcupadaException, CeldaInexistenteException{
-		
 		verificarCelda(coordenada);
 		
 		Celda celda = obtenerCelda(coordenada);		
@@ -39,7 +41,7 @@ public class Mapa {
 		}
 	}
 
-	private Celda obtenerCelda(Posicion coordenada) {
+	public Celda obtenerCelda(Posicion coordenada) {
 		return celdas[coordenada.getX()][coordenada.getY()];
 	}
 
@@ -52,5 +54,32 @@ public class Mapa {
 		
 		destino.ocupar(origen);
 		origen.liberar();
+	}
+
+	public Integer getTamanioX() {
+		
+		return this.tamanioX;
+	}
+
+	public Integer getTamanioY() {
+		
+		return this.tamanioY;
+	}
+
+	public Posicionable obtenerPosicionable(Posicion posicion) {
+
+		return obtenerCelda(posicion).obtenerPosicionable();
+	}
+
+	public Collection<Posicionable> obtenerPosicionables(Collection<Posicion> posiciones) {
+		
+		Collection<Posicionable> posicionables = new ArrayList<Posicionable>();
+		for(Posicion posicion : posiciones) {
+			Celda celda = obtenerCelda(posicion);
+			if(!posicionables.contains(celda.obtenerPosicionable())) {
+				posicionables.add(celda.obtenerPosicionable());
+			}
+		}
+		return posicionables;
 	}
 }

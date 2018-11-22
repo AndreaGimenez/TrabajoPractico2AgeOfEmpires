@@ -4,6 +4,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import Ataque.Atacador;
+import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -19,6 +23,7 @@ import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
 import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
 
 public class EspadachinTest {
+	
 	@Rule
 	public ExpectedException exceptionRule = ExpectedException.none();
 	
@@ -260,5 +265,53 @@ public class EspadachinTest {
 		
 		exceptionRule.expect(MovimientoInvalidoException.class);
 		espadachinAMover.mover(new DireccionAbajoIzquierda());
+	}
+	
+	//ATAQUE
+	
+	@Test
+	public void testCuandoUnEspadachinAtaqueUnAldeanoFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+		
+		Mapa mapa = new Mapa(250,250);
+		
+		Atacador espadachin = new Espadachin(new Posicion(1,1), mapa);
+		Atacable aldeano = new Aldeano(new Posicion(3,1), mapa);
+		
+		exceptionRule.expect(AtaqueFueraDeRangoException.class);
+		espadachin.atacar(aldeano);
+	}
+	
+	@Test
+	public void testCuandoUnEspadachinAtaca3VecesAUnAldeanoDeberiaLanzarUnidadMuertaException() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+		
+		Mapa mapa = new Mapa(250,250);
+		
+		Atacador espadachin = new Espadachin(new Posicion(1,1), mapa);
+		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
+		
+		espadachin.atacar(aldeano);
+		espadachin.atacar(aldeano);
+		
+		exceptionRule.expect(UnidadMuertaException.class);
+		espadachin.atacar(aldeano);
+	}
+	
+	@Test
+	public void testCuandoUnEspadachinAtaca18VecesAUnCuartelElUltimoAtaqueDeberiaLanzarEdificioDestruidoException() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+		
+		Mapa mapa = new Mapa(250,250);
+		
+		Atacador espadachin = new Espadachin(new Posicion(1,1), mapa);
+		Atacable cuartel = new Cuartel(new Posicion(2,1), mapa);
+		
+		for(int i = 0; i < 17; i++) {
+			espadachin.atacar(cuartel);
+		}
+		
+		exceptionRule.expect(EdificioDestruidoException.class);
+		espadachin.atacar(cuartel);
 	}
 }

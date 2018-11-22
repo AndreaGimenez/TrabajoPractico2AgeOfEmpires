@@ -1,17 +1,26 @@
 package fiuba.algo3.tp2.reparacion;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
+import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
-import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
+import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.Ataque;
+import fiuba.algo3.tp2.unidad.AtaqueEspadachin;
 
 public class ReparacionTest {
 	
@@ -19,13 +28,12 @@ public class ReparacionTest {
 	public ExpectedException exceptionRule = ExpectedException.none();
 	
 	@Test
-	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX3Y1() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX3Y1()
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
-		
 		Cuartel cuartel = new Cuartel(new Posicion(3,1), mapa);
 		
 		exceptionRule.expect(EdificioFueraDeRangoException.class);
@@ -33,8 +41,8 @@ public class ReparacionTest {
 	}
 	
 	@Test
-	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX2Y1PeroQueNoEsteDaniado() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+	public void testUnAldeanoEnLaPosicionX1Y1NoPuedeRepararUnCuartelQueEsteEnX2Y1PeroQueNoEsteDaniado()
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -43,27 +51,165 @@ public class ReparacionTest {
 		Cuartel cuartel = new Cuartel(new Posicion(2,1), mapa);
 		
 		exceptionRule.expect(EdificioNoAptoParaReparacionException.class);
+		
 		aldeano.repararEdificio(cuartel);
 	}
 	
-	/*@Test
+	@Test
 	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanio() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioDestruidoException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+		Cuartel cuartel = new Cuartel(new Posicion(2,2), mapa);
 		
-		Cuartel cuartel = new Cuartel(new Posicion(2,1), mapa);
-		
-		//cuartel.recibirDanio();
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(50);
+
+		cuartel.recibirDanio(ataque);
 		
 		aldeano.repararEdificio(cuartel);
-	}*/
+	}
 	
-	/*@Test
-	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurno() {
+	@Test
+	public void testUnAldeanoEnLaPosicionX1Y1PuedeReparaUnCuartelEnX2Y2QueRecibioDanioSoloUnaVezPorTurno() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioDestruidoException, EdificioConReparadorAsignadoException {
 		
-	}*/
+		Mapa mapa = new Mapa(250,250);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+
+		Cuartel cuartel = new Cuartel(new Posicion(2,2), mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(50);
+		 
+		cuartel.recibirDanio(ataque);
+		aldeano.repararEdificio(cuartel);
+		exceptionRule.expect(EdificioNoAptoParaReparacionException.class);
+		aldeano.repararEdificio(cuartel);
+	}
 	
+	
+	@Test
+	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurnos() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioDestruidoException, EdificioConReparadorAsignadoException {
+
+		Mapa mapa = new Mapa(250,250);
+
+		Jugador ignacio = new Jugador();
+
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+
+		Cuartel cuartel = new Cuartel(new Posicion(2,1),mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(249);
+
+		ignacio.agregarUnidad(aldeano);
+
+		ignacio.agregarEdificio(cuartel);
+
+		Turno turno = new Turno(ignacio.obtenerPosicionables());
+
+		turno.iniciar();
+
+		cuartel.recibirDanio(ataque);
+
+		aldeano.repararEdificio(cuartel);
+
+		assertEquals(51, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(101, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(151, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(201, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(250, cuartel.obtenerVida());
+	}
+
+	@Test
+	public void testRepararUnCastillo() throws CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, TamanioInvalidoException, EdificioDestruidoException, EdificioConReparadorAsignadoException {
+
+		Mapa mapa = new Mapa(250,250);
+
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+
+		Edificio castillo = new Castillo(new Posicion(2,1),mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(999);
+
+		castillo.recibirDanio(ataque);
+
+		aldeano.repararEdificio(castillo);
+
+		assertEquals(16, castillo.obtenerVida());
+
+	}
+
+	@Test
+	public void testDaniarUnCuartelDeberiaMostrarAlCuartelConLaMismaVidaAlAvanzarUnTurnoYNoFueReparado() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioDestruidoException {
+
+		Mapa mapa = new Mapa(250,250);
+
+		Jugador ignacio = new Jugador();
+
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+
+		Edificio cuartel = new Cuartel(new Posicion(2,1),mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(50);
+
+		ignacio.agregarUnidad(aldeano);
+
+		ignacio.agregarEdificio(cuartel);
+
+		Turno turno = new Turno(ignacio.obtenerPosicionables());
+
+		turno.iniciar();
+
+		cuartel.recibirDanio(ataque);
+
+		assertEquals(200, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(200, cuartel.obtenerVida());
+
+	}
+
+	@Test(expected = EdificioConReparadorAsignadoException.class)
+	public void testDosAldeanosNoDeberianPoderRepararElMismoEdificio() throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioConReparadorAsignadoException, EdificioDestruidoException {
+
+		Mapa mapa = new Mapa(250,250);
+
+		Aldeano juan = new Aldeano(new Posicion(1,1), mapa);
+
+		Aldeano pedro = new Aldeano(new Posicion(1,2), mapa);
+
+		Edificio castillo = new Castillo(new Posicion(2,1),mapa);
+		
+		Ataque ataque = mock(AtaqueEspadachin.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(999);
+
+		castillo.recibirDanio(ataque);
+
+		juan.repararEdificio(castillo);
+
+		pedro.repararEdificio(castillo);
+
+	}
+
+
 }

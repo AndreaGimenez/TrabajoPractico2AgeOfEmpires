@@ -267,6 +267,4 @@ public class AldeanoTest {
 		exceptionRule.expect(MovimientoInvalidoException.class);
 		aldeanoAMover.mover(new DireccionAbajoIzquierda());
 	}
-	
-
 }
