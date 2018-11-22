@@ -97,7 +97,7 @@ public class IntegracionTest {
 		assertEquals(60, oroDespues-oroAntes);
 	}
 	
-	/*@Test
+	@Test
 	public void testUnJugadorCon2AldeanosLibresY1ConstruyendoDeberiaGenerar40UnidadesDeOro()
 			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoSoportadoException {
 		Mapa mapa = new Mapa(250,250);
@@ -124,5 +124,5 @@ public class IntegracionTest {
 		int oroDespues = primerJugador.obtenerOro();
 		
 		assertEquals(40, oroDespues - oroAntes);
-	}*/
+	}
 }
