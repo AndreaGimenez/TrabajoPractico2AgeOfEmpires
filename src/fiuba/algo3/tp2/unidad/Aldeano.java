@@ -16,7 +16,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.reparacion.*;
 
-public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
+public class Aldeano extends Unidad implements ConstructorEdificios, Reparador{
 	
 	private static final int VIDA_MAXIMA = 50;
 	
@@ -41,28 +41,11 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	public void repararEdificio(Edificio edificio)
 			throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
-		estaEnElRango(edificio);
+		if(!estaEnElRango(edificio)) {
+			throw new EdificioFueraDeRangoException();
+		}
 		reparadorEdificio.repararEdificio(edificio, this);
 		this.edificioEnReparacion = edificio;
-	}
-
-	private boolean estaEnElRango(Edificio edificio) 
-			throws EdificioFueraDeRangoException {
-		
-		Collection<Posicion> aledanias = obtenerPosicionesAledanias();
-		
-		for(Posicion posicion : aledanias) {
-			if(posicion.getX() == edificio.obtenerPosicion().getX() && 
-					posicion.getY() == edificio.obtenerPosicion().getY()) {
-				return true;
-			}
-		}
-		throw new EdificioFueraDeRangoException();
-	}
-
-	private Collection<Posicion> obtenerPosicionesAledanias() {
-		
-		return forma.obtenerPosicionesContorno(obtenerPosicion());
 	}
 
 	@Override
@@ -73,11 +56,5 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 		if(this.edificioEnReparacion != null)
 			this.reparadorEdificio.repararEdificio(this.edificioEnReparacion, this);
 
-	}
-
-	public void recibirDanio(int danioRecibido) {
-		
-		vida -= danioRecibido;
-		
 	}
 }

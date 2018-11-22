@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.edificio;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.formas.Forma;
@@ -45,19 +46,25 @@ public abstract class Edificio implements Posicionable {
 	}
 	
 	@Override
-	public void posicionar(Posicion coordenada) throws CeldaOcupadaException, CeldaInexistenteException {
+	public void posicionar(Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException {
 		
-		Collection<Posicion> coordenadasAOcuparEnMapa = forma.obtenerCoordenadas(coordenada);
+		Collection<Posicion> posicionesAOcuparEnMapa = forma.obtenerCoordenadas(posicion);
 		
-		for(Posicion coordenadaPosicion : coordenadasAOcuparEnMapa) {
-			mapa.posicionar(this, coordenadaPosicion);
+		for(Posicion posicionAOcupar : posicionesAOcuparEnMapa) {
+			mapa.posicionar(this, posicionAOcupar);
 		}
-		this.posicion = coordenada;
+		this.posicion = posicion;
 	}
 	
 	@Override
 	public Posicion obtenerPosicion() {
 		return posicion;
+	}
+	
+	@Override
+	public Collection<Posicion> obtenerPosicionesOcupadasEnMapa(){
+		
+		return forma.obtenerCoordenadas(posicion);
 	}
 	
 	@Override
@@ -75,12 +82,18 @@ public abstract class Edificio implements Posicionable {
 	}
 
 
-	public void recibirDanio(int danio) {
+	public void recibirDanio(int danio) throws EdificioDestruidoException {
 
         this.reparacion = new ReparacionActivada();
-
+        
+        if(vida == 0) {
+        	throw new EdificioDestruidoException();
+        }
 		this.vida = this.vida - danio;
-
+		
+		if(vida <= 0) {
+			vida = 0;
+		}
 	}
 
 	public int obtenerVida(){

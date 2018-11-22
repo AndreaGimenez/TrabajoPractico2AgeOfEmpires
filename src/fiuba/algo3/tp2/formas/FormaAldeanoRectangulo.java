@@ -8,7 +8,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 public class FormaAldeanoRectangulo extends FormaRectangulo {
 	
 	private static final Integer LARGO = 1;
-	 private static final Integer ANCHO = 1;
+	private static final Integer ANCHO = 1;
 	 
 	 public FormaAldeanoRectangulo(){
 		 

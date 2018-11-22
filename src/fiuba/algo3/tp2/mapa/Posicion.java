@@ -47,4 +47,10 @@ public class Posicion {
 
 		return new Posicion(this.coordenadaX, this.coordenadaY-i);
 	}
+
+	public boolean esIgualA(Posicion otraPosicion) {
+		
+		return (this.coordenadaX == otraPosicion.getX()
+				&& this.coordenadaY == otraPosicion.getY());
+	}
 }
