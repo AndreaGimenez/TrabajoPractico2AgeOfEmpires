@@ -17,6 +17,9 @@ public class OroPorTurno {
 		sumarOroEnTurno();
 	}
 	
+	/*Se encarga de sumar en oroDisponible el oro del turno inmediatamente despues que se activo el recolector de oro
+	 * Luego desactiva el recolector para que no se pueda sumar dos veces en el turno
+	 */
 	public void sumarOroEnTurno() {
 		
 		if(recolectorOroActivado) {
@@ -32,10 +35,13 @@ public class OroPorTurno {
 		recolectorOroActivado = false ;
 	}
 	
+	/*Devuelve la cantidad de oro que se recolecto en el turno.
+	 * Luego deja en cero oroDisponible para que no pueda volver a sumaroro
+	 * en ese turno
+	 */
 	public int recolectarOroDelTurno() {
 		int oro = oroDisponible;
 		oroDisponible = 0;
-		desactivarRecolector();
 		return oro;
 	}
 }
