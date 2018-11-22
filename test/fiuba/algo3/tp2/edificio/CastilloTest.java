@@ -81,7 +81,6 @@ public class CastilloTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
-		castillo.finalizarConstruccion();
 		
 		ArmaAsedio armaAsedio = (ArmaAsedio)castillo.crear(TipoUnidad.ARMA_ASEDIO, new Posicion(5, 5));
 		
@@ -93,7 +92,6 @@ public class CastilloTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
-		castillo.finalizarConstruccion();
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
 		ArmaAsedio armaAsedio = (ArmaAsedio)castillo.crear(TipoUnidad.ARMA_ASEDIO, new Posicion(3, 3));
@@ -106,7 +104,6 @@ public class CastilloTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
-		castillo.finalizarConstruccion();
 		
 		exceptionRule.expect(UnidadNoSoportadaException.class);
 		ArmaAsedio armaAsedio = (ArmaAsedio)castillo.crear(TipoUnidad.ALDEANO, new Posicion(5, 5));
@@ -119,7 +116,6 @@ public class CastilloTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
-		castillo.finalizarConstruccion();
 		
 		exceptionRule.expect(UnidadNoSoportadaException.class);
 		ArmaAsedio armaAsedio = (ArmaAsedio)castillo.crear(TipoUnidad.ESPADACHIN, new Posicion(5, 5));
@@ -132,7 +128,6 @@ public class CastilloTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
-		castillo.finalizarConstruccion();
 		
 		exceptionRule.expect(UnidadNoSoportadaException.class);
 		ArmaAsedio armaAsedio = (ArmaAsedio)castillo.crear(TipoUnidad.ARQUERO, new Posicion(5, 5));
@@ -146,9 +141,7 @@ public class CastilloTest {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Castillo castillo = new Castillo(new Posicion(1, 1), mapa);
-		castillo.finalizarConstruccion();
 		Cuartel cuartel = new Cuartel(new Posicion(6, 4), mapa);
-		cuartel.finalizarConstruccion();
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
 		ArmaAsedio armaAsedio = (ArmaAsedio)castillo.crear(TipoUnidad.ARMA_ASEDIO, new Posicion(6, 4));

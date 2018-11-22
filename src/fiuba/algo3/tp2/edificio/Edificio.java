@@ -22,9 +22,8 @@ public abstract class Edificio implements Posicionable {
 	protected Reparacion reparacion;
 	private Forma forma;
 	protected Mapa mapa;
-	private boolean estaEnReparacion;
-	private boolean estaEnConstruccion;
 	private Aldeano aldeanoAsignadoParaReparar;
+	private boolean estaEnReparacion;
 	private int vida;
 	private int topeDeVida;
 	private int puntosDeRecuperacion;
@@ -42,7 +41,6 @@ public abstract class Edificio implements Posicionable {
 		this.puntosDeRecuperacion = saludRecuperadaPorTurno;
 		this.estaEnReparacion = false;
 		posicionar(posicion);
-		this.estaEnConstruccion = true;
 	}
 	
 	@Override
@@ -123,16 +121,7 @@ public abstract class Edificio implements Posicionable {
 
 	    return (this.aldeanoAsignadoParaReparar == aldeano);
     }
-    
-    public boolean estaEnConstruccion() {
-    	
-    	return this.estaEnConstruccion == true;
-    }
-    
-    public void finalizarConstruccion() {
-    	
-    	this.estaEnConstruccion = false;
-    }
+
 
     public abstract Unidad crear(TipoUnidad unidad, Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException;
 }

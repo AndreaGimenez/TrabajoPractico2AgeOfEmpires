@@ -25,10 +25,7 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 	@Override
 	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion) 
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
-		
-		if(super.estaEnConstruccion()) {
-			throw new EdifioNoAptoParaContruirException();
-		}
+
 		return this.creadorUnidades.crear(tipoUnidad, posicion);
 	}
 

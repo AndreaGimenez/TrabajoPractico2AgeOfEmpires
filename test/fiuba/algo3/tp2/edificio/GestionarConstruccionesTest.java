@@ -7,37 +7,40 @@ import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.UnidadConstants;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.LinkedList;
 
-import static org.junit.Assert.*;
-
 public class GestionarConstruccionesTest {
 
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
 
-    @Test(expected = EdificioEnConstruccionException.class)
-    public void testCrearUnCuartelYPedirleCrearUnaUnidadNoDeberiaSerPosibleYaQueEstaEnConstruccion()
+
+    @Test
+    public void testCrearUnEdificioYPedirleCrearUnaUnidadNoDeberiaSerPosibleYaQueEstaEnConstruccion()
             throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException {
 
         Mapa mapa = new Mapa(250, 250);
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
-        Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
-        GestionarConstrucciones gestorCuartel = new GestionarConstrucciones(cuartel);
+        Edificio cuartel = aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
+        GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
 
+        exceptionRule.expect(EdificioEnConstruccionException.class);
         gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 5));
-
 
     }
 
     @Test(expected = EdificioEnConstruccionException.class)
-    public void testCrearUnCuartelYPedirleCrearUnaUnidadHabiendoPasadoUnTurnoNoDeberiaSerPosibleYaQueEstaEnConstruccion()
+    public void testCrearUnEdificioYPedirleCrearUnaUnidadHabiendoPasadoUnTurnoNoDeberiaSerPosibleYaQueEstaEnConstruccion()
             throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
 
         Mapa mapa = new Mapa(250, 250);
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
         Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
-        GestionarConstrucciones gestorCuartel = new GestionarConstrucciones(cuartel);
+        GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
         LinkedList<Posicionable> posicionables = new LinkedList<>();
 
         posicionables.add(gestorCuartel);
@@ -49,13 +52,13 @@ public class GestionarConstruccionesTest {
     }
 
     @Test(expected = EdificioEnConstruccionException.class)
-    public void testCrearUnCuartelYPedirleCrearUnaUnidadHabiendoPasadoDosTurnosNoDeberiaSerPosibleYaQueEstaEnConstruccion()
+    public void testCrearUnEdificioYPedirleCrearUnaUnidadHabiendoPasadoDosTurnosNoDeberiaSerPosibleYaQueEstaEnConstruccion()
             throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
 
         Mapa mapa = new Mapa(250, 250);
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
         Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
-        GestionarConstrucciones gestorCuartel = new GestionarConstrucciones(cuartel);
+        GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
         LinkedList<Posicionable> posicionables = new LinkedList<>();
 
         posicionables.add(gestorCuartel);
@@ -68,13 +71,13 @@ public class GestionarConstruccionesTest {
     }
 
     @Test
-    public void testCrearUnCuartelYPedirleCrearUnaUnidadHabiendoPasadoTresTurnosDeberiaSerPosible()
+    public void testCrearUnEdificioYPedirleCrearUnaUnidadHabiendoPasadoTresTurnosDeberiaSerPosible()
             throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
 
         Mapa mapa = new Mapa(250, 250);
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
         Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
-        GestionarConstrucciones gestorCuartel = new GestionarConstrucciones(cuartel);
+        GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
         LinkedList<Posicionable> posicionables = new LinkedList<>();
 
         posicionables.add(gestorCuartel);
@@ -86,7 +89,6 @@ public class GestionarConstruccionesTest {
         gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(6, 6));
 
     }
-
 
 
 

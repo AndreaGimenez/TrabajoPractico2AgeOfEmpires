@@ -25,9 +25,8 @@ public class Castillo extends Edificio implements GeneradorUnidades, AtacadorZon
 	@Override
 	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion)
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
-		if(this.estaEnConstruccion())
-			throw new EdifioNoAptoParaContruirException();
-		return generadorUnidades.crear(tipoUnidad, posicion);
+
+		return this.generadorUnidades.crear(tipoUnidad, posicion);
 	}
  
 	@Override

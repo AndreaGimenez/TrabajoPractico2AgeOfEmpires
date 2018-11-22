@@ -29,7 +29,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador{
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA);
 		
-		this.creadorEdificio = new CreadorEdificioAldeano(mapa);
+		this.creadorEdificio = new CreadorEdificioAldeano(mapa, this);
 		this.reparadorEdificio = new ReparadorEdificioAldeano();
 		this.edificioEnReparacion = null;
 		this.edificioEnConstruccion = null;
@@ -75,4 +75,5 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador{
 			oroGeneradoEnTurno = 0;
 		}
 	}
+
 }

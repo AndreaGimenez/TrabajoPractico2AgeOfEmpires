@@ -4,18 +4,21 @@ import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
-import fiuba.algo3.tp2.edificio.UnidadNoSoportadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class CreadorEdificioAldeano implements CreadorEdificio  {
 	
 	private Mapa mapa;
+	private Aldeano aldeano;
 	
-	public CreadorEdificioAldeano(Mapa mapa) {
+	public CreadorEdificioAldeano(Mapa mapa, Aldeano aldeano) {
+
 		this.mapa = mapa;
+		this.aldeano = aldeano;
 	}
 	
 	@Override
@@ -41,4 +44,5 @@ public class CreadorEdificioAldeano implements CreadorEdificio  {
 	private Posicion determinarPosicionCreacion() {
 		return new Posicion(2,1);
 	}
+
 }

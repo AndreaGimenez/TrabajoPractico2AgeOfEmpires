@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.edificio;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -77,7 +78,6 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(1, 1), mapa);
-		plazaCentral.finalizarConstruccion();
 		
 		Aldeano aldeano = (Aldeano)plazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(3, 1));
 		
@@ -89,7 +89,6 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(1, 1), mapa);
-		plazaCentral.finalizarConstruccion();
 		
 		exceptionRule.expect(UnidadNoSoportadaException.class);
 		Espadachin espadachin = (Espadachin)plazaCentral.crear(TipoUnidad.ESPADACHIN, new Posicion(3, 1));
@@ -101,7 +100,6 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(1, 1), mapa);
-		plazaCentral.finalizarConstruccion();
 		
 		exceptionRule.expect(UnidadNoSoportadaException.class);
 		Arquero arquero = (Arquero)plazaCentral.crear(TipoUnidad.ARQUERO, new Posicion(3, 1));
@@ -113,7 +111,6 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(3, 3), mapa);
-		plazaCentral.finalizarConstruccion();
 		Aldeano unAldeano = new Aldeano(new Posicion(7, 7), mapa);
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
@@ -126,7 +123,6 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(3, 3), mapa);
-		plazaCentral.finalizarConstruccion();
 		
 		exceptionRule.expect(CeldaInexistenteException.class);
 		Aldeano unAldeano = (Aldeano)plazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(300, 300));
@@ -138,18 +134,20 @@ public class PlazaCentralTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(5, 5), mapa);
-		
-		assertEquals(true, plazaCentral.estaEnConstruccion());
+		GestionarConstruccion gestionarPlazaCentral = new GestionarConstruccion(plazaCentral);
+
+		assertTrue(gestionarPlazaCentral.estaEnConstruccion());
 	}
 	
 	@Test
-	public void test_AlEstarUnaPlazaCentralEnConstruccion_NoPuedeCrearUnidades() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
+	public void test_AlEstarUnaPlazaCentralEnConstruccion_NoPuedeCrearUnidades()
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException, EdificioEnConstruccionException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(3, 3), mapa);
-		
-		exceptionRule.expect(EdifioNoAptoParaContruirException.class);
-		Aldeano unAldeano = (Aldeano)plazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(10, 10));
+		GestionarConstruccion gestionarPlazaCentral = new GestionarConstruccion(plazaCentral);
+
+		exceptionRule.expect(EdificioEnConstruccionException.class);
+		Aldeano unAldeano = (Aldeano) gestionarPlazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(10, 10));
 	}
 }

@@ -6,8 +6,6 @@ import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
-import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants;
 
@@ -19,13 +17,13 @@ import fiuba.algo3.tp2.unidad.UnidadConstants;
 * 3/3 construido
 *
 * en el mismo turno que se quiere crear un edificio, el mismo esta en 0/3*/
-public class GestionarConstrucciones implements Posicionable {
+public class GestionarConstruccion implements Posicionable {
 
     Edificio edificio;
     private int turnosDesdeSuPosicionamiento;
     private EdificioEnConstruccionException e;
 
-    public GestionarConstrucciones(Cuartel edificio) {
+    public GestionarConstruccion(Edificio edificio) {
 
         this.edificio = edificio;
         this.e = new EdificioEnConstruccionException();

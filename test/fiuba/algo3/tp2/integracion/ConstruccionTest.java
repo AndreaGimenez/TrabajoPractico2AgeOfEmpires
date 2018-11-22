@@ -2,17 +2,9 @@ package fiuba.algo3.tp2.integracion;
 
 import Construccion.EdificioNoSoportadoException;
 
-import fiuba.algo3.tp2.edificio.EdificioConstants;
-import fiuba.algo3.tp2.edificio.EdifioNoAptoParaContruirException;
-import fiuba.algo3.tp2.edificio.PlazaCentral;
-import fiuba.algo3.tp2.edificio.UnidadNoSoportadaException;
-import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
-import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.edificio.*;
 import fiuba.algo3.tp2.mapa.*;
-import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
-import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
-import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,22 +14,21 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Rule;
 
 
-/*Nota: la celda de referencia es la superior izquierda, ya que al sumar en Forma se pierde la referencia anterior*/
 public class ConstruccionTest {
 	
 	@Rule
 	public ExpectedException expectedRule = ExpectedException.none();
 
     @Test
-    public void test01AldeanoConstruyeUnCuartelASuDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+    public void test01AldeanoConstruyeUnCuartelASuDerechaPorDebajo() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
 
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
-
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarHorizontalmente(1));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarALaDerechaPorDebajo(EdificioConstants.TipoEdificio.CUARTEL);
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(1)).estaOcupada());
 
@@ -50,15 +41,15 @@ public class ConstruccionTest {
     }
 
     @Test
-    public void test02AldeanoConstruyeUnCuartelASuIzquierda() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+    public void test02AldeanoConstruyeUnCuartelASuIzquierdaPorDebajo() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
 
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
-
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarHorizontalmente(-2));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarALaIzquierdaPorDebajo(EdificioConstants.TipoEdificio.CUARTEL);
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-1)).estaOcupada());
 
@@ -71,15 +62,15 @@ public class ConstruccionTest {
     }
 
     @Test
-    public void test03AldeanoConstruyeUnCuartelDebajo() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+    public void test03AldeanoConstruyeUnCuartelDebajoPorLaDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
 
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
-
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(-1));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarDebajoPorLaDerecha(EdificioConstants.TipoEdificio.CUARTEL);
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2)).estaOcupada());
 
@@ -92,15 +83,15 @@ public class ConstruccionTest {
     }
 
     @Test
-    public void test04AldeanoConstruyeUnCuartelArriba() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+    public void test04AldeanoConstruyeUnCuartelArribaPorLaDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
 
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
-
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(2));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarArribaPorLaDerecha(EdificioConstants.TipoEdificio.CUARTEL);
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(2)).estaOcupada());
 
@@ -113,57 +104,57 @@ public class ConstruccionTest {
     }
 
     @Test
-    public void test05AldeanoConstruyeUnCuartelArribaALaDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+    public void test05AldeanoConstruyeUnCuartelEnSuAristaSuperiorDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
 
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
-
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(1));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarEnAristaSuperiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(1)).estaOcupada());
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(1)).estaOcupada());
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(1).desplazarVerticalmente(1)).estaOcupada());
-
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(2).desplazarVerticalmente(1)).estaOcupada());
-
-    }
-
-    @Test
-    public void test05AldeanoConstruyeUnCuartelEntreSuDerechaYArribaALaDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
-
-        Mapa mapa = new Mapa(250,250);
-
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
-
-        Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
-
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(1));
-
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(1)).estaOcupada());
-
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(2)).estaOcupada());
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(1)).estaOcupada());
-
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(2)).estaOcupada());
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(2)).estaOcupada());
 
     }
 
     @Test
-    public void test06AldeanoConstruyeUnCuartelAbajoALaDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+    public void test06AldeanoConstruyeUnCuartelEnSuAristaInferiorDerecha() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
 
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
+        Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
+
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1)).estaOcupada());
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(2)).estaOcupada());
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(1)).estaOcupada());
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(2)).estaOcupada());
+
+    }
+
+    @Test
+    public void test07AldeanoConstruyeUnCuartelEnSuAristaSuperiorIzquierda() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+
+        Mapa mapa = new Mapa(250,250);
 
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarEnAristaSuperiorIzquierda(EdificioConstants.TipoEdificio.CUARTEL);
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1)).estaOcupada());
 
@@ -176,27 +167,6 @@ public class ConstruccionTest {
     }
 
     @Test
-    public void test07AldeanoConstruyeUnCuartelAbajoALaIzquierda() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
-
-        Mapa mapa = new Mapa(250,250);
-
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
-
-        Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
-
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-1));
-
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-1)).estaOcupada());
-
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1)).estaOcupada());
-
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-1).desplazarVerticalmente(-2)).estaOcupada());
-
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2)).estaOcupada());
-
-    }
-
-    @Test
     public void test08AldeanoConstruyeUnCuartelEnSuAristaInferiorIzquierda() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
@@ -205,28 +175,51 @@ public class ConstruccionTest {
 
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-2));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-2)).estaOcupada());
+        posicionador.posicionarEnAristaInferiorIzquierda(EdificioConstants.TipoEdificio.CUARTEL);
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(-2)).estaOcupada());
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-1)).estaOcupada());
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-1).desplazarVerticalmente(-2)).estaOcupada());
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(-2)).estaOcupada());
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-2)).estaOcupada());
 
     }
 
     @Test
-    public void test09AldeanoConstruyeUnCuartelEntreSuIzquierdaYSuAristaSuperiorIzquierda() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+    public void test09AldeanoConstruyeUnCuartelALaDerechaPorEncima() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
 
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
+        Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
+
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarALaDerechaPorEncima(EdificioConstants.TipoEdificio.CUARTEL);
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(1)).estaOcupada());
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(1)).estaOcupada());
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(2)).estaOcupada());
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(2)).estaOcupada());
+
+    }
+
+    @Test
+    public void test10AldeanoConstruyeUnCuartelALaIzquierdaPorEncima() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+
+        Mapa mapa = new Mapa(250,250);
 
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-2));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarALaIzquierdaPorEncima(EdificioConstants.TipoEdificio.CUARTEL);
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-2)).estaOcupada());
 
@@ -239,36 +232,36 @@ public class ConstruccionTest {
     }
 
     @Test
-    public void test10AldeanoConstruyeUnCuartelEnSuAristaSuperiorIzquierda() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+    public void test11AldeanoConstruyeUnCuartelDebajoPorLaIzquierda() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
 
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
-
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(-2));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(-2)).estaOcupada());
+        posicionador.posicionarDebajoPorLaIzquierda(EdificioConstants.TipoEdificio.CUARTEL);
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-1)).estaOcupada());
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-1)).estaOcupada());
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-2).desplazarVerticalmente(1)).estaOcupada());
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1)).estaOcupada());
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-1).desplazarVerticalmente(1)).estaOcupada());
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-1).desplazarVerticalmente(-2)).estaOcupada());
+
+        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2)).estaOcupada());
 
     }
 
     @Test
-    public void test11AldeanoConstruyeUnCuartelEntreSuAristaSuperiorIzquierdaYArriba() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
+    public void test12AldeanoConstruyeUnCuartelArribaPorLaIzquierda() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException {
 
         Mapa mapa = new Mapa(250,250);
 
-        EdificioConstants.TipoEdificio cuartel = EdificioConstants.TipoEdificio.CUARTEL;
-
         Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 
-        aldeano.crear(cuartel).posicionar(aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(-1));
+        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+
+        posicionador.posicionarArribaPorLaIzquierda(EdificioConstants.TipoEdificio.CUARTEL);
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(-1)).estaOcupada());
 
@@ -278,28 +271,6 @@ public class ConstruccionTest {
 
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(2)).estaOcupada());
 
-    }
-    
-    @Test
-    public void test12CuandoUnAldeanoCreaUnaPlazaCentral_EstaDebeEstarEnContruccion() 
-    		throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
-    	
-    	Mapa mapa = new Mapa(250, 250);
-    	
-    	Jugador jugador = new Jugador();
-    	
-    	Aldeano aldeano = new Aldeano(new Posicion(15, 15), mapa);
-    	
-    	jugador.agregarUnidad(aldeano);
-    	
-    	Turno turno = new Turno(jugador.obtenerPosicionables());
-    	
-    	turno.iniciar();
-    	
-    	PlazaCentral plazaCentral = (PlazaCentral) aldeano.crear(TipoEdificio.PLAZA_CENTRAL);
-    	
-    	expectedRule.expect(EdifioNoAptoParaContruirException.class);
-    	plazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(20, 20));
     }
 
 

@@ -75,9 +75,7 @@ public class Juego {
 			throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		Castillo castillo = new Castillo(buscarPosicionCastillo(), this.mapa);
-		castillo.finalizarConstruccion();
 		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(), this.mapa);
-		plazaCentral.finalizarConstruccion();
 		jugador.agregarEdificio(castillo); 
 		jugador.agregarEdificio(plazaCentral);
 		
