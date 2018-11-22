@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.edificio;
 
+import java.util.Collection;
+
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -64,4 +66,9 @@ public class GestionarConstrucciones implements Posicionable {
     public void siguienteAccion() {
         this.turnosDesdeSuPosicionamiento ++;
     }
+
+	@Override
+	public Collection<Posicion> obtenerPosicionesOcupadasEnMapa() {
+		return this.edificio.obtenerPosicionesOcupadasEnMapa();
+	}
 }
