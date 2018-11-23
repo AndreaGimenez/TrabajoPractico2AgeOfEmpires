@@ -32,7 +32,7 @@ public class Test03 {
 	@Rule
 	public ExpectedException exceptionRule = ExpectedException.none();
 	
-	// ESPADACHIN
+	// ATAQUES DE ESPADACHIN
 	
 	@Test
 	public void testUnEspadachinAtacaAUnAldeanoDentroDeSuRangoHastaMatarlo() 
@@ -80,7 +80,7 @@ public class Test03 {
 		espadachin.atacar(aldeano);
 	}
 	
-	//ARQUERO
+	// ATAQUES DE ARQUERO
 	
 	@Test
 	public void testUnArqueroAtacaUnAldeanoFueraDeSuRango() 
@@ -130,7 +130,7 @@ public class Test03 {
 		arquero.atacar(cuartel);
 	}
 	
-	// ARMA DE ASEDIO
+	// ATAQUES DE ARMA DE ASEDIO
 	
 	@Test
 	public void testUnArmaDeAsedioAtacaUnAldeano() 
@@ -176,7 +176,7 @@ public class Test03 {
 		armaAsedio.atacar(cuartel);
 	}
 	
-	// CASTILLO
+	// ATAQUES DE CASTILLO
 	
 	@Test
 	public void testUnCastilloAtacaUnaZonaEnLaQueHayUnAldeanoHastaMatarlo() 

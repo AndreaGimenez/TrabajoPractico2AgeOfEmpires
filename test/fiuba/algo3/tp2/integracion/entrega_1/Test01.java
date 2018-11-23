@@ -1,7 +1,6 @@
 package fiuba.algo3.tp2.integracion.entrega_1;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Rule;
@@ -9,6 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import fiuba.algo3.tp2.edificio.Castillo;
+import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
@@ -78,6 +78,11 @@ public class Test01 {
 			new Aldeano(new Posicion(5,2), mapa);
 			fail("Deberia lanzar CeldaOcupadaException");
 		}catch(CeldaOcupadaException e) {}
+		
+		Cuartel cuartel1 = new Cuartel(new Posicion(5,3), mapa);
+		Cuartel cuartel2 = new Cuartel(new Posicion(8,3), mapa);
+		
+		assertEquals(cuartel1, mapa.obtenerPosicionable(new Posicion(5,3)));
+		assertEquals(cuartel2, mapa.obtenerPosicionable(new Posicion(8,3)));
 	}
-	
 }
