@@ -1,7 +1,5 @@
 package fiuba.algo3.tp2.juego;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import fiuba.algo3.tp2.edificio.Castillo;
@@ -11,7 +9,6 @@ import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.mapa.PosicionesInicialesAldeanos;
 import fiuba.algo3.tp2.unidad.Aldeano;
 
@@ -23,7 +20,7 @@ public class Juego {
 	public static final int CANTIDAD_DE_JUGADORES = 2;
 	
 	private LinkedList<Jugador> jugadores;
-	private Mapa mapa;
+	public Mapa mapa;
 
 	public Juego(Mapa mapa) 
 			throws CantidadDeJugadoresInvalidaException {
@@ -33,7 +30,7 @@ public class Juego {
 	}
 
 	public void iniciar() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException {
 		
 		if(jugadores.size()!=CANTIDAD_DE_JUGADORES)
 			throw new CantidadDeJugadoresInvalidaException();
@@ -43,7 +40,7 @@ public class Juego {
 	}
 
 	public void cargarCondicionesIniciales(Jugador jugador) 
-			throws CeldaOcupadaException, CeldaInexistenteException {
+			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
 		
 		cargarEdificiosIniciales(jugador);
 		cargarUnidadesIniciales(jugador);
@@ -62,15 +59,15 @@ public class Juego {
 	}
 	
 	private void cargarUnidadesIniciales(Jugador jugador)
-			throws CeldaOcupadaException, CeldaInexistenteException {
+			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
 		
 		Aldeano aldeano1 = new Aldeano(buscarPosicionAldeano(), this.mapa);
 		Aldeano aldeano2 = new Aldeano(buscarPosicionAldeano(), this.mapa);
 		Aldeano aldeano3 = new Aldeano(buscarPosicionAldeano(), this.mapa);
 
-		jugador.agregarUnidad(aldeano1);
-		jugador.agregarUnidad(aldeano2);
-		jugador.agregarUnidad(aldeano3);
+		jugador.agregarUnidad(aldeano1, mapa);
+		jugador.agregarUnidad(aldeano2, mapa);
+		jugador.agregarUnidad(aldeano3, mapa);
 	
 	}
 

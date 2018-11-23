@@ -33,7 +33,10 @@ public class ArmaAsedio extends Unidad implements Atacador {
 
 	@Override
 	public void siguienteAccion() {
-
+		
+		if(!montada) {
+			movimiento = new MovimientoBasico();
+		}
 	}
 
 	@Override

@@ -5,12 +5,13 @@ import java.util.LinkedList;
 
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 
 public class Jugador {
+	
+	private static final int POBLACION_MAXIMA = 50;
 	
 	private int oro;
 	private Collection<Posicionable> edificios ;
@@ -36,11 +37,14 @@ public class Jugador {
 		posicionables.addAll(this.unidades);
 
 		return posicionables;
-
 	}
 
-	public void agregarUnidad(Unidad unidad) {
-
+	public void agregarUnidad(Unidad unidad, Mapa mapa) throws PoblacionMaximaAlcanzadaException {
+		
+		if(poblacion == POBLACION_MAXIMA) {
+			removerUnidad(unidad, mapa);
+			throw new PoblacionMaximaAlcanzadaException();
+		}
 		this.unidades.add(unidad);
 		poblacion += 1;
 		
@@ -82,8 +86,8 @@ public class Jugador {
 
 	public void removerUnidad(Unidad unidadARemover, Mapa mapa) {
 		unidades.remove(unidadARemover);
+		recolectoresOro.remove(unidadARemover);
 		mapa.obtenerCelda(unidadARemover.obtenerPosicion()).liberar();
 		poblacion -=1;
 	} 
-
 }

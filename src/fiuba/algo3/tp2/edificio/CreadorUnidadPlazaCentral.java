@@ -20,7 +20,6 @@ public class CreadorUnidadPlazaCentral implements CreadorUnidad {
 	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion)
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException {
 		
-		
 		if(!tipoUnidad.equals(TipoUnidad.ALDEANO)) {
 			throw new UnidadNoSoportadaException();
 		}

@@ -73,6 +73,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 		}
 		
 		actualizarRecolectorOro();
+		movimiento = new MovimientoBasico();
 	}
 
 	private void actualizarRecolectorOro() {

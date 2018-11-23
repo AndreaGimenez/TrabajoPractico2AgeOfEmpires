@@ -3,7 +3,6 @@ package fiuba.algo3.tp2.unidad;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import Ataque.Atacador;
 import fiuba.algo3.tp2.formas.Forma;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;

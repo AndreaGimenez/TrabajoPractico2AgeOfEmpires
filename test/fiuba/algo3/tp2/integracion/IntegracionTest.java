@@ -15,6 +15,7 @@ import fiuba.algo3.tp2.edificio.UnidadNoSoportadaException;
 import fiuba.algo3.tp2.juego.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -52,7 +53,7 @@ public class IntegracionTest {
 	
 	@Test
 	public void testAlIniciarUnaPartidaElPrimerJugadorPuedeCrearUnAldeano() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException, PoblacionMaximaAlcanzadaException {
 		
 		Mapa mapa = new Mapa(250,250);
 		Juego juego = new Juego(mapa);
@@ -75,7 +76,7 @@ public class IntegracionTest {
 	//RECOLECCION DEL ORO
 	@Test
 	public void testUnJugadorCon3AldeanosQueNoEstanConstruyendoNiReparandoDeberiaTener60UnidadesMasDeOro() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException {
 		
 		Mapa mapa = new Mapa(250,250);
 		Juego juego = new Juego(mapa);
@@ -99,7 +100,7 @@ public class IntegracionTest {
 	
 	@Test
 	public void testUnJugadorCon2AldeanosLibresY1ConstruyendoDeberiaGenerar40UnidadesDeOro()
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoSoportadoException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoSoportadoException, PoblacionMaximaAlcanzadaException {
 		Mapa mapa = new Mapa(250,250);
 		Juego juego = new Juego(mapa);
 		
