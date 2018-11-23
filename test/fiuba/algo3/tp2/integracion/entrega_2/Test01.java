@@ -6,6 +6,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.edificio.EdifioNoAptoParaContruirException;
+import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.edificio.UnidadNoSoportadaException;
 import fiuba.algo3.tp2.juego.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.Jugador;
@@ -16,6 +19,7 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 /**
  * Distribucion de jugadores en el mapa
@@ -143,5 +147,27 @@ public class Test01 {
 			assertEquals(true, celdaCastilloJugador2.estaOcupada());
 	}
 	
-
+	/*@Test
+	public void testUnJugadorCreaUnaPlazaCentralDeberiaTener25UnidadesMenosDeOro() 
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
+		Mapa mapa = new Mapa(300, 250);
+		
+		Juego juego = new Juego(mapa);
+		
+		juego.agregarJugador();
+		juego.agregarJugador();
+		
+		juego.iniciar();
+		
+		Jugador primerJugador = juego.obtenerJugador(0);
+		
+		int oroAntes = primerJugador.obtenerOro();
+		
+		PlazaCentral plaza = (PlazaCentral) mapa.obtenerCelda(new Posicion(5, 0)).obtenerPosicionable();
+		
+		primerJugador.agregarUnidad(plaza.crear(TipoUnidad.ALDEANO, new Posicion(10,10)),mapa);
+		
+		int oroDespues = primerJugador.obtenerOro();
+		assertEquals(25, oroAntes-oroDespues);
+	}*/
 }

@@ -14,11 +14,13 @@ import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 public class Espadachin extends Unidad implements Atacador {
 	
 	private static final int VIDA_MAXIMA = 100;
+	private static final int COSTO_GENERACION = 50;
+	
 	private Ataque ataque;
 	
 	public Espadachin(Posicion posicion, Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, mapa, new MovimientoBasico(), new FormaEspadachinRectangulo(), VIDA_MAXIMA);
+		super(posicion, mapa, new MovimientoBasico(), new FormaEspadachinRectangulo(), VIDA_MAXIMA, COSTO_GENERACION);
 		ataque = new AtaqueEspadachin();
 	}
 
@@ -30,5 +32,11 @@ public class Espadachin extends Unidad implements Atacador {
 	@Override
 	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException {
 		ataque.atacar(this, atacable);
+	}
+
+	@Override
+	public int obtenerCosto() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

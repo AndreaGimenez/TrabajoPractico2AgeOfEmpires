@@ -14,12 +14,14 @@ import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 public class ArmaAsedio extends Unidad implements Atacador {
 	
 	private static final int VIDA_MAXIMA = 150;
+	private static final int COSTO_GENERACION = 200;
+	
 	boolean montada;
 	private Ataque ataque;
 	
 	public ArmaAsedio(Posicion posicion, Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, mapa, new MovimientoBasico(), new FormaArmaAsedioRectangulo(), VIDA_MAXIMA);
+		super(posicion, mapa, new MovimientoBasico(), new FormaArmaAsedioRectangulo(), VIDA_MAXIMA, COSTO_GENERACION );
 		ataque = new AtaqueArmaAsedio();
 	}
 
@@ -42,5 +44,11 @@ public class ArmaAsedio extends Unidad implements Atacador {
 	@Override
 	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException {
 		ataque.atacar(this, atacable);
+	}
+
+	@Override
+	public int obtenerCosto() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

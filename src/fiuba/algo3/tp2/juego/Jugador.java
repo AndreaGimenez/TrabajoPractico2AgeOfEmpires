@@ -45,9 +45,12 @@ public class Jugador {
 			removerUnidad(unidad, mapa);
 			throw new PoblacionMaximaAlcanzadaException();
 		}
+		
 		this.unidades.add(unidad);
 		poblacion += 1;
 		
+		this.oro = oro - unidad.obtenerCosto();
+
 		if(unidad instanceof Aldeano) {
 			this.recolectoresOro.add((Aldeano) unidad);
 		}
