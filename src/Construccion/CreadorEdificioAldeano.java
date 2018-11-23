@@ -20,8 +20,8 @@ public class CreadorEdificioAldeano implements CreadorEdificio  {
 		this.mapa = mapa;
 		this.aldeano = aldeano;
 	}
-	
-	@Override
+
+    @Override
 	public Edificio crear(TipoEdificio tipoEdificio)
 			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException {
 		Edificio edificioADevolver;
