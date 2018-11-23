@@ -12,6 +12,7 @@ import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
 import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -93,7 +94,8 @@ public class ReparacionTest {
 	
 	
 	@Test
-	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurnos() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioDestruidoException, EdificioConReparadorAsignadoException {
+	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurnos() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioDestruidoException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException {
 
 		Mapa mapa = new Mapa(250,250);
 
@@ -106,7 +108,7 @@ public class ReparacionTest {
 		Ataque ataque = mock(AtaqueEspadachin.class);
 		when(ataque.obtenerDanioEdificio()).thenReturn(249);
 
-		ignacio.agregarUnidad(aldeano);
+		ignacio.agregarUnidad(aldeano, mapa);
 
 		ignacio.agregarEdificio(cuartel);
 
@@ -138,7 +140,8 @@ public class ReparacionTest {
 	}
 
 	@Test
-	public void testRepararUnCastillo() throws CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, TamanioInvalidoException, EdificioDestruidoException, EdificioConReparadorAsignadoException {
+	public void testRepararUnCastillo()
+			throws CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, TamanioInvalidoException, EdificioDestruidoException, EdificioConReparadorAsignadoException {
 
 		Mapa mapa = new Mapa(250,250);
 
@@ -158,7 +161,8 @@ public class ReparacionTest {
 	}
 
 	@Test
-	public void testDaniarUnCuartelDeberiaMostrarAlCuartelConLaMismaVidaAlAvanzarUnTurnoYNoFueReparado() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioDestruidoException {
+	public void testDaniarUnCuartelDeberiaMostrarAlCuartelConLaMismaVidaAlAvanzarUnTurnoYNoFueReparado() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioDestruidoException, PoblacionMaximaAlcanzadaException {
 
 		Mapa mapa = new Mapa(250,250);
 
@@ -171,7 +175,7 @@ public class ReparacionTest {
 		Ataque ataque = mock(AtaqueEspadachin.class);
 		when(ataque.obtenerDanioEdificio()).thenReturn(50);
 
-		ignacio.agregarUnidad(aldeano);
+		ignacio.agregarUnidad(aldeano, mapa);
 
 		ignacio.agregarEdificio(cuartel);
 
