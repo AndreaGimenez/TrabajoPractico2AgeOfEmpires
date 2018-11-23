@@ -13,6 +13,7 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
 	
 	private static final int VIDA_MAXIMA = 250;
 	private static final int SALUD_RECUPERADA_POR_TURNO = 50;
+    private static final int COSTO = 250;
 	
     private CreadorUnidad creadorUnidades;
 
@@ -26,6 +27,13 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
 		
 		return creadorUnidades.crear(tipoUnidad, posicion);
 	}
+
+    @Override
+    public int costo() {
+
+        return this.COSTO;
+
+    }
 
     @Override
     public void iniciar(){

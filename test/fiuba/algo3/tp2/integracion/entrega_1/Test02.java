@@ -14,8 +14,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.LinkedList;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -34,7 +34,10 @@ public class Test02 {
     public void testVerificarConstruccionDePlazaCentral() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
 
         Mapa mapa = new Mapa(250, 250);
+        Jugador ignacio = new Jugador();
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
+        ignacio.agregarUnidad(aldeano);
+        ignacio.setOro(100);
         PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
 
         posicionador.posicionarALaIzquierdaPorEncima(EdificioConstants.TipoEdificio.PLAZA_CENTRAL);
@@ -45,11 +48,10 @@ public class Test02 {
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-1)).estaOcupada());
 
 
-        LinkedList<Posicionable> posicionables = new LinkedList<>();
         GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(4,5)));
-        posicionables.add(gestorPlazaCentral);
+        ignacio.agregarEdificio(gestorPlazaCentral);
 
-        Turno turno = new Turno(posicionables);
+        Turno turno = new Turno(ignacio.obtenerPosicionables());
 
         // Turno 0/3
 
@@ -97,14 +99,15 @@ public class Test02 {
 
         try{
 
-            gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
-
+            gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(5, 6));
 
         } catch (EdificioEnConstruccionException e) {
 
             fail();
 
         }
+
+        assertEquals(0, ignacio.obtenerOro());
 
 
     }
@@ -116,6 +119,9 @@ public class Test02 {
         Mapa mapa = new Mapa(250, 250);
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
         PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+        Jugador ignacio = new Jugador();
+        ignacio.agregarUnidad(aldeano);
+        ignacio.setOro(250);
 
         posicionador.posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
 
@@ -125,10 +131,9 @@ public class Test02 {
         assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(1).desplazarVerticalmente(-2)).estaOcupada());
 
 
-        LinkedList<Posicionable> posicionables = new LinkedList<>();
         GestionarConstruccion gestorCuartel = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(6,6)));
-        posicionables.add(gestorCuartel);
-        Turno turno = new Turno(posicionables);
+        ignacio.agregarEdificio(gestorCuartel);
+        Turno turno = new Turno(ignacio.obtenerPosicionables());
 
 
        // Turno 0/3
@@ -219,6 +224,8 @@ public class Test02 {
 
         }
 
+
+        assertEquals(0, ignacio.obtenerOro());
     }
 
 

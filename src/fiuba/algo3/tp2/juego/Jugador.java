@@ -53,6 +53,8 @@ public class Jugador {
 
 		this.edificios.add(edificio);
 
+		this.oro = this.oro - edificio.costo();
+
 	}
 
 	public void setOro(int oroInicial) {

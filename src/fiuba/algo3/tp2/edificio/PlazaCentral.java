@@ -14,6 +14,7 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 	
 	private static final int VIDA_MAXIMA = 450;
 	private static final int SALUD_RECUPERADA_POR_TURNO = 25;
+	private static final int COSTO = 100;
 	
 	private CreadorUnidad creadorUnidades;
 	
@@ -27,6 +28,13 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
 
 		return this.creadorUnidades.crear(tipoUnidad, posicion);
+	}
+
+	@Override
+	public int costo() {
+
+		return this.COSTO;
+
 	}
 
 	@Override

@@ -43,7 +43,11 @@ public abstract class Edificio implements Posicionable, Atacable {
 		this.estaEnReparacion = false;
 		posicionar(posicion);
 	}
-	
+
+	public Edificio() {
+
+	}
+
 	@Override
 	public void posicionar(Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException {
 		
@@ -123,5 +127,7 @@ public abstract class Edificio implements Posicionable, Atacable {
     }
 
 
-    public abstract Unidad crear(TipoUnidad unidad, Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException;
+    public abstract Unidad crear(TipoUnidad unidad, Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException, EdificioEnConstruccionException;
+
+	public abstract int costo();
 }
