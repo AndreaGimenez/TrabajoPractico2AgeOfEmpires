@@ -89,5 +89,6 @@ public class Jugador {
 		recolectoresOro.remove(unidadARemover);
 		mapa.obtenerCelda(unidadARemover.obtenerPosicion()).liberar();
 		poblacion -=1;
-	} 
+	}
+
 }
