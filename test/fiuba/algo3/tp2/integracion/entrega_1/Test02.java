@@ -1,10 +1,13 @@
 package fiuba.algo3.tp2.integracion.entrega_1;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.LinkedList;
 
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -499,201 +502,203 @@ public class Test02 {
 		assertTrue(new Posicion(3,1).esIgualA(armaAsedio.obtenerPosicion()));
 	}
 
-    /*verificar construcción de cuartel y plaza central
-    verificar que se haga en los turnos propios al jugador
-    verificar que no suma oro
-    */
+	@Test
+	public void testVerificarConstruccionDePlazaCentral() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException {
 
-    @Test
-    public void testVerificarConstruccionDePlazaCentral() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
+		Mapa mapa = new Mapa(250, 250);
+		Jugador ignacio = new Jugador();
+		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
+		ignacio.agregarUnidad(aldeano, mapa);
+		ignacio.setOro(100);
+		PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
 
-        Mapa mapa = new Mapa(250, 250);
-        Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
-        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+		posicionador.posicionarALaIzquierdaPorEncima(EdificioConstants.TipoEdificio.PLAZA_CENTRAL);
 
-        posicionador.posicionarALaIzquierdaPorEncima(EdificioConstants.TipoEdificio.PLAZA_CENTRAL);
+		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-1)).estaOcupada());
+		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-2)).estaOcupada());
+		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-2)).estaOcupada());
+		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-1)).estaOcupada());
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-1)).estaOcupada());
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-2)).estaOcupada());
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-2)).estaOcupada());
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-1)).estaOcupada());
 
+		GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(4,5)));
+		ignacio.agregarEdificio(gestorPlazaCentral);
 
-        LinkedList<Posicionable> posicionables = new LinkedList<>();
-        GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(4,5)));
-        posicionables.add(gestorPlazaCentral);
+		Turno turno = new Turno(ignacio.obtenerPosicionables());
 
-        Turno turno = new Turno(posicionables);
+		// Turno 0/3
 
-        // Turno 0/3
+		try{
 
-        try{
+			gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
 
-            gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
+			fail();
 
-            fail();
+		} catch (EdificioEnConstruccionException e) {
 
-        } catch (EdificioEnConstruccionException e) {
+		}
 
-        }
+		turno.avanzar();
 
-        turno.avanzar();
+		// Turno 1/3
 
-        // Turno 1/3
+		try{
 
-        try{
+			gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
 
-            gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
+			fail();
 
-            fail();
+		} catch (EdificioEnConstruccionException e) {
 
-        } catch (EdificioEnConstruccionException e) {
+		}
 
-        }
+		turno.avanzar();
 
-        turno.avanzar();
+		// Turno 2/3
 
-        // Turno 2/3
+		try{
 
-        try{
+			gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
 
-            gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
+			fail();
 
-            fail();
+		} catch (EdificioEnConstruccionException e) {
 
-        } catch (EdificioEnConstruccionException e) {
+		}
 
-        }
+		turno.avanzar();
 
-        turno.avanzar();
+		//Turno 3/3
 
-        //Turno 3/3
+		try{
 
-        try{
+			gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(5, 6));
 
-            gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
+		} catch (EdificioEnConstruccionException e) {
 
+			fail();
 
-        } catch (EdificioEnConstruccionException e) {
+		}
 
-            fail();
+		assertEquals(0, ignacio.obtenerOro());
 
-        }
 
+	}
 
-    }
+	@Test
+	public void testVerificarConstruccionDeCuartel()
+			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException {
 
-    @Test
-    public void testVerificarConstruccionDeCuartel()
-            throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
+		Mapa mapa = new Mapa(250, 250);
+		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
+		PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+		Jugador ignacio = new Jugador();
+		ignacio.agregarUnidad(aldeano, mapa);
+		ignacio.setOro(250);
 
-        Mapa mapa = new Mapa(250, 250);
-        Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
-        PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+		posicionador.posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
 
-        posicionador.posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
+		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1)).estaOcupada());
+		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(2)).estaOcupada());
+		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(2).desplazarVerticalmente(-1)).estaOcupada());
+		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(1).desplazarVerticalmente(-2)).estaOcupada());
 
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1)).estaOcupada());
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(2)).estaOcupada());
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(2).desplazarVerticalmente(-1)).estaOcupada());
-        assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(1).desplazarVerticalmente(-2)).estaOcupada());
 
+		GestionarConstruccion gestorCuartel = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(6,6)));
+		ignacio.agregarEdificio(gestorCuartel);
+		Turno turno = new Turno(ignacio.obtenerPosicionables());
 
-        LinkedList<Posicionable> posicionables = new LinkedList<>();
-        GestionarConstruccion gestorCuartel = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(6,6)));
-        posicionables.add(gestorCuartel);
-        Turno turno = new Turno(posicionables);
 
+		// Turno 0/3
 
-       // Turno 0/3
+		try{
 
-        try{
+			gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 4));
 
-            gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 4));
+			fail();
 
-            fail();
+		} catch (EdificioEnConstruccionException e){
 
-        } catch (EdificioEnConstruccionException e){
+		}
 
-        }
+		try{
 
-        try{
+			gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(5, 4));
 
-            gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(5, 4));
+			fail();
 
-            fail();
+		} catch (EdificioEnConstruccionException e) {
 
-        } catch (EdificioEnConstruccionException e) {
+		}
 
-        }
+		turno.avanzar();
 
-        turno.avanzar();
+		// Turno 1/3
 
-        // Turno 1/3
+		try{
 
-        try{
+			gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 4));
 
-            gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 4));
+			fail();
 
-            fail();
+		} catch (EdificioEnConstruccionException e){
 
-        } catch (EdificioEnConstruccionException e){
+		}
 
-        }
+		try{
 
-        try{
+			gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(5, 4));
 
-            gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(5, 4));
+			fail();
 
-            fail();
+		} catch (EdificioEnConstruccionException e) {
 
-        } catch (EdificioEnConstruccionException e) {
+		}
 
-        }
 
+		turno.avanzar();
 
-        turno.avanzar();
+		// Turno 2/3
 
-        // Turno 2/3
+		try{
 
-        try{
+			gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 4));
 
-            gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 4));
+			fail();
 
-            fail();
+		} catch (EdificioEnConstruccionException e){
 
-        } catch (EdificioEnConstruccionException e){
+		}
 
-        }
+		try{
 
-        try{
+			gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(5, 4));
 
-            gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(5, 4));
+			fail();
 
-            fail();
+		} catch (EdificioEnConstruccionException e) {
 
-        } catch (EdificioEnConstruccionException e) {
+		}
 
-        }
+		turno.avanzar();
 
-        turno.avanzar();
+		// Turno 3/3
 
-        // Turno 3/3
+		try{
 
-        try{
+			Unidad espadachin = gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(6, 5));
 
-            Unidad espadachin = gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(6, 5));
+			Unidad arquero = gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(7, 5));
 
-            Unidad arquero = gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(7, 5));
 
+		} catch (EdificioEnConstruccionException e){
 
-        } catch (EdificioEnConstruccionException e){
+			fail();
 
-            fail();
+		}
 
-        }
 
-    }
+		assertEquals(0, ignacio.obtenerOro());
+	}
 
 
 }
