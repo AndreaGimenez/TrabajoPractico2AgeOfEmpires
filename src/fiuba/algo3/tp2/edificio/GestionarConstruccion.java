@@ -2,10 +2,9 @@ package fiuba.algo3.tp2.edificio;
 
 import java.util.Collection;
 
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.formas.Forma;
+import fiuba.algo3.tp2.mapa.*;
+import fiuba.algo3.tp2.reparacion.Reparacion;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants;
 
@@ -17,14 +16,14 @@ import fiuba.algo3.tp2.unidad.UnidadConstants;
 * 3/3 construido
 *
 * en el mismo turno que se quiere crear un edificio, el mismo esta en 0/3*/
-public class GestionarConstruccion implements Posicionable {
+public class GestionarConstruccion extends Edificio implements Posicionable {
 
     Edificio edificio;
     private int turnosDesdeSuPosicionamiento;
     private EdificioEnConstruccionException e;
 
     public GestionarConstruccion(Edificio edificio) {
-
+        super();
         this.edificio = edificio;
         this.e = new EdificioEnConstruccionException();
         this.turnosDesdeSuPosicionamiento = 0;
@@ -43,6 +42,11 @@ public class GestionarConstruccion implements Posicionable {
 
         return this.edificio.crear(espadachin, posicion);
 
+    }
+
+    @Override
+    public int costo() {
+        return this.edificio.costo();
     }
 
     @Override

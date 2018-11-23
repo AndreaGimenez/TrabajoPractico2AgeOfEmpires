@@ -28,7 +28,13 @@ public class Castillo extends Edificio implements GeneradorUnidades, AtacadorZon
 
 		return this.generadorUnidades.crear(tipoUnidad, posicion);
 	}
- 
+
+	@Override
+	public int costo() {
+
+		return 0;
+	}
+
 	@Override
 	public void siguienteAccion() {
 
