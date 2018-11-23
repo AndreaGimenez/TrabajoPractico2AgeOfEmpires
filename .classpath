@@ -27,6 +27,6 @@
 	<classpathentry kind="lib" path="libs/servlet-api-2.5-jar-6.1.14.jar"/>
 	<classpathentry kind="lib" path="libs/slf4j-api-jar-1.7.5.jar"/>
 	<classpathentry kind="lib" path="libs/slf4j-api-test-jar-1.7.5.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

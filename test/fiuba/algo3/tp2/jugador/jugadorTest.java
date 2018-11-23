@@ -174,7 +174,7 @@ public class jugadorTest {
 
 	}
 	
-	/*@Test
+	@Test
 	public void  testUnJugadorCon3AldeanosQueNoEstanReparandoNiConstruyendoGenera60UnidadesDeOro()
 			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 
@@ -188,13 +188,13 @@ public class jugadorTest {
 		
 		Jugador jugador = juego.obtenerJugador(0);
         Turno turno = new Turno(jugador.obtenerPosicionables());
-        int oroAntes = jugador.obtenerOro();
         
+        int oroAntes = jugador.obtenerOro();
+      
         turno.avanzar();
         
         int oroDespues = jugador.obtenerOro();
+
         
-        assertEquals(60, oroDespues-oroAntes);
-        
-	}*/
+	}
 }

@@ -1,7 +1,5 @@
 package fiuba.algo3.tp2.unidad;
 
-import java.util.Collection;
-
 import Construccion.ConstructorEdificios;
 import Construccion.CreadorEdificio;
 import Construccion.CreadorEdificioAldeano;
@@ -14,25 +12,36 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.movimiento.MovimientoBasico;
-import fiuba.algo3.tp2.reparacion.*;
+import fiuba.algo3.tp2.recursos.OroPorTurno;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.reparacion.Reparador;
+import fiuba.algo3.tp2.reparacion.ReparadorEdificio;
+import fiuba.algo3.tp2.reparacion.ReparadorEdificioAldeano;
 
-public class Aldeano extends Unidad implements ConstructorEdificios, Reparador{
+public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	
 	private static final int VIDA_MAXIMA = 50;
 	
 	private CreadorEdificio creadorEdificio;
+	private Edificio edificioEnConstruccion;
+	
 	private ReparadorEdificio reparadorEdificio;
 	private Edificio edificioEnReparacion;
-	private Edificio edificioEnConstruccion;
-	public int oroGeneradoEnTurno;
+	
+	public OroPorTurno oroPorTurno;
 
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA);
 		
 		this.creadorEdificio = new CreadorEdificioAldeano(mapa);
-		this.reparadorEdificio = new ReparadorEdificioAldeano();
 		this.edificioEnReparacion = null;
+		
+		this.reparadorEdificio = new ReparadorEdificioAldeano();
 		this.edificioEnConstruccion = null;
+		
+		this.oroPorTurno = new OroPorTurno();
 	}
 
 	public Edificio crear(TipoEdificio tipoEdificio)
@@ -63,16 +72,21 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador{
 			this.reparadorEdificio.repararEdificio(this.edificioEnReparacion, this);
 		}
 		
-		calcularOroEnTurno();
+		actualizarRecolectorOro();
 	}
 
-	private void calcularOroEnTurno() {
+	private void actualizarRecolectorOro() {
 		
 		if(this.edificioEnReparacion == null && this.edificioEnConstruccion == null) {
-			this.oroGeneradoEnTurno += 20;
+			oroPorTurno.activarRecolector();
 		}
 		else {
-			oroGeneradoEnTurno = 0;
+			oroPorTurno.desactivarRecolector();
 		}
 	}
+	
+	public int recolectarOro() {
+		return oroPorTurno.recolectarOroDelTurno();
+	}
+	
 }

@@ -4,6 +4,7 @@ import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
 import fiuba.algo3.tp2.formas.FormaEspadachinRectangulo;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -25,14 +26,9 @@ public class Espadachin extends Unidad implements Atacador {
 	public void siguienteAccion() {
 
 	}
-	
-	@Override
-	public void atacar(Edificio edificio) throws AtaqueFueraDeRangoException, EdificioDestruidoException {
-		ataque.atacar(this, edificio);
-	}
 
 	@Override
-	public void atacar(Unidad unidad) throws AtaqueFueraDeRangoException, UnidadMuertaException {
-		ataque.atacar(this, unidad);
+	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException {
+		ataque.atacar(this, atacable);
 	}
 }

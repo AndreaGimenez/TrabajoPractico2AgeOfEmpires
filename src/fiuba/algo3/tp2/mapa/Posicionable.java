@@ -13,5 +13,4 @@ public interface Posicionable {
 	public void iniciar();
 
     void siguienteAccion() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException;
-	public void recibirDanio(int danio);
 }

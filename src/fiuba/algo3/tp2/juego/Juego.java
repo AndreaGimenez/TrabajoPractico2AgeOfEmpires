@@ -45,11 +45,24 @@ public class Juego {
 	public void cargarCondicionesIniciales(Jugador jugador) 
 			throws CeldaOcupadaException, CeldaInexistenteException {
 		
-		jugador.setOro(ORO_INICIAL);
 		cargarEdificiosIniciales(jugador);
 		cargarUnidadesIniciales(jugador);
+		jugador.setOro(ORO_INICIAL);
 	}
 
+
+	private void cargarEdificiosIniciales(Jugador jugador)
+			throws CeldaOcupadaException, CeldaInexistenteException {
+		
+		Castillo castillo = new Castillo(buscarPosicionCastillo(), this.mapa);
+		castillo.finalizarConstruccion();
+		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(), this.mapa);
+		plazaCentral.finalizarConstruccion();
+		jugador.agregarEdificio(castillo); 
+		jugador.agregarEdificio(plazaCentral);
+		
+	}
+	
 	private void cargarUnidadesIniciales(Jugador jugador)
 			throws CeldaOcupadaException, CeldaInexistenteException {
 		
@@ -69,18 +82,6 @@ public class Juego {
 		
 		Posicion posicion = posiciones.buscarPosicion();
 		return posicion;
-	}
-
-	private void cargarEdificiosIniciales(Jugador jugador)
-			throws CeldaOcupadaException, CeldaInexistenteException {
-		
-		Castillo castillo = new Castillo(buscarPosicionCastillo(), this.mapa);
-		castillo.finalizarConstruccion();
-		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(), this.mapa);
-		plazaCentral.finalizarConstruccion();
-		jugador.agregarEdificio(castillo); 
-		jugador.agregarEdificio(plazaCentral);
-		
 	}
 
 	/*

@@ -39,6 +39,6 @@ public class CreadorEdificioAldeano implements CreadorEdificio  {
 	}
 	
 	private Posicion determinarPosicionCreacion() {
-		return new Posicion(2,1);
+		return new Posicion(20,20);
 	}
 }

@@ -69,9 +69,4 @@ public class GestionarConstruccion implements Posicionable {
 	public Collection<Posicion> obtenerPosicionesOcupadasEnMapa() {
 		return this.edificio.obtenerPosicionesOcupadasEnMapa();
 	}
-
-	@Override
-	public void recibirDanio(int danio) {
-		this.edificio.recibirDanio(danio);
-	}
 }

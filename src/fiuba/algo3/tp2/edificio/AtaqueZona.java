@@ -1,6 +1,8 @@
 package fiuba.algo3.tp2.edificio;
 
-public interface AtaqueZona {
+import fiuba.algo3.tp2.unidad.Ataque;
+
+public interface AtaqueZona extends Ataque {
 
 	public void atacar();
 }

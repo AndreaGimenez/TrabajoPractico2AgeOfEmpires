@@ -11,6 +11,7 @@ import java.util.Collection;
 import org.junit.Test;
 
 import Ataque.Atacador;
+import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Posicion;
 
 public class RangoAtaqueArqueroTest {
@@ -18,7 +19,7 @@ public class RangoAtaqueArqueroTest {
 	@Test
 	public void testDadoUnRangoAtaqueArqueroQueSeEncuentraEnLaPosicionX1Y1YUnAldeanoEnX5Y1NoDeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(5,1));
@@ -35,7 +36,7 @@ public class RangoAtaqueArqueroTest {
 	@Test
 	public void testDadoUnRangoAtaqueArqueroQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX8Y5DeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(8,5));
@@ -52,7 +53,7 @@ public class RangoAtaqueArqueroTest {
 	@Test
 	public void testDadoUnRangoAtaqueArqueroQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX6Y5DeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(6,5));
@@ -69,7 +70,7 @@ public class RangoAtaqueArqueroTest {
 	@Test
 	public void testDadoUnRangoAtaqueArqueroQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX2Y5DeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(2,5));
@@ -86,7 +87,7 @@ public class RangoAtaqueArqueroTest {
 	@Test
 	public void testDadoUnRangoAtaqueArqueroQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX4Y5DeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(4,5));
@@ -103,7 +104,7 @@ public class RangoAtaqueArqueroTest {
 	@Test
 	public void testDadoUnRangoAtaqueArqueroQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y8DeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(5,8));
@@ -120,7 +121,7 @@ public class RangoAtaqueArqueroTest {
 	@Test
 	public void testDadoUnRangoAtaqueArqueroQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y6DeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(5,6));
@@ -138,7 +139,7 @@ public class RangoAtaqueArqueroTest {
 	@Test
 	public void testDadoUnRangoAtaqueArqueroQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y4DeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(5,4));
@@ -155,7 +156,7 @@ public class RangoAtaqueArqueroTest {
 	@Test
 	public void testDadoUnRangoAtaqueArqueroQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y2DeberiaEstarEnElRango() {
 		
-		Aldeano aldeano = mock(Aldeano.class);
+		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
 		posicionesOcupadasAldeano.add(new Posicion(5,2));

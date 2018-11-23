@@ -1,23 +1,22 @@
 package fiuba.algo3.tp2.unidad;
 
 import Ataque.Atacador;
-import fiuba.algo3.tp2.edificio.Edificio;
-import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
+import fiuba.algo3.tp2.mapa.Atacable;
 
-public class AtaqueArquero extends Ataque {
+public class AtaqueArquero implements Ataque {
 
 	private RangoAtaque rangoAtaque;
 	
 	public AtaqueArquero() {
 		this.rangoAtaque = new RangoAtaqueArquero();
 	}
-	
+
 	@Override
-	public void atacar(Atacador atacador, Unidad unidad) throws AtaqueFueraDeRangoException, UnidadMuertaException {
+	public void atacar(Atacador atacador, Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException {
 		
-		if(rangoAtaque.estaEnRango(atacador, unidad)){
+		if(rangoAtaque.estaEnRango(atacador, atacable)){
 			
-			unidad.recibirDanio(15);
+			atacable.recibirDanio(this);
 		}
 		else {
 			throw new AtaqueFueraDeRangoException();
@@ -25,14 +24,12 @@ public class AtaqueArquero extends Ataque {
 	}
 	
 	@Override
-	public void atacar(Atacador atacador, Edificio edificio) throws AtaqueFueraDeRangoException, EdificioDestruidoException {
-		
-		if(rangoAtaque.estaEnRango(atacador, edificio)){
-			
-			edificio.recibirDanio(10);
-		}
-		else {
-			throw new AtaqueFueraDeRangoException();
-		}
+	public int obtenerDanioUnidad() {
+		return 15;
+	}
+	
+	@Override
+	public int obtenerDanioEdificio() {
+		return 10;
 	}
 }
