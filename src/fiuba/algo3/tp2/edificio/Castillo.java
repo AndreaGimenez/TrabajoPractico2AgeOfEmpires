@@ -36,6 +36,11 @@ public class Castillo extends Edificio implements GeneradorUnidades, AtacadorZon
 	}
 
 	@Override
+	public boolean estaReparado() {
+		return this.VIDA_MAXIMA == super.obtenerVida();
+	}
+
+	@Override
 	public void siguienteAccion() {
 
 	}

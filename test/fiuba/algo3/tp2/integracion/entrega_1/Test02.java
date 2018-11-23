@@ -3,11 +3,15 @@ package fiuba.algo3.tp2.integracion.entrega_1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
 
 import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
+import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
+import fiuba.algo3.tp2.unidad.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -37,13 +41,8 @@ import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
 import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.turno.Turno;
-import fiuba.algo3.tp2.unidad.Aldeano;
-import fiuba.algo3.tp2.unidad.ArmaAsedio;
-import fiuba.algo3.tp2.unidad.Arquero;
-import fiuba.algo3.tp2.unidad.DireccionAbajo;
-import fiuba.algo3.tp2.unidad.Espadachin;
-import fiuba.algo3.tp2.unidad.Unidad;
-import fiuba.algo3.tp2.unidad.UnidadConstants;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 /**
  * Pruebas de Unidades
@@ -522,7 +521,6 @@ public class Test02 {
 
 		GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(4,5)));
 		ignacio.agregarEdificio(gestorPlazaCentral);
-
 		Turno turno = new Turno(ignacio.obtenerPosicionables());
 
 		// Turno 0/3
@@ -698,6 +696,50 @@ public class Test02 {
 
 
 		assertEquals(0, ignacio.obtenerOro());
+	}
+
+
+	@Test
+	public void testDeReparacionDeCuartel() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, EdificioNoSoportadoException, EdificioFueraDeRangoException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
+
+		Mapa mapa = new Mapa(250, 250);
+		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
+		PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+		Jugador ignacio = new Jugador();
+		ignacio.agregarUnidad(aldeano, mapa);
+		ignacio.setOro(250);
+		Ataque ataque = mock(Ataque.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(249);
+
+		posicionador.posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
+
+		Edificio cuartel = (Edificio) mapa.obtenerPosicionable(new Posicion(6,6));
+
+		ignacio.agregarEdificio(cuartel);
+		Turno turno = new Turno(ignacio.obtenerPosicionables());
+
+		cuartel.recibirDanio(ataque);
+
+		aldeano.repararEdificio(cuartel);
+
+		assertEquals(51, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(101, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(151, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(201, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(250, cuartel.obtenerVida());
+
 	}
 
 

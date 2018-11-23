@@ -5,6 +5,7 @@ import java.util.Collection;
 import fiuba.algo3.tp2.formas.Forma;
 import fiuba.algo3.tp2.mapa.*;
 import fiuba.algo3.tp2.reparacion.Reparacion;
+import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants;
 
@@ -15,7 +16,7 @@ import fiuba.algo3.tp2.unidad.UnidadConstants;
 * 2/3 no construido
 * 3/3 construido
 *
-* en el mismo turno que se quiere crear un edificio, el mismo esta en 0/3*/
+* en el mismo turno que se quiere crear un edificio, esta en 0/3*/
 public class GestionarConstruccion extends Edificio implements Posicionable {
 
     Edificio edificio;
@@ -47,6 +48,11 @@ public class GestionarConstruccion extends Edificio implements Posicionable {
     @Override
     public int costo() {
         return this.edificio.costo();
+    }
+
+    @Override
+    public boolean estaReparado() {
+        return this.edificio.estaReparado();
     }
 
     @Override

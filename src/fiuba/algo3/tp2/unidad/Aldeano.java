@@ -36,10 +36,8 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA);
 		
 		this.creadorEdificio = new CreadorEdificioAldeano(mapa, this);
-		this.edificioEnReparacion = null;
 		
 		this.reparadorEdificio = new ReparadorEdificioAldeano();
-		this.edificioEnConstruccion = null;
 		
 		this.oroPorTurno = new OroPorTurno();
 	}
@@ -68,7 +66,10 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 
 		this.reparadorEdificio.esPosibileVolverAReparar();
 
+		if(this.edificioEnReparacion != null && this.edificioEnReparacion.estaReparado()) this.edificioEnReparacion = null;
+
 		if(this.edificioEnReparacion != null) {
+
 			this.reparadorEdificio.repararEdificio(this.edificioEnReparacion, this);
 		}
 		
@@ -78,7 +79,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 
 	private void actualizarRecolectorOro() {
 		
-		if(this.edificioEnReparacion == null && this.edificioEnConstruccion == null) {
+		if(this.edificioEnReparacion == null && this.edificioEnConstruccion == null ){
 			oroPorTurno.activarRecolector();
 		}
 		else {

@@ -38,6 +38,11 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 	}
 
 	@Override
+	public boolean estaReparado() {
+		return this.VIDA_MAXIMA == super.obtenerVida();
+	}
+
+	@Override
 	public void siguienteAccion() {
 
 	}
