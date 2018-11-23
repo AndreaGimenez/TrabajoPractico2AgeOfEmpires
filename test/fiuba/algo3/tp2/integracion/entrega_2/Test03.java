@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.integracion;
+package fiuba.algo3.tp2.integracion.entrega_2;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -8,7 +8,6 @@ import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.AtacadorZona;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
-import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
@@ -21,11 +20,14 @@ import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.AtaqueFueraDeRangoException;
 import fiuba.algo3.tp2.unidad.Espadachin;
-import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadMuertaException;
 import fiuba.algo3.tp2.unidad.UnidadNoAtacableException;
 
-public class Ataques {
+/**
+ * Tests de Ataques de unidades y castillo
+ *
+ */
+public class Test03 {
 
 	@Rule
 	public ExpectedException exceptionRule = ExpectedException.none();
@@ -269,4 +271,3 @@ public class Ataques {
 		espadachin.atacar(cuartel);
 	}
 }
-
