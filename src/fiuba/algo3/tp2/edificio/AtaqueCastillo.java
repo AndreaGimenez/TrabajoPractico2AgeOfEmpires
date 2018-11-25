@@ -18,7 +18,7 @@ public class AtaqueCastillo implements AtaqueZona {
 	
 	
 	public AtaqueCastillo(AtacadorZona atacante, Mapa mapa) {
-		rangoAtaque = new RangoAtaqueCastillo();
+		rangoAtaque = new RangoAtaqueCastillo(mapa);
 		this.atacante = atacante;
 		this.mapa = mapa;
 	}

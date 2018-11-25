@@ -11,15 +11,18 @@ import java.util.Collection;
 import org.junit.Test;
 
 import fiuba.algo3.tp2.mapa.Atacable;
+import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.RangoAtaque;
 
 public class RangoAtaqueCastilloTest {
 
 	@Test
-	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX1Y1YUnAldeanoEnX9Y1NoDeberiaEstarEnElRango() {
+	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX1Y1YUnAldeanoEnX9Y1NoDeberiaEstarEnElRango() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
@@ -30,13 +33,14 @@ public class RangoAtaqueCastilloTest {
 		AtacadorZona castillo = mock(Castillo.class);
 		when(castillo.obtenerPosicion()).thenReturn(new Posicion(1,1));
 		
-		RangoAtaque rango = new RangoAtaqueCastillo();
+		RangoAtaque rango = new RangoAtaqueCastillo(mapa);
 		assertFalse(rango.estaEnRango(castillo, aldeano));
 	}
 	
 	@Test
-	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX11Y5DeberiaEstarEnElRango() {
+	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX11Y5DeberiaEstarEnElRango() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
@@ -47,13 +51,14 @@ public class RangoAtaqueCastilloTest {
 		AtacadorZona castillo = mock(Castillo.class);
 		when(castillo.obtenerPosicion()).thenReturn(new Posicion(5,5));
 		
-		RangoAtaque rango = new RangoAtaqueCastillo();
+		RangoAtaque rango = new RangoAtaqueCastillo(mapa);
 		assertTrue(rango.estaEnRango(castillo, aldeano));
 	}
 	
 	@Test
-	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX10Y5DeberiaEstarEnElRango() {
+	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX10Y5DeberiaEstarEnElRango() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
@@ -64,13 +69,14 @@ public class RangoAtaqueCastilloTest {
 		AtacadorZona castillo = mock(Castillo.class);
 		when(castillo.obtenerPosicion()).thenReturn(new Posicion(5,5));
 		
-		RangoAtaque rango = new RangoAtaqueCastillo();
+		RangoAtaque rango = new RangoAtaqueCastillo(mapa);
 		assertTrue(rango.estaEnRango(castillo, aldeano));
 	}
 	
 	@Test
-	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX2Y5DeberiaEstarEnElRango() {
+	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX2Y5DeberiaEstarEnElRango() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
@@ -81,13 +87,14 @@ public class RangoAtaqueCastilloTest {
 		AtacadorZona castillo = mock(Castillo.class);
 		when(castillo.obtenerPosicion()).thenReturn(new Posicion(5,5));
 		
-		RangoAtaque rango = new RangoAtaqueCastillo();
+		RangoAtaque rango = new RangoAtaqueCastillo(mapa);
 		assertTrue(rango.estaEnRango(castillo, aldeano));
 	}
 	
 	@Test
-	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX4Y5DeberiaEstarEnElRango() {
+	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX4Y5DeberiaEstarEnElRango() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
@@ -98,13 +105,14 @@ public class RangoAtaqueCastilloTest {
 		AtacadorZona castillo = mock(Castillo.class);
 		when(castillo.obtenerPosicion()).thenReturn(new Posicion(5,5));
 		
-		RangoAtaque rango = new RangoAtaqueCastillo();
+		RangoAtaque rango = new RangoAtaqueCastillo(mapa);
 		assertTrue(rango.estaEnRango(castillo, aldeano));
 	}
 	
 	@Test
-	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y11DeberiaEstarEnElRango() {
+	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y11DeberiaEstarEnElRango() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
@@ -115,13 +123,14 @@ public class RangoAtaqueCastilloTest {
 		AtacadorZona castillo = mock(Castillo.class);
 		when(castillo.obtenerPosicion()).thenReturn(new Posicion(5,5));
 		
-		RangoAtaque rango = new RangoAtaqueCastillo();
+		RangoAtaque rango = new RangoAtaqueCastillo(mapa);
 		assertTrue(rango.estaEnRango(castillo, aldeano));
 	}
 	
 	@Test
-	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y10DeberiaEstarEnElRango() {
+	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y10DeberiaEstarEnElRango() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
@@ -132,13 +141,14 @@ public class RangoAtaqueCastilloTest {
 		AtacadorZona castillo = mock(Castillo.class);
 		when(castillo.obtenerPosicion()).thenReturn(new Posicion(5,5));
 		
-		RangoAtaque rango = new RangoAtaqueCastillo();
+		RangoAtaque rango = new RangoAtaqueCastillo(mapa);
 		assertTrue(rango.estaEnRango(castillo, aldeano));
 	}
 	
 	@Test
-	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y4DeberiaEstarEnElRango() {
+	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y4DeberiaEstarEnElRango() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
@@ -149,13 +159,14 @@ public class RangoAtaqueCastilloTest {
 		AtacadorZona castillo = mock(Castillo.class);
 		when(castillo.obtenerPosicion()).thenReturn(new Posicion(5,5));
 		
-		RangoAtaque rango = new RangoAtaqueCastillo();
+		RangoAtaque rango = new RangoAtaqueCastillo(mapa);
 		assertTrue(rango.estaEnRango(castillo, aldeano));
 	}
 	
 	@Test
-	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y2DeberiaEstarEnElRango() {
+	public void testDadoUnRangoAtaqueCastilloQueSeEncuentraEnLaPosicionX5Y5YUnAldeanoEnX5Y2DeberiaEstarEnElRango() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = mock(Aldeano.class);
 		
 		Collection<Posicion> posicionesOcupadasAldeano = new ArrayList<Posicion>();
@@ -166,7 +177,7 @@ public class RangoAtaqueCastilloTest {
 		AtacadorZona castillo = mock(Castillo.class);
 		when(castillo.obtenerPosicion()).thenReturn(new Posicion(5,5));
 		
-		RangoAtaque rango = new RangoAtaqueCastillo();
+		RangoAtaque rango = new RangoAtaqueCastillo(mapa);
 		assertTrue(rango.estaEnRango(castillo, aldeano));
 	}
 }
