@@ -4,7 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.AtacadorZona;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
@@ -18,6 +17,7 @@ import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.unidad.Atacador;
 import fiuba.algo3.tp2.unidad.AtaqueFueraDeRangoException;
 import fiuba.algo3.tp2.unidad.Espadachin;
 import fiuba.algo3.tp2.unidad.UnidadMuertaException;

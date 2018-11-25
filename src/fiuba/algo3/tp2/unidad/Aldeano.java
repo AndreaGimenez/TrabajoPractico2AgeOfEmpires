@@ -1,9 +1,9 @@
 package fiuba.algo3.tp2.unidad;
 
-import Construccion.ConstructorEdificios;
-import Construccion.CreadorEdificio;
-import Construccion.CreadorEdificioAldeano;
-import Construccion.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.construccion.ConstructorEdificios;
+import fiuba.algo3.tp2.construccion.CreadorEdificio;
+import fiuba.algo3.tp2.construccion.CreadorEdificioAldeano;
+import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;

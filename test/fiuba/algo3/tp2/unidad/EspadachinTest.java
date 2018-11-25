@@ -4,7 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
 import fiuba.algo3.tp2.mapa.Atacable;
