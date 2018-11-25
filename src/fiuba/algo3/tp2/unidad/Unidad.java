@@ -24,16 +24,18 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 	protected Forma forma;
 	protected int vida;
 	protected int topeDeVida;
+	int costoGeneracion;
 	private Mapa mapa;
 	
 	
-	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento, Forma forma, int vidaMaxima) throws CeldaOcupadaException, CeldaInexistenteException {
+	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento, Forma forma, int vidaMaxima, int costoGeneracion) throws CeldaOcupadaException, CeldaInexistenteException {
 		
 		this.mapa = mapa;
 		this.movimiento = movimiento;
 		this.forma = forma;
 		this.vida = vidaMaxima;
 		this.topeDeVida = vidaMaxima;
+		this.costoGeneracion = costoGeneracion;
 		posicionar(posicion);
 	}
 	
@@ -109,5 +111,10 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 	private Collection<Posicion> obtenerPosicionesAledanias() {
 		
 		return forma.obtenerPosicionesContorno(obtenerPosicion());
+	}
+
+	public int costo() {
+		
+		return costoGeneracion;
 	}
 }

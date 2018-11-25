@@ -2,10 +2,10 @@ package fiuba.algo3.tp2.edificio;
 
 import java.util.Collection;
 
-import Ataque.Atacador;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.unidad.Atacador;
 import fiuba.algo3.tp2.unidad.AtaqueFueraDeRangoException;
 import fiuba.algo3.tp2.unidad.RangoAtaque;
 import fiuba.algo3.tp2.unidad.UnidadMuertaException;
@@ -18,7 +18,7 @@ public class AtaqueCastillo implements AtaqueZona {
 	
 	
 	public AtaqueCastillo(AtacadorZona atacante, Mapa mapa) {
-		rangoAtaque = new RangoAtaqueCastillo();
+		rangoAtaque = new RangoAtaqueCastillo(mapa);
 		this.atacante = atacante;
 		this.mapa = mapa;
 	}

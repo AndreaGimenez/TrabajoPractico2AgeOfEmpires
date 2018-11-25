@@ -30,7 +30,7 @@ public class Juego {
 	}
 
 	public void iniciar() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		if(jugadores.size()!=CANTIDAD_DE_JUGADORES)
 			throw new CantidadDeJugadoresInvalidaException();
@@ -40,7 +40,7 @@ public class Juego {
 	}
 
 	public void cargarCondicionesIniciales(Jugador jugador) 
-			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		cargarEdificiosIniciales(jugador);
 		cargarUnidadesIniciales(jugador);
@@ -59,15 +59,15 @@ public class Juego {
 	}
 	
 	private void cargarUnidadesIniciales(Jugador jugador)
-			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Aldeano aldeano1 = new Aldeano(buscarPosicionAldeano(), this.mapa);
 		Aldeano aldeano2 = new Aldeano(buscarPosicionAldeano(), this.mapa);
 		Aldeano aldeano3 = new Aldeano(buscarPosicionAldeano(), this.mapa);
 
-		jugador.agregarUnidad(aldeano1, mapa);
-		jugador.agregarUnidad(aldeano2, mapa);
-		jugador.agregarUnidad(aldeano3, mapa);
+		jugador.agregarUnidad(aldeano1, mapa, false);
+		jugador.agregarUnidad(aldeano2, mapa, false);
+		jugador.agregarUnidad(aldeano3, mapa, false);
 	
 	}
 

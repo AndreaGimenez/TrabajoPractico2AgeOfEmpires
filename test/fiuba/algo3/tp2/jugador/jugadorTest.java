@@ -9,6 +9,7 @@ import org.junit.rules.ExpectedException;
 import fiuba.algo3.tp2.juego.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
@@ -30,7 +31,7 @@ public class jugadorTest {
 	//ORO
 	@Test
 	public void testAlIniciarUnNuevoJuegoElOroDeCadaJugadorDeberiaSer100() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
@@ -47,7 +48,7 @@ public class jugadorTest {
 	
 	@Test
 	public void  testUnJugadorCon3AldeanosQueNoEstanReparandoNiConstruyendoGenera60UnidadesDeOro()
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 
 		Mapa mapa = new Mapa(250, 250);
 		
@@ -66,6 +67,6 @@ public class jugadorTest {
         
         int oroDespues = jugador.obtenerOro();
 
-        
+        assertEquals(60, oroDespues-oroAntes);
 	}
 }
