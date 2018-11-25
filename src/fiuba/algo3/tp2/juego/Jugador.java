@@ -38,16 +38,31 @@ public class Jugador {
 
 		return posicionables;
 	}
+	
+	public void agregarUnidad(Unidad unidad, Mapa mapa) throws PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+		agregarUnidad(unidad, mapa, true);
+	}
 
-	public void agregarUnidad(Unidad unidad, Mapa mapa) throws PoblacionMaximaAlcanzadaException {
+	public void agregarUnidad(Unidad unidad, Mapa mapa, boolean verificarRecursos) 
+			throws PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
-		if(poblacion == POBLACION_MAXIMA) {
-			removerUnidad(unidad, mapa);
-			throw new PoblacionMaximaAlcanzadaException();
+		if(verificarRecursos) {
+			if(poblacion == POBLACION_MAXIMA) {
+				removerUnidad(unidad, mapa);
+				throw new PoblacionMaximaAlcanzadaException();
+			}
+			
+			if(this.oro >= unidad.costo()) {
+				this.oro = this.oro - unidad.costo();
+			}
+			else {
+				throw new OroInsuficienteException();
+			}
 		}
+		
 		this.unidades.add(unidad);
 		poblacion += 1;
-		
+
 		if(unidad instanceof Aldeano) {
 			this.recolectoresOro.add((Aldeano) unidad);
 		}
@@ -75,6 +90,7 @@ public class Jugador {
 	private int recolectarOroDelTurno() {
 		int oroDelTurno = 0;
 		for(Aldeano aldeanoActual : recolectoresOro) {
+			//System.out.println(aldeanoActual.recolectarOro());
 			oroDelTurno += aldeanoActual.recolectarOro();
 		}
 		return oroDelTurno;

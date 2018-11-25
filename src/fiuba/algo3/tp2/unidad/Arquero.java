@@ -13,11 +13,13 @@ public class Arquero extends Unidad implements Atacador {
 	
 	private static final int DANIO_UNIDAD = 15;
 	private static final int VIDA_MAXIMA = 75;
+	private static final int COSTO_GENERACION = 75;
+	
 	private Ataque ataque;
 	
 	public Arquero(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		
-		super(posicion, mapa, new MovimientoBasico(), new FormaArqueroRectangulo(), VIDA_MAXIMA);
+		super(posicion, mapa, new MovimientoBasico(), new FormaArqueroRectangulo(), VIDA_MAXIMA, COSTO_GENERACION);
 		ataque = new AtaqueArquero();
 	}
 

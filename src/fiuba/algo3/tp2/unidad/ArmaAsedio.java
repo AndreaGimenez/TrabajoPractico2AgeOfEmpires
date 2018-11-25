@@ -13,12 +13,14 @@ import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 public class ArmaAsedio extends Unidad implements Atacador {
 	
 	private static final int VIDA_MAXIMA = 150;
+	private static final int COSTO_GENERACION = 200;
+	
 	boolean montada;
 	private Ataque ataque;
 	
 	public ArmaAsedio(Posicion posicion, Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, mapa, new MovimientoBasico(), new FormaArmaAsedioRectangulo(), VIDA_MAXIMA);
+		super(posicion, mapa, new MovimientoBasico(), new FormaArmaAsedioRectangulo(), VIDA_MAXIMA, COSTO_GENERACION );
 		ataque = new AtaqueArmaAsedio();
 	}
 

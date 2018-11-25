@@ -23,6 +23,8 @@ import fiuba.algo3.tp2.reparacion.ReparadorEdificioAldeano;
 public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	
 	private static final int VIDA_MAXIMA = 50;
+	private static final int COSTO_GENERACION = 25;
+
 	
 	private CreadorEdificio creadorEdificio;
 	private Edificio edificioEnConstruccion;
@@ -33,7 +35,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	public OroPorTurno oroPorTurno;
 
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA);
+		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA, COSTO_GENERACION);
 		
 		this.creadorEdificio = new CreadorEdificioAldeano(mapa, this);
 		
@@ -66,7 +68,9 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 
 		this.reparadorEdificio.esPosibileVolverAReparar();
 
-		if(this.edificioEnReparacion != null && this.edificioEnReparacion.estaReparado()) this.edificioEnReparacion = null;
+		if(this.edificioEnReparacion != null && this.edificioEnReparacion.estaReparado()) {
+			this.edificioEnReparacion = null;
+		}
 
 		if(this.edificioEnReparacion != null) {
 
