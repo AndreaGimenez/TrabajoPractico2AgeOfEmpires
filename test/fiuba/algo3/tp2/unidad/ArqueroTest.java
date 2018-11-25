@@ -20,6 +20,8 @@ import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
 import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 
 public class ArqueroTest {
 	
@@ -270,7 +272,7 @@ public class ArqueroTest {
 	
 	@Test
 	public void testCuandoUnArqueroAtacaUnAldeanoFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -283,7 +285,9 @@ public class ArqueroTest {
 	
 	@Test
 	public void testCuandoUnArqueroAtaca5VecesAUnAldeanoDeberiaLanzarUnidadMuertaException() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, 
+			AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException, 
+			EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -291,9 +295,13 @@ public class ArqueroTest {
 		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
 		
 		arquero.atacar(aldeano);
+		arquero.siguienteAccion();
 		arquero.atacar(aldeano);
+		arquero.siguienteAccion();
 		arquero.atacar(aldeano);
+		arquero.siguienteAccion();
 		arquero.atacar(aldeano);
+		arquero.siguienteAccion();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
 		arquero.atacar(aldeano);
@@ -301,7 +309,8 @@ public class ArqueroTest {
 	
 	@Test
 	public void testCuandoUnArqueroAtaca26VecesAUnCuartelElUltimoAtaqueDeberiaLanzarEdificioDestruidoException() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, 
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -310,6 +319,7 @@ public class ArqueroTest {
 		
 		for(int i = 1; i < 26; i++) {
 			arquero.atacar(cuartel);
+			arquero.siguienteAccion();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);

@@ -20,6 +20,8 @@ import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
 import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 
 public class EspadachinTest {
 	
@@ -270,7 +272,7 @@ public class EspadachinTest {
 	
 	@Test
 	public void testCuandoUnEspadachinAtaqueUnAldeanoFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -283,7 +285,8 @@ public class EspadachinTest {
 	
 	@Test
 	public void testCuandoUnEspadachinAtaca3VecesAUnAldeanoDeberiaLanzarUnidadMuertaException() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, 
+			UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -291,7 +294,9 @@ public class EspadachinTest {
 		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
 		
 		espadachin.atacar(aldeano);
+		espadachin.siguienteAccion();
 		espadachin.atacar(aldeano);
+		espadachin.siguienteAccion();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
 		espadachin.atacar(aldeano);
@@ -299,7 +304,8 @@ public class EspadachinTest {
 	
 	@Test
 	public void testCuandoUnEspadachinAtaca18VecesAUnCuartelElUltimoAtaqueDeberiaLanzarEdificioDestruidoException() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, 
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -308,6 +314,7 @@ public class EspadachinTest {
 		
 		for(int i = 0; i < 17; i++) {
 			espadachin.atacar(cuartel);
+			espadachin.siguienteAccion();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);

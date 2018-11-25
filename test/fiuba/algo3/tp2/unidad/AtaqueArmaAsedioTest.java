@@ -27,7 +27,7 @@ public class AtaqueArmaAsedioTest {
 	
 	@Test
 	public void testCuandoUnAtaqueDeArmaAsedioAtacaUnAldeanoDeberiaLanzarUnidadNoAtacableException() 
-			throws AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Collection<Posicion> posicionesOcupadasCuartel = new ArrayList<Posicion>();
 		posicionesOcupadasCuartel.add(new Posicion(6,1));
@@ -47,7 +47,7 @@ public class AtaqueArmaAsedioTest {
 	
 	@Test
 	public void testCuandoUnAtaqueDeArmaAsedioAtacaUnCuartelFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() 
-			throws AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws AtaqueFueraDeRangoException, EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException {
 		
 		Atacable cuartel = mock(Cuartel.class);
 		
@@ -67,7 +67,7 @@ public class AtaqueArmaAsedioTest {
 	
 	@Test
 	public void testCuandoUnAtaqueDeArmaAsedioAtaca5VecesUnCuartelEnElUltimoGolpeDeberiaLanzarEdificioDestruidoException() 
-			throws AtaqueFueraDeRangoException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioDestruidoException {
+			throws AtaqueFueraDeRangoException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		Atacable cuartel = new Cuartel(new Posicion(2,1), mapa);

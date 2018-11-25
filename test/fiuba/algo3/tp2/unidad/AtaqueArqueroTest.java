@@ -26,7 +26,7 @@ public class AtaqueArqueroTest {
 	
 	
 	@Test
-	public void testCuandoUnAtaqueDeArqueroAtacaUnAldeanoFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() throws AtaqueFueraDeRangoException, UnidadMuertaException {
+	public void testCuandoUnAtaqueDeArqueroAtacaUnAldeanoFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoException() throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Atacable aldeano = mock(Aldeano.class);
 		
@@ -46,7 +46,7 @@ public class AtaqueArqueroTest {
 	
 	@Test
 	public void testCuandoUnAtaqueDeArqueroAtaca5VecesAUnAldeanoEnElUltimoGolpeDeberiaLanzarUnidadMuertaException() 
-			throws AtaqueFueraDeRangoException, UnidadMuertaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+			throws AtaqueFueraDeRangoException, UnidadMuertaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
@@ -64,7 +64,7 @@ public class AtaqueArqueroTest {
 	
 	@Test
 	public void testCuandoUnAtaqueDeArqueroAtaca26VecesAUnCuartelEnElUltimoGolpeDeberiaLanzarEdificioDestruidoException() 
-			throws AtaqueFueraDeRangoException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioDestruidoException {
+			throws AtaqueFueraDeRangoException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		Atacable cuartel = new Cuartel(new Posicion(1,2), mapa);

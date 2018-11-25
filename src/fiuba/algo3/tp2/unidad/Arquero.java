@@ -26,10 +26,12 @@ public class Arquero extends Unidad implements Atacador {
 	@Override
 	public void siguienteAccion() {
 		movimiento = new MovimientoBasico();
+		ataque = new AtaqueArquero();
 	}
 
 	@Override
-	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException {
+	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		ataque.atacar(this, atacable);
+		ataque = new AtaqueNulo();
 	}
 }

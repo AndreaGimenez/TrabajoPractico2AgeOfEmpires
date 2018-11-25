@@ -6,5 +6,5 @@ import fiuba.algo3.tp2.mapa.Posicionable;
 
 public interface Atacador extends Posicionable {
 	
-	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException;
+	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException;
 }
