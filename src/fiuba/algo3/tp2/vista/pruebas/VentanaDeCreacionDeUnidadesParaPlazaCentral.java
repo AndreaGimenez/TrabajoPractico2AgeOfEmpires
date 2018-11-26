@@ -1,16 +1,16 @@
-package fiuba.algo3.tp2.vistas;
+package fiuba.algo3.tp2.vista.pruebas;
 
-import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.edificio.PlazaCentral;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.vista.ventanas.VentanaCuartel;
+import fiuba.algo3.tp2.vista.ventanas.VentanaPlazaCentral;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class PruebaDeVentanaDeCreacionDeUnidadesParaCuartel extends Application {
+public class VentanaDeCreacionDeUnidadesParaPlazaCentral extends Application {
 
     public static void main(String args[]){
 
@@ -21,13 +21,13 @@ public class PruebaDeVentanaDeCreacionDeUnidadesParaCuartel extends Application 
     @Override
     public void start(Stage stage) throws Exception {
 
-        Cuartel cuartel = new Cuartel(new Posicion(5,5), new Mapa(250,250));
+        PlazaCentral plazaCentral = new PlazaCentral(new Posicion(5,5), new Mapa(250,250));
 
-        VentanaCuartel ventana = new VentanaCuartel(cuartel);
+        VentanaPlazaCentral ventana = new VentanaPlazaCentral(plazaCentral);
 
         stage.setTitle("Ventana de Prueba");
 
-        Button boton = new Button("Abrir ventana de cuartel");
+        Button boton = new Button("Abrir ventana de plaza central");
 
         boton.setOnAction(e-> ventana.mostrarPorPantalla());
 
@@ -42,4 +42,5 @@ public class PruebaDeVentanaDeCreacionDeUnidadesParaCuartel extends Application 
         stage.show();
 
     }
+
 }

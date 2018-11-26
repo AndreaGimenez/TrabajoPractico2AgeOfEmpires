@@ -1,6 +1,8 @@
 package fiuba.algo3.tp2.vista.ventanas;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.vista.botones.BotonCreadorDeAldeanosEventHandler;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeArqueroEventHandler;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeEspadachinEventHandler;
 import javafx.geometry.Pos;
@@ -11,25 +13,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class VentanaCuartel {
+public class VentanaPlazaCentral {
 
-    private static BotonCreadorDeEspadachinEventHandler botonCreadorDeEspadachinEventHandler;
+    private static BotonCreadorDeAldeanosEventHandler botonCreadorDeAldeanosEventHandler;
 
-    private static BotonCreadorDeArqueroEventHandler botonCreadorDeArqueroEventHandler;
+    private static Button botonDeAldeano;
 
-    private static Button botonDeArquero;
+    public VentanaPlazaCentral(PlazaCentral plazaCentral) {
 
-    private static Button botonDeEspadachin;
+        this.botonDeAldeano = new Button("Crear Aldeano");
 
-    public VentanaCuartel(Cuartel cuartel) {
-
-        this.botonDeArquero = new Button("Crear Arquero");
-
-        this.botonCreadorDeArqueroEventHandler = new BotonCreadorDeArqueroEventHandler(this.botonDeArquero, cuartel);
-
-        this.botonDeEspadachin = new Button("Crear Espadachin");
-
-        this.botonCreadorDeEspadachinEventHandler = new BotonCreadorDeEspadachinEventHandler(this.botonDeEspadachin, cuartel);
+        this.botonCreadorDeAldeanosEventHandler = new BotonCreadorDeAldeanosEventHandler(this.botonDeAldeano, plazaCentral);
 
     }
 
@@ -45,9 +39,7 @@ public class VentanaCuartel {
 
         label.setText("Seleccione la unidad a crear");
 
-        botonDeArquero.setOnAction(botonCreadorDeArqueroEventHandler);
-
-        botonDeEspadachin.setOnAction(botonCreadorDeEspadachinEventHandler);
+        botonDeAldeano.setOnAction(botonCreadorDeAldeanosEventHandler);
 
         VBox contenidoDeLaVentana = new VBox(10);
 
@@ -57,9 +49,7 @@ public class VentanaCuartel {
 
         contenedorDeTexto.getChildren().add(label);
 
-        contenedorDeBotones.getChildren().add(botonDeEspadachin);
-
-        contenedorDeBotones.getChildren().add(botonDeArquero);
+        contenedorDeBotones.getChildren().add(botonDeAldeano);
 
         contenedorDeBotones.setAlignment(Pos.CENTER);
 
