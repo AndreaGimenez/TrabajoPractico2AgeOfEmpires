@@ -6,6 +6,8 @@ import fiuba.algo3.tp2.edificio.PosicionarEdificio;
 import fiuba.algo3.tp2.mapa.*;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vista.JavaFXThreadingRule;
+import fiuba.algo3.tp2.vista.botones.BotonCreadorDeCuartelEventHandler;
+import fiuba.algo3.tp2.vista.botones.BotonCreadorDePlazaCentralEventHandler;
 import javafx.scene.control.Button;
 import org.junit.Rule;
 import org.junit.Test;

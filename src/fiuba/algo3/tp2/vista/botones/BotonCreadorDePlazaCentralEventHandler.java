@@ -1,27 +1,25 @@
-package fiuba.algo3.tp2.vistas;
+package fiuba.algo3.tp2.vista.botones;
 
 import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.EdificioConstants;
 import fiuba.algo3.tp2.edificio.PosicionarEdificio;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.unidad.Aldeano;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
-public class BotonCreadorDeCuartelEventHandler implements EventHandler<ActionEvent> {
-
-    private PosicionarEdificio posicionador;
+public class BotonCreadorDePlazaCentralEventHandler implements EventHandler<ActionEvent> {
 
     private Button boton;
 
+    private PosicionarEdificio posicionador;
 
-    public BotonCreadorDeCuartelEventHandler(Button botonCreadorDeCuartel, PosicionarEdificio aldeano) {
+    public BotonCreadorDePlazaCentralEventHandler(Button botonCreadorDePlazaCentral, PosicionarEdificio posicionador) {
 
-        this.boton = botonCreadorDeCuartel;
+        this.boton = botonCreadorDePlazaCentral;
 
-        this.posicionador = aldeano;
+        this.posicionador = posicionador;
 
     }
 
@@ -29,7 +27,7 @@ public class BotonCreadorDeCuartelEventHandler implements EventHandler<ActionEve
     public void handle(ActionEvent event) {
 
         try {
-            this.posicionador.posicionarALaDerechaPorEncima(EdificioConstants.TipoEdificio.CUARTEL);
+            this.posicionador.posicionarALaDerechaPorEncima(EdificioConstants.TipoEdificio.PLAZA_CENTRAL);
         } catch (EdificioNoSoportadoException e) {
             e.printStackTrace();
         } catch (CeldaInexistenteException e) {
