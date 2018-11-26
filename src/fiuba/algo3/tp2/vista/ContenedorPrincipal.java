@@ -14,9 +14,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class ContenedorPrincipal extends BorderPane {
@@ -28,19 +25,35 @@ public class ContenedorPrincipal extends BorderPane {
 
     public ContenedorPrincipal(Stage stage, Juego juego) {
         this.setMenu(stage);
-        this.setCentro(juego);
-        this.setConsola();
-        this.setBotonera(juego);
+        this.setMapa(juego);
+        this.setControles();
+        this.setEstadoJugador(juego);
     }
 
-    private void setBotonera(Juego juego) {
+    private void setEstadoJugador(Juego juego) {
 
-    	/*
-    	 * Acá podría ir las acciones y datos del jugador, en left podriamos poner las de un jugador
-    	 * y en right las del otro. Por ejemplo Oro, unidades, edificios, y las acciones que 
-    	 * puede realizar
-    	 */
+    	Label labelNombreUnidad = new Label();
+        labelNombreUnidad.setText("Aldeano");
+        
+        Label labelAcciones = new Label();
+        labelAcciones.setText("Acciones");
+        
+        Button botonConstruir = new Button();
+        botonConstruir.setText("Construir");
+        /*
+         * Agregar handler
+         * BotonConstruirHandler botonConstruirHandler = new BotonConstruirHandler();
+         * botonConstruir.setOnAction(botonConstruirHandler);
+         */
+        
 
+        VBox contenedorVertical = new VBox(labelNombreUnidad, labelAcciones, botonConstruir);
+        contenedorVertical.setSpacing(10);
+        contenedorVertical.setPadding(new Insets(15));
+        contenedorVertical.setStyle("-fx-background-color: brown;");
+        contenedorVertical.setPrefWidth(200);
+        
+        this.setLeft(contenedorVertical);
     }
 
     private void setMenu(Stage stage) {
@@ -48,7 +61,7 @@ public class ContenedorPrincipal extends BorderPane {
         this.setTop(menuBar);
     }
 
-    private void setCentro(Juego juego) {
+    private void setMapa(Juego juego) {
 
         canvasCentral = new Canvas(460, 220);
         vistaMapa = new VistaMapa(juego, canvasCentral);
@@ -58,27 +71,25 @@ public class ContenedorPrincipal extends BorderPane {
         contenedorCentral.setAlignment(Pos.CENTER);
         contenedorCentral.setSpacing(20);
         contenedorCentral.setPadding(new Insets(25));
-        Image imagen = new Image("file:src/vista/imagenes/fondo-verde.jpg");
+        Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/fondo-verde.jpg");
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         contenedorCentral.setBackground(new Background(imagenDeFondo));
 
         this.setCenter(contenedorCentral);
     }
 
-    private void setConsola() {
+    private void setControles() {
+    	
+        Label labelNombreJugador = new Label();
+        labelNombreJugador.setText("Jugador 1");
+        
+        VBox contenedorHorizontal = new VBox(labelNombreJugador);
+        contenedorHorizontal.setSpacing(10);
+        contenedorHorizontal.setPadding(new Insets(15));
+        contenedorHorizontal.setStyle("-fx-background-color: black;");
+        contenedorHorizontal.setPrefHeight(200);
 
-        // TODO cambiar por el modelo de Consola...
-        Label etiqueta = new Label();
-        etiqueta.setText("consola...");
-        etiqueta.setFont(Font.font("courier new", FontWeight.SEMI_BOLD, 14));
-        etiqueta.setTextFill(Color.WHITE);
-
-        VBox contenedorConsola = new VBox(etiqueta);
-        contenedorConsola.setSpacing(10);
-        contenedorConsola.setPadding(new Insets(15));
-        contenedorConsola.setStyle("-fx-background-color: black;");
-
-        this.setBottom(contenedorConsola);
+        this.setBottom(contenedorHorizontal);
     }
 
     public BarraDeMenu getBarraDeMenu() {
