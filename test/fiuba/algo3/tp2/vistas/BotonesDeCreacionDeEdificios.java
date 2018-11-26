@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.vistas;
+/*package fiuba.algo3.tp2.vistas;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 public class BotonesDeCreacionDeEdificios {
 
-    /*@Rule
+    @Rule
     public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
     @Test
@@ -75,6 +75,6 @@ public class BotonesDeCreacionDeEdificios {
 
         assertTrue(mapa.obtenerCelda(jose.obtenerPosicion().desplazarHorizontalmente(2).desplazarVerticalmente(1)).obtenerPosicionable() instanceof PlazaCentral);
 
-    }*/
+    }
 
-}
+}*/

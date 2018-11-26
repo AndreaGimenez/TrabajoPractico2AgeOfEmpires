@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.vistas;
+/*package fiuba.algo3.tp2.vistas;
 
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 
 public class BotonesDeCreacionDeUnidadesTest {
 
-    /*@Rule
+    @Rule
     public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
 
@@ -107,8 +107,8 @@ public class BotonesDeCreacionDeUnidadesTest {
 
         assertTrue(mapa.obtenerCelda(cuartel.obtenerPosicion().desplazarHorizontalmente(3)).obtenerPosicionable() instanceof Espadachin);
 
-    }*/
+    }
 
 
 
-}
+}*/
