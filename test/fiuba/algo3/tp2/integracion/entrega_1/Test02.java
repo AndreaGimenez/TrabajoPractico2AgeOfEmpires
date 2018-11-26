@@ -6,13 +6,11 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.LinkedList;
 
 import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
-import fiuba.algo3.tp2.unidad.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

@@ -40,6 +40,7 @@ public class ContenedorPrincipal extends BorderPane {
     	 * y en right las del otro. Por ejemplo Oro, unidades, edificios, y las acciones que 
     	 * puede realizar
     	 */
+
     }
 
     private void setMenu(Stage stage) {
