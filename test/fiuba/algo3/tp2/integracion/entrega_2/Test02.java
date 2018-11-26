@@ -14,6 +14,7 @@ import fiuba.algo3.tp2.edificio.UnidadNoSoportadaException;
 import fiuba.algo3.tp2.juego.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
@@ -21,6 +22,8 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
@@ -44,33 +47,30 @@ public class Test02 {
 	
 	@Test
 	public void testAlIniciarUnNuevoJuegoLaPoblacionDelJugadorDeberiaSer3() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		assertEquals(3, juego.obtenerJugador(0).obtenerPoblacionActual());
-		assertEquals(3, juego.obtenerJugador(1).obtenerPoblacionActual());
+		assertEquals(3, juego.obtenerJugadorActual().obtenerPoblacionActual());
+		juego.avanzarJugador();
+		assertEquals(3, juego.obtenerJugadorActual().obtenerPoblacionActual());
 	}
 	
 	@Test
 	public void testUnJugadorCreaUnAldeanoLaPoblacionDeberiaHaberAumentadoEn1() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		
 		int poblacionAntes = jugador.obtenerPoblacionActual();
 		jugador.agregarUnidad(new Aldeano(new Posicion(7,7), mapa), mapa);
@@ -81,20 +81,21 @@ public class Test02 {
 	
 	@Test
 	public void testUnJugadorCreaUnArmaDeAsedioLaPoblacionDeberiaHaberAumentadoEn1() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		
 		int poblacionAntes = jugador.obtenerPoblacionActual();
-		jugador.agregarUnidad(new ArmaAsedio(new Posicion(7,7), mapa), mapa);
+		
+		boolean checkearRecursos = false;
+		
+		jugador.agregarUnidad(new ArmaAsedio(new Posicion(7,7), mapa), mapa, checkearRecursos);
 		int poblacionDespues = jugador.obtenerPoblacionActual(); 
 		
 		assertEquals(1, poblacionDespues-poblacionAntes);
@@ -108,20 +109,19 @@ public class Test02 {
 	
 	@Test
 	public void testAUnJugadorConPoblacion4AlQueSeLeMuereUnArmaDeAsedioDeberiaTener3DePoblacion() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(7,7), mapa);
 		
-		jugador.agregarUnidad(armaAsedio, mapa);
+		boolean checkearRecursos = false;
+		jugador.agregarUnidad(armaAsedio, mapa, checkearRecursos);
 		int poblacionAntes = jugador.obtenerPoblacionActual();
 		
 		jugador.removerUnidad(armaAsedio, mapa);
@@ -132,20 +132,20 @@ public class Test02 {
 	
 	@Test
 	public void testAUnJugadorAlQueSeLeDestruyeUnArmaDeAsedioQueEstabaEnX7Y7DeberiaTenerLibreEsaPosicion() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(7,7), mapa);
 		
-		jugador.agregarUnidad(armaAsedio, mapa);
+		boolean checkearRecursos= false;
+		
+		jugador.agregarUnidad(armaAsedio, mapa, checkearRecursos);
 		
 		jugador.removerUnidad(armaAsedio, mapa);
 		
@@ -157,17 +157,15 @@ public class Test02 {
 	@Test
 	public void testAUnJugadorConPoblacion4AlQueSeLeMuereUnAldeanoDeberiaTener3DePoblacion()
 			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException,
-			CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 
 		Mapa mapa = new Mapa(250, 250);
 
 		Juego juego = new Juego(mapa);
 
-		juego.agregarJugador();
-		juego.agregarJugador();
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Aldeano aldeano = new Aldeano(new Posicion(7, 7), mapa);
 
 		jugador.agregarUnidad(aldeano, mapa);
@@ -181,17 +179,15 @@ public class Test02 {
 	
 	@Test
 	public void testAUnJugadorAlQueSeLeMuereUnAldeanoQueEstabaEnX7Y7DeberiaTenerLibreEsaPosicion() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Aldeano aldeano = new Aldeano(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(aldeano, mapa);
@@ -205,17 +201,15 @@ public class Test02 {
 	
 	@Test
 	public void testAUnJugadorConPoblacion4AlQueSeLeMuereEspadachinDeberiaTener3DePoblacion() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Espadachin espadachin = new Espadachin(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(espadachin, mapa);
@@ -229,17 +223,15 @@ public class Test02 {
 	
 	@Test
 	public void testAUnJugadorAlQueSeLeDestruyeUnEspadachinQueEstabaEnX7Y7DeberiaTenerLibreEsaPosicion() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Espadachin espadachin = new Espadachin(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(espadachin, mapa);
@@ -252,17 +244,15 @@ public class Test02 {
 	/*ARQUERO*/
 	@Test
 	public void testAUnJugadorConPoblacion4AlQueSeLeMuereUnArqueroDeberiaTener3DePoblacion() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Arquero arquero = new Arquero(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(arquero, mapa);
@@ -276,17 +266,15 @@ public class Test02 {
 	
 	@Test
 	public void testAUnJugadorAlQueSeLeDestruyeUnArqueroQueEstabaEnX7Y7DeberiaTenerLibreEsaPosicion() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Arquero arquero = new Arquero(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(arquero, mapa);
@@ -300,20 +288,18 @@ public class Test02 {
 	
 	@Test
 	public void testUnJugadorConLaPoblacionMaximaAlIntentarCrearUnaNuevaUnidadDeberiaLanzarPoblacionMaximaAlcanzadaException() 
-			throws PoblacionMaximaAlcanzadaException, CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, CantidadDeJugadoresInvalidaException {
+			throws PoblacionMaximaAlcanzadaException, CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, CantidadDeJugadoresInvalidaException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(1000,1000);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
-		
+		Jugador jugador = juego.obtenerJugadorActual();
+		boolean checkearRecursos = false;
 		for (int i = 3 ; i <50 ; i++) {
-			jugador.agregarUnidad(new Aldeano(new Posicion(i+10,i+10),mapa),mapa);
+			jugador.agregarUnidad(new Aldeano(new Posicion(i+10,i+10),mapa),mapa, checkearRecursos);
 		}
 		
 		exceptionRule.expect(PoblacionMaximaAlcanzadaException.class);

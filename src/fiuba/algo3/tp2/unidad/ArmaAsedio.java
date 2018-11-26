@@ -1,6 +1,5 @@
 package fiuba.algo3.tp2.unidad;
 
-import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
 import fiuba.algo3.tp2.formas.FormaArmaAsedioRectangulo;
 import fiuba.algo3.tp2.mapa.Atacable;
@@ -27,23 +26,30 @@ public class ArmaAsedio extends Unidad implements Atacador {
 
 	public void montar() {
 		this.movimiento = new MovimientoNulo();
+		this.ataque = new AtaqueArmaAsedio();
+		this.montada = true;
 	}
 
 	public void desmontar() {
 		this.movimiento = new MovimientoBasico();
+		this.ataque = new AtaqueNulo();
 	}
 
 	@Override
 	public void siguienteAccion() {
-		
-		if(!montada) {
-			movimiento = new MovimientoBasico();
+		if(montada) {
+			this.movimiento = new MovimientoNulo();
+			this.ataque = new AtaqueArmaAsedio();
+		}else {
+			this.movimiento = new MovimientoBasico();
+			this.ataque = new AtaqueNulo();	
 		}
 	}
 
 	@Override
-	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException {
+	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		ataque.atacar(this, atacable);
+		ataque = new AtaqueNulo();
 	}
 
 	@Override

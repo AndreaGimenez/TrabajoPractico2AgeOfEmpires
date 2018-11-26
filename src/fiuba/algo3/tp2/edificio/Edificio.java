@@ -24,6 +24,7 @@ public abstract class Edificio implements Posicionable, Atacable {
 	private Forma forma;
 	protected Mapa mapa;
 	private Aldeano aldeanoAsignadoParaReparar;
+	private Aldeano aldeanoConstructor;
 	private boolean estaEnReparacion;
 	private int vida;
 	private int topeDeVida;
@@ -126,8 +127,15 @@ public abstract class Edificio implements Posicionable, Atacable {
 	    return (this.aldeanoAsignadoParaReparar == aldeano);
     }
 
+    public Aldeano obtenerConstructor(){
+
+		return this.aldeanoAsignadoParaReparar;
+
+	}
 
     public abstract Unidad crear(TipoUnidad unidad, Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException, EdificioEnConstruccionException;
 
 	public abstract int costo();
+
+	public abstract boolean estaReparado();
 }

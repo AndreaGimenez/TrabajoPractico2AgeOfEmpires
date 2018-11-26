@@ -36,6 +36,11 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
     }
 
     @Override
+    public boolean estaReparado() {
+        return super.obtenerVida() == this.VIDA_MAXIMA;
+    }
+
+    @Override
     public void iniciar(){
 
     }

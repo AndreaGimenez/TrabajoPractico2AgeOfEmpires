@@ -1,9 +1,9 @@
 package fiuba.algo3.tp2.unidad;
 
-import Construccion.ConstructorEdificios;
-import Construccion.CreadorEdificio;
-import Construccion.CreadorEdificioAldeano;
-import Construccion.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.construccion.ConstructorEdificios;
+import fiuba.algo3.tp2.construccion.CreadorEdificio;
+import fiuba.algo3.tp2.construccion.CreadorEdificioAldeano;
+import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;
@@ -37,10 +37,8 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA, COSTO_GENERACION);
 		
 		this.creadorEdificio = new CreadorEdificioAldeano(mapa, this);
-		this.edificioEnReparacion = null;
 		
 		this.reparadorEdificio = new ReparadorEdificioAldeano();
-		this.edificioEnConstruccion = null;
 		
 		this.oroPorTurno = new OroPorTurno();
 	}
@@ -69,7 +67,12 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 
 		this.reparadorEdificio.esPosibileVolverAReparar();
 
+		if(this.edificioEnReparacion != null && this.edificioEnReparacion.estaReparado()) {
+			this.edificioEnReparacion = null;
+		}
+
 		if(this.edificioEnReparacion != null) {
+
 			this.reparadorEdificio.repararEdificio(this.edificioEnReparacion, this);
 		}
 		
@@ -79,7 +82,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 
 	private void actualizarRecolectorOro() {
 		
-		if(this.edificioEnReparacion == null && this.edificioEnConstruccion == null) {
+		if(this.edificioEnReparacion == null && this.edificioEnConstruccion == null ){
 			oroPorTurno.activarRecolector();
 		}
 		else {

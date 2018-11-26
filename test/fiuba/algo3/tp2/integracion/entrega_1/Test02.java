@@ -3,16 +3,21 @@ package fiuba.algo3.tp2.integracion.entrega_1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
 
 import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
+import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
+import fiuba.algo3.tp2.unidad.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import Construccion.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioConstants;
 import fiuba.algo3.tp2.edificio.EdificioEnConstruccionException;
@@ -20,11 +25,12 @@ import fiuba.algo3.tp2.edificio.EdifioNoAptoParaContruirException;
 import fiuba.algo3.tp2.edificio.GestionarConstruccion;
 import fiuba.algo3.tp2.edificio.PosicionarEdificio;
 import fiuba.algo3.tp2.edificio.UnidadNoSoportadaException;
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoIzquierda;
@@ -35,11 +41,13 @@ import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
 import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
 import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
 import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.unidad.DireccionAbajo;
 import fiuba.algo3.tp2.unidad.Espadachin;
 import fiuba.algo3.tp2.unidad.Unidad;
@@ -503,12 +511,13 @@ public class Test02 {
 	}
 
 	@Test
-	public void testVerificarConstruccionDePlazaCentral() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException {
+	public void testVerificarConstruccionDePlazaCentral() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 
 		Mapa mapa = new Mapa(250, 250);
 		Jugador ignacio = new Jugador();
 		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
-		ignacio.agregarUnidad(aldeano, mapa);
+		boolean checkearRecursos = false;
+		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
 		ignacio.setOro(100);
 		PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
 
@@ -522,8 +531,7 @@ public class Test02 {
 
 		GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(4,5)));
 		ignacio.agregarEdificio(gestorPlazaCentral);
-
-		Turno turno = new Turno(ignacio.obtenerPosicionables());
+		Turno turno = new Turno(ignacio);
 
 		// Turno 0/3
 
@@ -586,13 +594,15 @@ public class Test02 {
 
 	@Test
 	public void testVerificarConstruccionDeCuartel()
-			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 
 		Mapa mapa = new Mapa(250, 250);
 		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
 		PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
 		Jugador ignacio = new Jugador();
-		ignacio.agregarUnidad(aldeano, mapa);
+		
+		boolean checkearRecursos = false;
+		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
 		ignacio.setOro(250);
 
 		posicionador.posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
@@ -605,7 +615,7 @@ public class Test02 {
 
 		GestionarConstruccion gestorCuartel = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(6,6)));
 		ignacio.agregarEdificio(gestorCuartel);
-		Turno turno = new Turno(ignacio.obtenerPosicionables());
+		Turno turno = new Turno(ignacio);
 
 
 		// Turno 0/3
@@ -698,6 +708,52 @@ public class Test02 {
 
 
 		assertEquals(0, ignacio.obtenerOro());
+	}
+
+
+	@Test
+	public void testDeReparacionDeCuartel() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, EdificioNoSoportadoException, EdificioFueraDeRangoException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, OroInsuficienteException {
+
+		Mapa mapa = new Mapa(250, 250);
+		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
+		PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
+		Jugador ignacio = new Jugador();
+		
+		boolean checkearRecursos = false;
+		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
+		ignacio.setOro(250);
+		Ataque ataque = mock(Ataque.class);
+		when(ataque.obtenerDanioEdificio()).thenReturn(249);
+
+		posicionador.posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
+
+		Edificio cuartel = (Edificio) mapa.obtenerPosicionable(new Posicion(6,6));
+
+		ignacio.agregarEdificio(cuartel);
+		Turno turno = new Turno(ignacio);
+
+		cuartel.recibirDanio(ataque);
+
+		aldeano.repararEdificio(cuartel);
+
+		assertEquals(51, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(101, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(151, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(201, cuartel.obtenerVida());
+
+		turno.avanzar();
+
+		assertEquals(250, cuartel.obtenerVida());
+
 	}
 
 
