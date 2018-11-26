@@ -59,8 +59,8 @@ public class Jugador {
 				throw new PoblacionMaximaAlcanzadaException();
 			}
 			
-			if(this.oro >= unidad.costo()) {
-				this.oro = this.oro - unidad.costo();
+			if(this.oro >= unidad.obtenerCosto()) {
+				this.oro = this.oro - unidad.obtenerCosto();
 			}
 			else {
 				throw new OroInsuficienteException();
