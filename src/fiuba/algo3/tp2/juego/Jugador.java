@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 
@@ -14,10 +17,12 @@ public class Jugador {
 	private static final int POBLACION_MAXIMA = 50;
 	
 	private int oro;
+	private int poblacion;
 	private Collection<Posicionable> edificios ;
 	private Collection<Posicionable> unidades ;
 	private Collection<Aldeano> recolectoresOro;
-	private int poblacion;
+	
+	private Turno turno;
 
 	public Jugador() {
 		
@@ -26,6 +31,8 @@ public class Jugador {
 		this.recolectoresOro = new LinkedList<>();
 		this.oro = 0;
 		this.poblacion = 0;
+		
+		this.turno = new Turno(this);
 	}
 
 	public LinkedList<Posicionable> obtenerPosicionables() {
@@ -105,6 +112,10 @@ public class Jugador {
 		recolectoresOro.remove(unidadARemover);
 		mapa.obtenerCelda(unidadARemover.obtenerPosicion()).liberar();
 		poblacion -=1;
+	}
+
+	public void avanzarTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+		turno.avanzar();
 	}
 
 }

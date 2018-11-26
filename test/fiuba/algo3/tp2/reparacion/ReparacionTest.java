@@ -114,9 +114,7 @@ public class ReparacionTest {
 
 		ignacio.agregarEdificio(cuartel);
 
-		Turno turno = new Turno(ignacio.obtenerPosicionables());
-
-		turno.iniciar();
+		Turno turno = new Turno(ignacio);
 
 		cuartel.recibirDanio(ataque);
 
@@ -183,9 +181,7 @@ public class ReparacionTest {
 
 		ignacio.agregarEdificio(cuartel);
 
-		Turno turno = new Turno(ignacio.obtenerPosicionables());
-
-		turno.iniciar();
+		Turno turno = new Turno(ignacio);
 
 		cuartel.recibirDanio(ataque);
 

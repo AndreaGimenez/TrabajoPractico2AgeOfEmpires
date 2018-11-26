@@ -22,6 +22,8 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
@@ -46,18 +48,17 @@ public class Test02 {
 	
 	@Test
 	public void testAlIniciarUnNuevoJuegoLaPoblacionDelJugadorDeberiaSer3() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		assertEquals(3, juego.obtenerJugador(0).obtenerPoblacionActual());
-		assertEquals(3, juego.obtenerJugador(1).obtenerPoblacionActual());
+		assertEquals(3, juego.obtenerJugadorActual().obtenerPoblacionActual());
+		juego.avanzarJugador();
+		assertEquals(3, juego.obtenerJugadorActual().obtenerPoblacionActual());
 	}
 	
 	@Test
@@ -67,12 +68,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		
 		int poblacionAntes = jugador.obtenerPoblacionActual();
 		jugador.agregarUnidad(new Aldeano(new Posicion(7,7), mapa), mapa);
@@ -88,12 +87,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		
 		int poblacionAntes = jugador.obtenerPoblacionActual();
 		
@@ -309,12 +306,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(7,7), mapa);
 		
 		boolean checkearRecursos = false;
@@ -334,12 +329,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(7,7), mapa);
 		
 		boolean checkearRecursos= false;
@@ -362,11 +355,9 @@ public class Test02 {
 
 		Juego juego = new Juego(mapa);
 
-		juego.agregarJugador();
-		juego.agregarJugador();
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Aldeano aldeano = new Aldeano(new Posicion(7, 7), mapa);
 
 		jugador.agregarUnidad(aldeano, mapa);
@@ -385,12 +376,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Aldeano aldeano = new Aldeano(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(aldeano, mapa);
@@ -409,12 +398,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Espadachin espadachin = new Espadachin(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(espadachin, mapa);
@@ -433,12 +420,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Espadachin espadachin = new Espadachin(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(espadachin, mapa);
@@ -456,12 +441,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Arquero arquero = new Arquero(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(arquero, mapa);
@@ -480,12 +463,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		Arquero arquero = new Arquero(new Posicion(7,7), mapa);
 		
 		jugador.agregarUnidad(arquero, mapa);
@@ -504,12 +485,10 @@ public class Test02 {
 		Mapa mapa = new Mapa(1000,1000);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		boolean checkearRecursos = false;
 		for (int i = 3 ; i <50 ; i++) {
 			jugador.agregarUnidad(new Aldeano(new Posicion(i+10,i+10),mapa),mapa, checkearRecursos);

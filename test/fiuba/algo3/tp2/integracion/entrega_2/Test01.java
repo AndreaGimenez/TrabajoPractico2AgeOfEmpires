@@ -35,36 +35,20 @@ public class Test01 {
 
 	@Rule
 	public ExpectedException exceptionRule = ExpectedException.none();
-	
-	@Test
-	public void test_crearJuegoConMasDeDosJugadores_DeberiaLanzarCantidadDeJugadoresInvalidaException() 
-			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException {
-		
-		Juego juego = new Juego(new Mapa(250, 250));
-		juego.agregarJugador();
-		juego.agregarJugador();
-		
-		exceptionRule.expect(CantidadDeJugadoresInvalidaException.class);
-		juego.agregarJugador();
-	}
 
 	@Test
 	public void test_alIniciarJuegoCadaJugadorDeberiaTener_100_Oro() 
-			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Juego juego = new Juego(new Mapa(250, 250));
 		
-		juego.agregarJugador();
-		juego.agregarJugador();
-		
 		juego.iniciar();
 		
-		Jugador jugador1 = juego.obtenerJugador(0);
-		Jugador jugador2 = juego.obtenerJugador(1);
-		
+		Jugador jugador1 = juego.obtenerJugadorActual();
 		assertEquals(100, jugador1.obtenerOro());
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
 		assertEquals(100, jugador2.obtenerOro());
-		
 	}
 	
 	@Test
@@ -74,9 +58,6 @@ public class Test01 {
 			Mapa mapa = new Mapa(250, 250);
 			
 			Juego juego = new Juego(mapa);
-			
-			juego.agregarJugador();
-			juego.agregarJugador();
 			
 			juego.iniciar();
 			
@@ -93,9 +74,6 @@ public class Test01 {
 		
 		Mapa mapa = new Mapa(250, 250);
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
 		
 		juego.iniciar();
 		
@@ -123,28 +101,13 @@ public class Test01 {
 	}
 	
 	@Test
-	public void test_AlIniciarJuegoConUnJugadorDeberDarError() 
-			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
-		
-		Juego juego = new Juego(new Mapa(250, 250));
-		
-		juego.agregarJugador();
-		
-		exceptionRule.expect(CantidadDeJugadoresInvalidaException.class);
-		juego.iniciar();
-	}
-	
-	@Test
 	public void test_iniciarJuegoConUnMapaNoCuadradadoDeberiaUbicarBienLosCastillos()
 		throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 			
 			Mapa mapa = new Mapa(300, 250);
 			
 			Juego juego = new Juego(mapa);
-			
-			juego.agregarJugador();
-			juego.agregarJugador();
-			
+
 			juego.iniciar();
 			
 			Celda celdaCastilloJugador1 = mapa.obtenerCelda(new Posicion(0, 0));
@@ -160,13 +123,10 @@ public class Test01 {
 		Mapa mapa = new Mapa(300, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
-		
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		
 		int oroAntes = jugador.obtenerOro();
 		
@@ -186,13 +146,10 @@ public class Test01 {
 		Mapa mapa = new Mapa(300, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
-		
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		
 		int oroAntes = jugador.obtenerOro();
 		
@@ -212,13 +169,10 @@ public class Test01 {
 		Mapa mapa = new Mapa(300, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
-		
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		
 		int oroAntes = jugador.obtenerOro();
 		
@@ -238,21 +192,16 @@ public class Test01 {
 		Mapa mapa = new Mapa(300, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
-		
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
-		
-		Turno turno = new Turno(jugador.obtenerPosicionables());
+		Jugador jugador = juego.obtenerJugadorActual();
 		
 		Castillo castillo = (Castillo) mapa.obtenerCelda(new Posicion(0,0)).obtenerPosicionable();
 
-		turno.avanzar();
+		jugador.avanzarTurno();
 
-		turno.avanzar();
+		jugador.avanzarTurno();
 		
 		int oroAntes = jugador.obtenerOro();
 
@@ -270,13 +219,10 @@ public class Test01 {
 		Mapa mapa = new Mapa(300, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
-		
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
+		Jugador jugador = juego.obtenerJugadorActual();
 		
 		Castillo castillo = (Castillo) mapa.obtenerCelda(new Posicion(0,0)).obtenerPosicionable();
 		

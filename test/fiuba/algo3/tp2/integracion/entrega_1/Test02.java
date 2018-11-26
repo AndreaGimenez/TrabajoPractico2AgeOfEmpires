@@ -531,7 +531,7 @@ public class Test02 {
 
 		GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(4,5)));
 		ignacio.agregarEdificio(gestorPlazaCentral);
-		Turno turno = new Turno(ignacio.obtenerPosicionables());
+		Turno turno = new Turno(ignacio);
 
 		// Turno 0/3
 
@@ -615,7 +615,7 @@ public class Test02 {
 
 		GestionarConstruccion gestorCuartel = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(6,6)));
 		ignacio.agregarEdificio(gestorCuartel);
-		Turno turno = new Turno(ignacio.obtenerPosicionables());
+		Turno turno = new Turno(ignacio);
 
 
 		// Turno 0/3
@@ -730,7 +730,7 @@ public class Test02 {
 		Edificio cuartel = (Edificio) mapa.obtenerPosicionable(new Posicion(6,6));
 
 		ignacio.agregarEdificio(cuartel);
-		Turno turno = new Turno(ignacio.obtenerPosicionables());
+		Turno turno = new Turno(ignacio);
 
 		cuartel.recibirDanio(ataque);
 

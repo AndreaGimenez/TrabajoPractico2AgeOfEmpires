@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.edificio;
 
+import java.util.Collection;
 import java.util.LinkedList;
 
 import org.junit.Rule;
@@ -7,6 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -47,10 +49,13 @@ public class GestionarConstruccionesTest {
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
         Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
-        LinkedList<Posicionable> posicionables = new LinkedList<>();
-
+        
+        Jugador jugador = new Jugador();
+        
+        Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
+        
         posicionables.add(gestorCuartel);
-        Turno turno = new Turno(posicionables);
+        Turno turno = new Turno(jugador);
         turno.avanzar();
 
         gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 5));
@@ -65,10 +70,12 @@ public class GestionarConstruccionesTest {
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
         Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
-        LinkedList<Posicionable> posicionables = new LinkedList<>();
-
+        Jugador jugador = new Jugador();
+        
+        Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
+        
         posicionables.add(gestorCuartel);
-        Turno turno = new Turno(posicionables);
+        Turno turno = new Turno(jugador);
         turno.avanzar();
         turno.avanzar();
 
@@ -84,10 +91,11 @@ public class GestionarConstruccionesTest {
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
         Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
-        LinkedList<Posicionable> posicionables = new LinkedList<>();
-
-        posicionables.add(gestorCuartel);
-        Turno turno = new Turno(posicionables);
+         
+        Jugador jugador = new Jugador();
+        Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
+        jugador.agregarEdificio(gestorCuartel);
+        Turno turno = new Turno(jugador);
         turno.avanzar();
         turno.avanzar();
         turno.avanzar();
@@ -95,8 +103,4 @@ public class GestionarConstruccionesTest {
         gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(6, 6));
 
     }
-
-
-
-
 }

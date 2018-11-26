@@ -51,8 +51,6 @@ public class Aplicacion extends Application {
     	
     	Mapa mapa = new Mapa(250, 250);
         Juego juego = new Juego(mapa);
-        juego.agregarJugador();
-        juego.agregarJugador();
         juego.iniciar();
         return juego;
 	}

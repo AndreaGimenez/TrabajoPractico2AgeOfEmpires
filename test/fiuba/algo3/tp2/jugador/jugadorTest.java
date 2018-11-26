@@ -31,18 +31,19 @@ public class jugadorTest {
 	//ORO
 	@Test
 	public void testAlIniciarUnNuevoJuegoElOroDeCadaJugadorDeberiaSer100() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 
-		assertEquals(100, juego.obtenerJugador(0).obtenerOro());
-		assertEquals(100, juego.obtenerJugador(1).obtenerOro());
+		assertEquals(100, juego.obtenerJugadorActual().obtenerOro());
+		
+		juego.avanzarJugador();
+		
+		assertEquals(100, juego.obtenerJugadorActual().obtenerOro());
 
 	}
 	
@@ -53,17 +54,14 @@ public class jugadorTest {
 		Mapa mapa = new Mapa(250, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
+
 		juego.iniciar();
 		
-		Jugador jugador = juego.obtenerJugador(0);
-        Turno turno = new Turno(jugador.obtenerPosicionables());
+		Jugador jugador = juego.obtenerJugadorActual();
         
         int oroAntes = jugador.obtenerOro();
       
-        turno.avanzar();
+        jugador.avanzarTurno();
         
         int oroDespues = jugador.obtenerOro();
 
