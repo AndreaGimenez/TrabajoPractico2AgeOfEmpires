@@ -29,6 +29,7 @@ public class ContenedorPrincipal extends BorderPane {
 
     AccionesDeAldeano accionesDeAldeano;
 
+
     public ContenedorPrincipal(Stage stage, Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
         this.setMenu(stage);
         this.setMapa(juego);
@@ -42,6 +43,7 @@ public class ContenedorPrincipal extends BorderPane {
 
         this.accionesDeAldeano.mostrarAcciones(this);*/
 
+        
 
 
     	Label labelNombreUnidad = new Label();

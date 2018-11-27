@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 public class AccionesDeAldeano {
 
     /*Para hacer la prueba voy a hacer que este objeto tenga un posicionador, pero deberia
-    * ser pasado por referencia en el constructor*/
+    * ser pasado por referencia en el constructor, falta reparar*/
 
 
     PosicionarEdificio posicionador;
