@@ -9,6 +9,7 @@ import org.junit.rules.ExpectedException;
 
 import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -85,7 +86,7 @@ public class GestionarConstruccionesTest {
 
     @Test
     public void testCrearUnEdificioYPedirleCrearUnaUnidadHabiendoPasadoTresTurnosDeberiaSerPosible()
-            throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException {
+            throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, OroInsuficienteException {
 
         Mapa mapa = new Mapa(250, 250);
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
@@ -94,7 +95,7 @@ public class GestionarConstruccionesTest {
          
         Jugador jugador = new Jugador();
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
-        jugador.agregarEdificio(gestorCuartel);
+        jugador.agregarEdificio(gestorCuartel, false);
         Turno turno = new Turno(jugador);
         turno.avanzar();
         turno.avanzar();
