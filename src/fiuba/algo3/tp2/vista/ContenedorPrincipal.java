@@ -26,11 +26,11 @@ public class ContenedorPrincipal extends BorderPane {
     public ContenedorPrincipal(Stage stage, Juego juego) {
         this.setMenu(stage);
         this.setMapa(juego);
-        this.setControles();
+        this.setControles(juego);
         this.setEstadoJugador(juego);
     }
 
-    private void setEstadoJugador(Juego juego) {
+    private void setControles(Juego juego) {
 
     	Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Aldeano");
@@ -78,7 +78,7 @@ public class ContenedorPrincipal extends BorderPane {
         this.setCenter(contenedorCentral);
     }
 
-    private void setControles() {
+    private void setEstadoJugador(Juego juego) {
     	
         Label labelNombreJugador = new Label();
         labelNombreJugador.setText("Jugador 1");
