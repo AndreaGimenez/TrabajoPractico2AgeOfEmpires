@@ -23,6 +23,7 @@ public class Juego {
 	public LinkedList<Jugador> jugadores;
 	public Mapa mapa;
 	private Ronda ronda;
+	private boolean estaTerminado;
 
 	public Juego(Mapa mapa) 
 			throws CantidadDeJugadoresInvalidaException {
@@ -30,6 +31,7 @@ public class Juego {
 		this.jugadores = new LinkedList<Jugador>();
 		this.mapa = mapa;
 		this.ronda = new Ronda();
+		this.estaTerminado = false;
 	}
 
 	public void iniciar() 
@@ -140,5 +142,10 @@ public class Juego {
 	public void avanzarJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		obtenerJugadorActual().avanzarTurno();
 		ronda.avanzar();
+	}
+
+	public boolean estaTerminado() {
+		
+		return this.estaTerminado=true;
 	}
 }
