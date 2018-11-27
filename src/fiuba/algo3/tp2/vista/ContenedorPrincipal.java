@@ -1,10 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.juego.Juego;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
-import fiuba.algo3.tp2.vista.interfaces.AccionesDeAldeano;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -27,24 +23,14 @@ public class ContenedorPrincipal extends BorderPane {
     Canvas canvasCentral;
     VBox contenedorCentral;
 
-    AccionesDeAldeano accionesDeAldeano;
-
-
-    public ContenedorPrincipal(Stage stage, Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
+    public ContenedorPrincipal(Stage stage, Juego juego) {
         this.setMenu(stage);
         this.setMapa(juego);
-        this.setControles();
+        this.setControles(juego);
         this.setEstadoJugador(juego);
     }
 
-    private void setEstadoJugador(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
-
-        /*this.accionesDeAldeano = new AccionesDeAldeano();
-
-        this.accionesDeAldeano.mostrarAcciones(this);*/
-
-        
-
+    private void setControles(Juego juego) {
 
     	Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Aldeano");
@@ -54,11 +40,12 @@ public class ContenedorPrincipal extends BorderPane {
         
         Button botonConstruir = new Button();
         botonConstruir.setText("Construir");
-
-        /*Agregar handler
-        BotonConstruirHandler botonConstruirHandler = new BotonConstruirHandler();
-        botonConstruir.setOnAction(botonConstruirHandler);
-        */
+        /*
+         * Agregar handler
+         * BotonConstruirHandler botonConstruirHandler = new BotonConstruirHandler();
+         * botonConstruir.setOnAction(botonConstruirHandler);
+         */
+        
 
         VBox contenedorVertical = new VBox(labelNombreUnidad, labelAcciones, botonConstruir);
         contenedorVertical.setSpacing(10);
@@ -67,7 +54,6 @@ public class ContenedorPrincipal extends BorderPane {
         contenedorVertical.setPrefWidth(200);
         
         this.setLeft(contenedorVertical);
-
     }
 
     private void setMenu(Stage stage) {
@@ -92,7 +78,7 @@ public class ContenedorPrincipal extends BorderPane {
         this.setCenter(contenedorCentral);
     }
 
-    private void setControles() {
+    private void setEstadoJugador(Juego juego) {
     	
         Label labelNombreJugador = new Label();
         labelNombreJugador.setText("Jugador 1");
