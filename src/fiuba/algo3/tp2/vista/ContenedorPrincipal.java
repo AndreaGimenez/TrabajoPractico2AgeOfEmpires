@@ -1,6 +1,11 @@
 package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
+import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
+import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.vista.interfaces.AccionesDeAldeano;
+import fiuba.algo3.tp2.vista.interfaces.AccionesDeCuartel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -22,15 +27,23 @@ public class ContenedorPrincipal extends BorderPane {
     VistaMapa vistaMapa;
     Canvas canvasCentral;
     VBox contenedorCentral;
+    AccionesDeAldeano accionesDeAldeano;
+    AccionesDeCuartel accionesDeCuartel;
 
-    public ContenedorPrincipal(Stage stage, Juego juego) {
+    public ContenedorPrincipal(Stage stage, Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
         this.setMenu(stage);
         this.setMapa(juego);
         this.setControles(juego);
         this.setEstadoJugador(juego);
     }
 
-    private void setControles(Juego juego) {
+    private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
+
+        //this.accionesDeAldeano = new AccionesDeAldeano();
+        //this.accionesDeAldeano.mostrarAcciones(this);
+
+        //this.accionesDeCuartel = new AccionesDeCuartel();
+        //this.accionesDeCuartel.mostrarAcciones(this);
 
     	Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Aldeano");
