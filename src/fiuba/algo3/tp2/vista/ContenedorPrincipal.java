@@ -1,8 +1,11 @@
 package fiuba.algo3.tp2.vista;
 
+
 import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.vista.eventos.ButtonAvanzarTurnoHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +16,10 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class ContenedorPrincipal extends BorderPane {
@@ -80,16 +86,16 @@ public class ContenedorPrincipal extends BorderPane {
 
     private void setEstadoJugador(Juego juego) {
     	
-        Label labelNombreJugador = new Label();
-        labelNombreJugador.setText("Jugador 1");
+    	ContenedorEstadoJugador contenedorEstadoJugador = new ContenedorEstadoJugador();
+    	VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, contenedorEstadoJugador);
         
-        VBox contenedorHorizontal = new VBox(labelNombreJugador);
-        contenedorHorizontal.setSpacing(10);
-        contenedorHorizontal.setPadding(new Insets(15));
-        contenedorHorizontal.setStyle("-fx-background-color: black;");
-        contenedorHorizontal.setPrefHeight(200);
-
-        this.setBottom(contenedorHorizontal);
+        Button botonAvanzarTurno = new Button("Avanzar Turno");
+        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, juego);
+        botonAvanzarTurno.setOnAction(botonAvanzarTurnoHandler);
+        
+        contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
+        
+        this.setBottom(contenedorEstadoJugador);
     }
 
     public BarraDeMenu getBarraDeMenu() {
