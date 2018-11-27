@@ -33,7 +33,7 @@ public class Aplicacion extends Application {
         AplicacionOnKeyPressEventHandler AplicacionOnKeyPressEventHandler = new AplicacionOnKeyPressEventHandler(stage, contenedorPrincipal.getBarraDeMenu());
         escenaJuego.setOnKeyPressed(AplicacionOnKeyPressEventHandler);
 
-        ContenedorBienvenidos contenedorBienvenidos = new ContenedorBienvenidos(stage, escenaJuego);
+        ContenedorInicio contenedorBienvenidos = new ContenedorInicio(stage, escenaJuego);
         Scene escenaBienvenidos = new Scene(contenedorBienvenidos, 640, 480);
 
         // add handler to this:
