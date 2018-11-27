@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.vista.interfaces.AccionesDeAldeano;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -23,6 +24,8 @@ public class ContenedorPrincipal extends BorderPane {
     Canvas canvasCentral;
     VBox contenedorCentral;
 
+    AccionesDeAldeano accionesDeAldeano;
+
     public ContenedorPrincipal(Stage stage, Juego juego) {
         this.setMenu(stage);
         this.setMapa(juego);
@@ -31,6 +34,10 @@ public class ContenedorPrincipal extends BorderPane {
     }
 
     private void setControles(Juego juego) {
+
+        /*this.accionesDeAldeano = new AccionesDeAldeano();
+
+        this.accionesDeAldeano.mostrarAcciones(this);*/
 
     	Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Aldeano");
