@@ -112,7 +112,7 @@ public class ReparacionTest {
 		boolean checkearRecursos = false;
 		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
 
-		ignacio.agregarEdificio(cuartel);
+		ignacio.agregarEdificio(cuartel, false);
 
 		Turno turno = new Turno(ignacio);
 
@@ -179,7 +179,7 @@ public class ReparacionTest {
 		
 		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
 
-		ignacio.agregarEdificio(cuartel);
+		ignacio.agregarEdificio(cuartel, false);
 
 		Turno turno = new Turno(ignacio);
 

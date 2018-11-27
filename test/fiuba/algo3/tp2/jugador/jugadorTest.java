@@ -60,8 +60,9 @@ public class jugadorTest {
 		Jugador jugador = juego.obtenerJugadorActual();
         
         int oroAntes = jugador.obtenerOro();
-      
-        jugador.avanzarTurno();
+  
+        juego.avanzarJugador();
+        juego.avanzarJugador();
         
         int oroDespues = jugador.obtenerOro();
 

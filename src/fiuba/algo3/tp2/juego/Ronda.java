@@ -22,7 +22,6 @@ public class Ronda {
 	}
 
 	public void agregarJugador(Jugador jugador) {
-		
 		this.jugadores.add(jugador);
 	}
 
@@ -39,7 +38,6 @@ public class Ronda {
 	}
 
 	public Jugador obtenerJugadorActual() {
-
 		return jugadorActual;
 	}
 
@@ -51,6 +49,8 @@ public class Ronda {
 		else {
 			iniciar();
 		}
+		
+		jugadorActual.sumarOroDelTurno();
 		
 	}
 }

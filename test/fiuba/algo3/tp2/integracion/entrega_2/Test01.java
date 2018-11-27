@@ -43,7 +43,9 @@ public class Test01 {
 		
 		Jugador jugador1 = juego.obtenerJugadorActual();
 		assertEquals(100, jugador1.obtenerOro());
+		
 		juego.avanzarJugador();
+		
 		Jugador jugador2 = juego.obtenerJugadorActual();
 		assertEquals(100, jugador2.obtenerOro());
 	}

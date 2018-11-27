@@ -15,6 +15,7 @@ import fiuba.algo3.tp2.unidad.Unidad;
 public class Jugador {
 	
 	private static final int POBLACION_MAXIMA = 50;
+	private static final int ORO_INICIAL = 100;
 	
 	private int oro;
 	private int poblacion;
@@ -29,7 +30,7 @@ public class Jugador {
 		this.edificios = new LinkedList<>();
 		this.unidades = new LinkedList<>();
 		this.recolectoresOro = new LinkedList<>();
-		this.oro = 0;
+		this.oro = ORO_INICIAL;
 		this.poblacion = 0;
 		
 		this.turno = new Turno(this);
@@ -77,32 +78,38 @@ public class Jugador {
 		}
 	}
 
-	public void agregarEdificio(Edificio edificio) {
-
-		this.edificios.add(edificio);
-
-		this.oro = this.oro - edificio.costo();
-
-	}
-
-	public void setOro(int oroInicial) {
-		
-		this.oro = oroInicial;	
-		
+	public void agregarEdificio(Edificio edificio) throws OroInsuficienteException {
+	
+		agregarEdificio(edificio, true);
 	}
 	
-	public int obtenerOro() {
-		this.oro += recolectarOroDelTurno();
-		return this.oro;		
+	public void agregarEdificio(Edificio edificio, boolean checkearRecursos) throws OroInsuficienteException {
+		
+		if(checkearRecursos) {
+			
+			this.oro = this.oro - edificio.costo();
+			
+			if(this.oro >= edificio.costo()) {
+				this.oro = this.oro - edificio.costo();
+			}
+			else {
+				throw new OroInsuficienteException();
+			}
+		}
+		
+		this.edificios.add(edificio);
 	}
 
-	private int recolectarOroDelTurno() {
+	public int obtenerOro() {
+		return oro;	
+	}
+	
+	public void sumarOroDelTurno() {
 		int oroDelTurno = 0;
 		for(Aldeano aldeanoActual : recolectoresOro) {
-			//System.out.println(aldeanoActual.recolectarOro());
 			oroDelTurno += aldeanoActual.recolectarOro();
 		}
-		return oroDelTurno;
+		this.oro += oroDelTurno;
 	}
 
 	public int obtenerPoblacionActual() {

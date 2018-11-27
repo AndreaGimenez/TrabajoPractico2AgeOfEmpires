@@ -16,7 +16,6 @@ import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class Juego {
 
-	private static final int ORO_INICIAL = 100;
 	private static final Posicion POSICION_INICIAL_CASTILLO_JUG_1 = new Posicion(0, 0);
 	private static final Posicion POSICION_INICIAL_PLAZACENTRAL_JUG_1 = new Posicion(5, 0);
 	public static final int CANTIDAD_DE_JUGADORES = 2;
@@ -44,20 +43,23 @@ public class Juego {
 
 	public void cargarCondicionesIniciales(Jugador jugador) 
 			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
-		
 		cargarEdificiosIniciales(jugador);
 		cargarUnidadesIniciales(jugador);
-		jugador.setOro(ORO_INICIAL);
 	}
 
 
 	private void cargarEdificiosIniciales(Jugador jugador)
-			throws CeldaOcupadaException, CeldaInexistenteException {
+			throws CeldaOcupadaException, CeldaInexistenteException, OroInsuficienteException {
 		
 		Castillo castillo = new Castillo(buscarPosicionCastillo(), this.mapa);
+		
 		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(), this.mapa);
-		jugador.agregarEdificio(castillo); 
-		jugador.agregarEdificio(plazaCentral);
+		
+		boolean checkearRecursos = false;
+		jugador.agregarEdificio(castillo, checkearRecursos); 
+		
+		jugador.agregarEdificio(plazaCentral, checkearRecursos);
+		
 		
 	}
 	
@@ -122,6 +124,7 @@ public class Juego {
 		
 		Jugador jugador = new Jugador();
 		cargarCondicionesIniciales(jugador);
+
 		this.ronda.agregarJugador(jugador);
 	}
 
