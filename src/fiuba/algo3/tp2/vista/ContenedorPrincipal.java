@@ -4,6 +4,7 @@ import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.vista.eventos.ButtonAvanzarTurnoHandler;
 import fiuba.algo3.tp2.vista.interfaces.AccionesDeAldeano;
 import fiuba.algo3.tp2.vista.interfaces.AccionesDeCuartel;
 import javafx.geometry.Insets;
@@ -93,16 +94,16 @@ public class ContenedorPrincipal extends BorderPane {
 
     private void setEstadoJugador(Juego juego) {
     	
-        Label labelNombreJugador = new Label();
-        labelNombreJugador.setText("Jugador 1");
+    	ContenedorEstadoJugador contenedorEstadoJugador = new ContenedorEstadoJugador();
+    	VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, contenedorEstadoJugador);
         
-        VBox contenedorHorizontal = new VBox(labelNombreJugador);
-        contenedorHorizontal.setSpacing(10);
-        contenedorHorizontal.setPadding(new Insets(15));
-        contenedorHorizontal.setStyle("-fx-background-color: black;");
-        contenedorHorizontal.setPrefHeight(200);
-
-        this.setBottom(contenedorHorizontal);
+        Button botonAvanzarTurno = new Button("Avanzar Turno");
+        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, juego);
+        botonAvanzarTurno.setOnAction(botonAvanzarTurnoHandler);
+        
+        contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
+        
+        this.setBottom(contenedorEstadoJugador);
     }
 
     public BarraDeMenu getBarraDeMenu() {
