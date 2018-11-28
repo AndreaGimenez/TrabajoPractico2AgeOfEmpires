@@ -1,6 +1,10 @@
 package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
+import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
+import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vista.eventos.ButtonAvanzarTurnoHandler;
 import fiuba.algo3.tp2.vista.interfaces.AccionesDeAldeano;
 import fiuba.algo3.tp2.vista.interfaces.AccionesDeCuartel;
@@ -25,13 +29,13 @@ public class ContenedorPartida extends BorderPane {
     BarraDeMenu menuBar;
     VistaMapa vistaMapa;
     Canvas canvasCentral;
-    VBox contenedorCentral;
+    GridPane contenedorCentral;
     AccionesDeAldeano accionesDeAldeano;
     AccionesDeCuartel accionesDeCuartel;
 
-    public ContenedorPartida(Stage stage, Juego juego) {
+    public ContenedorPartida(Stage stage, Juego juego) throws CeldaOcupadaException, CeldaInexistenteException {
         this.setMenu(stage);
-        this.setMapa(juego);
+        this.setMapa(juego, stage);
         this.setControles(juego);
         this.setEstadoJugador(juego);
     }
@@ -73,16 +77,30 @@ public class ContenedorPartida extends BorderPane {
         this.setTop(menuBar);
     }
 
-    private void setMapa(Juego juego) {
+    private void setMapa(Juego juego, Stage stage) throws CeldaOcupadaException, CeldaInexistenteException {
     	
         canvasCentral = new Canvas();
         vistaMapa = new VistaMapa(juego, canvasCentral);
         vistaMapa.dibujar();
-
-        contenedorCentral = new VBox(canvasCentral);
+        
+        contenedorCentral = new GridPane();
         contenedorCentral.setAlignment(Pos.CENTER);
-        contenedorCentral.setSpacing(20);
-        contenedorCentral.setPadding(new Insets(25));
+        contenedorCentral.setGridLinesVisible(true);
+        
+        Button button1 = new Button("Button 1");
+        Button button2 = new Button("Button 2");
+        Button button3 = new Button("Button 3");
+        Button button4 = new Button("Button 4");
+        Button button5 = new Button("Button 5");
+        Button button6 = new Button("Button 6");
+        
+        contenedorCentral.add(button1, 0, 0, 1, 1);
+        contenedorCentral.add(button2, 1, 0, 1, 1);
+        contenedorCentral.add(button3, 2, 0, 1, 1);
+        contenedorCentral.add(button4, 0, 1, 1, 1);
+        contenedorCentral.add(button5, 1, 1, 1, 1);
+        contenedorCentral.add(button6, 2, 1, 1, 1);
+
         Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/fondo-verde.jpg");
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         contenedorCentral.setBackground(new Background(imagenDeFondo));

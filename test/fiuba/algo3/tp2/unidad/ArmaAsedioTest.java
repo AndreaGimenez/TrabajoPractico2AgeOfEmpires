@@ -347,13 +347,13 @@ public class ArmaAsedioTest {
 		Atacable cuartel = new Cuartel(new Posicion(2,1), mapa);
 		
 		armaAsedio.atacar(cuartel);
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		armaAsedio.atacar(cuartel);
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		armaAsedio.atacar(cuartel);
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		armaAsedio.atacar(cuartel);
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
 		armaAsedio.atacar(cuartel);

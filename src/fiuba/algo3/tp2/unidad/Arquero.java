@@ -24,7 +24,7 @@ public class Arquero extends Unidad implements Atacador {
 	}
 
 	@Override
-	public void siguienteAccion() {
+	public void actualizarEstadoParaNuevoTurno() {
 		movimiento = new MovimientoBasico();
 		ataque = new AtaqueArquero();
 	}

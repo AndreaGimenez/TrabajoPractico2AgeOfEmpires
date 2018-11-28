@@ -76,7 +76,7 @@ public abstract class Edificio implements Posicionable, Atacable {
 	}
 
 	@Override
-    public void siguienteAccion() throws EdificioNoAptoParaReparacionException {
+    public void actualizarEstadoParaNuevoTurno() throws EdificioNoAptoParaReparacionException {
 
     }
 

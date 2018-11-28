@@ -71,7 +71,7 @@ public class GestionarConstruccion extends Edificio implements Posicionable {
     }
 
     @Override
-    public void siguienteAccion() {
+    public void actualizarEstadoParaNuevoTurno() {
         this.turnosDesdeSuPosicionamiento ++;
     }
 

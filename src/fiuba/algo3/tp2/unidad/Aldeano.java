@@ -63,7 +63,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	}
 
 	@Override
-	public void siguienteAccion() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+	public void actualizarEstadoParaNuevoTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 
 		this.reparadorEdificio.esPosibileVolverAReparar();
 

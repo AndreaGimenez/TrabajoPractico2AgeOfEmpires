@@ -84,7 +84,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		aldeano.siguienteAccion();
+		aldeano.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA-DERECHA
 		aldeano.mover(new DireccionArribaDerecha());
@@ -95,7 +95,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		aldeano.siguienteAccion();
+		aldeano.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA
 		aldeano.mover(new DireccionArriba());
@@ -106,7 +106,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		aldeano.siguienteAccion();
+		aldeano.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA-IZQUIERDA
 		aldeano.mover(new DireccionArribaIzquierda());
@@ -117,7 +117,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		aldeano.siguienteAccion();
+		aldeano.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER IZQUIERDA
 		aldeano.mover(new DireccionIzquierda());
@@ -128,7 +128,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		aldeano.siguienteAccion();
+		aldeano.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO-IZQUIERDA
 		aldeano.mover(new DireccionAbajoIzquierda());
@@ -139,7 +139,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		aldeano.siguienteAccion();
+		aldeano.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO
 		aldeano.mover(new DireccionAbajo());
@@ -150,7 +150,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		aldeano.siguienteAccion();
+		aldeano.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO-DERECHA
 		aldeano.mover(new DireccionAbajoDerecha());
@@ -194,7 +194,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA-DERECHA
 		espadachin.mover(new DireccionArribaDerecha());
@@ -205,7 +205,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA
 		espadachin.mover(new DireccionArriba());
@@ -216,7 +216,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA-IZQUIERDA
 		espadachin.mover(new DireccionArribaIzquierda());
@@ -227,7 +227,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER IZQUIERDA
 		espadachin.mover(new DireccionIzquierda());
@@ -238,7 +238,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO-IZQUIERDA
 		espadachin.mover(new DireccionAbajoIzquierda());
@@ -249,7 +249,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO
 		espadachin.mover(new DireccionAbajo());
@@ -260,7 +260,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO-DERECHA
 		espadachin.mover(new DireccionAbajoDerecha());
@@ -304,7 +304,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA-DERECHA
 		arquero.mover(new DireccionArribaDerecha());
@@ -315,7 +315,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA
 		arquero.mover(new DireccionArriba());
@@ -326,7 +326,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA-IZQUIERDA
 		arquero.mover(new DireccionArribaIzquierda());
@@ -337,7 +337,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER IZQUIERDA
 		arquero.mover(new DireccionIzquierda());
@@ -348,7 +348,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO-IZQUIERDA
 		arquero.mover(new DireccionAbajoIzquierda());
@@ -359,7 +359,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO
 		arquero.mover(new DireccionAbajo());
@@ -370,7 +370,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO-DERECHA
 		arquero.mover(new DireccionAbajoDerecha());
@@ -414,7 +414,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA-DERECHA
 		armaAsedio.mover(new DireccionArribaDerecha());
@@ -425,7 +425,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA
 		armaAsedio.mover(new DireccionArriba());
@@ -436,7 +436,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ARRIBA-IZQUIERDA
 		armaAsedio.mover(new DireccionArribaIzquierda());
@@ -447,7 +447,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER IZQUIERDA
 		armaAsedio.mover(new DireccionIzquierda());
@@ -458,7 +458,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO-IZQUIERDA
 		armaAsedio.mover(new DireccionAbajoIzquierda());
@@ -469,7 +469,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO
 		armaAsedio.mover(new DireccionAbajo());
@@ -480,7 +480,7 @@ public class Test02 {
 			fail("Deberia lanza MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 		
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaNuevoTurno();
 		
 		//MOVER ABAJO-DERECHA
 		armaAsedio.mover(new DireccionAbajoDerecha());

@@ -36,7 +36,7 @@ public class ArmaAsedio extends Unidad implements Atacador {
 	}
 
 	@Override
-	public void siguienteAccion() {
+	public void actualizarEstadoParaNuevoTurno() {
 		if(montada) {
 			this.movimiento = new MovimientoNulo();
 			this.ataque = new AtaqueArmaAsedio();

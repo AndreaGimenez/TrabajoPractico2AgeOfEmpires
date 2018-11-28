@@ -19,7 +19,7 @@ public class Turno {
     	
     	Collection<Posicionable> posicionablesJugador = jugador.obtenerPosicionables();
 		for(Posicionable posicionable : posicionablesJugador) {
-			posicionable.siguienteAccion();
+			posicionable.actualizarEstadoParaNuevoTurno();
 		}
 
     }

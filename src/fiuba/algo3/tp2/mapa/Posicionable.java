@@ -12,5 +12,5 @@ public interface Posicionable {
 	public Collection<Posicion> obtenerPosicionesOcupadasEnMapa();
 	public void iniciar();
 
-    void siguienteAccion() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException;
+    void actualizarEstadoParaNuevoTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException;
 }

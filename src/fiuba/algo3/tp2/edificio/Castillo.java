@@ -41,7 +41,7 @@ public class Castillo extends Edificio implements GeneradorUnidades, AtacadorZon
 	}
 
 	@Override
-	public void siguienteAccion() {
+	public void actualizarEstadoParaNuevoTurno() {
 
 	}
 

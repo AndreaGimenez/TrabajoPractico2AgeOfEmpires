@@ -294,9 +294,9 @@ public class EspadachinTest {
 		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
 		
 		espadachin.atacar(aldeano);
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaNuevoTurno();
 		espadachin.atacar(aldeano);
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaNuevoTurno();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
 		espadachin.atacar(aldeano);
@@ -314,7 +314,7 @@ public class EspadachinTest {
 		
 		for(int i = 0; i < 17; i++) {
 			espadachin.atacar(cuartel);
-			espadachin.siguienteAccion();
+			espadachin.actualizarEstadoParaNuevoTurno();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);

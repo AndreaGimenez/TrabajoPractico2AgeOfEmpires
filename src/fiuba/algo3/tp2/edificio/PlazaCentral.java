@@ -43,7 +43,7 @@ public class PlazaCentral extends Edificio implements GeneradorUnidades {
 	}
 
 	@Override
-	public void siguienteAccion() {
+	public void actualizarEstadoParaNuevoTurno() {
 
 	}
 
