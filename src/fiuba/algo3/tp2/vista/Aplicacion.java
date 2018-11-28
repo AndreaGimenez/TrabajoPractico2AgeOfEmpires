@@ -1,20 +1,7 @@
 package fiuba.algo3.tp2.vista;
 
-import fiuba.algo3.tp2.juego.CantidadDeJugadoresInvalidaException;
-import fiuba.algo3.tp2.juego.Juego;
-import fiuba.algo3.tp2.juego.OroInsuficienteException;
-import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
-import fiuba.algo3.tp2.vista.eventos.AplicacionOnKeyPressEventHandler;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 
