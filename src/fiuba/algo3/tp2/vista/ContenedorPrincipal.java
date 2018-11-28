@@ -30,6 +30,7 @@ public class ContenedorPrincipal extends BorderPane {
     VBox contenedorCentral;
     AccionesDeAldeano accionesDeAldeano;
     AccionesDeCuartel accionesDeCuartel;
+    AccionesDeCastillo accionesDeCastillo;
 
     public ContenedorPrincipal(Stage stage, Juego juego) {
         this.setMenu(stage);
@@ -41,10 +42,13 @@ public class ContenedorPrincipal extends BorderPane {
     private void setControles(Juego juego) {
 
         //this.accionesDeAldeano = new AccionesDeAldeano();
-        //this.accionesDeAldeano.mostrarAcciones(this);
+        //this.accionesDeAldeano.mostrarAcciones(juego.);
 
         //this.accionesDeCuartel = new AccionesDeCuartel();
         //this.accionesDeCuartel.mostrarAcciones(this);
+
+        //this.accionesDeCastillo = new AccionesDeCastillo();
+        //this.accionesDeCastillo.mostrarAcciones(this);
 
     	Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Aldeano");
