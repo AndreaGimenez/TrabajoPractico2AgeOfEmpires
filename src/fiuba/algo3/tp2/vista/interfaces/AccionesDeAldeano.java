@@ -4,7 +4,7 @@ import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PosicionarEdificio;
 import fiuba.algo3.tp2.mapa.*;
 import fiuba.algo3.tp2.unidad.Aldeano;
-import fiuba.algo3.tp2.vista.ContenedorPrincipal;
+import fiuba.algo3.tp2.vista.ContenedorPartida;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeCuartelEventHandler;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDePlazaCentralEventHandler;
 import javafx.geometry.Insets;
@@ -26,7 +26,7 @@ public class AccionesDeAldeano {
 
     }
 
-    public void mostrarAcciones(ContenedorPrincipal contenedor){
+    public void mostrarAcciones(ContenedorPartida contenedor){
 
         Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Menu de Aldeano");

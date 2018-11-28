@@ -2,7 +2,7 @@ package fiuba.algo3.tp2.vista.interfaces;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.mapa.*;
-import fiuba.algo3.tp2.vista.ContenedorPrincipal;
+import fiuba.algo3.tp2.vista.ContenedorPartida;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeArqueroEventHandler;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeEspadachinEventHandler;
 import javafx.geometry.Insets;
@@ -20,7 +20,7 @@ public class AccionesDeCuartel {
 
     }
 
-    public void mostrarAcciones(ContenedorPrincipal contenedor){
+    public void mostrarAcciones(ContenedorPartida contenedor){
 
         Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Menu de Cuartel");

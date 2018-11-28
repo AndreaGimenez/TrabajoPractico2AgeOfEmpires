@@ -1,9 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.juego.Juego;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.vista.eventos.ButtonAvanzarTurnoHandler;
 import fiuba.algo3.tp2.vista.interfaces.AccionesDeAldeano;
 import fiuba.algo3.tp2.vista.interfaces.AccionesDeCuartel;
@@ -19,10 +16,11 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ContenedorPrincipal extends BorderPane {
+public class ContenedorPartida extends BorderPane {
 
     BarraDeMenu menuBar;
     VistaMapa vistaMapa;
@@ -31,7 +29,7 @@ public class ContenedorPrincipal extends BorderPane {
     AccionesDeAldeano accionesDeAldeano;
     AccionesDeCuartel accionesDeCuartel;
 
-    public ContenedorPrincipal(Stage stage, Juego juego) {
+    public ContenedorPartida(Stage stage, Juego juego) {
         this.setMenu(stage);
         this.setMapa(juego);
         this.setControles(juego);
@@ -76,8 +74,8 @@ public class ContenedorPrincipal extends BorderPane {
     }
 
     private void setMapa(Juego juego) {
-
-        canvasCentral = new Canvas(460, 220);
+    	
+        canvasCentral = new Canvas();
         vistaMapa = new VistaMapa(juego, canvasCentral);
         vistaMapa.dibujar();
 
