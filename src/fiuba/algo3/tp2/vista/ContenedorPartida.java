@@ -40,7 +40,7 @@ public class ContenedorPartida extends BorderPane {
     private void setControles(Juego juego) {
 
         //this.accionesDeAldeano = new AccionesDeAldeano();
-        //this.accionesDeAldeano.mostrarAcciones(juego.);
+        //this.accionesDeAldeano.mostrarAcciones(this);
 
         //this.accionesDeCuartel = new AccionesDeCuartel();
         //this.accionesDeCuartel.mostrarAcciones(this);

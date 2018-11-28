@@ -18,7 +18,7 @@ public class AccionesDeCastillo {
 
     }
 
-    public void mostrarAcciones(ContenedorPrincipal contenedor) {
+    public void mostrarAcciones(ContenedorPartida contenedor) {
 
         Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Menu de Castillo");
