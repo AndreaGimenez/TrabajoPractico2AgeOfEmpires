@@ -31,14 +31,14 @@ public class ContenedorPrincipal extends BorderPane {
     AccionesDeAldeano accionesDeAldeano;
     AccionesDeCuartel accionesDeCuartel;
 
-    public ContenedorPrincipal(Stage stage, Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
+    public ContenedorPrincipal(Stage stage, Juego juego) {
         this.setMenu(stage);
         this.setMapa(juego);
         this.setControles(juego);
         this.setEstadoJugador(juego);
     }
 
-    private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
+    private void setControles(Juego juego) {
 
         //this.accionesDeAldeano = new AccionesDeAldeano();
         //this.accionesDeAldeano.mostrarAcciones(this);
@@ -95,13 +95,14 @@ public class ContenedorPrincipal extends BorderPane {
     private void setEstadoJugador(Juego juego) {
     	
     	ContenedorEstadoJugador contenedorEstadoJugador = new ContenedorEstadoJugador();
-    	VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, contenedorEstadoJugador);
-        
         Button botonAvanzarTurno = new Button("Avanzar Turno");
+        VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, contenedorEstadoJugador);
+        
         ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, juego);
         botonAvanzarTurno.setOnAction(botonAvanzarTurnoHandler);
-        
         contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
+        
+        vistaEstadoJugador.actualizar();
         
         this.setBottom(contenedorEstadoJugador);
     }

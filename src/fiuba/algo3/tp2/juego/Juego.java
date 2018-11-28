@@ -34,11 +34,11 @@ public class Juego {
 		this.estaTerminado = false;
 	}
 
-	public void iniciar() 
+	public void iniciar(String[] nombreJugadores) 
 			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
 		for(int i = 0; i < CANTIDAD_DE_JUGADORES; i++) {
-			agregarJugador();
+			agregarJugador(nombreJugadores[i]);
 		}
 		ronda.iniciar();
 	}
@@ -121,10 +121,10 @@ public class Juego {
 		return posicion;
 	}
 
-	private void agregarJugador() 
+	private void agregarJugador(String nombreJugador) 
 			throws CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
-		Jugador jugador = new Jugador();
+		Jugador jugador = new Jugador(nombreJugador);
 		cargarCondicionesIniciales(jugador);
 
 		this.ronda.agregarJugador(jugador);

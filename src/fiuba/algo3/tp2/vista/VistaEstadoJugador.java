@@ -18,5 +18,6 @@ public class VistaEstadoJugador {
 		Jugador jugadorActual = juego.obtenerJugadorActual();
 		contenedorEstadoJugador.actualizarOro(jugadorActual.obtenerOro());
 		contenedorEstadoJugador.actualizarPoblacion(jugadorActual.obtenerPoblacionActual());
+		contenedorEstadoJugador.actualizarNombreJugador(jugadorActual.obtenerNombre());
 	}
 }

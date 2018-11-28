@@ -100,7 +100,7 @@ public class ReparacionTest {
 
 		Mapa mapa = new Mapa(250,250);
 
-		Jugador ignacio = new Jugador();
+		Jugador ignacio = new Jugador("Jugador 1");
 
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
@@ -166,7 +166,7 @@ public class ReparacionTest {
 
 		Mapa mapa = new Mapa(250,250);
 
-		Jugador ignacio = new Jugador();
+		Jugador ignacio = new Jugador("Jugador 1");
 
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 

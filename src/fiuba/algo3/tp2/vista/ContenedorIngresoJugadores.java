@@ -29,7 +29,7 @@ public class ContenedorIngresoJugadores extends VBox {
 	private Stage stage;
 	private Collection<String> nombresJugadores;
 	
-	public ContenedorIngresoJugadores(Stage stage, Scene proximaEscena) {
+	public ContenedorIngresoJugadores(Stage stage) {
 	
 	    super();
 	
@@ -69,7 +69,7 @@ public class ContenedorIngresoJugadores extends VBox {
 	    botonAceptarIngresoJugador.setPrefWidth(250);
 	    botonAceptarIngresoJugador.setStyle(this.obtenerEstiloBoton());
 	    
-	    BotonAceptarIngresoJugadorHandler botonAceptarIngresoJugadorHandler = new BotonAceptarIngresoJugadorHandler(stage, labelAdvertencia, labelNombreJugador, tfNombreJugador, nombresJugadores, proximaEscena);
+	    BotonAceptarIngresoJugadorHandler botonAceptarIngresoJugadorHandler = new BotonAceptarIngresoJugadorHandler(stage, labelAdvertencia, labelNombreJugador, tfNombreJugador, nombresJugadores);
 	    botonAceptarIngresoJugador.setOnAction(botonAceptarIngresoJugadorHandler);
 	    
 	    Button botonSalir = new Button();

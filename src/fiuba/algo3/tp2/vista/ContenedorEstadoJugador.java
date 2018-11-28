@@ -21,6 +21,7 @@ public class ContenedorEstadoJugador extends HBox {
 
 	private Label labelCantidadOro;
 	private Label labelCantidadPoblacion;
+	private Label labelNombreJugador;
 	
 	public ContenedorEstadoJugador() {
 		
@@ -28,7 +29,7 @@ public class ContenedorEstadoJugador extends HBox {
 		
 		Collection<Node> elementos = new ArrayList<Node>();
 		
-		Label labelNombreJugador = new Label("Jugador 1");
+		labelNombreJugador = new Label("");
 		labelNombreJugador.setFont(Font.font("Sans-Serif", 25));
 		elementos.add(labelNombreJugador);
 		
@@ -72,5 +73,9 @@ public class ContenedorEstadoJugador extends HBox {
 	public void actualizarPoblacion(int poblacion) {
 		
 		labelCantidadPoblacion.setText(String.valueOf(poblacion));
+	}
+	public void actualizarNombreJugador(String nombreJugador) {
+		
+		labelNombreJugador.setText(nombreJugador);
 	}
 }

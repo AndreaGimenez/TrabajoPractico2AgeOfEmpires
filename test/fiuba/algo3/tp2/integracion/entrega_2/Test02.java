@@ -53,7 +53,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 
 		assertEquals(3, juego.obtenerJugadorActual().obtenerPoblacionActual());
 		juego.avanzarJugador();
@@ -68,7 +68,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
 		Jugador jugador = juego.obtenerJugadorActual();
 		
@@ -87,7 +87,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
 		Jugador jugador = juego.obtenerJugadorActual();
 		
@@ -115,7 +115,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 
 		Jugador jugador = juego.obtenerJugadorActual();
 		ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(7,7), mapa);
@@ -138,7 +138,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 
 		Jugador jugador = juego.obtenerJugadorActual();
 		ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(7,7), mapa);
@@ -163,7 +163,7 @@ public class Test02 {
 
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});;
 
 		Jugador jugador = juego.obtenerJugadorActual();
 		Aldeano aldeano = new Aldeano(new Posicion(7, 7), mapa);
@@ -185,7 +185,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 
 		Jugador jugador = juego.obtenerJugadorActual();
 		Aldeano aldeano = new Aldeano(new Posicion(7,7), mapa);
@@ -207,7 +207,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 
 		Jugador jugador = juego.obtenerJugadorActual();
 		Espadachin espadachin = new Espadachin(new Posicion(7,7), mapa);
@@ -229,7 +229,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 
 		Jugador jugador = juego.obtenerJugadorActual();
 		Espadachin espadachin = new Espadachin(new Posicion(7,7), mapa);
@@ -250,7 +250,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 
 		Jugador jugador = juego.obtenerJugadorActual();
 		Arquero arquero = new Arquero(new Posicion(7,7), mapa);
@@ -272,7 +272,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 
 		Jugador jugador = juego.obtenerJugadorActual();
 		Arquero arquero = new Arquero(new Posicion(7,7), mapa);
@@ -294,7 +294,7 @@ public class Test02 {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
 		Jugador jugador = juego.obtenerJugadorActual();
 		boolean checkearRecursos = false;

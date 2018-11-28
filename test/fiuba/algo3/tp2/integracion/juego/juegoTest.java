@@ -31,7 +31,7 @@ public class juegoTest {
 		Mapa mapa = new Mapa(250,250);
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
 		Jugador primerJugador = juego.obtenerJugadorActual();
 		

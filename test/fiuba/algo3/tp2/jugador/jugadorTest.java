@@ -37,7 +37,7 @@ public class jugadorTest {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 
 		assertEquals(100, juego.obtenerJugadorActual().obtenerOro());
 		
@@ -55,7 +55,7 @@ public class jugadorTest {
 		
 		Juego juego = new Juego(mapa);
 
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
 		Jugador jugador = juego.obtenerJugadorActual();
         

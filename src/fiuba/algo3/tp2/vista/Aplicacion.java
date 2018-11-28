@@ -28,24 +28,12 @@ public class Aplicacion extends Application {
     public void start(final Stage stage) throws Exception {
 
         stage.setTitle("Age of Empires");
-
         
-        Juego juego = crearJuego();
-        
-        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(stage, juego);
-        Scene escenaJuego = new Scene(contenedorPrincipal, 640, 480);
-         
-        AplicacionOnKeyPressEventHandler AplicacionOnKeyPressEventHandler = new AplicacionOnKeyPressEventHandler(stage, contenedorPrincipal.getBarraDeMenu());
-        escenaJuego.setOnKeyPressed(AplicacionOnKeyPressEventHandler);
-        
-        ContenedorIngresoJugadores contenedorIngresoJugadores = new ContenedorIngresoJugadores(stage, escenaJuego);
+        ContenedorIngresoJugadores contenedorIngresoJugadores = new ContenedorIngresoJugadores(stage);
         Scene escenaIngresoJugadores = new Scene(contenedorIngresoJugadores, 640, 480);
 
         ContenedorInicio contenedorBienvenidos = new ContenedorInicio(stage, escenaIngresoJugadores);
         Scene escenaBienvenidos = new Scene(contenedorBienvenidos, 640, 480);
-        
-        // add handler to this:
-        // stage.setOnCloseRequest()
 
         stage.setScene(escenaBienvenidos);
         stage.setFullScreen(true);
@@ -53,13 +41,4 @@ public class Aplicacion extends Application {
         stage.show();
 
     }
-
-    private Juego crearJuego() 
-    		throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
-    	
-    	Mapa mapa = new Mapa(250, 250);
-        Juego juego = new Juego(mapa);
-        juego.iniciar();
-        return juego;
-	}
 }

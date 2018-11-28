@@ -39,7 +39,7 @@ public class Test01 {
 		
 		Juego juego = new Juego(new Mapa(250, 250));
 		
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
 		Jugador jugador1 = juego.obtenerJugadorActual();
 		assertEquals(100, jugador1.obtenerOro());
@@ -58,7 +58,7 @@ public class Test01 {
 			
 			Juego juego = new Juego(mapa);
 			
-			juego.iniciar();
+			juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 			
 			Celda celdaCastilloJugador1 = mapa.obtenerCelda(new Posicion(0, 0));
 			Celda celdaCastilloJugador2 = mapa.obtenerCelda(new Posicion(244, 244));
@@ -74,7 +74,7 @@ public class Test01 {
 		Mapa mapa = new Mapa(250, 250);
 		Juego juego = new Juego(mapa);
 		
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
 		Celda celdaCastilloJugador1 = mapa.obtenerCelda(new Posicion(1, 1));	
 		Celda celdaCastilloJugador2 = mapa.obtenerCelda(new Posicion(244, 244));
@@ -107,7 +107,7 @@ public class Test01 {
 			
 			Juego juego = new Juego(mapa);
 
-			juego.iniciar();
+			juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 			
 			Celda celdaCastilloJugador1 = mapa.obtenerCelda(new Posicion(0, 0));
 			Celda celdaCastilloJugador2 = mapa.obtenerCelda(new Posicion(294, 244));

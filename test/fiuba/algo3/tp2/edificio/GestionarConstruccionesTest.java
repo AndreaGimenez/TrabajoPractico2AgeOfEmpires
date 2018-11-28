@@ -51,7 +51,7 @@ public class GestionarConstruccionesTest {
         Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
         
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador("Jugador 1");
         
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         
@@ -71,7 +71,7 @@ public class GestionarConstruccionesTest {
         Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
         Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador("Jugador 1");
         
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         
@@ -93,7 +93,7 @@ public class GestionarConstruccionesTest {
         Cuartel cuartel = (Cuartel) aldeano.crear(EdificioConstants.TipoEdificio.CUARTEL);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
          
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador("Jugador 1");
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         jugador.agregarEdificio(gestorCuartel, false);
         Turno turno = new Turno(jugador);

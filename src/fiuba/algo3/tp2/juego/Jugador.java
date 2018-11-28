@@ -24,14 +24,16 @@ public class Jugador {
 	private Collection<Aldeano> recolectoresOro;
 	
 	private Turno turno;
+	private String nombre;
 
-	public Jugador() {
+	public Jugador(String nombre) {
 		
 		this.edificios = new LinkedList<>();
 		this.unidades = new LinkedList<>();
 		this.recolectoresOro = new LinkedList<>();
 		this.oro = ORO_INICIAL;
 		this.poblacion = 0;
+		this.nombre = nombre;
 		
 		this.turno = new Turno(this);
 	}
@@ -127,4 +129,7 @@ public class Jugador {
 		turno.avanzar();
 	}
 
+	public String obtenerNombre() {
+		return nombre;
+	}
 }

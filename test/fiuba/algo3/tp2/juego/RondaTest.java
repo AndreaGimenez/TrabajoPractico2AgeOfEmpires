@@ -24,8 +24,8 @@ public class RondaTest {
 	public void testSeAgreganDosJugadoresAUnaRondaVaciaAhoraDeberiaTenerDosJugadores() {
 		
 		Ronda ronda = new Ronda();
-		Jugador jugadorUno = new Jugador();
-		Jugador jugadorDos = new Jugador();
+		Jugador jugadorUno = new Jugador("Jugador 1");
+		Jugador jugadorDos = new Jugador("Jugador 1");
 		
 		ronda.agregarJugador(jugadorUno);
 		ronda.agregarJugador(jugadorDos);
@@ -39,7 +39,7 @@ public class RondaTest {
 	public void testAlIniciarElRecorridoDeUnaRondaDeberiaApuntarAlPrimerJugador() {
 		
 		Ronda ronda = new Ronda();
-		Jugador jugador = new Jugador();
+		Jugador jugador = new Jugador("Jugador 1");
 		
 		ronda.agregarJugador(jugador);
 		
@@ -52,7 +52,7 @@ public class RondaTest {
 	public void testAlRecorrerUnaRondaDeUnJugadorSiempreDevuelveElMismoJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Ronda ronda = new Ronda();
-		Jugador jugador = new Jugador();
+		Jugador jugador = new Jugador("Jugador 1");
 		
 		ronda.agregarJugador(jugador);
 		
@@ -73,8 +73,8 @@ public class RondaTest {
 	public void testAlRecorrerUnaRondaDeDosJugadoresDeberiaDevolverAlternadamenteUnoYOtro() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Ronda ronda = new Ronda();
-		Jugador jugadorUno = new Jugador();
-		Jugador jugadorDos = new Jugador();
+		Jugador jugadorUno = new Jugador("Jugador 1");
+		Jugador jugadorDos = new Jugador("Jugador 1");
 		
 		ronda.agregarJugador(jugadorUno);
 		ronda.agregarJugador(jugadorDos);

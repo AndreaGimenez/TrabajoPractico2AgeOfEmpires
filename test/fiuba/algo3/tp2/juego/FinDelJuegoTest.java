@@ -52,7 +52,7 @@ public class FinDelJuegoTest{
 		AtaqueArquero ataque = mock(AtaqueArquero.class);
 		when(ataque.obtenerDanioEdificio()).thenReturn(1000);
 		
-		juego.iniciar();
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
 		Jugador jugador1 = juego.obtenerJugadorActual();
 		

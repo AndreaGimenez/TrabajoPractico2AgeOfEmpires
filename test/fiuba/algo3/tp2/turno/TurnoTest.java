@@ -35,7 +35,7 @@ public class TurnoTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Jugador jugador = new Jugador();
+		Jugador jugador = new Jugador("Jugador 1");
 		Collection<Posicionable> posicionablesJugador = jugador.obtenerPosicionables();
 		Aldeano aldeano = new Aldeano(new Posicion(0, 0), mapa);
 		
@@ -55,7 +55,7 @@ public class TurnoTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Jugador jugador = new Jugador();
+		Jugador jugador = new Jugador("Jugador 1");
 		Collection<Posicionable> posicionablesJugador = jugador.obtenerPosicionables();
 		Aldeano aldeano = new Aldeano(new Posicion(0, 0), mapa);
 		
