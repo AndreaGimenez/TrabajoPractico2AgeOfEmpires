@@ -18,7 +18,7 @@ public class PlazaCentralTest {
 
 	@Rule
 	public ExpectedException exceptionRule = ExpectedException.none();
-	
+
 	@Test
 	public void test_DadaUnaPlazaCentralEnlaPosicionX5Y2CuandoSePosicionaUnAldeanoEnLaPosicionX5Y2_DeberiaLanzarCeldaOcupadaException() 
 			throws CeldaOcupadaException, TamanioInvalidoException, CeldaInexistenteException {
@@ -66,7 +66,26 @@ public class PlazaCentralTest {
 		exceptionRule.expect(CeldaOcupadaException.class);
 		new Aldeano(new Posicion(5, 3), mapa);
 	}
+<<<<<<< HEAD
 	
+=======
+<<<<<<< HEAD
+	
+	@Test
+	public void test_DadaUnaPlazaCentralEnLaPosicionX5Y5DeberiaCrearAldeanoEnLaPosicionX5Y6() throws TamanioInvalidoException, 
+			CeldaOcupadaException, CeldaInexistenteException, EdificioNoGeneraUnidadException{
+		
+		Mapa mapa = new Mapa(250, 250);
+		
+		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(5, 5), mapa);
+		
+		plazaCentral.generarUnidad(new Aldeano(new Posicion(5, 7), mapa));
+		
+	}
+	
+=======
+
+>>>>>>> johnny
 	@Test
 	public void test_AlPosicionarUnaPlazaCentral_DebeEstarEnConstruccion() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
@@ -89,4 +108,5 @@ public class PlazaCentralTest {
 		exceptionRule.expect(EdificioEnConstruccionException.class);
 		Aldeano unAldeano = (Aldeano) gestionarPlazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(10, 10));
 	}
+>>>>>>> develop
 }

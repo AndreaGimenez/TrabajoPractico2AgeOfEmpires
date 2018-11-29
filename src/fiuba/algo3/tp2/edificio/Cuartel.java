@@ -5,6 +5,7 @@ import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+<<<<<<< HEAD
 import fiuba.algo3.tp2.reparacion.ReparacionDesactivada;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
@@ -16,6 +17,20 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
     private static final int COSTO = 250;
 	
     private CreadorUnidad creadorUnidades;
+=======
+
+<<<<<<< HEAD
+public class Cuartel extends Edificio{
+
+	public Cuartel(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
+		super(posicion, new FormaCuartel(), mapa);
+	}
+}
+=======
+public class Cuartel extends Edificio {
+
+    private int puntosDeSaludPorReparacion = 50;
+>>>>>>> johnny
 
     public Cuartel(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
         super(posicion, new FormaCuartelRectangulo(), new ReparacionDesactivada(), VIDA_MAXIMA, SALUD_RECUPERADA_POR_TURNO, mapa);
@@ -50,3 +65,4 @@ public class Cuartel extends Edificio implements GeneradorUnidades {
         return super.obtenerPosicion();
     }
 }
+>>>>>>> develop
