@@ -36,6 +36,9 @@ public class Test03 {
 		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(1, 1), mapa);
 		
 		Aldeano aldeano = (Aldeano)plazaCentral.crear(TipoUnidad.ALDEANO, new Posicion(3, 1));
+		
+		exceptionRule.expect(CeldaOcupadaException.class);
+		new Aldeano(new Posicion(3,1), mapa);
 	}
 	
 	@Test

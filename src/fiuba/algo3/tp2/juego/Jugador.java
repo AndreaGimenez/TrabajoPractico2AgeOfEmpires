@@ -73,7 +73,7 @@ public class Jugador {
 		this.unidades.add(unidad);
 		poblacion += 1;
 		
-		this.oro = oro - unidad.obtenerCosto();
+		//this.oro = oro - unidad.obtenerCosto();
 
 		if(unidad instanceof Aldeano) {
 			this.recolectoresOro.add((Aldeano) unidad);

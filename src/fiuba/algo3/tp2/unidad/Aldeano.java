@@ -96,8 +96,8 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 
 	@Override
 	public int obtenerCosto() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return this.costoGeneracion;
 	}
 	
 }

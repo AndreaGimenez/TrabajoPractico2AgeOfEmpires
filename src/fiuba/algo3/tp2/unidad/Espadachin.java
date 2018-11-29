@@ -36,7 +36,7 @@ public class Espadachin extends Unidad implements Atacador {
 
 	@Override
 	public int obtenerCosto() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.costoGeneracion;
 	}
 }
