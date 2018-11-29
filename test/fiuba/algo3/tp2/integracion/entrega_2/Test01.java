@@ -34,7 +34,7 @@ public class Test01 {
 	public ExpectedException exceptionRule = ExpectedException.none();
 
 	@Test
-	public void test_alIniciarJuegoCadaJugadorDeberiaTener_100_Oro() 
+	public void test_alIniciarJuegoElJugador1DeberiaTener_100_Oro() 
 			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Juego juego = new Juego(new Mapa(250, 250));
@@ -43,6 +43,15 @@ public class Test01 {
 		
 		Jugador jugador1 = juego.obtenerJugadorActual();
 		assertEquals(100, jugador1.obtenerOro());
+	}
+	
+	@Test
+	public void test_alIniciarJuegoElJugador2DeberiaTener_100_Oro() 
+			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+		
+		Juego juego = new Juego(new Mapa(250, 250));
+		
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
 		juego.avanzarJugador();
 		
@@ -51,20 +60,29 @@ public class Test01 {
 	}
 	
 	@Test
-	public void test_alIniciarJuegoCadaJugadorDeberiaTenerUnCastillo_YEstarPosicionadoUnoEnCadaEsquina()
+	public void test_alIniciarJuegoElJugador1DeberiaTenerUnCastillo_YEstarPosicionadoEnLaEsquinaInferiorIzquierda()
 		throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 			
 			Mapa mapa = new Mapa(250, 250);
 			
 			Juego juego = new Juego(mapa);
-			
 			juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 			
 			Celda celdaCastilloJugador1 = mapa.obtenerCelda(new Posicion(0, 0));
-			Celda celdaCastilloJugador2 = mapa.obtenerCelda(new Posicion(244, 244));
 			assertEquals(true, celdaCastilloJugador1.estaOcupada());
+	}
+	
+	@Test
+	public void test_alIniciarJuegoElJugador1DeberiaTenerUnCastillo_YEstarPosicionadoEnLaEsquinaSuperiorDerecha()
+		throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+			
+			Mapa mapa = new Mapa(250, 250);
+			
+			Juego juego = new Juego(mapa);
+			juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
+			
+			Celda celdaCastilloJugador2 = mapa.obtenerCelda(new Posicion(244, 244));
 			assertEquals(true, celdaCastilloJugador2.estaOcupada());
-
 	}
 	
 	@Test
@@ -98,43 +116,22 @@ public class Test01 {
 		assertEquals(true, celdaAldeano3Jugador2.estaOcupada());
 		assertEquals(true, celdaPlazaCentralJugador2.estaOcupada());
 	}
-	
+	/*
 	@Test
-	public void test_iniciarJuegoConUnMapaNoCuadradadoDeberiaUbicarBienLosCastillos()
-		throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
-			
-			Mapa mapa = new Mapa(300, 250);
-			
-			Juego juego = new Juego(mapa);
-
-			juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
-			
-			Celda celdaCastilloJugador1 = mapa.obtenerCelda(new Posicion(0, 0));
-			Celda celdaCastilloJugador2 = mapa.obtenerCelda(new Posicion(294, 244));
-			assertEquals(true, celdaCastilloJugador1.estaOcupada());
-			assertEquals(true, celdaCastilloJugador2.estaOcupada());
-	}
-	
-	/*@Test
-	public void testUnJugadorCreaUnaPlazaCentralDeberiaTener25UnidadesMenosDeOro() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException {
+	public void testUnJugadorCreaUnAldeanoPlazaCentralDeberiaTener25UnidadesMenosDeOro() 
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		Mapa mapa = new Mapa(300, 250);
 		
 		Juego juego = new Juego(mapa);
-		
-		juego.agregarJugador();
-		juego.agregarJugador();
-		
-		juego.iniciar();
-		
-		Jugador primerJugador = juego.obtenerJugador(0);
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
+		Jugador primerJugador = juego.obtenerJugadorActual();
 		
 		int oroAntes = primerJugador.obtenerOro();
 		
 		PlazaCentral plaza = (PlazaCentral) mapa.obtenerCelda(new Posicion(5, 0)).obtenerPosicionable();
 		
 		primerJugador.agregarUnidad(plaza.crear(TipoUnidad.ALDEANO, new Posicion(10,10)),mapa);
-		
+	
 		int oroDespues = primerJugador.obtenerOro();
 		assertEquals(25, oroAntes-oroDespues);
 	}*/

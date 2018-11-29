@@ -24,7 +24,7 @@ public class Arquero extends Unidad implements Atacador {
 	}
 
 	@Override
-	public void siguienteAccion() {
+	public void actualizarEstadoParaSiguienteTurno() {
 		movimiento = new MovimientoBasico();
 		ataque = new AtaqueArquero();
 	}
@@ -37,7 +37,7 @@ public class Arquero extends Unidad implements Atacador {
 
 	@Override
 	public int obtenerCosto() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return this.costoGeneracion;
 	}
 }

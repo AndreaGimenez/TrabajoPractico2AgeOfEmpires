@@ -36,7 +36,7 @@ public class ArmaAsedio extends Unidad implements Atacador {
 	}
 
 	@Override
-	public void siguienteAccion() {
+	public void actualizarEstadoParaSiguienteTurno() {
 		if(montada) {
 			this.movimiento = new MovimientoNulo();
 			this.ataque = new AtaqueArmaAsedio();
@@ -54,7 +54,7 @@ public class ArmaAsedio extends Unidad implements Atacador {
 
 	@Override
 	public int obtenerCosto() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.costoGeneracion;
 	}
 }

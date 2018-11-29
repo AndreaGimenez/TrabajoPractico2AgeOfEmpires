@@ -6,6 +6,9 @@ import fiuba.algo3.tp2.formas.Forma;
 import fiuba.algo3.tp2.mapa.*;
 import fiuba.algo3.tp2.reparacion.Reparacion;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.ArmaAsedio;
+import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.unidad.Espadachin;
 import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.unidad.UnidadConstants;
 
@@ -36,15 +39,7 @@ public class GestionarConstruccion extends Edificio implements Posicionable {
         return this.turnosDesdeSuPosicionamiento < 3;
 
     }
-
-    public Unidad crear(UnidadConstants.TipoUnidad espadachin, Posicion posicion) throws EdificioEnConstruccionException, CeldaOcupadaException, EdifioNoAptoParaContruirException, CeldaInexistenteException, UnidadNoSoportadaException {
-
-        if(this.estaEnConstruccion()) throw this.e;
-
-        return this.edificio.crear(espadachin, posicion);
-
-    }
-
+  
     @Override
     public int costo() {
         return this.edificio.costo();
@@ -71,12 +66,49 @@ public class GestionarConstruccion extends Edificio implements Posicionable {
     }
 
     @Override
-    public void siguienteAccion() {
+    public void actualizarEstadoParaSiguienteTurno() {
         this.turnosDesdeSuPosicionamiento ++;
     }
 
 	@Override
 	public Collection<Posicion> obtenerPosicionesOcupadasEnMapa() {
 		return this.edificio.obtenerPosicionesOcupadasEnMapa();
+	}
+
+	public Aldeano crearAldeano(Posicion posicion, Mapa mapa) 
+			throws EdificioEnConstruccionException, UnidadNoSoportadaException, CeldaOcupadaException, CeldaInexistenteException {
+		
+		if(this.estaEnConstruccion()) throw this.e;
+		
+		if(!this.edificio.getClass().equals(PlazaCentral.class)) throw new UnidadNoSoportadaException();
+
+        return new Aldeano(posicion, mapa);
+	}
+
+	public Espadachin crearEspadachin(Posicion posicion, Mapa mapa) throws EdificioEnConstruccionException, UnidadNoSoportadaException, CeldaOcupadaException, CeldaInexistenteException {
+		
+		if(this.estaEnConstruccion()) throw this.e;
+		
+		if(!this.edificio.getClass().equals(Cuartel.class)) throw new UnidadNoSoportadaException();
+
+        return new Espadachin(posicion, mapa);
+	}
+
+	public Arquero crearArquero(Posicion posicion, Mapa mapa) throws EdificioEnConstruccionException, UnidadNoSoportadaException, CeldaOcupadaException, CeldaInexistenteException {
+		
+		if(this.estaEnConstruccion()) throw this.e;
+		
+		if(!this.edificio.getClass().equals(Cuartel.class)) throw new UnidadNoSoportadaException();
+
+        return new Arquero(posicion, mapa);
+	}
+
+	public ArmaAsedio crearArmaAsedio(Posicion posicion, Mapa mapa) throws EdificioEnConstruccionException, UnidadNoSoportadaException, CeldaOcupadaException, CeldaInexistenteException {
+		
+		if(this.estaEnConstruccion()) throw this.e;
+		
+		if(!this.edificio.getClass().equals(Castillo.class)) throw new UnidadNoSoportadaException();
+
+        return new ArmaAsedio(posicion, mapa);
 	}
 }

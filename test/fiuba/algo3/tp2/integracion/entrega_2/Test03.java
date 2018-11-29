@@ -48,9 +48,9 @@ public class Test03 {
 		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
 		
 		espadachin.atacar(aldeano);
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaSiguienteTurno();
 		espadachin.atacar(aldeano);
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaSiguienteTurno();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
 		espadachin.atacar(aldeano);
@@ -68,7 +68,7 @@ public class Test03 {
 		
 		for(int i = 0; i < 17; i++) {
 			espadachin.atacar(cuartel);
-			espadachin.siguienteAccion();
+			espadachin.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
@@ -114,13 +114,13 @@ public class Test03 {
 		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
 		
 		arquero.atacar(aldeano);
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaSiguienteTurno();
 		arquero.atacar(aldeano);
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaSiguienteTurno();
 		arquero.atacar(aldeano);
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaSiguienteTurno();
 		arquero.atacar(aldeano);
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaSiguienteTurno();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
 		arquero.atacar(aldeano);
@@ -138,7 +138,7 @@ public class Test03 {
 		
 		for(int i = 1; i < 26; i++) {
 			arquero.atacar(cuartel);
-			arquero.siguienteAccion();
+			arquero.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
@@ -188,13 +188,13 @@ public class Test03 {
 		Atacable cuartel = new Cuartel(new Posicion(2,1), mapa);
 		
 		armaAsedio.atacar(cuartel);
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		armaAsedio.atacar(cuartel);
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		armaAsedio.atacar(cuartel);
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		armaAsedio.atacar(cuartel);
-		armaAsedio.siguienteAccion();
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
 		armaAsedio.atacar(cuartel);
@@ -254,9 +254,9 @@ public class Test03 {
 		castillo.atacar();
 		
 		espadachin.atacar(aldeano);
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaSiguienteTurno();
 		espadachin.atacar(aldeano);
-		espadachin.siguienteAccion();
+		espadachin.actualizarEstadoParaSiguienteTurno();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
 		espadachin.atacar(aldeano);
@@ -295,7 +295,7 @@ public class Test03 {
 		
 		for(int i = 1; i <= 17; i++) {
 			espadachin.atacar(cuartel);
-			espadachin.siguienteAccion();
+			espadachin.actualizarEstadoParaSiguienteTurno();
 		}
 		exceptionRule.expect(EdificioDestruidoException.class);
 		espadachin.atacar(cuartel);
