@@ -23,7 +23,7 @@ public class Espadachin extends Unidad implements Atacador {
 	}
 
 	@Override
-	public void siguienteAccion() {
+	public void actualizarEstadoParaSiguienteTurno() {
 		movimiento = new MovimientoBasico();
 		ataque = new AtaqueEspadachin();
 	}

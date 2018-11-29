@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.edificio;
+/*package fiuba.algo3.tp2.edificio;
 
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
@@ -10,4 +10,4 @@ public interface CreadorUnidad {
 
 	public Unidad crear(TipoUnidad tipoUnidad, Posicion posicion) 
 			throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException;
-}
+}*/

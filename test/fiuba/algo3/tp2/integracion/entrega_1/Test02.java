@@ -965,7 +965,7 @@ public class Test02 {
 
 		try{
 
-			gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
+			gestorPlazaCentral.crearAldeano(new Posicion(6, 5), mapa);
 
 			fail();
 
@@ -979,7 +979,7 @@ public class Test02 {
 
 		try{
 
-			gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
+			gestorPlazaCentral.crearAldeano(new Posicion(6, 5), mapa);
 
 			fail();
 
@@ -993,7 +993,7 @@ public class Test02 {
 
 		try{
 
-			gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(6, 5));
+			gestorPlazaCentral.crearAldeano(new Posicion(6, 5), mapa);
 
 			fail();
 
@@ -1007,7 +1007,7 @@ public class Test02 {
 
 		try{
 
-			gestorPlazaCentral.crear(UnidadConstants.TipoUnidad.ALDEANO, new Posicion(5, 6));
+			gestorPlazaCentral.crearAldeano(new Posicion(5, 6), mapa);
 
 		} catch (EdificioEnConstruccionException e) {
 
