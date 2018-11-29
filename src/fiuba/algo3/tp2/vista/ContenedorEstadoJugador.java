@@ -51,7 +51,7 @@ public class ContenedorEstadoJugador extends HBox {
 		
         this.setSpacing(10);
         this.setPadding(new Insets(15));
-        this.setPrefHeight(200);
+        this.setPrefHeight(60);
         
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/estado-jugador-background.jpg", 

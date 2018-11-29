@@ -148,4 +148,8 @@ public class Juego {
 		
 		return this.estaTerminado=true;
 	}
+	
+	public Mapa obtenerMapa() {
+		return mapa;
+	}
 }
