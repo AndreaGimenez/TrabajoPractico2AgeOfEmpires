@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -72,6 +74,10 @@ public class ContenedorIngresoJugadores extends VBox {
 	    BotonAceptarIngresoJugadorHandler botonAceptarIngresoJugadorHandler = new BotonAceptarIngresoJugadorHandler(stage, labelAdvertencia, labelNombreJugador, tfNombreJugador, nombresJugadores);
 	    botonAceptarIngresoJugador.setOnAction(botonAceptarIngresoJugadorHandler);
 	    
+        BotonEnter botonEnter = new BotonEnter();
+       
+        botonEnter.disparar(botonAceptarIngresoJugador);
+	    
 	    Button botonSalir = new Button();
 	    botonSalir.setText("SALIR");
 	    botonSalir.setTextFill(Color.WHITE);
@@ -81,6 +87,8 @@ public class ContenedorIngresoJugadores extends VBox {
 	    
 	    BotonSalirEventHandler botonSalirEventHandler = new BotonSalirEventHandler();
 	    botonSalir.setOnAction(botonSalirEventHandler);
+	    
+        botonEnter.disparar(botonSalir);
 	    
 	    this.getChildren().addAll(labelNombreJugador, tfNombreJugador, labelAdvertencia, botonAceptarIngresoJugador, botonSalir);
 	}
