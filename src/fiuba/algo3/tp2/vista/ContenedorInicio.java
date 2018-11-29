@@ -8,6 +8,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -52,6 +53,9 @@ public class ContenedorInicio extends VBox {
         BotonComenzarPartidaEventHandler botonComenzarPartidaEventHandler = new BotonComenzarPartidaEventHandler(stage, proximaEscena);
         botonComenzarPartida.setOnAction(botonComenzarPartidaEventHandler);
         
+        BotonEnter botonEnter = new BotonEnter();
+        botonEnter.disparar(botonComenzarPartida);
+        
         Button botonSalir = new Button();
         botonSalir.setText("SALIR");
         botonSalir.setTextFill(Color.WHITE);
@@ -61,6 +65,8 @@ public class ContenedorInicio extends VBox {
         
         BotonSalirEventHandler botonSalirEventHandler = new BotonSalirEventHandler();
         botonSalir.setOnAction(botonSalirEventHandler);
+
+        botonEnter.disparar(botonSalir);
         
         this.getChildren().addAll(botonComenzarPartida, botonSalir);
     }

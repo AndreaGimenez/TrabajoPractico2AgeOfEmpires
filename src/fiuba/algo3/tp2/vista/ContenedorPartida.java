@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -72,7 +73,8 @@ public class ContenedorPartida extends BorderPane {
          * BotonConstruirHandler botonConstruirHandler = new BotonConstruirHandler();
          * botonConstruir.setOnAction(botonConstruirHandler);
          */
-        
+        BotonEnter botonEnter = new BotonEnter();
+        botonEnter.disparar(botonConstruir);
 
         VBox contenedorVertical = new VBox(labelNombreUnidad, labelAcciones, botonConstruir);
         contenedorVertical.setSpacing(10);
@@ -152,6 +154,12 @@ public class ContenedorPartida extends BorderPane {
         ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, juego);
         botonAvanzarTurno.setOnAction(botonAvanzarTurnoHandler);
         contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
+        
+        botonAvanzarTurno.setOnKeyPressed(evento -> {if(evento.getCode() == KeyCode.ENTER) {
+        	botonAvanzarTurno.fire();
+	    	evento.consume();
+	    	}
+	    });
         
         vistaEstadoJugador.actualizar();
         
