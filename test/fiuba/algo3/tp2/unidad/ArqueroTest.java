@@ -297,13 +297,13 @@ public class ArqueroTest {
 		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
 		
 		arquero.atacar(aldeano);
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaSiguienteTurno();
 		arquero.atacar(aldeano);
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaSiguienteTurno();
 		arquero.atacar(aldeano);
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaSiguienteTurno();
 		arquero.atacar(aldeano);
-		arquero.siguienteAccion();
+		arquero.actualizarEstadoParaSiguienteTurno();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
 		arquero.atacar(aldeano);
@@ -321,7 +321,7 @@ public class ArqueroTest {
 		
 		for(int i = 1; i < 26; i++) {
 			arquero.atacar(cuartel);
-			arquero.siguienteAccion();
+			arquero.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
