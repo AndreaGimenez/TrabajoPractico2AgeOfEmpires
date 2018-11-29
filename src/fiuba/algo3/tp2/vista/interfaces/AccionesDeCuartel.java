@@ -20,7 +20,7 @@ public class AccionesDeCuartel {
 
     }
 
-    public void mostrarAcciones(ContenedorPartida contenedor){
+    public void mostrarAcciones(ContenedorPartida contenedor) throws TamanioInvalidoException{
 
         Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Menu de Cuartel");
@@ -31,10 +31,10 @@ public class AccionesDeCuartel {
         Button botonCrearEspadachin = new Button();
         botonCrearEspadachin.setText("Crear Espadachin");
 
-        BotonCreadorDeEspadachinEventHandler botonCreadorDeEspadachinEventHandler = new BotonCreadorDeEspadachinEventHandler(botonCrearArquero, this.cuartel);
+        BotonCreadorDeEspadachinEventHandler botonCreadorDeEspadachinEventHandler = new BotonCreadorDeEspadachinEventHandler(botonCrearArquero, this.cuartel, new Mapa(250, 250));
         botonCrearArquero.setOnAction(botonCreadorDeEspadachinEventHandler);
 
-        BotonCreadorDeArqueroEventHandler botonCreadorDeArqueroEventHandler = new BotonCreadorDeArqueroEventHandler(botonCrearArquero, this.cuartel);
+        BotonCreadorDeArqueroEventHandler botonCreadorDeArqueroEventHandler = new BotonCreadorDeArqueroEventHandler(botonCrearArquero, this.cuartel, new Mapa(250, 250));
         botonCrearEspadachin.setOnAction(botonCreadorDeArqueroEventHandler);
 
         VBox contenedorVertical = new VBox(labelNombreUnidad, botonCrearArquero, botonCrearEspadachin);
