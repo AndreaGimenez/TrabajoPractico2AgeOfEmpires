@@ -23,7 +23,7 @@ public class VentanaDeCreacionDeUnidadesParaPlazaCentral extends Application {
 
         PlazaCentral plazaCentral = new PlazaCentral(new Posicion(5,5), new Mapa(250,250));
 
-        VentanaPlazaCentral ventana = new VentanaPlazaCentral(plazaCentral);
+        VentanaPlazaCentral ventana = new VentanaPlazaCentral(plazaCentral, new Mapa(250, 250));
 
         stage.setTitle("Ventana de Prueba");
 

@@ -267,4 +267,16 @@ public class AldeanoTest {
 		exceptionRule.expect(MovimientoInvalidoException.class);
 		aldeanoAMover.mover(new DireccionAbajoIzquierda());
 	}
+	/*
+	@Test
+	public void test_AldeanoConstruyeUnaPlazaCentral() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+		
+		Mapa mapa = new Mapa(250, 250);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
+		
+		aldeano.crear(tipoEdificio)
+		
+		
+	}*/
 }

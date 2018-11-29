@@ -2,6 +2,7 @@ package fiuba.algo3.tp2.vista.ventanas;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeAldeanosEventHandler;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeArqueroEventHandler;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeEspadachinEventHandler;
@@ -19,11 +20,11 @@ public class VentanaPlazaCentral {
 
     private static Button botonDeAldeano;
 
-    public VentanaPlazaCentral(PlazaCentral plazaCentral) {
+    public VentanaPlazaCentral(PlazaCentral plazaCentral, Mapa mapa) {
 
         this.botonDeAldeano = new Button("Crear Aldeano");
 
-        this.botonCreadorDeAldeanosEventHandler = new BotonCreadorDeAldeanosEventHandler(this.botonDeAldeano, plazaCentral);
+        this.botonCreadorDeAldeanosEventHandler = new BotonCreadorDeAldeanosEventHandler(this.botonDeAldeano, plazaCentral, mapa);
 
     }
 

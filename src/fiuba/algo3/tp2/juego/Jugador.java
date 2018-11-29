@@ -3,6 +3,7 @@ package fiuba.algo3.tp2.juego;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicionable;
@@ -131,5 +132,16 @@ public class Jugador {
 
 	public String obtenerNombre() {
 		return nombre;
+	}
+	public boolean castilloDestruido(Mapa mapa) {
+		
+		Castillo castillo = null;
+		
+		for(Posicionable edificioActual : edificios) {
+			if(edificioActual instanceof Castillo) {
+				castillo = (Castillo) edificioActual;
+			}
+		}
+		return castillo.estaDestruido();
 	}
 }

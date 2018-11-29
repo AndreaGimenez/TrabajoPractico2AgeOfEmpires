@@ -61,8 +61,6 @@ public class Juego {
 		jugador.agregarEdificio(castillo, checkearRecursos); 
 		
 		jugador.agregarEdificio(plazaCentral, checkearRecursos);
-		
-		
 	}
 	
 	private void cargarUnidadesIniciales(Jugador jugador)
@@ -130,11 +128,6 @@ public class Juego {
 		this.ronda.agregarJugador(jugador);
 	}
 
-	public Jugador obtenerJugador(int numeroDeJugador) {
-		
-		return this.jugadores.get(numeroDeJugador);
-	}
-	
 	public Jugador obtenerJugadorActual() {
 		return ronda.obtenerJugadorActual();
 	}
@@ -142,11 +135,14 @@ public class Juego {
 	public void avanzarJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		obtenerJugadorActual().avanzarTurno();
 		ronda.avanzar();
+		if(obtenerJugadorActual().castilloDestruido(mapa)) {
+			this.estaTerminado = true ;
+		}
 	}
 
 	public boolean estaTerminado() {
 		
-		return this.estaTerminado=true;
+		return this.estaTerminado;
 	}
 	
 	public Mapa obtenerMapa() {

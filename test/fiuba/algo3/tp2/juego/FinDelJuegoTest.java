@@ -54,18 +54,20 @@ public class FinDelJuegoTest{
 		
 		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
+		juego.avanzarJugador();
 		Jugador jugador1 = juego.obtenerJugadorActual();
+		Castillo castilloJ1 = (Castillo) jugador1.obtenerPosicionables().getFirst();
+		juego.avanzarJugador();
+		
+		//en el turno del jugador 2 se ataca el castillo del jugador 1
+		castilloJ1.recibirDanio(ataque);
+		System.out.println(castilloJ1.obtenerVida());
 		
 		juego.avanzarJugador();
 		
-		Jugador jugador2 = juego.obtenerJugadorActual();
-		Espadachin espadachin = new Espadachin(new Posicion(0, 4), mapa);
-		jugador2.agregarUnidad(espadachin, mapa, true);
 		
-		//juego.obtenerJugadorActual().atacar(juego.obtenerAtacables(jugador1).getFirst(), juego.obtenerJugadorActual().obtenerPosicionables().getLast());
-		Castillo castillo = (Castillo) jugador2.obtenerPosicionables().getFirst();
-		
-		castillo.recibirDanio(ataque);
 		
 		assertEquals(true, juego.estaTerminado());
 		
