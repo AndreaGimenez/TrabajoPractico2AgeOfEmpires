@@ -1,6 +1,8 @@
 package fiuba.algo3.tp2.vista.ventanas;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeArqueroEventHandler;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeEspadachinEventHandler;
 import javafx.geometry.Pos;
@@ -21,15 +23,15 @@ public class VentanaCuartel {
 
     private static Button botonDeEspadachin;
 
-    public VentanaCuartel(Cuartel cuartel) {
+    public VentanaCuartel(Cuartel cuartel) throws TamanioInvalidoException {
 
         this.botonDeArquero = new Button("Crear Arquero");
 
-        this.botonCreadorDeArqueroEventHandler = new BotonCreadorDeArqueroEventHandler(this.botonDeArquero, cuartel);
+        this.botonCreadorDeArqueroEventHandler = new BotonCreadorDeArqueroEventHandler(this.botonDeArquero, cuartel, new Mapa(250, 250));
 
         this.botonDeEspadachin = new Button("Crear Espadachin");
 
-        this.botonCreadorDeEspadachinEventHandler = new BotonCreadorDeEspadachinEventHandler(this.botonDeEspadachin, cuartel);
+        this.botonCreadorDeEspadachinEventHandler = new BotonCreadorDeEspadachinEventHandler(this.botonDeEspadachin, cuartel, new Mapa(250, 250));
 
     }
 

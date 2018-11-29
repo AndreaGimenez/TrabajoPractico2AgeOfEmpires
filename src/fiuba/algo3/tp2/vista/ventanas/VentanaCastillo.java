@@ -1,6 +1,8 @@
 package fiuba.algo3.tp2.vista.ventanas;
 
 import fiuba.algo3.tp2.edificio.Castillo;
+import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeArmaDeAsedioEventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,11 +19,11 @@ public class VentanaCastillo {
 
     private static Button botonDeArmaAsedio;
 
-    public VentanaCastillo(Castillo castillo) {
+    public VentanaCastillo(Castillo castillo) throws TamanioInvalidoException {
 
         this.botonDeArmaAsedio = new Button("Crear Arma de Asedio");
 
-        this.botonCreadorDeArmaDeAsedioEventHandler = new BotonCreadorDeArmaDeAsedioEventHandler(this.botonDeArmaAsedio, castillo);
+        this.botonCreadorDeArmaDeAsedioEventHandler = new BotonCreadorDeArmaDeAsedioEventHandler(this.botonDeArmaAsedio, castillo, new Mapa(250, 250));
 
     }
 
