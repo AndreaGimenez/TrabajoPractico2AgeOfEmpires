@@ -4,9 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.Cuartel;
-import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
@@ -22,6 +20,8 @@ import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
 import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 
 public class ArmaAsedioTest {
 	
@@ -311,7 +311,7 @@ public class ArmaAsedioTest {
 	
 	@Test
 	public void testCuandoUnArmaAsedioAtacaUnAldeanoDeberiaLanzarUnidadNoAtacableException() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -324,7 +324,7 @@ public class ArmaAsedioTest {
 
 	@Test
 	public void testCuandoUnArmaAsedioAtacaUnCuartelFueraDeSuRangoDeberiaLanzarAtaqueFueraDeRangoExceptionException() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -337,17 +337,23 @@ public class ArmaAsedioTest {
 	
 	@Test
 	public void testCuandoUnArmaAsedioAtaca5VecesUnCuartelDeberiaLanzarEdificioDestruidoException() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, 
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
 		Atacador armaAsedio = new ArmaAsedio(new Posicion(1,1), mapa);
+		((ArmaAsedio)armaAsedio).montar();
 		Atacable cuartel = new Cuartel(new Posicion(2,1), mapa);
 		
 		armaAsedio.atacar(cuartel);
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		armaAsedio.atacar(cuartel);
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		armaAsedio.atacar(cuartel);
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		armaAsedio.atacar(cuartel);
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
 		armaAsedio.atacar(cuartel);

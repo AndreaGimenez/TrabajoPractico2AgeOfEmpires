@@ -76,7 +76,7 @@ public abstract class Edificio implements Posicionable, Atacable {
 	}
 
 	@Override
-    public void siguienteAccion() throws EdificioNoAptoParaReparacionException {
+    public void actualizarEstadoParaSiguienteTurno() throws EdificioNoAptoParaReparacionException {
 
     }
 
@@ -132,8 +132,6 @@ public abstract class Edificio implements Posicionable, Atacable {
 		return this.aldeanoAsignadoParaReparar;
 
 	}
-
-    public abstract Unidad crear(TipoUnidad unidad, Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdifioNoAptoParaContruirException, EdificioEnConstruccionException;
 
 	public abstract int costo();
 

@@ -3,6 +3,8 @@ package fiuba.algo3.tp2.edificio;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
+import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.RangoAtaque;
@@ -12,16 +14,31 @@ public class RangoAtaqueCastillo extends RangoAtaque {
 	private int rango = 3;
 	private int ancho = 4;
 	private int largo = 4;
+	private Mapa mapa;
+	
+	public RangoAtaqueCastillo(Mapa mapa) {
+		this.mapa = mapa;
+	}
 	
 	@Override
 	public Collection<Posicion> obtenerPosicionesRango(Posicionable atacante) {
 		
+		Collection<Posicion> posicionesInvalidas = new ArrayList<Posicion>();
 		Collection<Posicion> posicionesRango = new ArrayList<Posicion>();
 		
 		for(int i = 1; i <= rango; i++) {
+			
 			posicionesRango.addAll(obtenerPosicionesADistancia(atacante.obtenerPosicion(), i));
 		}
 		
+		for(Posicion posicion : posicionesRango) {
+			try {
+				mapa.verificarCelda(posicion);
+			}catch(CeldaInexistenteException e) {
+				posicionesInvalidas.add(posicion);
+			}
+		}
+		posicionesRango.removeAll(posicionesInvalidas);
 		return posicionesRango;
 	}
 	

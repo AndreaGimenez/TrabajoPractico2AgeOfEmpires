@@ -10,65 +10,67 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.PosicionesInicialesAldeanos;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class Juego {
 
-	private static final int ORO_INICIAL = 100;
 	private static final Posicion POSICION_INICIAL_CASTILLO_JUG_1 = new Posicion(0, 0);
 	private static final Posicion POSICION_INICIAL_PLAZACENTRAL_JUG_1 = new Posicion(5, 0);
 	public static final int CANTIDAD_DE_JUGADORES = 2;
 	
-	private LinkedList<Jugador> jugadores;
+	public LinkedList<Jugador> jugadores;
 	public Mapa mapa;
+	private Ronda ronda;
+	private boolean estaTerminado;
 
 	public Juego(Mapa mapa) 
 			throws CantidadDeJugadoresInvalidaException {
 
-		this.jugadores = new LinkedList<>();
+		this.jugadores = new LinkedList<Jugador>();
 		this.mapa = mapa;
+		this.ronda = new Ronda();
+		this.estaTerminado = false;
 	}
 
-	public void iniciar() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException {
+	public void iniciar(String[] nombreJugadores) 
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
-		if(jugadores.size()!=CANTIDAD_DE_JUGADORES)
-			throw new CantidadDeJugadoresInvalidaException();
-		
-		cargarCondicionesIniciales(jugadores.get(0));
-		cargarCondicionesIniciales(jugadores.get(1));
+		for(int i = 0; i < CANTIDAD_DE_JUGADORES; i++) {
+			agregarJugador(nombreJugadores[i]);
+		}
+		ronda.iniciar();
 	}
 
 	public void cargarCondicionesIniciales(Jugador jugador) 
-			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
-		
+			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		cargarEdificiosIniciales(jugador);
 		cargarUnidadesIniciales(jugador);
-		jugador.setOro(ORO_INICIAL);
 	}
 
 
 	private void cargarEdificiosIniciales(Jugador jugador)
-			throws CeldaOcupadaException, CeldaInexistenteException {
+			throws CeldaOcupadaException, CeldaInexistenteException, OroInsuficienteException {
 		
 		Castillo castillo = new Castillo(buscarPosicionCastillo(), this.mapa);
-		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(), this.mapa);
-		jugador.agregarEdificio(castillo); 
-		jugador.agregarEdificio(plazaCentral);
 		
+		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(), this.mapa);
+		
+		boolean checkearRecursos = false;
+		jugador.agregarEdificio(castillo, checkearRecursos); 
+		
+		jugador.agregarEdificio(plazaCentral, checkearRecursos);
 	}
 	
 	private void cargarUnidadesIniciales(Jugador jugador)
-			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
-		Aldeano aldeano1 = new Aldeano(buscarPosicionAldeano(), this.mapa);
-		Aldeano aldeano2 = new Aldeano(buscarPosicionAldeano(), this.mapa);
-		Aldeano aldeano3 = new Aldeano(buscarPosicionAldeano(), this.mapa);
-
-		jugador.agregarUnidad(aldeano1, mapa);
-		jugador.agregarUnidad(aldeano2, mapa);
-		jugador.agregarUnidad(aldeano3, mapa);
-	
+		boolean checkearRecursos = false;
+		
+		for(int i = 0 ; i < 3 ; i++) {
+			jugador.agregarUnidad(new Aldeano(buscarPosicionAldeano(), this.mapa),this.mapa, checkearRecursos);
+		}	
 	}
 
 	private Posicion buscarPosicionAldeano() {
@@ -117,16 +119,33 @@ public class Juego {
 		return posicion;
 	}
 
-	public void agregarJugador() throws CantidadDeJugadoresInvalidaException {
+	private void agregarJugador(String nombreJugador) 
+			throws CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
-		if(jugadores.size()==CANTIDAD_DE_JUGADORES)
-			throw new CantidadDeJugadoresInvalidaException();
-		this.jugadores.add(new Jugador());
-		
+		Jugador jugador = new Jugador(nombreJugador);
+		cargarCondicionesIniciales(jugador);
+
+		this.ronda.agregarJugador(jugador);
 	}
 
-	public Jugador obtenerJugador(int numeroDeJugador) {
+	public Jugador obtenerJugadorActual() {
+		return ronda.obtenerJugadorActual();
+	}
+
+	public void avanzarJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+		obtenerJugadorActual().avanzarTurno();
+		ronda.avanzar();
+		if(obtenerJugadorActual().castilloDestruido()) {
+			this.estaTerminado = true ;
+		}
+	}
+
+	public boolean estaTerminado() {
 		
-		return this.jugadores.get(numeroDeJugador);
+		return ( this.estaTerminado );
+	}
+
+	public Mapa obtenerMapa() {
+		return mapa;
 	}
 }

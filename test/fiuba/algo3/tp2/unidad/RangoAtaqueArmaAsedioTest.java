@@ -10,7 +10,6 @@ import java.util.Collection;
 
 import org.junit.Test;
 
-import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Posicion;

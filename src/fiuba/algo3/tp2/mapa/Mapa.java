@@ -34,7 +34,7 @@ public class Mapa {
 		celda.ocupar(posicionable);
 	}
 
-	private void verificarCelda(Posicion coordenada) throws CeldaInexistenteException {
+	public void verificarCelda(Posicion coordenada) throws CeldaInexistenteException {
 		if(coordenada.getX() < 0 || coordenada.getX() >= tamanioX
 		   || coordenada.getY() < 0 || coordenada.getY() >= tamanioY) {
 			throw new CeldaInexistenteException();

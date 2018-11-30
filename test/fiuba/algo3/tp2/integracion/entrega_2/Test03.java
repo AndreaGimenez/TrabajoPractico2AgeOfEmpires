@@ -4,7 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import Ataque.Atacador;
 import fiuba.algo3.tp2.edificio.AtacadorZona;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
@@ -15,10 +14,14 @@ import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.unidad.Atacador;
 import fiuba.algo3.tp2.unidad.AtaqueFueraDeRangoException;
+import fiuba.algo3.tp2.unidad.AtaqueInvalidoException;
 import fiuba.algo3.tp2.unidad.Espadachin;
 import fiuba.algo3.tp2.unidad.UnidadMuertaException;
 import fiuba.algo3.tp2.unidad.UnidadNoAtacableException;
@@ -36,7 +39,8 @@ public class Test03 {
 	
 	@Test
 	public void testUnEspadachinAtacaAUnAldeanoDentroDeSuRangoHastaMatarlo() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadMuertaException, EdificioDestruidoException, AtaqueFueraDeRangoException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadMuertaException, 
+			EdificioDestruidoException, AtaqueFueraDeRangoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -44,7 +48,9 @@ public class Test03 {
 		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
 		
 		espadachin.atacar(aldeano);
+		espadachin.actualizarEstadoParaSiguienteTurno();
 		espadachin.atacar(aldeano);
+		espadachin.actualizarEstadoParaSiguienteTurno();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
 		espadachin.atacar(aldeano);
@@ -52,7 +58,8 @@ public class Test03 {
 	
 	@Test
 	public void testUnEspadachinAtacaUnCuartelHastaDestruirlo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, 
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -61,6 +68,7 @@ public class Test03 {
 		
 		for(int i = 0; i < 17; i++) {
 			espadachin.atacar(cuartel);
+			espadachin.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
@@ -69,7 +77,7 @@ public class Test03 {
 	
 	@Test
 	public void testUnEspadachinAtacaUnAldeanoFueraDeSuRango() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -84,7 +92,7 @@ public class Test03 {
 	
 	@Test
 	public void testUnArqueroAtacaUnAldeanoFueraDeSuRango() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -97,7 +105,8 @@ public class Test03 {
 	
 	@Test
 	public void testUnArqueroAtacaUnAldeanoHastaMatarlo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, 
+			AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -105,9 +114,13 @@ public class Test03 {
 		Atacable aldeano = new Aldeano(new Posicion(2,1), mapa);
 		
 		arquero.atacar(aldeano);
+		arquero.actualizarEstadoParaSiguienteTurno();
 		arquero.atacar(aldeano);
+		arquero.actualizarEstadoParaSiguienteTurno();
 		arquero.atacar(aldeano);
+		arquero.actualizarEstadoParaSiguienteTurno();
 		arquero.atacar(aldeano);
+		arquero.actualizarEstadoParaSiguienteTurno();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
 		arquero.atacar(aldeano);
@@ -115,7 +128,8 @@ public class Test03 {
 	
 	@Test
 	public void testUnArqueroAtacaUnCuartelHastaDestruirlo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, 
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
@@ -124,6 +138,7 @@ public class Test03 {
 		
 		for(int i = 1; i < 26; i++) {
 			arquero.atacar(cuartel);
+			arquero.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
@@ -134,11 +149,12 @@ public class Test03 {
 	
 	@Test
 	public void testUnArmaDeAsedioAtacaUnAldeano() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
 		Atacador armaAsedio = new ArmaAsedio(new Posicion(1,1), mapa);
+		((ArmaAsedio)armaAsedio).montar();
 		Atacable aldeano = new Aldeano(new Posicion(5,1), mapa);
 		
 		exceptionRule.expect(UnidadNoAtacableException.class);
@@ -147,11 +163,12 @@ public class Test03 {
 
 	@Test
 	public void testUnArmaDeAsedioAtacaUnCuartelFueraDeSuRango() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
 		Atacador armaAsedio = new ArmaAsedio(new Posicion(1,1), mapa);
+		((ArmaAsedio)armaAsedio).montar();
 		Atacable cuartel = new Cuartel(new Posicion(7,1), mapa);
 		
 		exceptionRule.expect(AtaqueFueraDeRangoException.class);
@@ -160,17 +177,24 @@ public class Test03 {
 	
 	@Test
 	public void testUnArmaDeAsedioAtacaUnCuartelHastaDestruirlo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, 
+			UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		
 		Atacador armaAsedio = new ArmaAsedio(new Posicion(1,1), mapa);
+		((ArmaAsedio)armaAsedio).montar();
+		
 		Atacable cuartel = new Cuartel(new Posicion(2,1), mapa);
 		
 		armaAsedio.atacar(cuartel);
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		armaAsedio.atacar(cuartel);
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		armaAsedio.atacar(cuartel);
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		armaAsedio.atacar(cuartel);
+		armaAsedio.actualizarEstadoParaSiguienteTurno();
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
 		armaAsedio.atacar(cuartel);
@@ -180,7 +204,7 @@ public class Test03 {
 	
 	@Test
 	public void testUnCastilloAtacaUnaZonaEnLaQueHayUnAldeanoHastaMatarlo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
@@ -197,7 +221,7 @@ public class Test03 {
 	
 	@Test
 	public void testUnCastilloAtacaUnaZonaEnLaQueHayUnAldeanoHastaMatarloYContinuaAtacando() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
@@ -217,7 +241,8 @@ public class Test03 {
 	
 	@Test
 	public void testUnCastilloAtacaUnaZonaConUnAldeanoFueraDeLaZonaAldeanoFueraDeLaZonaDeAtaque() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, 
+			UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
@@ -229,14 +254,17 @@ public class Test03 {
 		castillo.atacar();
 		
 		espadachin.atacar(aldeano);
+		espadachin.actualizarEstadoParaSiguienteTurno();
 		espadachin.atacar(aldeano);
+		espadachin.actualizarEstadoParaSiguienteTurno();
+		
 		exceptionRule.expect(UnidadMuertaException.class);
 		espadachin.atacar(aldeano);
 	}
 	
 	@Test
 	public void testUnCastilloAtacaUnCuartelQueSeEncuentraEnLaZonaDeAtaque() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
@@ -253,7 +281,8 @@ public class Test03 {
 	
 	@Test
 	public void testUnCastilloAtacaCuandoHayUnCuartelFueraDeLaZonaDeAtaque() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException,
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
@@ -266,8 +295,45 @@ public class Test03 {
 		
 		for(int i = 1; i <= 17; i++) {
 			espadachin.atacar(cuartel);
+			espadachin.actualizarEstadoParaSiguienteTurno();
 		}
 		exceptionRule.expect(EdificioDestruidoException.class);
 		espadachin.atacar(cuartel);
+	}
+	
+	@Test
+	public void testUnCastilloUbicadoEnLaEsquinaInferiorIzquierdaAtacaUnCuartelDentroDeLaZonaDeAtaque() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException,
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+		
+		Mapa mapa = new Mapa(250, 250);
+		AtacadorZona castillo = new Castillo(new Posicion(0,0), mapa);
+		Atacador espadachin = new Espadachin(new Posicion(4,0), mapa);
+		Atacable cuartel = new Cuartel(new Posicion(5,0), mapa);
+		
+		for(int i = 1; i <= 14; i++) {
+			castillo.atacar();
+		}
+		
+		exceptionRule.expect(EdificioDestruidoException.class);
+		espadachin.atacar(cuartel);
+	}
+	
+	@Test
+	public void testUnCastilloUbicadoEnLaEsquinaSuperiorDerechoAtacaUnAldeanoDentroDeLaZonaDeAtaque() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException,
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+		
+		Mapa mapa = new Mapa(250, 250);
+		AtacadorZona castillo = new Castillo(new Posicion(246,246), mapa);
+		Atacador espadachin = new Espadachin(new Posicion(245,249), mapa);
+		Atacable aldeano = new Aldeano(new Posicion(244,249), mapa);
+		
+		for(int i = 1; i <= 3; i++) {
+			castillo.atacar();
+		}
+		
+		exceptionRule.expect(UnidadMuertaException.class);
+		espadachin.atacar(aldeano);
 	}
 }

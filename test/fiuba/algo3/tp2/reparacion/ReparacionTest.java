@@ -12,6 +12,7 @@ import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
 import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
@@ -95,11 +96,11 @@ public class ReparacionTest {
 	
 	@Test
 	public void testUnAldeanoEnLaPosicionX1Y1ReparaUnCuartelCon0PorCientoDeVidaEnCuatroTurnos() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioDestruidoException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioDestruidoException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 
 		Mapa mapa = new Mapa(250,250);
 
-		Jugador ignacio = new Jugador();
+		Jugador ignacio = new Jugador("Jugador 1");
 
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
@@ -107,14 +108,13 @@ public class ReparacionTest {
 		
 		Ataque ataque = mock(AtaqueEspadachin.class);
 		when(ataque.obtenerDanioEdificio()).thenReturn(249);
+		
+		boolean checkearRecursos = false;
+		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
 
-		ignacio.agregarUnidad(aldeano, mapa);
+		ignacio.agregarEdificio(cuartel, false);
 
-		ignacio.agregarEdificio(cuartel);
-
-		Turno turno = new Turno(ignacio.obtenerPosicionables());
-
-		turno.iniciar();
+		Turno turno = new Turno(ignacio);
 
 		cuartel.recibirDanio(ataque);
 
@@ -162,11 +162,11 @@ public class ReparacionTest {
 
 	@Test
 	public void testDaniarUnCuartelDeberiaMostrarAlCuartelConLaMismaVidaAlAvanzarUnTurnoYNoFueReparado() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioDestruidoException, PoblacionMaximaAlcanzadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioDestruidoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 
 		Mapa mapa = new Mapa(250,250);
 
-		Jugador ignacio = new Jugador();
+		Jugador ignacio = new Jugador("Jugador 1");
 
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
@@ -174,14 +174,14 @@ public class ReparacionTest {
 		
 		Ataque ataque = mock(AtaqueEspadachin.class);
 		when(ataque.obtenerDanioEdificio()).thenReturn(50);
+		
+		boolean checkearRecursos = false;
+		
+		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
 
-		ignacio.agregarUnidad(aldeano, mapa);
+		ignacio.agregarEdificio(cuartel, false);
 
-		ignacio.agregarEdificio(cuartel);
-
-		Turno turno = new Turno(ignacio.obtenerPosicionables());
-
-		turno.iniciar();
+		Turno turno = new Turno(ignacio);
 
 		cuartel.recibirDanio(ataque);
 

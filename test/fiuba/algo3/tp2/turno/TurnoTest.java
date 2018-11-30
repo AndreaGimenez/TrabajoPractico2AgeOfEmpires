@@ -9,6 +9,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -17,6 +20,8 @@ import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class TurnoTest {
@@ -30,13 +35,13 @@ public class TurnoTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Collection<Posicionable> posicionablesJugador = new ArrayList<Posicionable>();
+		Jugador jugador = new Jugador("Jugador 1");
+		Collection<Posicionable> posicionablesJugador = jugador.obtenerPosicionables();
 		Aldeano aldeano = new Aldeano(new Posicion(0, 0), mapa);
 		
 		posicionablesJugador.add(aldeano);
 		
-		Turno primerTurno = new Turno(posicionablesJugador);
-		primerTurno.iniciar();
+		Turno primerTurno = new Turno(jugador);
 		
 		aldeano.mover(new DireccionDerecha());
 		
@@ -46,21 +51,21 @@ public class TurnoTest {
 	
 	@Test
 	public void testDadoUnAldeanoQueYaSeMovioEnUnTurnoDeberiaPoderMoverseEnUnNuevoTurno() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException{
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException{
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Collection<Posicionable> posicionablesJugador = new ArrayList<Posicionable>();
+		Jugador jugador = new Jugador("Jugador 1");
+		Collection<Posicionable> posicionablesJugador = jugador.obtenerPosicionables();
 		Aldeano aldeano = new Aldeano(new Posicion(0, 0), mapa);
 		
-		posicionablesJugador.add(aldeano);
+		boolean checkearRecursos = false;
+		jugador.agregarUnidad(aldeano, mapa, checkearRecursos);
 		
-		Turno primerTurno = new Turno(posicionablesJugador);
-		primerTurno.iniciar();
+		Turno turno = new Turno(jugador);
 		aldeano.mover(new DireccionDerecha());
 		
-		Turno segundoTurno = new Turno(posicionablesJugador);
-		segundoTurno.iniciar();
+		turno.avanzar();
 		aldeano.mover(new DireccionDerecha());
 	}
 }

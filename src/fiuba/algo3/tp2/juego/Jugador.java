@@ -3,29 +3,40 @@ package fiuba.algo3.tp2.juego;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 
 public class Jugador {
 	
 	private static final int POBLACION_MAXIMA = 50;
+	private static final int ORO_INICIAL = 100;
 	
 	private int oro;
+	private int poblacion;
 	private Collection<Posicionable> edificios ;
 	private Collection<Posicionable> unidades ;
 	private Collection<Aldeano> recolectoresOro;
-	private int poblacion;
+	
+	private Turno turno;
+	private String nombre;
 
-	public Jugador() {
+	public Jugador(String nombre) {
 		
 		this.edificios = new LinkedList<>();
 		this.unidades = new LinkedList<>();
 		this.recolectoresOro = new LinkedList<>();
-		this.oro = 0;
+		this.oro = ORO_INICIAL;
 		this.poblacion = 0;
+		this.nombre = nombre;
+		
+		this.turno = new Turno(this);
 	}
 
 	public LinkedList<Posicionable> obtenerPosicionables() {
@@ -38,46 +49,70 @@ public class Jugador {
 
 		return posicionables;
 	}
+	
+	public void agregarUnidad(Unidad unidad, Mapa mapa) throws PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+		agregarUnidad(unidad, mapa, true);
+	}
 
-	public void agregarUnidad(Unidad unidad, Mapa mapa) throws PoblacionMaximaAlcanzadaException {
+	public void agregarUnidad(Unidad unidad, Mapa mapa, boolean verificarRecursos) 
+			throws PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
-		if(poblacion == POBLACION_MAXIMA) {
-			removerUnidad(unidad, mapa);
-			throw new PoblacionMaximaAlcanzadaException();
+		if(verificarRecursos) {
+			if(poblacion == POBLACION_MAXIMA) {
+				removerUnidad(unidad, mapa);
+				throw new PoblacionMaximaAlcanzadaException();
+			}
+			
+			if(this.oro >= unidad.obtenerCosto()) {
+				this.oro = this.oro - unidad.obtenerCosto();
+			}
+			else {
+				throw new OroInsuficienteException();
+			}
 		}
+		
 		this.unidades.add(unidad);
 		poblacion += 1;
 		
+		//this.oro = oro - unidad.obtenerCosto();
+
 		if(unidad instanceof Aldeano) {
 			this.recolectoresOro.add((Aldeano) unidad);
 		}
 	}
 
-	public void agregarEdificio(Edificio edificio) {
-
-		this.edificios.add(edificio);
-
-		this.oro = this.oro - edificio.costo();
-
-	}
-
-	public void setOro(int oroInicial) {
-		
-		this.oro = oroInicial;	
-		
+	public void agregarEdificio(Edificio edificio) throws OroInsuficienteException {
+	
+		agregarEdificio(edificio, true);
 	}
 	
-	public int obtenerOro() {
-		this.oro += recolectarOroDelTurno();
-		return this.oro;		
+	public void agregarEdificio(Edificio edificio, boolean checkearRecursos) throws OroInsuficienteException {
+		
+		if(checkearRecursos) {
+			
+			this.oro = this.oro - edificio.costo();
+			
+			if(this.oro >= edificio.costo()) {
+				this.oro = this.oro - edificio.costo();
+			}
+			else {
+				throw new OroInsuficienteException();
+			}
+		}
+		
+		this.edificios.add(edificio);
 	}
 
-	private int recolectarOroDelTurno() {
+	public int obtenerOro() {
+		return oro;	
+	}
+	
+	public void sumarOroDelTurno() {
 		int oroDelTurno = 0;
 		for(Aldeano aldeanoActual : recolectoresOro) {
 			oroDelTurno += aldeanoActual.recolectarOro();
 		}
-		return oroDelTurno;
+		this.oro += oroDelTurno;
 	}
 
 	public int obtenerPoblacionActual() {
@@ -91,4 +126,23 @@ public class Jugador {
 		poblacion -=1;
 	}
 
+	public void avanzarTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+		turno.avanzar();
+	}
+
+	public String obtenerNombre() {
+		return nombre;
+	}
+
+	public boolean castilloDestruido() {
+
+		return this.obtenerCastillo().estaDestruido();
+
+	}
+
+	private Castillo obtenerCastillo() {
+
+		return (Castillo) this.obtenerPosicionables().getFirst();
+
+	}
 }

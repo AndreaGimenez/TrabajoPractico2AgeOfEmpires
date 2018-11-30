@@ -6,11 +6,7 @@ public class ReparacionActivada implements Reparacion {
 
 	@Override
 	public void reparar(Edificio edificio) throws EdificioNoAptoParaReparacionException {
-
 		edificio.curar();
-
-
-
 	}
 
 }

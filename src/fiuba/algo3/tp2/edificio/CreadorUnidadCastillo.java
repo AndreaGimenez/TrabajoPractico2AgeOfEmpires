@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.edificio;
+/*package fiuba.algo3.tp2.edificio;
 
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
@@ -29,3 +29,4 @@ public class CreadorUnidadCastillo implements CreadorUnidad {
 	}
 
 }
+*/
