@@ -1,17 +1,18 @@
-package fiuba.algo3.tp2.juego;
-
+package fiuba.algo3.integracion.entrega_3;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-
 
 import org.junit.Rule;
 import org.junit.Test;
-import static org.mockito.Mockito.when;
 import org.junit.rules.ExpectedException;
 
 import fiuba.algo3.tp2.edificio.Castillo;
+import fiuba.algo3.tp2.juego.CantidadDeJugadoresInvalidaException;
+import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -20,9 +21,12 @@ import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.AtaqueArquero;
 
+import org.junit.experimental.theories.suppliers.TestedOn;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class FinDelJuegoTest{
+public class TestFinDelJuego {
 	
 	@Rule
 	public ExpectedException exceptionRule = ExpectedException.none();
@@ -86,7 +90,5 @@ public class FinDelJuegoTest{
 		juego.avanzarJugador();
 
 		assertFalse(juego.estaTerminado());
-		
 	}
 }
-
