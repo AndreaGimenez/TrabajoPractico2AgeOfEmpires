@@ -133,15 +133,16 @@ public class Jugador {
 	public String obtenerNombre() {
 		return nombre;
 	}
-	public boolean castilloDestruido(Mapa mapa) {
-		
-		Castillo castillo = null;
-		
-		for(Posicionable edificioActual : edificios) {
-			if(edificioActual instanceof Castillo) {
-				castillo = (Castillo) edificioActual;
-			}
-		}
-		return castillo.estaDestruido();
+
+	public boolean castilloDestruido() {
+
+		return this.obtenerCastillo().estaDestruido();
+
+	}
+
+	private Castillo obtenerCastillo() {
+
+		return (Castillo) this.obtenerPosicionables().getFirst();
+
 	}
 }

@@ -12,9 +12,13 @@ public class AccionesDeCastillo {
 
     Castillo castillo;
 
+    Mapa mapa;
+
     public AccionesDeCastillo() throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
 
         this.castillo = new Castillo(new Posicion(5, 5), new Mapa(250, 250));
+
+        this.mapa = new Mapa(250,250);
 
     }
 
@@ -26,7 +30,7 @@ public class AccionesDeCastillo {
         Button botonCreadorDeArmaDeAsedio = new Button();
         botonCreadorDeArmaDeAsedio.setText("Crear Arma de Asedio");
 
-        BotonCreadorDeArmaDeAsedioEventHandler botonCreadorDeArmaDeAsedioEventHandler = new BotonCreadorDeArmaDeAsedioEventHandler(botonCreadorDeArmaDeAsedio, this.castillo);
+        BotonCreadorDeArmaDeAsedioEventHandler botonCreadorDeArmaDeAsedioEventHandler = new BotonCreadorDeArmaDeAsedioEventHandler(botonCreadorDeArmaDeAsedio, this.castillo, this.mapa);
         botonCreadorDeArmaDeAsedio.setOnAction(botonCreadorDeArmaDeAsedioEventHandler);
 
         VBox contenedorVertical = new VBox(labelNombreUnidad, botonCreadorDeArmaDeAsedio);

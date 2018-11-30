@@ -15,13 +15,11 @@ public class Castillo extends Edificio implements /*GeneradorUnidades,*/ Atacado
 	private static final int SALUD_RECUPERADA_POR_TURNO = 15;
 	//private CreadorUnidad generadorUnidades;
 	private AtaqueZona ataque;
-	private boolean destruido;
 	
 	public Castillo(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, new FormaCastilloRectangulo(), new ReparacionDesactivada(), VIDA_MAXIMA, SALUD_RECUPERADA_POR_TURNO, mapa);
 		//this.generadorUnidades = new CreadorUnidadCastillo(mapa);
 		this.ataque = new AtaqueCastillo(this, mapa);
-		this.destruido = false;
 	}
 
 	@Override
@@ -37,9 +35,7 @@ public class Castillo extends Edificio implements /*GeneradorUnidades,*/ Atacado
 
 	@Override
 	public void actualizarEstadoParaSiguienteTurno() {
-		if(this.obtenerVida() == 0) {
-			this.destruido = true;
-		}
+
 	}
 
 	@Override
@@ -48,7 +44,7 @@ public class Castillo extends Edificio implements /*GeneradorUnidades,*/ Atacado
 	}
 	
 	public boolean estaDestruido() {
-		return this.destruido;
+		return super.obtenerVida() == 0;
 	}
 /*
 	@Override

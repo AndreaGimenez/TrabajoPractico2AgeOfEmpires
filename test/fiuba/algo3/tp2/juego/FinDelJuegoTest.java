@@ -2,6 +2,7 @@ package fiuba.algo3.tp2.juego;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -63,46 +64,44 @@ public class FinDelJuegoTest{
 		
 		//en el turno del jugador 2 se ataca el castillo del jugador 1
 		castilloJ1.recibirDanio(ataque);
-		System.out.println(castilloJ1.obtenerVida());
+		//System.out.println(castilloJ1.obtenerVida());
 		
 		juego.avanzarJugador();
 		
-		
-		
-		assertEquals(true, juego.estaTerminado());
+		assertTrue(juego.estaTerminado());
 		
 	}
-	/*
+
 	@Test
 	public void test_AlNoEliminarCastilloDeUnJugadorElJuegoNoDebeFinalizar() 
 			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, 
 			CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, 
 			OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
-		
+
 		Mapa mapa = new Mapa(250, 250);
-		
+
 		Juego juego = new Juego(mapa);
-		
+
 		AtaqueArquero ataque = mock(AtaqueArquero.class);
 		when(ataque.obtenerDanioEdificio()).thenReturn(500);
-		
-		juego.iniciar();
-		
-		Jugador jugador1 = juego.obtenerJugadorActual();
-		
+
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
+
 		juego.avanzarJugador();
-		
 		Jugador jugador2 = juego.obtenerJugadorActual();
-		Espadachin espadachin = new Espadachin(new Posicion(0, 4), mapa);
-		jugador2.agregarUnidad(espadachin, mapa, true);
+		juego.avanzarJugador();
+		Jugador jugador1 = juego.obtenerJugadorActual();
+		Castillo castilloJ1 = (Castillo) jugador1.obtenerPosicionables().getFirst();
+		juego.avanzarJugador();
+
+		//en el turno del jugador 2 se ataca el castillo del jugador 1
+		castilloJ1.recibirDanio(ataque);
+		//System.out.println(castilloJ1.obtenerVida());
+
+		juego.avanzarJugador();
+
+		assertFalse(juego.estaTerminado());
 		
-		//juego.obtenerJugadorActual().atacar(juego.obtenerAtacables(jugador1).getFirst(), juego.obtenerJugadorActual().obtenerPosicionables().getLast());
-		Castillo castillo = (Castillo) jugador2.obtenerPosicionables().getFirst();
-		
-		castillo.recibirDanio(ataque);
-		
-		assertEquals(false, juego.estaTerminado());
-		
-	}*/
+	}
 }
 

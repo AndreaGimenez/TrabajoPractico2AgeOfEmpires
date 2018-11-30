@@ -135,16 +135,16 @@ public class Juego {
 	public void avanzarJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		obtenerJugadorActual().avanzarTurno();
 		ronda.avanzar();
-		if(obtenerJugadorActual().castilloDestruido(mapa)) {
+		if(obtenerJugadorActual().castilloDestruido()) {
 			this.estaTerminado = true ;
 		}
 	}
 
 	public boolean estaTerminado() {
 		
-		return this.estaTerminado;
+		return ( this.estaTerminado );
 	}
-	
+
 	public Mapa obtenerMapa() {
 		return mapa;
 	}
