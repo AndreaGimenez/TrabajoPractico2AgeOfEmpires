@@ -1,12 +1,15 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Celda;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.vista.botones.BotonCreadorDeCuartelEventHandler;
+import fiuba.algo3.tp2.vista.botones.BotonCreadorDePlazaCentralEventHandler;
 import fiuba.algo3.tp2.vista.eventos.ButtonAvanzarTurnoHandler;
 import fiuba.algo3.tp2.vista.interfaces.AccionesDeAldeano;
 import fiuba.algo3.tp2.vista.interfaces.AccionesDeCuartel;
@@ -46,23 +49,23 @@ public class ContenedorPartida extends BorderPane {
     AccionesDeCuartel accionesDeCuartel;
     AccionesDeCastillo accionesDeCastillo;
 
-    public ContenedorPartida(Stage stage, Juego juego) throws CeldaOcupadaException, CeldaInexistenteException {
+    public ContenedorPartida(Stage stage, Juego juego) throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
         this.setMenu(stage);
         this.setMapa(juego, stage);
         this.setControles(juego);
         this.setEstadoJugador(juego);
     }
 
-    private void setControles(Juego juego) {
+    private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
 
-        //this.accionesDeAldeano = new AccionesDeAldeano();
-        //this.accionesDeAldeano.mostrarAcciones(this);
+        /*this.accionesDeAldeano = new AccionesDeAldeano();
+        this.accionesDeAldeano.mostrarAcciones(this);
 
-        //this.accionesDeCuartel = new AccionesDeCuartel();
-        //this.accionesDeCuartel.mostrarAcciones(this);
+        this.accionesDeCuartel = new AccionesDeCuartel();
+        this.accionesDeCuartel.mostrarAcciones(this);
 
-        //this.accionesDeCastillo = new AccionesDeCastillo();
-        //this.accionesDeCastillo.mostrarAcciones(this);
+        this.accionesDeCastillo = new AccionesDeCastillo();
+        this.accionesDeCastillo.mostrarAcciones(this);*/
 
     	Label labelNombreUnidad = new Label();
         labelNombreUnidad.setText("Aldeano");
@@ -72,11 +75,7 @@ public class ContenedorPartida extends BorderPane {
         
         Button botonConstruir = new Button();
         botonConstruir.setText("Construir");
-        /*
-         * Agregar handler
-         * BotonConstruirHandler botonConstruirHandler = new BotonConstruirHandler();
-         * botonConstruir.setOnAction(botonConstruirHandler);
-         */
+
         BotonEnter botonEnter = new BotonEnter();
         botonEnter.disparar(botonConstruir);
 

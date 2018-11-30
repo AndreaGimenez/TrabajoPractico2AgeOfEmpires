@@ -1,5 +1,9 @@
 package fiuba.algo3.tp2.mapa;
 
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 

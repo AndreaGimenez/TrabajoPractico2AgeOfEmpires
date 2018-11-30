@@ -8,24 +8,22 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
 import fiuba.algo3.tp2.mapa.Atacable;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
-import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
-import fiuba.algo3.tp2.unidad.Ataque;
-import fiuba.algo3.tp2.unidad.AtaqueEspadachin;
-import fiuba.algo3.tp2.unidad.AtaqueFueraDeRangoException;
-import fiuba.algo3.tp2.unidad.Unidad;
-import fiuba.algo3.tp2.unidad.UnidadMuertaException;
+import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
+import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 
 public class AtaqueCastilloTest {
 

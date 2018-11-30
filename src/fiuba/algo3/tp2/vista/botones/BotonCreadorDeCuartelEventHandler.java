@@ -1,11 +1,10 @@
 package fiuba.algo3.tp2.vista.botones;
 
-import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.EdificioConstants;
 import fiuba.algo3.tp2.edificio.PosicionarEdificio;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
-import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

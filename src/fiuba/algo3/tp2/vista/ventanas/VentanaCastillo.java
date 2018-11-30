@@ -2,7 +2,7 @@ package fiuba.algo3.tp2.vista.ventanas;
 
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeArmaDeAsedioEventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

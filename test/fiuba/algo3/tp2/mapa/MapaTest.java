@@ -5,6 +5,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

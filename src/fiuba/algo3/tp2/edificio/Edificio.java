@@ -2,20 +2,19 @@ package fiuba.algo3.tp2.edificio;
 
 import java.util.Collection;
 
+import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
 import fiuba.algo3.tp2.formas.Forma;
 import fiuba.algo3.tp2.mapa.Atacable;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
-import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
-import fiuba.algo3.tp2.reparacion.Reparacion;
-import fiuba.algo3.tp2.reparacion.ReparacionActivada;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.reparacion.Reparacion;
+import fiuba.algo3.tp2.excepciones.reparacion.ReparacionActivada;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Ataque;
-import fiuba.algo3.tp2.unidad.Unidad;
-import fiuba.algo3.tp2.unidad.UnidadConstants.TipoUnidad;
 
 public abstract class Edificio implements Posicionable, Atacable {
 
@@ -24,8 +23,6 @@ public abstract class Edificio implements Posicionable, Atacable {
 	private Forma forma;
 	protected Mapa mapa;
 	private Aldeano aldeanoAsignadoParaReparar;
-	private Aldeano aldeanoConstructor;
-	private boolean estaEnReparacion;
 	private int vida;
 	private int topeDeVida;
 	private int puntosDeRecuperacion;
@@ -41,7 +38,6 @@ public abstract class Edificio implements Posicionable, Atacable {
 		this.vida = vidaMaxima;
 		this.topeDeVida = vidaMaxima;
 		this.puntosDeRecuperacion = saludRecuperadaPorTurno;
-		this.estaEnReparacion = false;
 		posicionar(posicion);
 	}
 
@@ -76,7 +72,7 @@ public abstract class Edificio implements Posicionable, Atacable {
 	}
 
 	@Override
-    public void actualizarEstadoParaSiguienteTurno() throws EdificioNoAptoParaReparacionException {
+    public void actualizarEstadoParaSiguienteTurno() {
 
     }
 
@@ -118,7 +114,6 @@ public abstract class Edificio implements Posicionable, Atacable {
 
 	    this.aldeanoAsignadoParaReparar = aldeano;
 
-		this.estaEnReparacion = true;
 
 	}
 
@@ -126,12 +121,6 @@ public abstract class Edificio implements Posicionable, Atacable {
 
 	    return (this.aldeanoAsignadoParaReparar == aldeano);
     }
-
-    public Aldeano obtenerConstructor(){
-
-		return this.aldeanoAsignadoParaReparar;
-
-	}
 
 	public abstract int costo();
 

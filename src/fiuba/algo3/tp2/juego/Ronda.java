@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 
 public class Ronda {
 	Collection<Jugador> jugadores;

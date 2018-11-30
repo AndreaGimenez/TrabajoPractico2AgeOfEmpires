@@ -3,7 +3,7 @@ package fiuba.algo3.tp2.edificio;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;

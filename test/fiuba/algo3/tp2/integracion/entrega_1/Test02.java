@@ -4,32 +4,28 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 
 import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
-import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioConstants;
-import fiuba.algo3.tp2.edificio.EdificioEnConstruccionException;
-import fiuba.algo3.tp2.edificio.EdifioNoAptoParaContruirException;
+import fiuba.algo3.tp2.excepciones.EdificioEnConstruccionException;
+import fiuba.algo3.tp2.excepciones.EdifioNoAptoParaContruirException;
 import fiuba.algo3.tp2.edificio.GestionarConstruccion;
 import fiuba.algo3.tp2.edificio.PosicionarEdificio;
-import fiuba.algo3.tp2.edificio.UnidadNoSoportadaException;
-import fiuba.algo3.tp2.juego.Jugador;
-import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.UnidadNoSoportadaException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionArriba;
@@ -37,19 +33,15 @@ import fiuba.algo3.tp2.movimiento.DireccionArribaDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
-import fiuba.algo3.tp2.movimiento.MovimientoInvalidoException;
-import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
-import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
-import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.unidad.DireccionAbajo;
 import fiuba.algo3.tp2.unidad.Espadachin;
-import fiuba.algo3.tp2.unidad.Unidad;
-import fiuba.algo3.tp2.unidad.UnidadConstants;
 
 /**
  * Pruebas de Unidades

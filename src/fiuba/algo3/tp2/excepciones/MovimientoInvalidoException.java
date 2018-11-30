@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.movimiento;
+package fiuba.algo3.tp2.excepciones;
 
 public class MovimientoInvalidoException extends Exception {
 

@@ -2,6 +2,9 @@ package fiuba.algo3.tp2.mapa;
 
 import static org.junit.Assert.assertTrue;
 
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import org.junit.Test;
 
 import fiuba.algo3.tp2.unidad.Aldeano;
