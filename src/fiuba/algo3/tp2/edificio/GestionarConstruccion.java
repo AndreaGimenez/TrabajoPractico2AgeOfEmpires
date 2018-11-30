@@ -2,15 +2,15 @@ package fiuba.algo3.tp2.edificio;
 
 import java.util.Collection;
 
-import fiuba.algo3.tp2.formas.Forma;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioEnConstruccionException;
+import fiuba.algo3.tp2.excepciones.UnidadNoSoportadaException;
 import fiuba.algo3.tp2.mapa.*;
-import fiuba.algo3.tp2.reparacion.Reparacion;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Espadachin;
-import fiuba.algo3.tp2.unidad.Unidad;
-import fiuba.algo3.tp2.unidad.UnidadConstants;
 
 /*Estado de construccion:
 *

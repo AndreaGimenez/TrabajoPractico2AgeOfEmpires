@@ -1,14 +1,15 @@
-package fiuba.algo3.tp2.reparacion;
+package fiuba.algo3.tp2.excepciones.reparacion;
 
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.edificio.Edificio;
-import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class ReparadorEdificioAldeano implements ReparadorEdificio {
 
 	private EdificioConReparadorAsignadoException EdificioConReparadorAsignado;
 	private boolean yaRepareEsteTurno;
-	private EdificioNoAptoParaReparacionException EdificioNoAptoParaReparacionException;
+	private fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException EdificioNoAptoParaReparacionException;
 
 	public ReparadorEdificioAldeano() {
 

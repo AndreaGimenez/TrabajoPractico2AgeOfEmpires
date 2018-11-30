@@ -3,22 +3,22 @@ package fiuba.algo3.tp2.unidad;
 import fiuba.algo3.tp2.construccion.ConstructorEdificios;
 import fiuba.algo3.tp2.construccion.CreadorEdificio;
 import fiuba.algo3.tp2.construccion.CreadorEdificioAldeano;
-import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.recursos.OroPorTurno;
-import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.reparacion.EdificioFueraDeRangoException;
-import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
-import fiuba.algo3.tp2.reparacion.Reparador;
-import fiuba.algo3.tp2.reparacion.ReparadorEdificio;
-import fiuba.algo3.tp2.reparacion.ReparadorEdificioAldeano;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioFueraDeRangoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.reparacion.Reparador;
+import fiuba.algo3.tp2.excepciones.reparacion.ReparadorEdificio;
+import fiuba.algo3.tp2.excepciones.reparacion.ReparadorEdificioAldeano;
 
 public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	

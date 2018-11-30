@@ -4,8 +4,8 @@ import java.util.Collection;
 
 import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.mapa.Posicionable;
-import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 
 public class Turno {
 	

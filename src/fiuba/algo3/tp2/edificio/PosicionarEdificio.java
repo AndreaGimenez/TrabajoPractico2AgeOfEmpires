@@ -1,8 +1,8 @@
 package fiuba.algo3.tp2.edificio;
 
-import fiuba.algo3.tp2.construccion.EdificioNoSoportadoException;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class PosicionarEdificio {

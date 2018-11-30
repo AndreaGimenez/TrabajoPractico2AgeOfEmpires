@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.edificio;
+package fiuba.algo3.tp2.excepciones;
 
 public class EspacioDeConstruccionOcupadoError extends Exception{
 }

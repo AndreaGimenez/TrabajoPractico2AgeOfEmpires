@@ -1,10 +1,8 @@
 package fiuba.algo3.tp2.unidad;
 
-import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
+import fiuba.algo3.tp2.excepciones.*;
 import fiuba.algo3.tp2.formas.FormaArmaAsedioRectangulo;
 import fiuba.algo3.tp2.mapa.Atacable;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.movimiento.MovimientoBasico;

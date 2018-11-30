@@ -1,5 +1,8 @@
 package fiuba.algo3.tp2.vista.interfaces;
 
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.mapa.*;
 import fiuba.algo3.tp2.vista.ContenedorPartida;

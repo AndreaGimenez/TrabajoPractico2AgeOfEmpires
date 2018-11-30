@@ -7,24 +7,24 @@ import org.junit.rules.ExpectedException;
 import fiuba.algo3.tp2.edificio.AtacadorZona;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
-import fiuba.algo3.tp2.edificio.EdificioDestruidoException;
+import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
 import fiuba.algo3.tp2.mapa.Atacable;
-import fiuba.algo3.tp2.mapa.CeldaInexistenteException;
-import fiuba.algo3.tp2.mapa.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.TamanioInvalidoException;
-import fiuba.algo3.tp2.reparacion.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.reparacion.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Atacador;
-import fiuba.algo3.tp2.unidad.AtaqueFueraDeRangoException;
-import fiuba.algo3.tp2.unidad.AtaqueInvalidoException;
+import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.unidad.Espadachin;
-import fiuba.algo3.tp2.unidad.UnidadMuertaException;
-import fiuba.algo3.tp2.unidad.UnidadNoAtacableException;
+import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
+import fiuba.algo3.tp2.excepciones.UnidadNoAtacableException;
 
 /**
  * Tests de Ataques de unidades y castillo
