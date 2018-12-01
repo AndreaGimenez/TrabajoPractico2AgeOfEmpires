@@ -6,7 +6,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 
 public abstract class Forma {
 
-	public abstract Collection<Posicion> obtenerCoordenadas(Posicion coordenada);
+	public abstract Collection<Posicion> obtenerPosiciones(Posicion coordenada);
 
 	public abstract Collection<Posicion> obtenerPosicionesContorno(Posicion posicion);
 

@@ -24,7 +24,7 @@ public class FormaPlazaCentralRectangulo extends Forma {
 	 }
 	 
 	 @Override
-	 public Collection<Posicion> obtenerCoordenadas(Posicion coordenadaOrigen){
+	 public Collection<Posicion> obtenerPosiciones(Posicion coordenadaOrigen){
 		 
 		 Collection<Posicion> posicionesADevolver = new ArrayList<Posicion>();
 		 

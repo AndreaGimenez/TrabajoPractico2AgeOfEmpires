@@ -48,7 +48,7 @@ public abstract class Edificio implements Posicionable, Atacable {
 	@Override
 	public void posicionar(Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException {
 		
-		Collection<Posicion> posicionesAOcuparEnMapa = forma.obtenerCoordenadas(posicion);
+		Collection<Posicion> posicionesAOcuparEnMapa = forma.obtenerPosiciones(posicion);
 		for(Posicion posicionAOcupar : posicionesAOcuparEnMapa) {
 			mapa.posicionar(this, posicionAOcupar);
 		}
@@ -63,7 +63,7 @@ public abstract class Edificio implements Posicionable, Atacable {
 	@Override
 	public Collection<Posicion> obtenerPosicionesOcupadasEnMapa(){
 		
-		return forma.obtenerCoordenadas(posicion);
+		return forma.obtenerPosiciones(posicion);
 	}
 	
 	@Override
