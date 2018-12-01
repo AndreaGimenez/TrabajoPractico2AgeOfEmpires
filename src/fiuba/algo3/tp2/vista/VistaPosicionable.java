@@ -3,15 +3,24 @@ package fiuba.algo3.tp2.vista;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.mapa.Celda;
+import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Espadachin;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 public class VistaPosicionable {
+	
+	private Mapa mapa;
 
+	private ContenedorMapa contenedorMapa;
+	private ContenedorControles contenedorControles;
+	
 	private VistaAldeano vistaAldeano;
 	private VistaEspadachin vistaEspadachin;
 	private VistaArquero vistaArquero;
@@ -31,6 +40,22 @@ public class VistaPosicionable {
 		this.vistaCuartel = new VistaCuartel();
 		this.vistaPlazaCentral = new VistaPlazaCentral();
 		this.vistaCastillo = new VistaCastillo();
+	}
+	
+	public void dibujarPosicionables() {
+		
+        for(Node nodo : contenedorMapa.getChildren()) {
+			if(nodo instanceof Pane) {
+				
+				Pane pane = (Pane) nodo;
+				int colIndex = contenedorMapa.obtenerColumnIndex(pane);
+				int rowIndex = contenedorMapa.obtenerRowIndex(pane);
+				Celda celda = mapa.obtenerCelda(new Posicion(colIndex, rowIndex));
+				Posicionable posicionable = celda.obtenerPosicionable();
+				
+				dibujarPosicionable(posicionable, pane);
+			}
+        }
 	}
 
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
@@ -67,5 +92,33 @@ public class VistaPosicionable {
     			
     		}
 		}
+	}
+
+	public void dibujarControles(Pane nodo) {
+		
+		int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
+		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
+		
+		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
+		
+		if(posicionable != null) {
+    		if(posicionable instanceof Aldeano) {
+    			vistaAldeano.dibujarControles((Aldeano)posicionable);
+    		}
+		}
+	}
+
+	public void setContenedorControles(ContenedorControles contenedorControles) {
+		this.contenedorControles = contenedorControles;
+		
+		this.vistaAldeano.setContenedorControles(contenedorControles);
+	}
+	
+	public void setContenedorMapa(ContenedorMapa contenedorMapa) {
+		this.contenedorMapa = contenedorMapa;
+	}
+	
+	public void setMapa(Mapa mapa) {
+		this.mapa = mapa;
 	}
 }

@@ -73,6 +73,10 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 		return this.mapa;
 	}
 	
+	public int obtenerVida() {
+		return vida;
+	}
+	
 	@Override
 	public void mover(Direccion direccion) throws MovimientoInvalidoException {
 		movimiento.mover(this, direccion, mapa);

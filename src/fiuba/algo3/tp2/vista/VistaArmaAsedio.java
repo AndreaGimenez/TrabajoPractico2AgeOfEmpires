@@ -11,6 +11,8 @@ import javafx.scene.layout.Pane;
 
 public class VistaArmaAsedio {
 
+	private ContenedorControles contenedorControles;
+
 	public void dibujar(ArmaAsedio posicionable, Pane pane) {
 		
 		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/armaAsedio.jpeg", 

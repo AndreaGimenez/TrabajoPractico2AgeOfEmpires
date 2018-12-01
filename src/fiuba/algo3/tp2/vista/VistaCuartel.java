@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 
 public class VistaCuartel {
 
+	private ContenedorControles contenedorControles;
+
 	public void dibujar(Cuartel posicionable, Pane pane) {
 		pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
 	}

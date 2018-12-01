@@ -7,14 +7,17 @@ import javafx.scene.layout.Pane;
 public class NodoMapaOnMouseClickedEventHandler implements EventHandler<MouseEvent>{
 	
 	private VistaMapa vistaMapa;
+	private VistaPosicionable vistaPosicionable;
 
-	public NodoMapaOnMouseClickedEventHandler(VistaMapa vistaMapa) {
+	public NodoMapaOnMouseClickedEventHandler(VistaMapa vistaMapa, VistaPosicionable vistaPosicionable) {
 		this.vistaMapa = vistaMapa;
+		this.vistaPosicionable = vistaPosicionable;
 	}
 
 	@Override
 	public void handle(MouseEvent event) {
 		
 		vistaMapa.seleccionarNodo((Pane)event.getSource());
+		vistaPosicionable.dibujarControles((Pane)event.getSource());
 	}
 }

@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 
 public class VistaCastillo {
 
+	private ContenedorControles contenedorControles;
+
 	public void dibujar(Castillo posicionable, Pane pane) {
 		pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
 	}

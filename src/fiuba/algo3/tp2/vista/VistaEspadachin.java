@@ -11,6 +11,8 @@ import javafx.scene.layout.Pane;
 
 public class VistaEspadachin {
 
+	private ContenedorControles contenedorControles;
+
 	public void dibujar(Espadachin posicionable, Pane pane) {
 		
         Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/espadachin.jpg", 

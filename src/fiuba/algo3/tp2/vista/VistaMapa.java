@@ -2,11 +2,9 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.Collection;
 
-import fiuba.algo3.tp2.mapa.Celda;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
-import javafx.scene.Node;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -26,10 +24,10 @@ public class VistaMapa {
 	private VistaPosicionable vistaPosicionable;
 	
 
-	public VistaMapa(Mapa mapa, ContenedorMapa contenedorMapa) {
+	public VistaMapa(Mapa mapa, ContenedorMapa contenedorMapa, VistaPosicionable vistaPosicionable) {
 		 this.mapa = mapa;
 		 this.contenedorMapa = contenedorMapa;
-		 this.vistaPosicionable = new VistaPosicionable();
+		 this.vistaPosicionable = vistaPosicionable;
 	}
 
 	public void dibujarTerreno() {
@@ -48,27 +46,11 @@ public class VistaMapa {
             	
             	Pane pane = new Pane();
             	
-            	NodoMapaOnMouseClickedEventHandler nodoMapaOnMouseClickedEventHandler = new NodoMapaOnMouseClickedEventHandler(this);
+            	NodoMapaOnMouseClickedEventHandler nodoMapaOnMouseClickedEventHandler = new NodoMapaOnMouseClickedEventHandler(this, vistaPosicionable);
             	pane.setOnMouseClicked(nodoMapaOnMouseClickedEventHandler);
             	
             	contenedorMapa.add(pane, i, Math.abs(j - (mapa.getTamanioY() - 1)));
             }
-        }
-	}
-	
-	public void dibujarPosicionables() {
-		
-        for(Node nodo : contenedorMapa.getChildren()) {
-			if(nodo instanceof Pane) {
-				
-				Pane pane = (Pane) nodo;
-				int colIndex = contenedorMapa.obtenerColumnIndex(pane);
-				int rowIndex = contenedorMapa.obtenerRowIndex(pane);
-				Celda celda = mapa.obtenerCelda(new Posicion(colIndex, rowIndex));
-				Posicionable posicionable = celda.obtenerPosicionable();
-				
-				vistaPosicionable.dibujarPosicionable(posicionable, pane);
-			}
         }
 	}
 	
