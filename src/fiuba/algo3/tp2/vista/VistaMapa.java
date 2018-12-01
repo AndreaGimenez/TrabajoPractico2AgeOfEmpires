@@ -6,103 +6,110 @@ import fiuba.algo3.tp2.mapa.Celda;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
-import fiuba.algo3.tp2.unidad.Aldeano;
-import javafx.event.EventHandler;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
+import javafx.scene.Node;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 
 public class VistaMapa {
 	
+	public static int TAMANIO_NODO = 50;
+	
 	private Mapa mapa;
 	private ContenedorMapa contenedorMapa;
 	private Pane nodoSeleccionado;
+	
+	private VistaPosicionable vistaPosicionable;
+	
 
 	public VistaMapa(Mapa mapa, ContenedorMapa contenedorMapa) {
 		 this.mapa = mapa;
 		 this.contenedorMapa = contenedorMapa;
+		 this.vistaPosicionable = new VistaPosicionable();
 	}
 
-	public void dibujar() {
+	public void dibujarTerreno() {
 		
 		for (int i = 0; i < mapa.getTamanioX(); i++) {
-            RowConstraints row = new RowConstraints(50);
+            RowConstraints row = new RowConstraints(TAMANIO_NODO);
             contenedorMapa.getRowConstraints().add(row);
         }
         for (int i = 0; i < mapa.getTamanioY(); i++) {
-            ColumnConstraints col = new ColumnConstraints(50);
+            ColumnConstraints col = new ColumnConstraints(TAMANIO_NODO);
             contenedorMapa.getColumnConstraints().add(col);
         }
         
         for (int i = 0 ; i < mapa.getTamanioX() ; i++) {
             for (int j = 0; j < mapa.getTamanioY(); j++) {
             	
-            	Celda celda = mapa.obtenerCelda(new Posicion(i, j));
-            	Posicionable posicionable = celda.obtenerPosicionable();
-            	
-            	
             	Pane pane = new Pane();
-            	if(posicionable != null) {
-            		if(posicionable instanceof Aldeano) {
-            			
-            	        Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/aldeano.jpg", 
-       						 50, 
-       						 50, 
-       						 false, 
-       						 true);
-       
-            	        BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-       
-            			pane.setBackground(new Background(fondoAldeano));
-            		}else {
-            			pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
-            		}
-            		
-            	}
-                pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-					@Override
-					public void handle(MouseEvent event) {
-						
-						int colIndex = contenedorMapa.obtenerColumnIndex((Pane)event.getSource());
-						int rowIndex = contenedorMapa.obtenerRowIndex((Pane)event.getSource());
-						
-						Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
-						if(posicionable == null) {
-							Pane nodo = contenedorMapa.obtenerCelda(colIndex, rowIndex);
-							nodo.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, null, BorderStroke.THICK)));
-						}else {
-							Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
-							for(Posicion posicion: posicionesPosicionable) {
-								Pane nodoPosicion = contenedorMapa.obtenerCelda(posicion.getX(), posicion.getY());
-								nodoPosicion.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, null, BorderStroke.THICK)));
-							}
-						}
-						
-						Pane nodoSeleccionadoAnterior = nodoSeleccionado;
-						nodoSeleccionado = (Pane)event.getSource();
-						
-						if(nodoSeleccionadoAnterior != null) {
-							nodoSeleccionadoAnterior.setBorder(Border.EMPTY);
-						}
-						nodoSeleccionado.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, null, BorderStroke.THICK)));
-					}
-				});
-                contenedorMapa.add(pane, i, Math.abs(j - (mapa.getTamanioY() - 1)));
+            	
+            	NodoMapaOnMouseClickedEventHandler nodoMapaOnMouseClickedEventHandler = new NodoMapaOnMouseClickedEventHandler(this);
+            	pane.setOnMouseClicked(nodoMapaOnMouseClickedEventHandler);
+            	
+            	contenedorMapa.add(pane, i, Math.abs(j - (mapa.getTamanioY() - 1)));
             }
         }
+	}
+	
+	public void dibujarPosicionables() {
+		
+        for(Node nodo : contenedorMapa.getChildren()) {
+			if(nodo instanceof Pane) {
+				
+				Pane pane = (Pane) nodo;
+				int colIndex = contenedorMapa.obtenerColumnIndex(pane);
+				int rowIndex = contenedorMapa.obtenerRowIndex(pane);
+				Celda celda = mapa.obtenerCelda(new Posicion(colIndex, rowIndex));
+				Posicionable posicionable = celda.obtenerPosicionable();
+				
+				vistaPosicionable.dibujarPosicionable(posicionable, pane);
+			}
+        }
+	}
+	
+	public void seleccionarNodo(Pane nodo) {
+		
+		Pane nodoAnterior = nodoSeleccionado;
+		nodoSeleccionado = nodo;
+		
+		if(nodoAnterior != null) {
+			deseleccionarNodo(nodoAnterior);
+		}
+		
+		int colIndex = contenedorMapa.obtenerColumnIndex(nodoSeleccionado);
+		int rowIndex = contenedorMapa.obtenerRowIndex(nodoSeleccionado);
+		
+		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
+		if(posicionable == null) {
+			nodoSeleccionado.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, null, BorderStroke.THICK)));
+		}else {
+			Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
+			for(Posicion posicion: posicionesPosicionable) {
+				Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion.getX(), posicion.getY());
+				nodoPosicion.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, null, BorderStroke.THICK)));
+			}
+		}
+	}
+
+	private void deseleccionarNodo(Pane nodo) {
+		
+		int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
+		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
+		
+		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
+		if(posicionable == null) {
+			nodo.setBorder(Border.EMPTY);
+		}else {
+			Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
+			for(Posicion posicion: posicionesPosicionable) {
+				Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion.getX(), posicion.getY());
+				nodoPosicion.setBorder(Border.EMPTY);
+			}
+		}
 	}
 }

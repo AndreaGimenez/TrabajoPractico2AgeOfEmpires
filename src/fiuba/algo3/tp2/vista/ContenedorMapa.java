@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 
 public class ContenedorMapa extends GridPane {
 
-	public Pane obtenerCelda(int colIndex, int rowIndex) {
+	public Pane obtenerNodo(int colIndex, int rowIndex) {
 		
 		Pane nodoADevolver = null;
 		for(Node nodo : getChildren()) {

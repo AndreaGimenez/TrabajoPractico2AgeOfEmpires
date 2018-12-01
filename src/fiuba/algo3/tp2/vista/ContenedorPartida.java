@@ -9,7 +9,6 @@ import fiuba.algo3.tp2.vista.interfaces.AccionesDeAldeano;
 import fiuba.algo3.tp2.vista.interfaces.AccionesDeCuartel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -22,15 +21,12 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ContenedorPartida extends BorderPane {
 
     BarraDeMenu menuBar;
-    VistaMapa vistaMapa;
-    Canvas canvasCentral;
     AccionesDeAldeano accionesDeAldeano;
     AccionesDeCuartel accionesDeCuartel;
     AccionesDeCastillo accionesDeCastillo;
@@ -93,8 +89,9 @@ public class ContenedorPartida extends BorderPane {
         scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrollPane.setContent(contenedorMapa);
 
-        vistaMapa = new VistaMapa(juego.obtenerMapa(), contenedorMapa);
-        vistaMapa.dibujar();
+        VistaMapa vistaMapa = new VistaMapa(juego.obtenerMapa(), contenedorMapa);
+        vistaMapa.dibujarTerreno();
+        vistaMapa.dibujarPosicionables();
         
         this.setCenter(scrollPane);
     }
