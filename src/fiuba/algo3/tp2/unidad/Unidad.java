@@ -3,7 +3,8 @@ package fiuba.algo3.tp2.unidad;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
+import org.apache.ivy.core.settings.Validatable;
+
 import fiuba.algo3.tp2.formas.Forma;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
@@ -17,14 +18,15 @@ import fiuba.algo3.tp2.movimiento.Movimiento;
 import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
 import fiuba.algo3.tp2.movimiento.MovimientoNulo;
+import fiuba.algo3.tp2.vida.Vida;
+import fiuba.algo3.tp2.vida.VidaUnidad;
 
 public abstract class Unidad implements Movible, Posicionable, Atacable {
 
 	protected Posicion posicion;
 	protected Movimiento movimiento;
 	protected Forma forma;
-	protected int vida;
-	protected int topeDeVida;
+	protected Vida vida;
 	protected int costoGeneracion;
 	private Mapa mapa;
 	
@@ -35,8 +37,7 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 		this.mapa = mapa;
 		this.movimiento = movimiento;
 		this.forma = forma;
-		this.vida = vidaMaxima;
-		this.topeDeVida = vidaMaxima;
+		this.vida = new VidaUnidad(vidaMaxima);
 		this.costoGeneracion = costoGeneracion;
 		posicionar(posicion);
 	}
@@ -74,7 +75,8 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 	}
 	
 	public int obtenerVida() {
-		return vida;
+		
+		return vida.obtenerVidaActual();
 	}
 	
 	@Override
@@ -90,14 +92,8 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 	
 	@Override
 	public void recibirDanio(Ataque ataque) {
-		if(vida == 0) {
-			throw new UnidadMuertaException();
-		}
-		vida -= ataque.obtenerDanioUnidad();
 		
-		if(vida < 0) {
-			vida = 0;
-		}
+		this.vida.recibirDanio(ataque);		
 	}
 	
 	protected boolean estaEnElRango(Posicionable posicionable) {

@@ -15,6 +15,8 @@ import fiuba.algo3.tp2.excepciones.reparacion.Reparacion;
 import fiuba.algo3.tp2.excepciones.reparacion.ReparacionActivada;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Ataque;
+import fiuba.algo3.tp2.vida.Vida;
+import fiuba.algo3.tp2.vida.VidaEdificio;
 
 public abstract class Edificio implements Posicionable, Atacable {
 
@@ -23,9 +25,7 @@ public abstract class Edificio implements Posicionable, Atacable {
 	private Forma forma;
 	protected Mapa mapa;
 	private Aldeano aldeanoAsignadoParaReparar;
-	private int vida;
-	private int topeDeVida;
-	private int puntosDeRecuperacion;
+	private Vida vida;
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
@@ -35,9 +35,7 @@ public abstract class Edificio implements Posicionable, Atacable {
 		this.mapa = mapa;
 		this.forma = forma;
 		this.reparacion = reparacion;
-		this.vida = vidaMaxima;
-		this.topeDeVida = vidaMaxima;
-		this.puntosDeRecuperacion = saludRecuperadaPorTurno;
+		this.vida = new VidaEdificio(vidaMaxima, saludRecuperadaPorTurno);
 		posicionar(posicion);
 	}
 
@@ -85,29 +83,18 @@ public abstract class Edificio implements Posicionable, Atacable {
 		
         this.reparacion = new ReparacionActivada();
         
-        if(vida == 0) {
-        	throw new EdificioDestruidoException();
-        }
-		vida -= ataque.obtenerDanioEdificio();
-		
-		if(vida <= 0) {
-			vida = 0;
-		}
+        this.vida.recibirDanio(ataque);
 	}
 
 	public int obtenerVida(){
 
-		return this.vida;
+		return this.vida.obtenerVidaActual();
 
 	}
 
     public void curar(){
-
-	    if(this.vida > this.topeDeVida - this.puntosDeRecuperacion)
-	        this.vida = this.topeDeVida;
-	    else
-	        this.vida = this.vida + this.puntosDeRecuperacion;
-
+    	
+    	vida.curar();
     }
 
 	public void enReparacionPorAldeano(Aldeano aldeano){
