@@ -66,4 +66,9 @@ public class VistaAldeano {
 	public void setContenedorControles(ContenedorControles contenedorControles) {
 		this.contenedorControles = contenedorControles;
 	}
+
+	public void dibujarControles(Aldeano posicionable) {
+		// TODO Auto-generated method stub
+		
+	}
 }

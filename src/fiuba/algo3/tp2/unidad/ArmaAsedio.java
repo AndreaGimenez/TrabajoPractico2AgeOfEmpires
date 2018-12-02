@@ -50,9 +50,4 @@ public class ArmaAsedio extends Unidad implements Atacador {
 		ataque = new AtaqueNulo();
 	}
 
-	@Override
-	public int obtenerCosto() {
-		
-		return this.costoGeneracion;
-	}
 }

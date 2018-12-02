@@ -11,12 +11,12 @@ public class PlazaCentral extends Edificio /*implements GeneradorUnidades */{
 	
 	private static final int VIDA_MAXIMA = 450;
 	private static final int SALUD_RECUPERADA_POR_TURNO = 25;
-	private static final int COSTO = 100;
+	private static final int COSTO_CONSTRUCCION = 100;
 	
 	//private CreadorUnidad creadorUnidades;
 	
 	public PlazaCentral(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-		super(posicion, new FormaPlazaCentralRectangulo(), new ReparacionDesactivada(), VIDA_MAXIMA, SALUD_RECUPERADA_POR_TURNO, mapa);
+		super(posicion, new FormaPlazaCentralRectangulo(), new ReparacionDesactivada(), VIDA_MAXIMA, SALUD_RECUPERADA_POR_TURNO, COSTO_CONSTRUCCION, mapa);
 		//this.creadorUnidades = new CreadorUnidadPlazaCentral(mapa);
 	}
 /*
@@ -27,21 +27,9 @@ public class PlazaCentral extends Edificio /*implements GeneradorUnidades */{
 		return this.creadorUnidades.crear(tipoUnidad, posicion);
 	}
 */
-	@Override
-	public int costo() {
-
-		return this.COSTO;
-
-	}
-
-	@Override
-	public boolean estaReparado() {
-		return this.VIDA_MAXIMA == super.obtenerVida();
-	}
 
 	@Override
 	public void actualizarEstadoParaSiguienteTurno() {
 
 	}
-
 }

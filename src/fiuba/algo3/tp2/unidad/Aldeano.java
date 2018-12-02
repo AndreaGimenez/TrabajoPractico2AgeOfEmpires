@@ -93,11 +93,5 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	public int recolectarOro() {
 		return oroPorTurno.recolectarOroDelTurno();
 	}
-
-	@Override
-	public int obtenerCosto() {
-
-		return this.costoGeneracion;
-	}
 	
 }

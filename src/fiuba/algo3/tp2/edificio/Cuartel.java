@@ -11,12 +11,12 @@ public class Cuartel extends Edificio /*implements GeneradorUnidades*/ {
 	
 	private static final int VIDA_MAXIMA = 250;
 	private static final int SALUD_RECUPERADA_POR_TURNO = 50;
-    private static final int COSTO = 250;
+    private static final int COSTO_CONSTRUCCION = 250;
 	
     //private CreadorUnidad creadorUnidades;
 
     public Cuartel(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
-        super(posicion, new FormaCuartelRectangulo(), new ReparacionDesactivada(), VIDA_MAXIMA, SALUD_RECUPERADA_POR_TURNO, mapa);
+        super(posicion, new FormaCuartelRectangulo(), new ReparacionDesactivada(), VIDA_MAXIMA, SALUD_RECUPERADA_POR_TURNO, COSTO_CONSTRUCCION, mapa);
        // this.creadorUnidades = new CreadorUnidadCuartel(mapa);
     }
     /*
@@ -26,25 +26,14 @@ public class Cuartel extends Edificio /*implements GeneradorUnidades*/ {
 		return creadorUnidades.crear(tipoUnidad, posicion);
 	}*/
 
-    @Override
-    public int costo() {
-
-        return this.COSTO;
-
-    }
-
-    @Override
-    public boolean estaReparado() {
-        return super.obtenerVida() == this.VIDA_MAXIMA;
-    }
-
-    @Override
-    public void iniciar(){
-
-    }
-
     public Posicion obtenerPosicion(){
 
         return super.obtenerPosicion();
     }
+
+	@Override
+	public void actualizarEstadoParaSiguienteTurno() {
+		// TODO Auto-generated method stub
+		
+	}
 }

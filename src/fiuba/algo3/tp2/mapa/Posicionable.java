@@ -12,7 +12,7 @@ public interface Posicionable {
 	public void posicionar(Posicion coordenada) throws CeldaOcupadaException, CeldaInexistenteException;
 	public Posicion obtenerPosicion();
 	public Collection<Posicion> obtenerPosicionesOcupadasEnMapa();
-	public void iniciar();
+	//public void iniciar();
 
     void actualizarEstadoParaSiguienteTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException;
 }
