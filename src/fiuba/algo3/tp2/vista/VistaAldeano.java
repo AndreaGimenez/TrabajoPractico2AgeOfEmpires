@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vista.botones.BotonAldeanoReparaEdificioEventHandler;
 import javafx.scene.control.Button;
@@ -36,23 +37,23 @@ public class VistaAldeano {
       pane.setBackground(new Background(fondoAldeano));
 	}
 
-	public void dibujarControles(Edificio edificio) {
+	public void dibujarControles(Aldeano aldeano) {
 		
 		aldeano.obtenerVida();
 		contenedorControles.setNombreUnidad("Aldeano");
 		
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionConstruir());
-		acciones.add(crearAccionReparar(edificio));
+		acciones.add(crearAccionReparar(/*edificio*/));
 		
 		contenedorControles.setAcciones(acciones);
 	}
 
-	private Button crearAccionReparar(Edificio edificio) {
+	private Button crearAccionReparar(/*Edificio edificio*/) {
 		Button accionReparar = new Button("Reparar");
-		BotonAldeanoReparaEdificioEventHandler botonAldeanoReparaEdificioEventHandler = new BotonAldeanoReparaEdificioEventHandler(edificio);
+		/*BotonAldeanoReparaEdificioEventHandler botonAldeanoReparaEdificioEventHandler = new BotonAldeanoReparaEdificioEventHandler(edificio);
 		botonAldeanoReparaEdificioEventHandler.seleccionarAldeano(aldeano);
-		accionReparar.setOnAction(botonAldeanoReparaEdificioEventHandler);
+		accionReparar.setOnAction(botonAldeanoReparaEdificioEventHandler);*/
 		return accionReparar;
 	}
 
@@ -67,8 +68,4 @@ public class VistaAldeano {
 		this.contenedorControles = contenedorControles;
 	}
 
-	public void dibujarControles(Aldeano posicionable) {
-		// TODO Auto-generated method stub
-		
-	}
 }
