@@ -13,4 +13,13 @@ public class VistaPlazaCentral {
 	public void dibujar(PlazaCentral posicionable, Pane pane) {
 		pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
 	}
+
+    public void dibujarControles(PlazaCentral posicionable) {
+    }
+
+	public void setContenedorControles(ContenedorControles contenedorControles) {
+
+		this.contenedorControles = contenedorControles;
+
+	}
 }

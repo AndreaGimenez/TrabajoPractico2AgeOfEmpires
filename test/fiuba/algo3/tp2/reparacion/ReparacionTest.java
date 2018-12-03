@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.excepciones.reparacion;
+package fiuba.algo3.tp2.reparacion;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

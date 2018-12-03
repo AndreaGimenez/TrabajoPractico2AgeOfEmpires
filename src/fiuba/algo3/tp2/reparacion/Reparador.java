@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.excepciones.reparacion;
+package fiuba.algo3.tp2.reparacion;
 
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioFueraDeRangoException;

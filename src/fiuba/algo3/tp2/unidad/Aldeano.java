@@ -16,9 +16,9 @@ import fiuba.algo3.tp2.recursos.OroPorTurno;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioFueraDeRangoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
-import fiuba.algo3.tp2.excepciones.reparacion.Reparador;
-import fiuba.algo3.tp2.excepciones.reparacion.ReparadorEdificio;
-import fiuba.algo3.tp2.excepciones.reparacion.ReparadorEdificioAldeano;
+import fiuba.algo3.tp2.reparacion.Reparador;
+import fiuba.algo3.tp2.reparacion.ReparadorEdificio;
+import fiuba.algo3.tp2.reparacion.ReparadorEdificioAldeano;
 
 public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	

@@ -4,10 +4,9 @@ import java.util.Collection;
 
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
-import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
-import fiuba.algo3.tp2.excepciones.reparacion.Reparacion;
-import fiuba.algo3.tp2.excepciones.reparacion.ReparacionActivada;
+import fiuba.algo3.tp2.reparacion.Reparacion;
+import fiuba.algo3.tp2.reparacion.ReparacionActivada;
 import fiuba.algo3.tp2.formas.Forma;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Mapa;

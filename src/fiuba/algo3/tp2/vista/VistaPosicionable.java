@@ -104,7 +104,19 @@ public class VistaPosicionable {
 		if(posicionable != null) {
     		if(posicionable instanceof Aldeano) {
     			vistaAldeano.dibujarControles((Aldeano)posicionable);
-    		}
+    		} else if(posicionable instanceof Castillo){
+    			vistaCastillo.dibujarControles((Castillo)posicionable, mapa);
+			} else if(posicionable instanceof Cuartel) {
+				vistaCuartel.dibujarControles((Cuartel) posicionable, mapa);
+			} else if(posicionable instanceof PlazaCentral){
+    			vistaPlazaCentral.dibujarControles((PlazaCentral) posicionable);
+			} else if(posicionable instanceof Arquero) {
+				vistaArquero.dibujarControles((Arquero) posicionable);
+			} else if(posicionable instanceof Espadachin){
+    			vistaEspadachin.dibujarControles((Espadachin) posicionable);
+			} else if(posicionable instanceof ArmaAsedio){
+    			vistaArmaAsedio.dibujarControles((ArmaAsedio) posicionable);
+			}
 		}
 	}
 
@@ -112,6 +124,18 @@ public class VistaPosicionable {
 		this.contenedorControles = contenedorControles;
 		
 		this.vistaAldeano.setContenedorControles(contenedorControles);
+
+		this.vistaArmaAsedio.setContenedorControles(contenedorControles);
+
+		this.vistaEspadachin.setContenedorControles(contenedorControles);
+
+		this.vistaPlazaCentral.setContenedorControles(contenedorControles);
+
+		this.vistaArquero.setContenedorControles(contenedorControles);
+
+		this.vistaCastillo.setContenedorControles(contenedorControles);
+
+		this.vistaCuartel.setContenedorControles(contenedorControles);
 	}
 	
 	public void setContenedorMapa(ContenedorMapa contenedorMapa) {
