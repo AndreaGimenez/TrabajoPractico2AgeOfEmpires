@@ -18,7 +18,7 @@ public class BotonMovimientoHandler implements EventHandler<ActionEvent>{
 		this.movible = movible;
 		this.direccion = direccion;
 		this.vistaSeleccionador = vistaSeleccionador;
-		this.musica = new Musica("src/fiuba/algo3/tp2/vista/MovimientoUnidadSonido.mp3");
+		this.musica = new Musica("src/fiuba/algo3/tp2/vista/aldeanoCaminando.mp3");
 	}
 
 	@Override

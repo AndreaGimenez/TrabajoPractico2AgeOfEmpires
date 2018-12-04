@@ -16,14 +16,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>src/fiuba/algo3/tp2/vista/ArmaAsedioSonido.mp3</name>
+			<name>src/fiuba/algo3/tp2/vista/aldeanoCaminando.mp3</name>
 			<type>1</type>
-			<location>C:/Users/asgimenez/Downloads/ArmaAsedioSonido.mp3</location>
-		</link>
-		<link>
-			<name>src/fiuba/algo3/tp2/vista/MovimientoUnidadSonido.mp3</name>
-			<type>1</type>
-			<location>C:/Users/asgimenez/Downloads/MovimientoUnidadSonido.mp3</location>
+			<location>C:/Users/asgimenez/Downloads/aldeanoCaminando.mp3</location>
 		</link>
 	</linkedResources>
 </projectDescription>
