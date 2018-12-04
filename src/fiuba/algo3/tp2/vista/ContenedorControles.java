@@ -37,14 +37,18 @@ public class ContenedorControles extends VBox {
 	public void setAcciones(Collection<Button> acciones) {
 		
 		labelAcciones.setText("Acciones");
+		this.acciones.addAll(acciones);
+		getChildren().addAll(this.acciones);
+	}
+
+	public void clean() {
+		
+		labelNombreUnidad.setText("");
+		labelAcciones.setText("");
 		
 		if(this.acciones != null) {
 			getChildren().removeAll(this.acciones);
 		}
-		
 		this.acciones = new ArrayList<Button>();
-		this.acciones.addAll(acciones);
-		
-		getChildren().addAll(this.acciones);
 	}
 }

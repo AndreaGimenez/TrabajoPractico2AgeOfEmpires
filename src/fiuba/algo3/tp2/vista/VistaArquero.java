@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.Arquero;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -53,5 +54,10 @@ public class VistaArquero {
 		Button botonAtacar = new Button("Atacar");
 		//TODO agregar event handler.
 		return botonAtacar;
+	}
+
+	public void dibujar(Arquero posicionable, Posicion posicionAnterior) {
+		// TODO Auto-generated method stub
+		
 	}
 }

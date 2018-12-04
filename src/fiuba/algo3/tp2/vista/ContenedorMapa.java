@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.mapa.Posicion;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -10,6 +11,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 public class ContenedorMapa extends GridPane {
 	
@@ -22,21 +24,6 @@ public class ContenedorMapa extends GridPane {
         setBackground(new Background(imagenDeFondo));
 	}
 
-	public Pane obtenerNodo(int colIndex, int rowIndex) {
-		
-		Pane nodoADevolver = null;
-		for(Node nodo : getChildren()) {
-			if(nodoADevolver == null
-					&& nodo instanceof Pane
-					&& obtenerColumnIndex(nodo) == colIndex
-					&& obtenerRowIndex(nodo) == rowIndex) {
-				
-				nodoADevolver = (Pane)nodo;
-			}
-		}
-		return nodoADevolver;
-	}
-
 	public int obtenerColumnIndex(Node nodo) {
 		
 		return GridPane.getColumnIndex(nodo);
@@ -44,5 +31,24 @@ public class ContenedorMapa extends GridPane {
 
 	public int obtenerRowIndex(Node nodo) {
 		return Math.abs(GridPane.getRowIndex(nodo) - (getRowConstraints().size() - 1));
+	}
+
+	public void setBackground(Background fondo, Posicion posicion) {
+		
+		obtenerNodo(posicion).setBackground(fondo);
+	}
+
+	public Pane obtenerNodo(Posicion posicion) {
+		
+		Pane nodoADevolver = null;
+		for(Node nodo : getChildren()) {
+			if(nodoADevolver == null
+					&& nodo instanceof Pane
+					&& new Posicion(obtenerColumnIndex(nodo), obtenerRowIndex(nodo)).esIgualA(posicion)) {
+				
+				nodoADevolver = (Pane)nodo;
+			}
+		}
+		return nodoADevolver;
 	}
 }

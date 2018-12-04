@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -49,5 +50,10 @@ public class VistaArmaAsedio {
 		Button botonAtacar = new Button("Atacar");
 		//TODO agregar event handler.
 		return botonAtacar;
+	}
+
+	public void dibujar(ArmaAsedio posicionable, Posicion posicionAnterior) {
+		// TODO Auto-generated method stub
+		
 	}
 }

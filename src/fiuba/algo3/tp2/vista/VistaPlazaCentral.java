@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.mapa.Posicion;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -21,5 +22,10 @@ public class VistaPlazaCentral {
 
 		this.contenedorControles = contenedorControles;
 
+	}
+
+	public void dibujar(PlazaCentral posicionable, Posicion posicionAnterior) {
+		// TODO Auto-generated method stub
+		
 	}
 }

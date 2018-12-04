@@ -33,7 +33,7 @@ public class VistaPosicionable {
 	public VistaPosicionable() {
 		
 		super();
-		this.vistaAldeano = new VistaAldeano();
+		this.vistaAldeano = new VistaAldeano(this);
 		this.vistaEspadachin = new VistaEspadachin();
 		this.vistaArquero = new VistaArquero();
 		this.vistaArmaAsedio = new VistaArmaAsedio();
@@ -94,12 +94,49 @@ public class VistaPosicionable {
 		}
 	}
 
+	public void dibujarPosicionable(Posicionable posicionable, Posicion posicionAnterior) {
+		
+		if(posicionable != null) {
+			
+    		if(posicionable instanceof Aldeano) {
+    			
+    			vistaAldeano.dibujar((Aldeano)posicionable, posicionAnterior);
+    	        
+    		} else if(posicionable instanceof Espadachin) {
+    			
+    			vistaEspadachin.dibujar((Espadachin)posicionable, posicionAnterior);
+    			
+    		} else if(posicionable instanceof Arquero) {
+    			
+    			vistaArquero.dibujar((Arquero)posicionable, posicionAnterior);
+    			
+    		} else if(posicionable instanceof ArmaAsedio) {
+    			
+    			vistaArmaAsedio.dibujar((ArmaAsedio)posicionable, posicionAnterior);
+    			
+    		} else if(posicionable instanceof Cuartel) {
+    			
+    			vistaCuartel.dibujar((Cuartel)posicionable, posicionAnterior);
+    			
+    		} else if(posicionable instanceof PlazaCentral) {
+    			
+    			vistaPlazaCentral.dibujar((PlazaCentral)posicionable, posicionAnterior);
+    			
+    		} else if(posicionable instanceof Castillo) {
+    			
+    			vistaCastillo.dibujar((Castillo)posicionable, posicionAnterior);
+    			
+    		}
+		}
+	}
+
 	public void dibujarControles(Pane nodo) {
 		
 		int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
 		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
 		
 		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
+		contenedorControles.clean();
 		
 		if(posicionable != null) {
     		if(posicionable instanceof Aldeano) {
@@ -121,6 +158,7 @@ public class VistaPosicionable {
 	}
 
 	public void setContenedorControles(ContenedorControles contenedorControles) {
+		
 		this.contenedorControles = contenedorControles;
 		
 		this.vistaAldeano.setContenedorControles(contenedorControles);
@@ -139,10 +177,21 @@ public class VistaPosicionable {
 	}
 	
 	public void setContenedorMapa(ContenedorMapa contenedorMapa) {
+		
 		this.contenedorMapa = contenedorMapa;
+		this.vistaAldeano.setContenedorMapa(contenedorMapa);
+	}
+	
+	public void setVistaSeleccionador(VistaSeleccionador vistaSeleccionador) {
+		
+		this.vistaAldeano.setVistaSeleccionador(vistaSeleccionador);
 	}
 	
 	public void setMapa(Mapa mapa) {
 		this.mapa = mapa;
+	}
+
+	public void limpiarControles() {
+		contenedorControles.clean();
 	}
 }

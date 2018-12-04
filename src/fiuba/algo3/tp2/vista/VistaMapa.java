@@ -1,36 +1,32 @@
 package fiuba.algo3.tp2.vista;
 
-import java.util.Collection;
-
+import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.Posicionable;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
 
 public class VistaMapa {
 	
 	public static int TAMANIO_NODO = 50;
 	
-	private Mapa mapa;
+	private Juego juego;
 	private ContenedorMapa contenedorMapa;
-	private Pane nodoSeleccionado;
 	
 	private VistaPosicionable vistaPosicionable;
+	private VistaSeleccionador vistaSeleccionador;
 	
 
-	public VistaMapa(Mapa mapa, ContenedorMapa contenedorMapa, VistaPosicionable vistaPosicionable) {
-		 this.mapa = mapa;
+	public VistaMapa(Juego juego, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador, VistaPosicionable vistaPosicionable) {
+		 this.juego = juego;
 		 this.contenedorMapa = contenedorMapa;
 		 this.vistaPosicionable = vistaPosicionable;
+		 this.vistaSeleccionador = vistaSeleccionador;
 	}
 
 	public void dibujarTerreno() {
+		
+		Mapa mapa = juego.obtenerMapa();
 		
 		for (int i = 0; i < mapa.getTamanioX(); i++) {
             RowConstraints row = new RowConstraints(TAMANIO_NODO);
@@ -46,52 +42,11 @@ public class VistaMapa {
             	
             	Pane pane = new Pane();
             	
-            	NodoMapaOnMouseClickedEventHandler nodoMapaOnMouseClickedEventHandler = new NodoMapaOnMouseClickedEventHandler(this, vistaPosicionable);
+            	NodoMapaOnMouseClickedEventHandler nodoMapaOnMouseClickedEventHandler = new NodoMapaOnMouseClickedEventHandler(juego, contenedorMapa, vistaSeleccionador, vistaPosicionable);
             	pane.setOnMouseClicked(nodoMapaOnMouseClickedEventHandler);
             	
             	contenedorMapa.add(pane, i, Math.abs(j - (mapa.getTamanioY() - 1)));
             }
         }
-	}
-	
-	public void seleccionarNodo(Pane nodo) {
-		
-		Pane nodoAnterior = nodoSeleccionado;
-		nodoSeleccionado = nodo;
-		
-		if(nodoAnterior != null) {
-			deseleccionarNodo(nodoAnterior);
-		}
-		
-		int colIndex = contenedorMapa.obtenerColumnIndex(nodoSeleccionado);
-		int rowIndex = contenedorMapa.obtenerRowIndex(nodoSeleccionado);
-		
-		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
-		if(posicionable == null) {
-			nodoSeleccionado.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, null, BorderStroke.THICK)));
-		}else {
-			Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
-			for(Posicion posicion: posicionesPosicionable) {
-				Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion.getX(), posicion.getY());
-				nodoPosicion.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, null, BorderStroke.THICK)));
-			}
-		}
-	}
-
-	private void deseleccionarNodo(Pane nodo) {
-		
-		int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
-		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
-		
-		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
-		if(posicionable == null) {
-			nodo.setBorder(Border.EMPTY);
-		}else {
-			Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
-			for(Posicion posicion: posicionesPosicionable) {
-				Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion.getX(), posicion.getY());
-				nodoPosicion.setBorder(Border.EMPTY);
-			}
-		}
 	}
 }
