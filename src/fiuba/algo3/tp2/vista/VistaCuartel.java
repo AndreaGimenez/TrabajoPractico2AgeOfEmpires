@@ -27,7 +27,7 @@ public class VistaCuartel {
 
     public void dibujarControles(Cuartel posicionable, Mapa mapa) {
 
-		contenedorControles.setNombreUnidad("Aldeano");
+		contenedorControles.setNombreUnidad("Cuartel");
 
 		cuartel = posicionable;
 

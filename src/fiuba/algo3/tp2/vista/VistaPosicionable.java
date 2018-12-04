@@ -28,6 +28,7 @@ public class VistaPosicionable {
 	private VistaCuartel vistaCuartel;
 	private VistaPlazaCentral vistaPlazaCentral;
 	private VistaCastillo vistaCastillo;
+	private VistaCeldaSinOcupar vistaCeldaSinOcupar;
 	
 	
 	public VistaPosicionable() {
@@ -40,6 +41,7 @@ public class VistaPosicionable {
 		this.vistaCuartel = new VistaCuartel();
 		this.vistaPlazaCentral = new VistaPlazaCentral();
 		this.vistaCastillo = new VistaCastillo();
+		this.vistaCeldaSinOcupar = new VistaCeldaSinOcupar();
 	}
 	
 	public void dibujarPosicionables() {
@@ -102,21 +104,22 @@ public class VistaPosicionable {
 		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
 		
 		if(posicionable != null) {
-    		if(posicionable instanceof Aldeano) {
+			if(posicionable instanceof Aldeano) {
     			vistaAldeano.dibujarControles((Aldeano)posicionable);
     		} else if(posicionable instanceof Castillo){
     			vistaCastillo.dibujarControles((Castillo)posicionable, mapa);
 			} else if(posicionable instanceof Cuartel) {
 				vistaCuartel.dibujarControles((Cuartel) posicionable, mapa);
 			} else if(posicionable instanceof PlazaCentral){
-    			vistaPlazaCentral.dibujarControles((PlazaCentral) posicionable);
+    			vistaPlazaCentral.dibujarControles((PlazaCentral) posicionable, mapa);
 			} else if(posicionable instanceof Arquero) {
 				vistaArquero.dibujarControles((Arquero) posicionable);
 			} else if(posicionable instanceof Espadachin){
     			vistaEspadachin.dibujarControles((Espadachin) posicionable);
 			} else if(posicionable instanceof ArmaAsedio){
     			vistaArmaAsedio.dibujarControles((ArmaAsedio) posicionable);
-			}
+			} else
+				vistaCeldaSinOcupar.dibujarControles();
 		}
 	}
 
@@ -136,6 +139,8 @@ public class VistaPosicionable {
 		this.vistaCastillo.setContenedorControles(contenedorControles);
 
 		this.vistaCuartel.setContenedorControles(contenedorControles);
+
+		this.vistaCeldaSinOcupar.setContenedorControles(contenedorControles);
 	}
 	
 	public void setContenedorMapa(ContenedorMapa contenedorMapa) {

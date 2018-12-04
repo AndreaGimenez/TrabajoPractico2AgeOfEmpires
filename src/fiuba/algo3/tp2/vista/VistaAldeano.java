@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.edificio.PosicionarEdificio;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vista.botones.BotonAldeanoReparaEdificioEventHandler;
@@ -44,23 +45,22 @@ public class VistaAldeano {
 		
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionConstruir());
-		acciones.add(crearAccionReparar(/*edificio*/));
+		acciones.add(crearAccionReparar());
 		
 		contenedorControles.setAcciones(acciones);
 	}
 
 	private Button crearAccionReparar(/*Edificio edificio*/) {
 		Button accionReparar = new Button("Reparar");
-		/*BotonAldeanoReparaEdificioEventHandler botonAldeanoReparaEdificioEventHandler = new BotonAldeanoReparaEdificioEventHandler(edificio);
-		botonAldeanoReparaEdificioEventHandler.seleccionarAldeano(aldeano);
-		accionReparar.setOnAction(botonAldeanoReparaEdificioEventHandler);*/
+		//accionReparar.setOnAction(new BotonAldeanoReparaEdificioEventHandler());
 		return accionReparar;
 	}
 
 	private Button crearAccionConstruir() {
 		
 		Button accionConstruir = new Button("Construir");
-		//TODO Agregar el handler
+		PosicionarEdificio posicionarEdificio = new PosicionarEdificio(aldeano);
+		accionConstruir.setOnAction(new BotonConstruirEdificioEventHandler(accionConstruir, posicionarEdificio));
 		return accionConstruir;
 	}
 
