@@ -20,7 +20,7 @@ public class Aplicacion extends Application {
 
         stage.setTitle("Age of Empires");
         
-        String cancionInicioJuego = "/home/andre/Escritorio/FIUBA/ALGORITMOS III/AgeOfEmpires/TrabajoPractico2AgeOfEmpires/src/fiuba/algo3/tp2/vista/MusicaDeInicio.mp3";
+        String cancionInicioJuego = "src/fiuba/algo3/tp2/vista/MusicaDeInicio.mp3";
         Media musica = new Media(new File(cancionInicioJuego).toURI().toString());
         
         MediaPlayer mediaPlayer = new MediaPlayer(musica);
