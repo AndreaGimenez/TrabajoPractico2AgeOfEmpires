@@ -1,7 +1,11 @@
 package fiuba.algo3.tp2.vista;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.movimiento.Movible;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -11,16 +15,52 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-public class VistaArquero {
+public class VistaArquero implements VistaPosicionable, VistaMovible {
 
 	private ContenedorControles contenedorControles;
+	private ContenedorMapa contenedorMapa;
+	private VistaSeleccionador vistaSeleccionador;
 
-	private Arquero arquero;
+	public VistaArquero(ContenedorControles contenedorControles, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador) {
+		this.contenedorControles = contenedorControles;
+		this.contenedorMapa = contenedorMapa;
+		this.vistaSeleccionador = vistaSeleccionador;
+	}
 
-	public void dibujar(Arquero posicionable, Pane pane) {
+	@Override
+	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
+		pane.setBackground(obtenerFondoArquero());
+	}
+
+	@Override
+	public void dibujarControles(Posicionable posicionable) {
+		
+		contenedorControles.clean();
+		
+		contenedorControles.setNombreUnidad("Espadachin");
+
+		Collection<Button> acciones = new ArrayList<Button>();
+		acciones.add(crearAccionAtacar());
+		
+		//Movimientos
+		acciones.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable));
+
+		contenedorControles.setAcciones(acciones);
+	}
+	
+	private Button crearAccionAtacar() {
+		Button botonAtacar = new Button("Atacar");
+		//TODO agregar event handler.
+		return botonAtacar;
+	}
+	
+	@Override
+	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
+		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+		contenedorMapa.setBackground(obtenerFondoArquero(), movible.obtenerPosicion());
+	}
+
+	public Background obtenerFondoArquero() {
 		
 		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/arquero.jpeg", 
 					 VistaMapa.TAMANIO_NODO, 
@@ -28,36 +68,8 @@ public class VistaArquero {
 					 false, 
 					 true);
 
-	        BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
-	        pane.setBackground(new Background(fondoAldeano));
-	}
-
-    public void setContenedorControles(ContenedorControles contenedorControles) {
-
-		this.contenedorControles = contenedorControles;
-    }
-
-	public void dibujarControles(Arquero posicionable) {
-
-		contenedorControles.setNombreUnidad("Arquero");
-
-		this.arquero = posicionable;
-
-		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(crearAccionAtacar());
-
-		contenedorControles.setAcciones(acciones);
-	}
-
-	private Button crearAccionAtacar() {
-		Button botonAtacar = new Button("Atacar");
-		//TODO agregar event handler.
-		return botonAtacar;
-	}
-
-	public void dibujar(Arquero posicionable, Posicion posicionAnterior) {
-		// TODO Auto-generated method stub
-		
+        return new Background(fondoAldeano);
 	}
 }

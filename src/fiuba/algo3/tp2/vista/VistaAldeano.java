@@ -4,16 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.movimiento.Direccion;
-import fiuba.algo3.tp2.movimiento.DireccionAbajoDerecha;
-import fiuba.algo3.tp2.movimiento.DireccionAbajoIzquierda;
-import fiuba.algo3.tp2.movimiento.DireccionArriba;
-import fiuba.algo3.tp2.movimiento.DireccionArribaDerecha;
-import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
-import fiuba.algo3.tp2.movimiento.DireccionDerecha;
-import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
-import fiuba.algo3.tp2.unidad.Aldeano;
-import fiuba.algo3.tp2.unidad.DireccionAbajo;
+import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.movimiento.Movible;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -23,29 +15,46 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
-public class VistaAldeano {
+public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	
 	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
-	
 	private VistaSeleccionador vistaSeleccionador;
-	private VistaPosicionable vistaPosicionable;
 	
-	public VistaAldeano(VistaPosicionable vistaPosicionable) {
-		this.vistaPosicionable = vistaPosicionable;
+	public VistaAldeano(ContenedorControles contenedorControles, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador) {
+		this.contenedorControles = contenedorControles;
+		this.contenedorMapa = contenedorMapa;
+		this.vistaSeleccionador = vistaSeleccionador;
 	}
 	
-	public void dibujar(Aldeano aldeano, Pane pane) {
-		
+	@Override
+	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
 		pane.setBackground(obtenerFondoAldeano());
 	}
-	
-	public void dibujar(Aldeano aldeano, Posicion posicionAnterior) {
-		
-		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		contenedorMapa.setBackground(obtenerFondoAldeano(), aldeano.obtenerPosicion());
-	}
 
+	@Override
+	public void dibujarControles(Posicionable posicionable) {
+		
+		contenedorControles.clean();
+		
+		contenedorControles.setNombreUnidad("Aldeano");
+		
+		Collection<Button> acciones = new ArrayList<Button>();
+		acciones.add(crearAccionConstruir());
+		acciones.add(crearAccionReparar(/*edificio*/));
+		
+		//Movimientos
+		acciones.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable));
+		
+		contenedorControles.setAcciones(acciones);
+	}
+	
+	@Override
+	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
+		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+		contenedorMapa.setBackground(obtenerFondoAldeano(), movible.obtenerPosicion());
+	}
+	
 	private Background obtenerFondoAldeano() {
 		
 		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/aldeano.jpg", 
@@ -58,21 +67,6 @@ public class VistaAldeano {
 		
 		return new Background(fondoAldeano);
 	
-	}
-	
-	public void dibujarControles(Aldeano aldeano) {
-		
-		aldeano.obtenerVida();
-		contenedorControles.setNombreUnidad("Aldeano");
-		
-		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(crearAccionConstruir());
-		acciones.add(crearAccionReparar(/*edificio*/));
-		
-		//Movimientos
-		acciones.addAll(new CreadorBotonesMovimiento(vistaPosicionable, vistaSeleccionador).crearBotones(aldeano));
-		
-		contenedorControles.setAcciones(acciones);
 	}
 
 	private Button crearAccionReparar(/*Edificio edificio*/) {
@@ -88,17 +82,5 @@ public class VistaAldeano {
 		Button accionConstruir = new Button("Construir");
 		//TODO Agregar el handler
 		return accionConstruir;
-	}
-
-	public void setContenedorControles(ContenedorControles contenedorControles) {
-		this.contenedorControles = contenedorControles;
-	}
-
-	public void setContenedorMapa(ContenedorMapa contenedorMapa) {
-		this.contenedorMapa = contenedorMapa;
-	}
-	
-	public void setVistaSeleccionador(VistaSeleccionador vistaSeleccionador) {
-		this.vistaSeleccionador = vistaSeleccionador;
 	}
 }

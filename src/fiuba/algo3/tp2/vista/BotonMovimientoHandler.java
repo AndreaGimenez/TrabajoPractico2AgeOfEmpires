@@ -11,13 +11,11 @@ public class BotonMovimientoHandler implements EventHandler<ActionEvent>{
 	
 	private Movible movible;
 	private Direccion direccion;
-	private VistaPosicionable vistaPosicionable;
 	private VistaSeleccionador vistaSeleccionador;
 	
 	public BotonMovimientoHandler(Movible movible, Direccion direccion, VistaPosicionable vistaPosicionable, VistaSeleccionador vistaSeleccionador) {
 		this.movible = movible;
 		this.direccion = direccion;
-		this.vistaPosicionable = vistaPosicionable;
 		this.vistaSeleccionador = vistaSeleccionador;
 	}
 
@@ -26,10 +24,13 @@ public class BotonMovimientoHandler implements EventHandler<ActionEvent>{
 		try {
 			Posicion posicionAnterior = movible.obtenerPosicion();
 			movible.mover(direccion);
-			vistaPosicionable.dibujarPosicionable(movible, posicionAnterior);
+			((VistaMovible)VistaPosicionableMultitone.getInstance(movible)).dibujarPosicionable(movible, posicionAnterior);
 			vistaSeleccionador.seleccionarNodo(movible);
 			
 		} catch (MovimientoInvalidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
