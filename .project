@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/fiuba/algo3/tp2/vista/MusicaDeInicio.mp3</name>
+			<type>1</type>
+			<location>/home/andre/Descargas/Age of Empires  Mythologies Soundtrack - Egyptian Campaign Theme 01.mp3</location>
+		</link>
+	</linkedResources>
 </projectDescription>
