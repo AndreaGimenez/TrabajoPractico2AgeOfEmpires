@@ -29,12 +29,14 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 	private Stage stage;
 	private Label labelAdvertencia;
 	private Label labelNombreJugador;
-
-	public BotonAceptarIngresoJugadorHandler(Stage stage, Label labelAdvertencia, Label labelNombreJugador, TextField tfNombreJugador, Collection<String> nombresJugadores) {
+	private Musica musica;
+	
+	public BotonAceptarIngresoJugadorHandler(Stage stage, Label labelAdvertencia, Label labelNombreJugador, TextField tfNombreJugador, Collection<String> nombresJugadores, Musica musica) {
 		this.nombresJugadores = nombresJugadores;
 		this.tfNombreJugador = tfNombreJugador;
 		this.labelAdvertencia = labelAdvertencia;
 		this.labelNombreJugador = labelNombreJugador;
+		this.musica = musica;
 		this.stage = stage;
 	}
 
@@ -58,6 +60,8 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 					Scene escenaJuego = new Scene(contenedorJuego);
 					AplicacionOnKeyPressEventHandler AplicacionOnKeyPressEventHandler = new AplicacionOnKeyPressEventHandler(stage, contenedorJuego.getBarraDeMenu());
 			        escenaJuego.setOnKeyPressed(AplicacionOnKeyPressEventHandler);
+			        
+			        musica.detenerReproduccionMusica();
 			        
 					stage.setScene(escenaJuego);
 					stage.setFullScreen(true);

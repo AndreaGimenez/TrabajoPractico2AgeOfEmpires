@@ -27,13 +27,14 @@ public class ContenedorIngresoJugadores extends VBox {
 
 	private Stage stage;
 	private Collection<String> nombresJugadores;
-	
-	public ContenedorIngresoJugadores(Stage stage) {
+	private Musica musica;
+	public ContenedorIngresoJugadores(Stage stage, Musica musica) {
 	
 	    super();
 	
 	    this.stage = stage;
 	    this.nombresJugadores = new ArrayList<String>();
+	    this.musica = musica;
 	    
 	    this.setAlignment(Pos.CENTER);
 	    this.setSpacing(20);
@@ -68,7 +69,7 @@ public class ContenedorIngresoJugadores extends VBox {
 	    tfNombreJugador.setPrefWidth(250);
 	    tfNombreJugador.setMaxWidth(250);
 	    
-	    BotonAceptarIngresoJugadorHandler botonAceptarIngresoJugadorHandler = new BotonAceptarIngresoJugadorHandler(stage, labelAdvertencia, labelNombreJugador, tfNombreJugador, nombresJugadores);
+	    BotonAceptarIngresoJugadorHandler botonAceptarIngresoJugadorHandler = new BotonAceptarIngresoJugadorHandler(stage, labelAdvertencia, labelNombreJugador, tfNombreJugador, nombresJugadores, musica);
 	    botonAceptarIngresoJugador.setOnAction(botonAceptarIngresoJugadorHandler);
 	    
 	    TextBoxNombreJugadorHandler tfNombreJugadorHandler = new TextBoxNombreJugadorHandler(botonAceptarIngresoJugador);
