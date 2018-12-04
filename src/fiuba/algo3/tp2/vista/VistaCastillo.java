@@ -2,6 +2,7 @@ package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeArmaDeAsedioEventHandler;
 import javafx.scene.control.Button;
@@ -49,5 +50,10 @@ public class VistaCastillo {
 
 	public void setContenedorControles(ContenedorControles contenedorControles) {
 		this.contenedorControles = contenedorControles;
+	}
+
+	public void dibujar(Castillo posicionable, Posicion posicionAnterior) {
+		// TODO Auto-generated method stub
+		
 	}
 }

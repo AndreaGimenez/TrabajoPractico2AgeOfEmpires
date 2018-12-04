@@ -7,13 +7,10 @@ import fiuba.algo3.tp2.vista.eventos.BotonSalirEventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -60,10 +57,6 @@ public class ContenedorIngresoJugadores extends VBox {
 	    labelAdvertencia.setTextFill(Color.RED);
 	    labelAdvertencia.setFont(Font.font("Arial, Helvetica, sans-serif", FontWeight.BOLD, 12));
 	    
-	    TextField tfNombreJugador = new TextField();
-	    tfNombreJugador.setPrefWidth(250);
-	    tfNombreJugador.setMaxWidth(250);
-	    
 	    Button botonAceptarIngresoJugador = new Button();
 	    botonAceptarIngresoJugador.setText("ACEPTAR");
 	    botonAceptarIngresoJugador.setTextFill(Color.WHITE);
@@ -71,12 +64,15 @@ public class ContenedorIngresoJugadores extends VBox {
 	    botonAceptarIngresoJugador.setPrefWidth(250);
 	    botonAceptarIngresoJugador.setStyle(this.obtenerEstiloBoton());
 	    
+	    TextField tfNombreJugador = new TextField();
+	    tfNombreJugador.setPrefWidth(250);
+	    tfNombreJugador.setMaxWidth(250);
+	    
 	    BotonAceptarIngresoJugadorHandler botonAceptarIngresoJugadorHandler = new BotonAceptarIngresoJugadorHandler(stage, labelAdvertencia, labelNombreJugador, tfNombreJugador, nombresJugadores);
 	    botonAceptarIngresoJugador.setOnAction(botonAceptarIngresoJugadorHandler);
 	    
-        BotonEnter botonEnter = new BotonEnter();
-       
-        botonEnter.disparar(botonAceptarIngresoJugador);
+	    TextBoxNombreJugadorHandler tfNombreJugadorHandler = new TextBoxNombreJugadorHandler(botonAceptarIngresoJugador);
+	    tfNombreJugador.setOnKeyPressed(tfNombreJugadorHandler);
 	    
 	    Button botonSalir = new Button();
 	    botonSalir.setText("SALIR");
@@ -87,8 +83,6 @@ public class ContenedorIngresoJugadores extends VBox {
 	    
 	    BotonSalirEventHandler botonSalirEventHandler = new BotonSalirEventHandler();
 	    botonSalir.setOnAction(botonSalirEventHandler);
-	    
-        botonEnter.disparar(botonSalir);
 	    
 	    this.getChildren().addAll(labelNombreJugador, tfNombreJugador, labelAdvertencia, botonAceptarIngresoJugador, botonSalir);
 	}

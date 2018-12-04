@@ -5,10 +5,10 @@ import java.util.LinkedList;
 
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
-import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
@@ -144,5 +144,10 @@ public class Jugador {
 
 		return (Castillo) this.obtenerPosicionables().getFirst();
 
+	}
+	
+	public boolean posicionablePerteneceAJugador(Posicionable posicionable) {
+		
+		return (posicionable != null && (edificios.contains(posicionable) || unidades.contains(posicionable)));
 	}
 }

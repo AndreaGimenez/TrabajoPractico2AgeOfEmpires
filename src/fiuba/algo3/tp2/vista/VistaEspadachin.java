@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.Espadachin;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -48,5 +49,10 @@ public class VistaEspadachin {
 		Button botonAtacar = new Button("Atacar");
 		//TODO agregar event handler.
 		return botonAtacar;
+	}
+
+	public void dibujar(Espadachin posicionable, Posicion posicionAnterior) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -2,6 +2,7 @@ package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeArqueroEventHandler;
 import fiuba.algo3.tp2.vista.botones.BotonCreadorDeEspadachinEventHandler;
 import javafx.scene.control.Button;
@@ -63,5 +64,10 @@ public class VistaCuartel {
 	public void setContenedorControles(ContenedorControles contenedorControles) {
 
 		this.contenedorControles = contenedorControles;
+	}
+
+	public void dibujar(Cuartel posicionable, Posicion posicionAnterior) {
+		// TODO Auto-generated method stub
+		
 	}
 }
