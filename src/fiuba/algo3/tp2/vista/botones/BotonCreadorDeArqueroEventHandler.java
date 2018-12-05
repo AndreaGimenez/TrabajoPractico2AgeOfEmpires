@@ -40,7 +40,7 @@ public class BotonCreadorDeArqueroEventHandler implements EventHandler<ActionEve
         try {
             this.gestorDeConstruccion.crearArquero(this.cuartel.obtenerPosicion().desplazarHorizontalmente(3), mapa);
         } catch (CeldaOcupadaException e) {
-            e.printStackTrace();
+            
         } catch (CeldaInexistenteException e) {
             e.printStackTrace();
         } catch (UnidadNoSoportadaException e) {

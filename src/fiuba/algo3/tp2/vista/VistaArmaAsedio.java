@@ -37,7 +37,7 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
 		
 		contenedorControles.clean();
 		
-		contenedorControles.setNombreUnidad("Espadachin");
+		contenedorControles.setNombreUnidad("Arma de Asedio");
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionAtacar());
