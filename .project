@@ -18,7 +18,7 @@
 		<link>
 			<name>src/fiuba/algo3/tp2/vista/aldeanoCaminando.mp3</name>
 			<type>1</type>
-			<location>C:/Users/asgimenez/Downloads/aldeanoCaminando.mp3</location>
+			<location>/home/chrisxfs/workspace/java/TrabajoPractico2AgeOfEmpires/src/fiuba/algo3/tp2/vista/aldeanoCaminando.mp3</location>
 		</link>
 	</linkedResources>
 </projectDescription>

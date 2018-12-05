@@ -3,15 +3,20 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.Collection;
 
+import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Espadachin;
 import fiuba.algo3.tp2.vista.eventos.AplicacionOnKeyPressEventHandler;
@@ -85,10 +90,26 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
     		throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
     	
     	Mapa mapa = new Mapa(50, 50);
-    	new Arquero(new Posicion(10, 10), mapa);
-    	new Espadachin(new Posicion(11, 10), mapa);
         Juego juego = new Juego(mapa);
         juego.iniciar(nombresJugadores.toArray(new String[juego.CANTIDAD_DE_JUGADORES]));
+        
+        juego.obtenerJugadorActual().agregarEdificio(new Cuartel(new Posicion(8, 0), mapa), false);
+        juego.obtenerJugadorActual().agregarUnidad(new Arquero(new Posicion(10, 10), mapa), mapa, false);
+        juego.obtenerJugadorActual().agregarUnidad(new Espadachin(new Posicion(11, 10), mapa), mapa, false);
+        juego.obtenerJugadorActual().agregarUnidad(new ArmaAsedio(new Posicion(12, 10), mapa), mapa, false);
+        try {
+			juego.avanzarJugador();
+		} catch (EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        juego.obtenerJugadorActual().agregarUnidad(new Aldeano(new Posicion(13, 10), mapa), mapa, false);
+        try {
+			juego.avanzarJugador();
+		} catch (EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return juego;
 	}
 
