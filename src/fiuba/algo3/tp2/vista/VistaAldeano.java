@@ -3,6 +3,7 @@ package fiuba.algo3.tp2.vista;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import fiuba.algo3.tp2.edificio.PosicionarEdificio;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
@@ -41,15 +42,12 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		contenedorControles.setNombreUnidad("Aldeano");
 		contenedorControles.setVida(((Aldeano)posicionable).obtenerVida());
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(crearAccionConstruir());
+		acciones.add(crearAccionConstruir((Aldeano)posicionable));
 		acciones.add(crearAccionReparar(/*edificio*/));
-		
-		//Movimientos
-		acciones.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable));
-		
+		acciones.add(crearAccionMoverse(this, posicionable, contenedorControles, vistaSeleccionador));
 		contenedorControles.setAcciones(acciones);
 	}
-	
+
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
@@ -78,10 +76,18 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		return accionReparar;
 	}
 
-	private Button crearAccionConstruir() {
+	private Button crearAccionConstruir(Aldeano aldeanoSeleccionado) {
 		
 		Button accionConstruir = new Button("Construir");
-		//TODO Agregar el handler
+		BotonConstruirEdificioEventHandler botonConstruirEdificioEventHandler = new BotonConstruirEdificioEventHandler(accionConstruir, new PosicionarEdificio(aldeanoSeleccionado));
+		
 		return accionConstruir;
+	}	
+	
+	private Button crearAccionMoverse(VistaAldeano vistaAldeano, Posicionable posicionableActual, ContenedorControles contenedorControles, VistaSeleccionador vistaSeleccionador) {
+		Button accionMoverse = new Button("Mover");
+		BotonMoverseHandler botonMoverseHandler = new BotonMoverseHandler(accionMoverse, posicionableActual, contenedorControles, vistaSeleccionador, vistaAldeano);
+		accionMoverse.setOnAction(botonMoverseHandler);
+		return accionMoverse;
 	}
 }

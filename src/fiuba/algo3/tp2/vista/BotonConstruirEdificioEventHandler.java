@@ -14,13 +14,13 @@ public class BotonConstruirEdificioEventHandler implements EventHandler<ActionEv
 
     Button boton;
     PosicionarEdificio posicionador;
+    
 
     public BotonConstruirEdificioEventHandler(Button accionConstruir, PosicionarEdificio posicionarEdificio) {
 
         this.boton = accionConstruir;
 
         this.posicionador = posicionarEdificio;
-
     }
 
     @Override
