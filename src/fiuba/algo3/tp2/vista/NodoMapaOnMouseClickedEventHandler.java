@@ -13,13 +13,11 @@ public class NodoMapaOnMouseClickedEventHandler implements EventHandler<MouseEve
 	private Juego juego;
 	
 	private VistaSeleccionador vistaSeleccionador;
-	private VistaPosicionable vistaPosicionable;
 
-	public NodoMapaOnMouseClickedEventHandler(Juego juego, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador, VistaPosicionable vistaPosicionable) {
+	public NodoMapaOnMouseClickedEventHandler(Juego juego, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador) {
 		this.contenedorMapa = contenedorMapa;
 		this.juego = juego;
 		this.vistaSeleccionador = vistaSeleccionador;
-		this.vistaPosicionable = vistaPosicionable;
 	}
 
 	@Override
@@ -31,7 +29,12 @@ public class NodoMapaOnMouseClickedEventHandler implements EventHandler<MouseEve
 		Posicionable posicionable = juego.obtenerMapa().obtenerPosicionable(new Posicion(colIndex, rowIndex));
 		
 		if(juego.obtenerJugadorActual().posicionablePerteneceAJugador(posicionable)) {
-			vistaPosicionable.dibujarControles((Pane)event.getSource());
+			try {
+				VistaPosicionableMultitone.getInstance(posicionable).dibujarControles(posicionable);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			vistaSeleccionador.seleccionarNodo((Pane)event.getSource());
 		}
 	}

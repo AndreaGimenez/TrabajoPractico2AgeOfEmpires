@@ -9,33 +9,33 @@ import fiuba.algo3.tp2.vista.eventos.ButtonAvanzarTurnoHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class ContenedorPartida extends BorderPane {
 	
-	VistaPosicionable vistaPosicionable;
+	Mapa mapa;
+	
+	ContenedorControles contenedorControles;
+	ContenedorMapa contenedorMapa;
+	ContenedorEstadoJugador contenedorEstadoJugador;
+	
 	VistaSeleccionador vistaSeleccionador;
 	VistaMapa vistaMapa;
 	
     BarraDeMenu menuBar;
 
-    public ContenedorPartida(Stage stage, Juego juego) throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException {
+    public ContenedorPartida(Stage stage, Juego juego) throws Exception {
     	
-    	vistaPosicionable = new VistaPosicionable();
         this.setMenu(stage);
-        this.setMapa(juego, stage);
         this.setControles(juego);
         this.setEstadoJugador(juego);
+        this.setMapa(juego, stage);
     }
 
     private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
     	
-        ContenedorControles contenedorControles = new ContenedorControles();
-        
-        vistaPosicionable.setContenedorControles(contenedorControles);
-        
+        contenedorControles = new ContenedorControles();        
         this.setLeft(contenedorControles);
     }
 
@@ -44,43 +44,35 @@ public class ContenedorPartida extends BorderPane {
         this.setTop(menuBar);
     }
 
-    private void setMapa(Juego juego, Stage stage) throws CeldaOcupadaException, CeldaInexistenteException {
+    private void setMapa(Juego juego, Stage stage) throws Exception {
     	
-    	Mapa mapa = juego.obtenerMapa();
-    	ContenedorMapa contenedorMapa = new ContenedorMapa();
+    	mapa = juego.obtenerMapa();
+    	contenedorMapa = new ContenedorMapa();
     	vistaSeleccionador = new VistaSeleccionador(mapa, contenedorMapa);
-    	vistaPosicionable.setVistaSeleccionador(vistaSeleccionador);
+
+    	VistaPosicionableMultitone.init(contenedorControles, contenedorMapa, vistaSeleccionador, mapa);
     	
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrollPane.setContent(contenedorMapa);
 
-        vistaMapa = new VistaMapa(juego, contenedorMapa, vistaSeleccionador, vistaPosicionable);
+        vistaMapa = new VistaMapa(juego, contenedorMapa, vistaSeleccionador);
         vistaMapa.dibujarTerreno();
-        
-        vistaPosicionable.setMapa(mapa);
-        vistaPosicionable.setContenedorMapa(contenedorMapa);
-        vistaPosicionable.dibujarPosicionables();
+        vistaMapa.dibujarPosicionables();
         
         this.setCenter(scrollPane);
     }
 
     private void setEstadoJugador(Juego juego) {
     	
-    	ContenedorEstadoJugador contenedorEstadoJugador = new ContenedorEstadoJugador();
+    	contenedorEstadoJugador = new ContenedorEstadoJugador();
         Button botonAvanzarTurno = new Button("Avanzar Turno");
         VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, contenedorEstadoJugador);
         
-        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, vistaSeleccionador, vistaPosicionable, juego);
+        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, contenedorControles, vistaSeleccionador, juego);
         botonAvanzarTurno.setOnAction(botonAvanzarTurnoHandler);
         contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
-        
-        botonAvanzarTurno.setOnKeyPressed(evento -> {if(evento.getCode() == KeyCode.ENTER) {
-        	botonAvanzarTurno.fire();
-	    	evento.consume();
-	    	}
-	    });
         
         vistaEstadoJugador.actualizar();
         

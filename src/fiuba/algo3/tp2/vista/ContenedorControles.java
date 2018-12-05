@@ -28,6 +28,8 @@ public class ContenedorControles extends VBox {
         setPadding(new Insets(15));
         setStyle("-fx-background-color: brown;");
         setPrefWidth(200);
+        
+        this.acciones = new ArrayList<Button>();
 	}
 
 	public void setNombreUnidad(String nombreUnidad) {

@@ -68,6 +68,9 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 					
 					//TODO manejar una excepcion que puede ser arrojada al iniciar el juego
 					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 			
