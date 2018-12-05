@@ -35,9 +35,7 @@ public class GestionarConstruccion extends Edificio implements Posicionable {
     }
 
     public boolean estaEnConstruccion(){
-
         return this.turnosDesdeSuPosicionamiento < 3;
-
     }
   
     @Override

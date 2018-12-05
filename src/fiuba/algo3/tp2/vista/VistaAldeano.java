@@ -44,9 +44,8 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		contenedorControles.setNombreUnidad("Aldeano");
 		
 		Collection<Button> acciones = new ArrayList<Button>();
-		Collection<Button> botonesMovimiento = new ArrayList<Button>();
-		
-		acciones.add(crearAccionConstruir((Aldeano)posicionable));
+		acciones.add(crearAccionConstruirCuartel());
+		acciones.add(crearAccionConstruirPlazaCentral());
 		acciones.add(crearAccionReparar(/*edificio*/));
 		
 		//Movimientos
@@ -85,11 +84,15 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		return accionReparar;
 	}
 
-	private Button crearAccionConstruir(Aldeano aldeanoSeleccionado) {
+	private Button crearAccionConstruirCuartel() {
 		
-		Button accionConstruir = new Button("Construir");
-		BotonConstruirEdificioEventHandler botonConstruirEdificioEventHandler = new BotonConstruirEdificioEventHandler(accionConstruir, new PosicionarEdificio(aldeanoSeleccionado));
-		
-		return accionConstruir;
-	}	
+		Button accionConstruirCuartel = new Button("Construir Cuartel");
+		return accionConstruirCuartel;
+	}
+	
+	private Button crearAccionConstruirPlazaCentral() {
+		Button accionConstruirPlazaCentral = new Button("Construir Plaza Central");
+		return accionConstruirPlazaCentral;
+	}
+
 }

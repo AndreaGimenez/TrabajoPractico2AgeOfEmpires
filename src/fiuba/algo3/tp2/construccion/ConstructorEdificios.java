@@ -8,6 +8,6 @@ import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 
 public interface ConstructorEdificios {
 	
-	public Edificio crear(TipoEdificio tipoEdificio) 
+	public void crear(Edificio edificio) 
 			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException;
 }

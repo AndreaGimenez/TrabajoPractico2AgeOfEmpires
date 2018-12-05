@@ -15,76 +15,88 @@ public class PosicionarEdificio {
 
     }
 
-    public void posicionarALaDerechaPorDebajo(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+    public void posicionarALaDerechaPorDebajo(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
 
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(1));
-
-    }
-
-    public void posicionarALaIzquierdaPorDebajo(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
-
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(-2));
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(1));
 
     }
 
-    public void posicionarDebajoPorLaDerecha(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+    public void posicionarALaIzquierdaPorDebajo(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
 
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1));
-
-    }
-
-    public void posicionarArribaPorLaDerecha(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
-
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2));
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(-2));
 
     }
 
+    public void posicionarDebajoPorLaDerecha(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
 
-    public void posicionarEnAristaSuperiorDerecha(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
-
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(1));
-
-    }
-
-    public void posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
-
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1));
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1));
 
     }
 
-    public void posicionarEnAristaSuperiorIzquierda(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+    public void posicionarArribaPorLaDerecha(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
 
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1));
-
-    }
-
-    public void posicionarEnAristaInferiorIzquierda(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
-
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-2));
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2));
 
     }
 
-    public void posicionarALaDerechaPorEncima(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
 
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(1));
+    public void posicionarEnAristaSuperiorDerecha(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
 
-    }
-
-    public void posicionarALaIzquierdaPorEncima(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
-
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-2));
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(1));
 
     }
 
-    public void posicionarDebajoPorLaIzquierda(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+    public void posicionarEnAristaInferiorDerecha(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
 
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-1));
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1));
 
     }
 
-    public void posicionarArribaPorLaIzquierda(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+    public void posicionarEnAristaSuperiorIzquierda(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
 
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(-1));
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1));
+
+    }
+
+    public void posicionarEnAristaInferiorIzquierda(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-2));
+
+    }
+
+    public void posicionarALaDerechaPorEncima(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(1));
+
+    }
+
+    public void posicionarALaIzquierdaPorEncima(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-2));
+
+    }
+
+    public void posicionarDebajoPorLaIzquierda(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-1));
+
+    }
+
+    public void posicionarArribaPorLaIzquierda(Edificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
+
+        this.aldeano.crear(edificio);
+        edificio.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(-1));
 
     }
 }

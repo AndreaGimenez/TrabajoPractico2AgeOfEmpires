@@ -43,12 +43,8 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 		this.oroPorTurno = new OroPorTurno();
 	}
 
-	public Edificio crear(TipoEdificio tipoEdificio)
-			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException {
-		
-		Edificio edificio = creadorEdificio.crear(tipoEdificio);
+	public void crear(Edificio edificio){
 		this.edificioEnConstruccion = edificio;
-		return edificio;
 	}
 
 	@Override
