@@ -13,6 +13,12 @@
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.apache.ivyde.eclipse.ivynature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/fiuba/algo3/tp2/vista/aldeanoCaminando.mp3</name>
+			<type>1</type>
+			<location>/home/chrisxfs/workspace/java/TrabajoPractico2AgeOfEmpires/src/fiuba/algo3/tp2/vista/aldeanoCaminando.mp3</location>
+		</link>
+	</linkedResources>
 </projectDescription>
