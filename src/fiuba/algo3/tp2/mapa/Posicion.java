@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.mapa;
 
+import javafx.geometry.Pos;
+
 public class Posicion {
 
 	protected int coordenadaX;
@@ -19,10 +21,18 @@ public class Posicion {
 		return coordenadaY;
 	}
 
-	public Posicion sumar(Posicion coordenadaOrigen) {
+	public Posicion sumar(Posicion posicion) {
 		
-		Integer coordenadaX = this.coordenadaX + coordenadaOrigen.getX();
-		Integer coordenadaY = this.coordenadaY + coordenadaOrigen.getY();
+		Integer coordenadaX = this.coordenadaX + posicion.getX();
+		Integer coordenadaY = this.coordenadaY + posicion.getY();
+		
+		return new Posicion(coordenadaX, coordenadaY);
+	}
+	
+	public Posicion restar(Posicion posicion) {
+		
+		Integer coordenadaX = this.coordenadaX - posicion.getX();
+		Integer coordenadaY = this.coordenadaY - posicion.getY();
 		
 		return new Posicion(coordenadaX, coordenadaY);
 	}
@@ -52,5 +62,9 @@ public class Posicion {
 		
 		return (this.coordenadaX == otraPosicion.getX()
 				&& this.coordenadaY == otraPosicion.getY());
+	}
+	
+	public String toString() {
+		return String.valueOf(this.getX()) + this.getY();
 	}
 }

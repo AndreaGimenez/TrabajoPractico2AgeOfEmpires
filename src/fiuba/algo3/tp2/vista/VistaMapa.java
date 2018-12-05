@@ -12,6 +12,8 @@ import javafx.scene.layout.RowConstraints;
 
 public class VistaMapa {
 	
+	private NodoMapaOnMouseClickedStrategy nodoMapaOnMouseClickedStrategy;
+	
 	public static int TAMANIO_NODO = 50;
 	
 	private Juego juego;
@@ -44,12 +46,22 @@ public class VistaMapa {
             	
             	Pane pane = new Pane();
             	
-            	NodoMapaOnMouseClickedEventHandler nodoMapaOnMouseClickedEventHandler = new NodoMapaOnMouseClickedEventHandler(juego, contenedorMapa, vistaSeleccionador);
+            	NodoMapaOnMouseClickedStrategy strategy = new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador);
+            	NodoMapaOnMouseClickedEventHandler nodoMapaOnMouseClickedEventHandler = new NodoMapaOnMouseClickedEventHandler(strategy);
             	pane.setOnMouseClicked(nodoMapaOnMouseClickedEventHandler);
             	
             	contenedorMapa.add(pane, i, Math.abs(j - (mapa.getTamanioY() - 1)));
             }
         }
+	}
+	
+	public void setNodoMapaOnMouseClickedStrategy(NodoMapaOnMouseClickedStrategy strategy){
+		
+		for(Node nodo : contenedorMapa.getChildren()) {
+			if(nodo instanceof Pane) {
+				((NodoMapaOnMouseClickedEventHandler)nodo.getOnMouseClicked()).setStrategy(strategy);
+			}
+		}
 	}
 	
 	public void dibujarPosicionables() throws Exception {

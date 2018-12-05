@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 public class ContenedorControles extends VBox {
 	
 	private Label labelNombreUnidad;
+	private Label labelVida;
 	private Label labelAcciones;
 	private Collection<Button> acciones;
 
@@ -19,6 +20,10 @@ public class ContenedorControles extends VBox {
     	labelNombreUnidad = new Label();
         labelNombreUnidad.setText("");
         getChildren().add(labelNombreUnidad);
+        
+        labelVida = new Label();
+        labelVida.setText("");
+        getChildren().add(labelVida);
         
         labelAcciones = new Label();
         labelAcciones.setText("");
@@ -36,6 +41,10 @@ public class ContenedorControles extends VBox {
 		labelNombreUnidad.setText(nombreUnidad);
 	}
 	
+	public void setVida(int vida) {
+		labelVida.setText(String.valueOf(vida));
+	}
+	
 	public void setAcciones(Collection<Button> acciones) {
 		
 		labelAcciones.setText("Acciones");
@@ -46,6 +55,7 @@ public class ContenedorControles extends VBox {
 	public void clean() {
 		
 		labelNombreUnidad.setText("");
+		labelVida.setText("");
 		labelAcciones.setText("");
 		
 		if(this.acciones != null) {

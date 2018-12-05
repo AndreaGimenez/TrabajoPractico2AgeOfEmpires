@@ -6,6 +6,7 @@ import java.util.Collection;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
+import fiuba.algo3.tp2.unidad.Aldeano;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -38,7 +39,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		contenedorControles.clean();
 		
 		contenedorControles.setNombreUnidad("Aldeano");
-		
+		contenedorControles.setVida(((Aldeano)posicionable).obtenerVida());
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionConstruir());
 		acciones.add(crearAccionReparar(/*edificio*/));

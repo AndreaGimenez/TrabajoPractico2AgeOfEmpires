@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.vista;
 
+import java.io.File;
+
 import fiuba.algo3.tp2.vista.eventos.BotonComenzarPartidaEventHandler;
 import fiuba.algo3.tp2.vista.eventos.BotonSalirEventHandler;
 import javafx.geometry.Insets;
@@ -15,6 +17,8 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -24,9 +28,9 @@ public class ContenedorInicio extends VBox {
     Stage stage;
 
     public ContenedorInicio(Stage stage, Scene proximaEscena) {
-
+    	
         super();
-
+        
         this.stage = stage;
 
         this.setAlignment(Pos.CENTER);
@@ -39,7 +43,7 @@ public class ContenedorInicio extends VBox {
         						 primaryScreenBounds.getHeight(), 
         						 false, 
         						 true);
-        
+
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
         

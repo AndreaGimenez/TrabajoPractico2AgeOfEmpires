@@ -1,11 +1,7 @@
 package fiuba.algo3.tp2.vista;
 
-import java.io.File;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 
@@ -20,13 +16,10 @@ public class Aplicacion extends Application {
 
         stage.setTitle("Age of Empires");
         
-        String cancionInicioJuego = "src/fiuba/algo3/tp2/vista/MusicaDeInicio.mp3";
-        Media musica = new Media(new File(cancionInicioJuego).toURI().toString());
+        Musica musica = new Musica("src/fiuba/algo3/tp2/vista/MusicaDeInicio.mp3");
+        musica.iniciarReproduccionMusica();
         
-        MediaPlayer mediaPlayer = new MediaPlayer(musica);
-        mediaPlayer.play();
-        
-        ContenedorIngresoJugadores contenedorIngresoJugadores = new ContenedorIngresoJugadores(stage);
+        ContenedorIngresoJugadores contenedorIngresoJugadores = new ContenedorIngresoJugadores(stage, musica);
         Scene escenaIngresoJugadores = new Scene(contenedorIngresoJugadores, 640, 480);
 
         ContenedorInicio contenedorBienvenidos = new ContenedorInicio(stage, escenaIngresoJugadores);
@@ -34,8 +27,6 @@ public class Aplicacion extends Application {
 
         stage.setScene(escenaBienvenidos);
         stage.setFullScreen(true);
-
         stage.show();
-
     }
 }

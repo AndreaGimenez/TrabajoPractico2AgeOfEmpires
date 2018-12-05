@@ -12,11 +12,13 @@ public class BotonMovimientoHandler implements EventHandler<ActionEvent>{
 	private Movible movible;
 	private Direccion direccion;
 	private VistaSeleccionador vistaSeleccionador;
+	//private Musica musica;
 	
 	public BotonMovimientoHandler(Movible movible, Direccion direccion, VistaPosicionable vistaPosicionable, VistaSeleccionador vistaSeleccionador) {
 		this.movible = movible;
 		this.direccion = direccion;
 		this.vistaSeleccionador = vistaSeleccionador;
+		//this.musica = new Musica("src/fiuba/algo3/tp2/vista/aldeanoCaminando.mp3");
 	}
 
 	@Override
@@ -26,7 +28,7 @@ public class BotonMovimientoHandler implements EventHandler<ActionEvent>{
 			movible.mover(direccion);
 			((VistaMovible)VistaPosicionableMultitone.getInstance(movible)).dibujarPosicionable(movible, posicionAnterior);
 			vistaSeleccionador.seleccionarNodo(movible);
-			
+			//musica.iniciarReproduccionMusica();
 		} catch (MovimientoInvalidoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

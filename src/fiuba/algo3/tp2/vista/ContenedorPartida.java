@@ -29,8 +29,8 @@ public class ContenedorPartida extends BorderPane {
     	
         this.setMenu(stage);
         this.setControles(juego);
-        this.setEstadoJugador(juego);
         this.setMapa(juego, stage);
+        this.setEstadoJugador(juego);
     }
 
     private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
@@ -49,8 +49,6 @@ public class ContenedorPartida extends BorderPane {
     	mapa = juego.obtenerMapa();
     	contenedorMapa = new ContenedorMapa();
     	vistaSeleccionador = new VistaSeleccionador(mapa, contenedorMapa);
-
-    	VistaPosicionableMultitone.init(contenedorControles, contenedorMapa, vistaSeleccionador, mapa);
     	
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
@@ -58,6 +56,8 @@ public class ContenedorPartida extends BorderPane {
         scrollPane.setContent(contenedorMapa);
 
         vistaMapa = new VistaMapa(juego, contenedorMapa, vistaSeleccionador);
+        VistaPosicionableMultitone.init(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, mapa, juego);
+        
         vistaMapa.dibujarTerreno();
         vistaMapa.dibujarPosicionables();
         

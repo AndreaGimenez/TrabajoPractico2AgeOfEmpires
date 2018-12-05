@@ -3,6 +3,7 @@ package fiuba.algo3.tp2.vista;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Aldeano;
@@ -25,24 +26,28 @@ public class VistaPosicionableMultitone {
 	private VistaPosicionableMultitone(ContenedorControles contenedorControles,
 									ContenedorMapa contenedorMapa,
 									VistaSeleccionador vistaSeleccionador,
-									Mapa mapa) {
+									VistaMapa vistaMapa,
+									Mapa mapa,
+									Juego juego) {
 		
 		vistaAldeano = new VistaAldeano(contenedorControles, contenedorMapa, vistaSeleccionador);
 		vistaEspadachin = new VistaEspadachin(contenedorControles, contenedorMapa, vistaSeleccionador);
-		vistaArquero = new VistaArquero(contenedorControles, contenedorMapa, vistaSeleccionador);
+		vistaArquero = new VistaArquero(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
 		vistaArmaAsedio = new VistaArmaAsedio(contenedorControles, contenedorMapa, vistaSeleccionador);
-		vistaCuartel = new VistaCuartel(contenedorControles, mapa);
-		vistaPlazaCentral = new VistaPlazaCentral(contenedorControles, mapa);
-		vistaCastillo = new VistaCastillo(contenedorControles, mapa);
+		vistaCuartel = new VistaCuartel(contenedorMapa, contenedorControles, mapa);
+		vistaPlazaCentral = new VistaPlazaCentral(contenedorMapa, contenedorControles, mapa);
+		vistaCastillo = new VistaCastillo(contenedorMapa, contenedorControles, mapa);
 	}
 	
 	public static void init(ContenedorControles contenedorControles,
 					 		ContenedorMapa contenedorMapa,
 					 		VistaSeleccionador vistaSeleccionador,
-					 		Mapa mapa) {
+					 		VistaMapa vistaMapa,
+					 		Mapa mapa,
+					 		Juego juego) {
 		
 		if(multitone == null) {
-			multitone = new VistaPosicionableMultitone(contenedorControles, contenedorMapa, vistaSeleccionador, mapa);
+			multitone = new VistaPosicionableMultitone(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, mapa, juego);
 		}
 		
 	}

@@ -11,10 +11,9 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 
 public class ContenedorMapa extends GridPane {
-	
+
 	public ContenedorMapa() {
 		
     	setAlignment(Pos.CENTER);

@@ -31,6 +31,7 @@ public class ArmaAsedio extends Unidad implements Atacador {
 	public void desmontar() {
 		this.movimiento = new MovimientoBasico();
 		this.ataque = new AtaqueNulo();
+		this.montada = false;
 	}
 
 	@Override
@@ -48,6 +49,10 @@ public class ArmaAsedio extends Unidad implements Atacador {
 	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		ataque.atacar(this, atacable);
 		ataque = new AtaqueNulo();
+	}
+
+	public boolean montada() {
+		return montada;
 	}
 
 }
