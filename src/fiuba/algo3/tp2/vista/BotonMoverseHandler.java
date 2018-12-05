@@ -31,7 +31,7 @@ public class BotonMoverseHandler implements EventHandler<ActionEvent>{
 		
 		Collection<Button> direccionMovimientos = new ArrayList<Button>();
 
-		direccionMovimientos.addAll(new CreadorBotonesMovimiento(vistaPosicionable, vistaSeleccionador).crearBotones((Movible)posicionable));
+		direccionMovimientos.addAll(new CreadorBotonesMovimiento(vistaPosicionable, vistaSeleccionador, contenedorControles).crearBotones((Movible)posicionable));
 				
 		contenedorControles.setAcciones(direccionMovimientos);
 	}

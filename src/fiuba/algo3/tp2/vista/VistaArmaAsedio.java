@@ -45,7 +45,7 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
 		acciones.add(crearAccionAtacar());
 		
 		//Movimientos
-		acciones.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable));
+		acciones.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador, contenedorControles).crearBotones((Movible)posicionable));
 		
 		contenedorControles.setAcciones(acciones);
 	}

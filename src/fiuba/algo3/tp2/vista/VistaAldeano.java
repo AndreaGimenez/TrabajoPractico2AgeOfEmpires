@@ -8,6 +8,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -15,6 +16,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class VistaAldeano implements VistaPosicionable, VistaMovible {
@@ -36,17 +38,24 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
-		
+
 		contenedorControles.clean();
 		
 		contenedorControles.setNombreUnidad("Aldeano");
-		contenedorControles.setVida(((Aldeano)posicionable).obtenerVida());
+		
 		Collection<Button> acciones = new ArrayList<Button>();
+		Collection<Button> botonesMovimiento = new ArrayList<Button>();
+		
 		acciones.add(crearAccionConstruir((Aldeano)posicionable));
 		acciones.add(crearAccionReparar(/*edificio*/));
-		acciones.add(crearAccionMoverse(this, posicionable, contenedorControles, vistaSeleccionador));
+		
+		//Movimientos
+		botonesMovimiento.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador, contenedorControles).crearBotones((Movible)posicionable));
+		acciones.addAll(botonesMovimiento);
 		contenedorControles.setAcciones(acciones);
 	}
+
+	
 
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
@@ -83,11 +92,4 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		
 		return accionConstruir;
 	}	
-	
-	private Button crearAccionMoverse(VistaAldeano vistaAldeano, Posicionable posicionableActual, ContenedorControles contenedorControles, VistaSeleccionador vistaSeleccionador) {
-		Button accionMoverse = new Button("Mover");
-		BotonMoverseHandler botonMoverseHandler = new BotonMoverseHandler(accionMoverse, posicionableActual, contenedorControles, vistaSeleccionador, vistaAldeano);
-		accionMoverse.setOnAction(botonMoverseHandler);
-		return accionMoverse;
-	}
 }
