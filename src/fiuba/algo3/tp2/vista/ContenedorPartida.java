@@ -47,7 +47,7 @@ public class ContenedorPartida extends BorderPane {
     private void setMapa(Juego juego, Stage stage) throws Exception {
     	
     	mapa = juego.obtenerMapa();
-    	contenedorMapa = new ContenedorMapa();
+    	contenedorMapa = new ContenedorMapa(mapa);
     	vistaSeleccionador = new VistaSeleccionador(mapa, contenedorMapa);
     	
         ScrollPane scrollPane = new ScrollPane();
@@ -70,7 +70,7 @@ public class ContenedorPartida extends BorderPane {
         Button botonAvanzarTurno = new Button("Avanzar Turno");
         VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, contenedorEstadoJugador);
         
-        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, contenedorControles, vistaSeleccionador, juego);
+        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, contenedorControles, vistaSeleccionador, vistaMapa, juego);
         botonAvanzarTurno.setOnAction(botonAvanzarTurnoHandler);
         contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
         

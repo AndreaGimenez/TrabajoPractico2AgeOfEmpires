@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,12 +15,16 @@ import javafx.scene.layout.Pane;
 
 public class ContenedorMapa extends GridPane {
 
-	public ContenedorMapa() {
+	public ContenedorMapa(Mapa mapa) {
 		
     	setAlignment(Pos.CENTER);
     	setGridLinesVisible(true);
-        Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/fondo-verde.jpg");
-        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/terreno.jpg",
+        		mapa.getTamanioX()*VistaMapa.TAMANIO_NODO,
+        		mapa.getTamanioY()*VistaMapa.TAMANIO_NODO,
+        		false,
+        		true);
+        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         setBackground(new Background(imagenDeFondo));
 	}
 

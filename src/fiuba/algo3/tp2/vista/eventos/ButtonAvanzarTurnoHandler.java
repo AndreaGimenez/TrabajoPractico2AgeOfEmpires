@@ -5,6 +5,7 @@ import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.vista.ContenedorControles;
 import fiuba.algo3.tp2.vista.VistaEstadoJugador;
+import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +13,7 @@ import javafx.event.EventHandler;
 public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 
 	private Juego juego;
+	private VistaMapa vistaMapa;
 	private VistaEstadoJugador vistaEstadoJugador;
 	private VistaSeleccionador vistaSeleccionador;
 	private ContenedorControles contenedorControles;
@@ -19,10 +21,12 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 	public ButtonAvanzarTurnoHandler(VistaEstadoJugador vistaEstadoJugador, 
 									 ContenedorControles contenedorControles, 
 									 VistaSeleccionador vistaSeleccionador,
+									 VistaMapa vistaMapa,
 									 Juego juego) {
 		this.contenedorControles = contenedorControles;
 		this.vistaSeleccionador = vistaSeleccionador;
 		this.vistaEstadoJugador = vistaEstadoJugador;
+		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 	}
 	
@@ -35,6 +39,7 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 			vistaEstadoJugador.actualizar();
 			vistaSeleccionador.deseleccionarNodoActual();
 			contenedorControles.clean();
+			vistaMapa.dibujarPosicionables();
 			
 		} catch (EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
 			// TODO Auto-generated catch block

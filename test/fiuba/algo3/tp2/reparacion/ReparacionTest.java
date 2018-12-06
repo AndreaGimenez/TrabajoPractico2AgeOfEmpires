@@ -97,7 +97,7 @@ public class ReparacionTest {
 
 		Mapa mapa = new Mapa(250,250);
 
-		Jugador ignacio = new Jugador("Jugador 1");
+		Jugador ignacio = new Jugador("Jugador 1", mapa);
 
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
@@ -111,7 +111,7 @@ public class ReparacionTest {
 
 		ignacio.agregarEdificio(cuartel, false);
 
-		Turno turno = new Turno(ignacio);
+		Turno turno = new Turno(ignacio, mapa);
 
 		cuartel.recibirDanio(ataque);
 
@@ -163,7 +163,7 @@ public class ReparacionTest {
 
 		Mapa mapa = new Mapa(250,250);
 
-		Jugador ignacio = new Jugador("Jugador 1");
+		Jugador ignacio = new Jugador("Jugador 1", mapa);
 
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 
@@ -178,7 +178,7 @@ public class ReparacionTest {
 
 		ignacio.agregarEdificio(cuartel, false);
 
-		Turno turno = new Turno(ignacio);
+		Turno turno = new Turno(ignacio, mapa);
 
 		cuartel.recibirDanio(ataque);
 

@@ -1,19 +1,23 @@
 package fiuba.algo3.tp2.juego;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
-import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.edificio.Castillo;
+import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
-import fiuba.algo3.tp2.mapa.Celda;
+import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
-import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.PosicionesInicialesAldeanos;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.mapa.Celda;
+import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.mapa.PosicionesInicialesAldeanos;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.Unidad;
 
 public class Juego {
 
@@ -123,7 +127,7 @@ public class Juego {
 	private void agregarJugador(String nombreJugador) 
 			throws CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
-		Jugador jugador = new Jugador(nombreJugador);
+		Jugador jugador = new Jugador(nombreJugador, mapa);
 		cargarCondicionesIniciales(jugador);
 
 		this.ronda.agregarJugador(jugador);
@@ -136,6 +140,26 @@ public class Juego {
 	public void avanzarJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		obtenerJugadorActual().avanzarTurno();
 		ronda.avanzar();
+		
+		Jugador jugadorActual = obtenerJugadorActual();
+		LinkedList<Posicionable> posicionablesJugador = jugadorActual.obtenerPosicionables();
+    	Iterator<Posicionable> posicionablesIterator = posicionablesJugador.iterator();
+    	
+    	while(posicionablesIterator.hasNext()) {
+    		Posicionable posicionable = posicionablesIterator.next();
+    		if(posicionable instanceof Unidad) {
+    			Unidad unidad = (Unidad)posicionable;
+    			if(unidad.estaMuerta()) {
+    				jugadorActual.removerUnidad((Unidad)posicionable, mapa);
+    			}
+    		}else if(posicionable instanceof Edificio
+    				&& !(posicionable instanceof Castillo)) {
+    			Edificio edificio = (Edificio)posicionable;
+    			if(edificio.estaDestruido()) {
+    				jugadorActual.removerEdificio((Edificio)posicionable, mapa);
+    			}
+    		}
+    	}
 		if(obtenerJugadorActual().castilloDestruido()) {
 			this.estaTerminado = true ;
 		}

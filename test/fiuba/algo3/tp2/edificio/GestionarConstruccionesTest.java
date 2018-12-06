@@ -53,12 +53,12 @@ public class GestionarConstruccionesTest {
         Cuartel cuartel = new Cuartel(new Posicion(17, 17), mapa);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
         
-        Jugador jugador = new Jugador("Jugador 1");
+        Jugador jugador = new Jugador("Jugador 1", mapa);
         
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         
         posicionables.add(gestorCuartel);
-        Turno turno = new Turno(jugador);
+        Turno turno = new Turno(jugador, mapa);
         turno.avanzar();
 
         gestorCuartel.crearEspadachin(new Posicion(19, 19), mapa);
@@ -73,12 +73,12 @@ public class GestionarConstruccionesTest {
         
         Cuartel cuartel = new Cuartel(new Posicion(17, 17), mapa);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
-        Jugador jugador = new Jugador("Jugador 1");
+        Jugador jugador = new Jugador("Jugador 1", mapa);
         
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         
         posicionables.add(gestorCuartel);
-        Turno turno = new Turno(jugador);
+        Turno turno = new Turno(jugador, mapa);
         turno.avanzar();
         turno.avanzar();
 
@@ -95,10 +95,10 @@ public class GestionarConstruccionesTest {
         Cuartel cuartel = new Cuartel(new Posicion(17, 17), mapa);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
          
-        Jugador jugador = new Jugador("Jugador 1");
+        Jugador jugador = new Jugador("Jugador 1", mapa);
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         jugador.agregarEdificio(gestorCuartel, false);
-        Turno turno = new Turno(jugador);
+        Turno turno = new Turno(jugador, mapa);
         turno.avanzar();
         turno.avanzar();
         turno.avanzar();
@@ -116,10 +116,10 @@ public class GestionarConstruccionesTest {
         Cuartel cuartel = new Cuartel(new Posicion(17, 17), mapa);
         GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
          
-        Jugador jugador = new Jugador("Jugador 1");
+        Jugador jugador = new Jugador("Jugador 1", mapa);
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         jugador.agregarEdificio(gestorCuartel, false);
-        Turno turno = new Turno(jugador);
+        Turno turno = new Turno(jugador, mapa);
         turno.avanzar();
         turno.avanzar();
         turno.avanzar();
@@ -138,10 +138,10 @@ public class GestionarConstruccionesTest {
         PlazaCentral plazaCentral = new PlazaCentral(new Posicion(17, 17), mapa);
         GestionarConstruccion gestorPlaza = new GestionarConstruccion(plazaCentral);
          
-        Jugador jugador = new Jugador("Jugador 1");
+        Jugador jugador = new Jugador("Jugador 1", mapa);
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         jugador.agregarEdificio(gestorPlaza, false);
-        Turno turno = new Turno(jugador);
+        Turno turno = new Turno(jugador, mapa);
         turno.avanzar();
         turno.avanzar();
         turno.avanzar();
@@ -160,10 +160,10 @@ public class GestionarConstruccionesTest {
         Castillo castillo = new Castillo(new Posicion(17, 17), mapa);
         GestionarConstruccion gestorCastillo = new GestionarConstruccion(castillo);
          
-        Jugador jugador = new Jugador("Jugador 1");
+        Jugador jugador = new Jugador("Jugador 1", mapa);
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         jugador.agregarEdificio(gestorCastillo, false);
-        Turno turno = new Turno(jugador);
+        Turno turno = new Turno(jugador, mapa);
         turno.avanzar();
         turno.avanzar();
         turno.avanzar();
@@ -181,10 +181,10 @@ public class GestionarConstruccionesTest {
         Castillo castillo = new Castillo(new Posicion(17, 17), mapa);
         GestionarConstruccion gestorCastillo = new GestionarConstruccion(castillo);
          
-        Jugador jugador = new Jugador("Jugador 1");
+        Jugador jugador = new Jugador("Jugador 1",mapa);
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         jugador.agregarEdificio(gestorCastillo, false);
-        Turno turno = new Turno(jugador);
+        Turno turno = new Turno(jugador, mapa);
         turno.avanzar();
         turno.avanzar();
         turno.avanzar();

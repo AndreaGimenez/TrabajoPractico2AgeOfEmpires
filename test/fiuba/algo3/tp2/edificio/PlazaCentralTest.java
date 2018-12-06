@@ -109,10 +109,10 @@ public class PlazaCentralTest {
         PlazaCentral plazaCentral = new PlazaCentral(new Posicion(17, 17), mapa);
         GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion(plazaCentral);
          
-        Jugador jugador = new Jugador("Jugador 1");
+        Jugador jugador = new Jugador("Jugador 1", mapa);
         Collection<Posicionable> posicionables = jugador.obtenerPosicionables();
         jugador.agregarEdificio(gestorPlazaCentral, false);
-        Turno turno = new Turno(jugador);
+        Turno turno = new Turno(jugador, mapa);
         turno.avanzar();
         turno.avanzar();
         turno.avanzar();
