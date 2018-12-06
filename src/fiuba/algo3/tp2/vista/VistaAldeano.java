@@ -111,13 +111,19 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 				"Construir a la derecha por debajo", "Construir a la izquierda por encima", "Construir a la izquierda por debajo",
 				"Construir en arista superior izquierda", "Construir en arista superior derecha", "Construir en arista inferior izquierda",
 				"Construir en arista inferior derecha");
+		construirCuartel.setPromptText("Seleccionar posicion");
 		Button botonRealizarConstruccionCuartel = new Button("Aceptar");
-		botonRealizarConstruccionCuartel.setOnAction(e -> buscarPosicionCuartel(construirCuartel.getEditor().getText()).realizarConstruccion());
+
+		botonRealizarConstruccionCuartel.setOnAction(e -> buscarPosicionCuartel(construirCuartel.getValue()).realizarConstruccion());
 
 		ComboBox<String> construirPlazaCentral = new ComboBox<>();
 		construirPlazaCentral.getItems().addAll(construirCuartel.getItems());
+		construirPlazaCentral.setPromptText("Seleccionar posicion");
 		Button botonRealizarConstruccionPlazaCentral = new Button("Aceptar");
-		botonRealizarConstruccionPlazaCentral.setOnAction(e -> buscarPosicionPlazaCentral(construirPlazaCentral.getEditor().getText()).realizarConstruccion());
+
+		botonRealizarConstruccionPlazaCentral.setOnAction(e -> {
+			buscarPosicionPlazaCentral(construirPlazaCentral.getValue()).realizarConstruccion();
+			});
 
 		Collection<Button> acciones = new ArrayList<>();
 		acciones.add(crearAccionReparar((Aldeano) posicionable));
@@ -131,6 +137,9 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	}
 
 	private AccionPosicionarEdificio buscarPosicionPlazaCentral(String accion) {
+
+		System.out.println(accion);
+
 		AccionPosicionarEdificio buscado = null;
 
 		ListIterator<AccionPosicionarEdificio> iterador = this.construccionesPlazaCentral.listIterator();
@@ -143,6 +152,9 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	}
 
 	private AccionPosicionarEdificio buscarPosicionCuartel(String accion) {
+
+		System.out.println(accion);
+
 		AccionPosicionarEdificio buscado = null;
 
 		ListIterator<AccionPosicionarEdificio> iterador = this.construccionesCuartel.listIterator();

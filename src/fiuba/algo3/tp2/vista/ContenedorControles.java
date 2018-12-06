@@ -69,8 +69,7 @@ public class ContenedorControles extends VBox {
 
 	public void setAccionesCuartel(ComboBox<String> acciones, Button botonRealizarConstruccion){
 		this.labelConstruccionesCuartel.setText("Construir cuartel");
-		this.construccionesCuartel.getEditor().setText("Seleccionar posicion");
-		this.construccionesCuartel.getItems().addAll(acciones.getItems());
+		this.construccionesCuartel = acciones;
 		getChildren().addAll(this.construccionesCuartel);
 		this.confirmarConstruccionCuartel = botonRealizarConstruccion;
 		getChildren().addAll(this.confirmarConstruccionCuartel);
@@ -78,8 +77,7 @@ public class ContenedorControles extends VBox {
 
 	public void setAccionesPlazaCentral(ComboBox<String> acciones, Button botonRealizarConstruccion){
 		this.labelConstruccionesPlazaCentral.setText("Construir plaza central");
-		this.construccionesPlazaCentral.getEditor().setText("Seleccionar posicion");
-		this.construccionesPlazaCentral.getItems().addAll(acciones.getItems());
+		this.construccionesPlazaCentral = acciones;
 		getChildren().addAll(this.construccionesPlazaCentral);
 		this.confirmarConstruccionPlazaCentral = botonRealizarConstruccion;
 		getChildren().addAll(this.confirmarConstruccionPlazaCentral);

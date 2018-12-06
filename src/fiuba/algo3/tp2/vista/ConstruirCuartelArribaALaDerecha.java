@@ -35,9 +35,11 @@ public class ConstruirCuartelArribaALaDerecha implements AccionPosicionarEdifici
 
     @Override
     public AccionPosicionarEdificio coincideAccion(String accion) {
+
         if(this.identificador.equals(accion))
             return this;
         else
             return null;
+
     }
 }

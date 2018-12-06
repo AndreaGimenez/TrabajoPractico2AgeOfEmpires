@@ -15,7 +15,7 @@ public class ConstruirCuartelAristaInferiorIzquierda implements AccionPosicionar
 	    public ConstruirCuartelAristaInferiorIzquierda(Aldeano aldeano) {
 
 	        this.posicionador = new PosicionarEdificio(aldeano);
-	        this.identificador = "Construir en la esquina inferior izquierda";
+	        this.identificador = "Construir en arista superior izquierda";
 	    }
 	    
 		@Override
