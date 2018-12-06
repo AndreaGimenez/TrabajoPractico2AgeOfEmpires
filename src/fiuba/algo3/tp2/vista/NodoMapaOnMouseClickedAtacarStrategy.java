@@ -45,6 +45,8 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
 		Posicionable posicionable = juego.obtenerMapa().obtenerPosicionable(new Posicion(colIndex, rowIndex));
 		
+		MensajeDeError error = new MensajeDeError();
+		
 		if(!juego.obtenerJugadorActual().posicionablePerteneceAJugador(posicionable)
 				&& posicionable instanceof Atacable) {
 			
@@ -58,11 +60,20 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 		        final Animation animation = new ColorTransition(Color.RED, nodoShape);
 		        animation.play();
 				
-			} catch (UnidadMuertaException | EdificioDestruidoException | AtaqueFueraDeRangoException
-					| AtaqueInvalidoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
+			} 
+			catch(UnidadMuertaException e) {
+				error.mostrarVentanaError("Esta Unidad Ya Fue Destruida");
+			}
+			catch(EdificioDestruidoException e) {
+				error.mostrarVentanaError("Este Edificio Ya Fue Destruido");
+			}
+			catch(AtaqueFueraDeRangoException e) {
+				error.mostrarVentanaError("Ataque Fuera De Rango");
+			}
+			catch(AtaqueInvalidoException e) {
+				error.mostrarVentanaError("Ataque Inválido");
+			}
+			finally {
 				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));
 				contenedorMapa.setCursor(Cursor.DEFAULT);
 			}

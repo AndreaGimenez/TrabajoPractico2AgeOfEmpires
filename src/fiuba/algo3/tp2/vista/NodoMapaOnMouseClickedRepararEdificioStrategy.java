@@ -39,6 +39,8 @@ public class NodoMapaOnMouseClickedRepararEdificioStrategy implements NodoMapaOn
 		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
 		Posicionable posicionable = juego.obtenerMapa().obtenerPosicionable(new Posicion(colIndex, rowIndex));
 		
+		MensajeDeError error = new MensajeDeError();
+		
 		if(juego.obtenerJugadorActual().posicionablePerteneceAJugador(posicionable) &&
 				posicionable instanceof Edificio) {
 			try {
@@ -51,8 +53,14 @@ public class NodoMapaOnMouseClickedRepararEdificioStrategy implements NodoMapaOn
 		        animation.play();
 		        
 			}
-			catch(EdificioFueraDeRangoException | EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
-				e.printStackTrace();
+			catch(EdificioFueraDeRangoException e) {
+				error.mostrarVentanaError("Edificio Fuera De Rango de Reparación");
+			}
+			catch(EdificioNoAptoParaReparacionException e) {
+				error.mostrarVentanaError("Edificio No Apto Para Reparación");
+			}
+			catch(EdificioConReparadorAsignadoException e) {
+				error.mostrarVentanaError("Este Edificio Ya Tiene Asignado Un Reparador");
 			}
 			finally {
 				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));

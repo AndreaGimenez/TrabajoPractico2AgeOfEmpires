@@ -77,7 +77,7 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 	}
 	
 	@Override
-	public void mover(Direccion direccion) throws MovimientoInvalidoException {
+	public void mover(Direccion direccion) throws MovimientoInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 		movimiento.mover(this, direccion, mapa);
 		movimiento = new MovimientoNulo();
 	}

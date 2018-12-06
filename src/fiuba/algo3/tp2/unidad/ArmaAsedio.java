@@ -40,28 +40,25 @@ public class ArmaAsedio extends Unidad implements Atacador {
 		
 		if(gestionadorMontaje.montajeFinalizado()) {
 			gestionadorMontaje.finalizarMontaje();
-			this.movimiento = new MovimientoNulo();
-			this.ataque = new AtaqueArmaAsedio();
 		}
 		
 		if(gestionadorMontaje.desmontajeFinalizado()) {
 			gestionadorMontaje.finalizarDesmontaje();
+		}
+		
+		if(gestionadorMontaje.estaMontada()) {
+			this.movimiento = new MovimientoNulo();
+			this.ataque = new AtaqueArmaAsedio();
+		}
+		else{
 			this.movimiento = new MovimientoBasico();
 			this.ataque = new AtaqueNulo();	
-		}
-		
-		if(gestionadorMontaje.montajeEnCurso()){
-			this.movimiento = new MovimientoNulo();
-			this.ataque = new AtaqueNulo();	
-		}
-		
-		else {
-			ataque = new AtaqueArmaAsedio();
 		}
 	}
 
 	@Override
-	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
+	public void atacar(Atacable atacable)
+			throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		ataque.atacar(this, atacable);
 		ataque = new AtaqueNulo();
 	}
