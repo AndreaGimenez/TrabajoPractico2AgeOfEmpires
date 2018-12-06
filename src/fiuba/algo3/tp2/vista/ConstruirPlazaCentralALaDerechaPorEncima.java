@@ -6,20 +6,21 @@ import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
-public class BotonConstruirCuartelEnAristaInferiorIzquierdaEventHandler implements EventHandler<ActionEvent> {
+public class ConstruirPlazaCentralALaDerechaPorEncima implements AccionPosicionarEdificio {
+
     private PosicionarEdificio posicionador;
+    private String identificador;
 
-    public BotonConstruirCuartelEnAristaInferiorIzquierdaEventHandler(Aldeano aldeano) {
+    public ConstruirPlazaCentralALaDerechaPorEncima(Aldeano aldeano) {
         this.posicionador = new PosicionarEdificio(aldeano);
+        this.identificador = "Construir a la derecha por encima";
     }
 
     @Override
-    public void handle(ActionEvent event) {
+    public void realizarConstruccion() {
         try {
-            this.posicionador.posicionarEnAristaInferiorIzquierda(EdificioConstants.TipoEdificio.CUARTEL);
+            this.posicionador.posicionarALaDerechaPorEncima(EdificioConstants.TipoEdificio.PLAZA_CENTRAL);
         } catch (EdificioNoSoportadoException e) {
             e.printStackTrace();
         } catch (CeldaInexistenteException e) {
@@ -27,5 +28,13 @@ public class BotonConstruirCuartelEnAristaInferiorIzquierdaEventHandler implemen
         } catch (CeldaOcupadaException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public AccionPosicionarEdificio coincideAccion(String accion) {
+        if(this.identificador.equals(accion))
+            return this;
+        else
+            return null;
     }
 }
