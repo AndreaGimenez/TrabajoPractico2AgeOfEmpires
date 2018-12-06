@@ -1,29 +1,36 @@
 package fiuba.algo3.tp2.vista.botones;
 
-import fiuba.algo3.tp2.edificio.Edificio;
-import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.excepciones.EdificioFueraDeRangoException;
-import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.vista.ContenedorMapa;
+import fiuba.algo3.tp2.vista.VistaMapa;
+import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class BotonAldeanoReparaEdificioEventHandler implements EventHandler<ActionEvent> {
 
     private Aldeano aldeano;
+    private VistaMapa vistaMapa;
+    private ContenedorMapa contenedorMapa;
+    private Juego juego;
+    private VistaSeleccionador vistaSeleccionador;
 
-    private Edificio edificio;
-
-    public BotonAldeanoReparaEdificioEventHandler(Edificio edificio){
-
-        this.edificio = edificio;
-
+    public BotonAldeanoReparaEdificioEventHandler(Aldeano aldeano, VistaMapa vistaMapa, ContenedorMapa contenedorMapa, Juego juego, VistaSeleccionador vistaSeleccionador){
+    	
+    	this.aldeano = aldeano;
+    	this.vistaMapa = vistaMapa;
+    	this.contenedorMapa = contenedorMapa;
+    	this.juego = juego;
+    	this.vistaSeleccionador = vistaSeleccionador;
     }
 
     @Override
     public void handle(ActionEvent event) {
-
-        try {
+    	
+    	vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedRepararEdificioStrategy(contenedorMapa, juego, aldeano, vistaMapa, vistaSeleccionador));
+    	
+       /* try {
             this.aldeano.repararEdificio(this.edificio);
         } catch (EdificioFueraDeRangoException e) {
             e.printStackTrace();
@@ -31,13 +38,8 @@ public class BotonAldeanoReparaEdificioEventHandler implements EventHandler<Acti
             e.printStackTrace();
         } catch (EdificioConReparadorAsignadoException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
-    public void seleccionarAldeano(Aldeano aldeano) {
-
-        this.aldeano = aldeano;
-
-    }
 }

@@ -30,7 +30,7 @@ public class VistaPosicionableMultitone {
 									Mapa mapa,
 									Juego juego) {
 		
-		vistaAldeano = new VistaAldeano(contenedorControles, contenedorMapa, vistaSeleccionador);
+		vistaAldeano = new VistaAldeano(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
 		vistaEspadachin = new VistaEspadachin(contenedorControles, contenedorMapa, vistaSeleccionador);
 		vistaArquero = new VistaArquero(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
 		vistaArmaAsedio = new VistaArmaAsedio(contenedorControles, contenedorMapa, vistaSeleccionador);
