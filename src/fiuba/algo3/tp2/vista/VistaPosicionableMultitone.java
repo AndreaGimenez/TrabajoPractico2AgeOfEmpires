@@ -52,11 +52,11 @@ public class VistaPosicionableMultitone {
 		
 	}
 	
-	public static VistaPosicionable getInstance(Posicionable posicionable) throws Exception {
+	public static VistaPosicionable getInstance(Posicionable posicionable) {
 		if(multitone != null) {
 			return multitone.obtenerVista(posicionable);
 		}else {
-			throw new Exception("Debe inicializar antes de obtener una instancia");
+			throw new RuntimeException("Debe inicializar antes de obtener una instancia");
 		}
 	}
 

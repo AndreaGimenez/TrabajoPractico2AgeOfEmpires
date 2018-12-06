@@ -44,6 +44,7 @@ public class VistaCuartel implements VistaPosicionable {
 		
 		Cuartel cuartel = (Cuartel) posicionable;
 		contenedorControles.setNombreUnidad("Cuartel");
+		contenedorControles.setVida(cuartel.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionCrearArquero(cuartel));

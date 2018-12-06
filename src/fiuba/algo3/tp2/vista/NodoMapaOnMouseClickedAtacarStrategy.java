@@ -9,6 +9,8 @@ import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.unidad.Unidad;
+import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -42,12 +44,14 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 			
 			try {
 				arquero.atacar((Atacable)posicionable);
+				VistaPosicionableMultitone.getInstance(posicionable).dibujarPosicionable(posicionable, nodo);
 			} catch (UnidadMuertaException | EdificioDestruidoException | AtaqueFueraDeRangoException
 					| AtaqueInvalidoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));
+				contenedorMapa.setCursor(Cursor.DEFAULT);
 			}
 			
 		}

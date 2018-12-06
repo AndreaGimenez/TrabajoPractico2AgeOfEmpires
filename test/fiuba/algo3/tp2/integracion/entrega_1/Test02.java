@@ -935,7 +935,7 @@ public class Test02 {
 	public void testVerificarConstruccionDePlazaCentral() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 
 		Mapa mapa = new Mapa(250, 250);
-		Jugador ignacio = new Jugador("Jugador 1");
+		Jugador ignacio = new Jugador("Jugador 1", mapa);
 		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
 		boolean checkearRecursos = false;
 		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
@@ -951,7 +951,7 @@ public class Test02 {
 
 		GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(4,5)));
 		ignacio.agregarEdificio(gestorPlazaCentral, false);
-		Turno turno = new Turno(ignacio);
+		Turno turno = new Turno(ignacio, mapa);
 
 		// Turno 0/3
 

@@ -30,7 +30,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		pane.setBackground(obtenerFondoAldeano());
+		pane.setBackground(obtenerFondoAldeano((Aldeano)posicionable));
 	}
 
 	@Override
@@ -40,6 +40,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		
 		contenedorControles.setNombreUnidad("Aldeano");
 		contenedorControles.setVida(((Aldeano)posicionable).obtenerVida());
+		
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionConstruir());
 		acciones.add(crearAccionReparar(/*edificio*/));
@@ -53,12 +54,19 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		contenedorMapa.setBackground(obtenerFondoAldeano(), movible.obtenerPosicion());
+		contenedorMapa.setBackground(obtenerFondoAldeano((Aldeano)movible), movible.obtenerPosicion());
 	}
 	
-	private Background obtenerFondoAldeano() {
+	private Background obtenerFondoAldeano(Aldeano aldeano) {
 		
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/aldeano.jpg", 
+		String imagePath = "";
+		
+		if(aldeano.estaMuerta()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+		}else {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano.jpg";
+		}
+		Image imagen = new Image(imagePath, 
 			       VistaMapa.TAMANIO_NODO,
 			 	   VistaMapa.TAMANIO_NODO,
 			       false,

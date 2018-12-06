@@ -20,10 +20,9 @@ public class VidaUnidad{
 			throw new UnidadMuertaException();
 		}
 		
-		if(vidaActual > danio) {
-			vidaActual -= danio;
-		}
-		else {
+		vidaActual -= danio;
+		
+		if(vidaActual <= 0) {
 			vidaActual = 0;
 		}
 	}

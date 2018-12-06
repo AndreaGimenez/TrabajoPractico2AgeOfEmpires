@@ -43,7 +43,9 @@ public class VistaPlazaCentral implements VistaPosicionable {
 		contenedorControles.clean();
 		
 		PlazaCentral plazaCentral = (PlazaCentral) posicionable;
+		
 		contenedorControles.setNombreUnidad("Plaza Central");
+		contenedorControles.setVida(plazaCentral.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionCrearAldeano(plazaCentral));

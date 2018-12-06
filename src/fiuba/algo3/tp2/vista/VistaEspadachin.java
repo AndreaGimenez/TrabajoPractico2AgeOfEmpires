@@ -6,6 +6,7 @@ import java.util.Collection;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
+import fiuba.algo3.tp2.unidad.Espadachin;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -37,7 +38,10 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible {
 		
 		contenedorControles.clean();
 		
+		Espadachin espadachin = (Espadachin)posicionable;
+		
 		contenedorControles.setNombreUnidad("Espadachin");
+		contenedorControles.setVida(espadachin.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionAtacar());

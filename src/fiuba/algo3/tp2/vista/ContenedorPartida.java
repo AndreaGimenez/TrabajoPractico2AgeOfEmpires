@@ -70,7 +70,7 @@ public class ContenedorPartida extends BorderPane {
         Button botonAvanzarTurno = new Button("Avanzar Turno");
         VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, contenedorEstadoJugador);
         
-        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, contenedorControles, vistaSeleccionador, juego);
+        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, contenedorControles, vistaSeleccionador, vistaMapa, juego);
         botonAvanzarTurno.setOnAction(botonAvanzarTurnoHandler);
         contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
         
