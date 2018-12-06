@@ -16,7 +16,8 @@ public class ContenedorControles extends VBox {
 	private Label labelAcciones;
 	private Label labelConstrucciones;
 	private Collection<Button> acciones;
-	private ComboBox<String> construccion;
+	private ComboBox<String> construcciones;
+	private Button confirmarConstruccion;
 
 	public ContenedorControles() {
 		
@@ -41,8 +42,7 @@ public class ContenedorControles extends VBox {
         setPrefWidth(200);
         
         this.acciones = new ArrayList<>();
-        this.construccion = new ComboBox<>();
-        this.construccion.getEditor().setText("Seleccionar posicion");
+        this.construcciones = new ComboBox<>();
 	}
 
 	public void setNombreUnidad(String nombreUnidad) {
@@ -61,10 +61,12 @@ public class ContenedorControles extends VBox {
 	}
 
 	public void setAcciones(ComboBox<String> acciones, Button botonRealizarConstruccion){
-		labelConstrucciones.setText("Construir cuartel");
-		this.construccion.getItems().addAll(acciones.getItems());
-		getChildren().add(this.construccion);
-		getChildren().add(botonRealizarConstruccion);
+		this.labelConstrucciones.setText("Construir cuartel");
+		this.construcciones.getEditor().setText("Seleccionar posicion");
+		this.construcciones.getItems().addAll(acciones.getItems());
+		getChildren().add(this.construcciones);
+		this.confirmarConstruccion = botonRealizarConstruccion;
+		getChildren().add(this.confirmarConstruccion);
 	}
 
 	public void clean() {
@@ -78,11 +80,14 @@ public class ContenedorControles extends VBox {
 			getChildren().removeAll(this.acciones);
 		}
 
-		if(this.construccion != null) {
-			getChildren().removeAll(this.construccion);
+		if(this.construcciones != null) {
+			getChildren().removeAll(this.construcciones);
 		}
 
+		if(this.confirmarConstruccion != null)
+			getChildren().remove(this.confirmarConstruccion);
+
 		this.acciones = new ArrayList<>();
-		this.construccion = new ComboBox<>();
+		this.construcciones = new ComboBox<>();
 	}
 }

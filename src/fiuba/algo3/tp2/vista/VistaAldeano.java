@@ -93,8 +93,6 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 
 	}
 
-
-
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
