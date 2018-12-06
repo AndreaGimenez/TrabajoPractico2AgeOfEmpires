@@ -8,13 +8,18 @@ import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.vista.ColorTransition;
 import fiuba.algo3.tp2.vista.ContenedorMapa;
 import fiuba.algo3.tp2.vista.NodoMapaOnMouseClickedSeleccionarStrategy;
 import fiuba.algo3.tp2.vista.NodoMapaOnMouseClickedStrategy;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
+import javafx.animation.Animation;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class NodoMapaOnMouseClickedRepararEdificioStrategy implements NodoMapaOnMouseClickedStrategy {
 	
@@ -43,6 +48,13 @@ public class NodoMapaOnMouseClickedRepararEdificioStrategy implements NodoMapaOn
 				posicionable instanceof Edificio) {
 			try {
 				reparador.repararEdificio((Edificio)posicionable);
+				
+				Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
+				nodo.getChildren().add(nodoShape);
+				
+		        final Animation animation = new ColorTransition(Color.GREEN, nodoShape);
+		        animation.play();
+		        
 			}
 			catch(EdificioFueraDeRangoException | EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
 				e.printStackTrace();

@@ -31,16 +31,17 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	private ReparadorEdificio reparadorEdificio;
 	private Edificio edificioEnReparacion;
 	
+	private RangoReparacion rangoReparacion;
+	
 	public OroPorTurno oroPorTurno;
 
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA, COSTO_GENERACION);
 		
 		this.creadorEdificio = new CreadorEdificioAldeano(mapa, this);
-		
 		this.reparadorEdificio = new ReparadorEdificioAldeano();
-		
 		this.oroPorTurno = new OroPorTurno();
+		this.rangoReparacion = new RangoReparacion();
 	}
 
 	public Edificio crear(TipoEdificio tipoEdificio)
@@ -55,7 +56,7 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	public void repararEdificio(Edificio edificio)
 			throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
 		
-		if(!estaEnElRango(edificio)) {
+		if(!rangoReparacion.estaEnRango(this, edificio)) {
 			throw new EdificioFueraDeRangoException();
 		}
 		reparadorEdificio.repararEdificio(edificio, this);

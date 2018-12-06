@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.vista;
 
+
+
 import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
 import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
@@ -10,15 +12,12 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Atacador;
 import javafx.animation.Animation;
-import javafx.animation.Interpolator;
-import javafx.animation.Transition;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import javafx.util.Duration;
 
 public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClickedStrategy {
 
@@ -56,29 +55,7 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 				Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
 				nodo.getChildren().add(nodoShape);
 				
-		        final Animation animation = new Transition() {
-
-		            {
-		                setCycleDuration(Duration.millis(750));
-		                setInterpolator(Interpolator.EASE_OUT);
-		            }
-
-		            @Override
-		            protected void interpolate(double frac) {
-		            	
-		            	double valorInicialOpacity = 0;
-		            	double valorActualOpacity = 0;
-		            	
-		            	if(frac <= 0.5) {
-		            		valorActualOpacity = valorInicialOpacity + (frac * 2);
-		            	}else {
-		            		valorActualOpacity = 1 - (frac - 0.5) * 2;
-		            	}
-		            	
-		                Color vColor = new Color(1, 0, 0, valorActualOpacity);
-		                nodoShape.setFill(vColor);
-		            }
-		        };
+		        final Animation animation = new ColorTransition(Color.RED, nodoShape);
 		        animation.play();
 				
 			} catch (UnidadMuertaException | EdificioDestruidoException | AtaqueFueraDeRangoException

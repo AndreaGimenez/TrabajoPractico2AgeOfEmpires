@@ -84,7 +84,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	
 	}
 
-	private Button crearAccionReparar(Aldeano aldeano/*Edificio edificio*/) {
+	private Button crearAccionReparar(Aldeano aldeano) {
 		Button accionReparar = new Button("Reparar");
 		
 		BotonAldeanoReparaEdificioEventHandler botonAldeanoReparaEdificioEventHandler = 

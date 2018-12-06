@@ -7,6 +7,7 @@ import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 
 public class BotonAldeanoReparaEdificioEventHandler implements EventHandler<ActionEvent> {
 
@@ -27,19 +28,8 @@ public class BotonAldeanoReparaEdificioEventHandler implements EventHandler<Acti
 
     @Override
     public void handle(ActionEvent event) {
-    	
     	vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedRepararEdificioStrategy(contenedorMapa, juego, aldeano, vistaMapa, vistaSeleccionador));
-    	
-       /* try {
-            this.aldeano.repararEdificio(this.edificio);
-        } catch (EdificioFueraDeRangoException e) {
-            e.printStackTrace();
-        } catch (EdificioNoAptoParaReparacionException e) {
-            e.printStackTrace();
-        } catch (EdificioConReparadorAsignadoException e) {
-            e.printStackTrace();
-        }*/
-
+    	contenedorMapa.setCursor(Cursor.HAND);
     }
 
 }
