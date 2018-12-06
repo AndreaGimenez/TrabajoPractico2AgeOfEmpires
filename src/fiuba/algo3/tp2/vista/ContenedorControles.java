@@ -14,7 +14,6 @@ public class ContenedorControles extends VBox {
 	
 	private Label labelNombreUnidad;
 	private Label labelVida;
-<<<<<<< Updated upstream
 	private Label labelAccionesMovimiento;
 	private Label labelConstruccionesCuartel;
 	private Label labelConstruccionesPlazaCentral;
@@ -23,7 +22,6 @@ public class ContenedorControles extends VBox {
 	private Button confirmarConstruccionCuartel;
 	private ComboBox<String> construccionesPlazaCentral;
 	private Button confirmarConstruccionPlazaCentral;
-=======
 	private Label labelAcciones;
 	private Label labelConstrucciones;
 	private Collection<Button> acciones;
@@ -56,11 +54,9 @@ public class ContenedorControles extends VBox {
         setStyle("-fx-background-color: brown;");
         setPrefWidth(200);
         
-<<<<<<< Updated upstream
         this.accionesMovimiento = new ArrayList<>();
         this.construccionesCuartel = new ComboBox<>();
         this.construccionesPlazaCentral = new ComboBox<>();
-=======
         this.acciones = new ArrayList<>();
         this.construcciones = new ComboBox<>();
         this.botonera = new GridPane();
@@ -102,10 +98,6 @@ public class ContenedorControles extends VBox {
 		this.confirmarConstruccionPlazaCentral = botonRealizarConstruccion;
 		getChildren().addAll(this.confirmarConstruccionPlazaCentral);
 	}
-	
-	public void setBotonera(GridPane botoneraMovimiento) {
-		this.botonera = botoneraMovimiento;
-	}
 
 	public void clean() {
 		
@@ -123,26 +115,19 @@ public class ContenedorControles extends VBox {
 			getChildren().removeAll(this.construccionesCuartel);
 		}
 
-<<<<<<< Updated upstream
-		if(this.confirmarConstruccionCuartel != null)
-			getChildren().remove(this.confirmarConstruccionCuartel);
-
 		if(this.construccionesPlazaCentral != null)
 			getChildren().removeAll(this.construccionesCuartel);
-
-		if(this.confirmarConstruccionPlazaCentral != null)
-			getChildren().remove(this.confirmarConstruccionCuartel);
 
 		this.accionesMovimiento = new ArrayList<>();
 		this.construccionesCuartel = new ComboBox<>();
 		this.construccionesPlazaCentral = new ComboBox<>();
-=======
+
 		if(this.confirmarConstruccion != null)
 			getChildren().remove(this.confirmarConstruccion);
 		
 		getChildren().remove(botonera);
+		
 		this.acciones = new ArrayList<>();
 		this.construcciones = new ComboBox<>();
->>>>>>> Stashed changes
 	}
 }

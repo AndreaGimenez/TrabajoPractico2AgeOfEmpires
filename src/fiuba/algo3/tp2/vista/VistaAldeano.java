@@ -126,10 +126,11 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		//Movimientos
 		GridPane botoneraMovimiento = new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable);
 		contenedorControles.getChildren().add(botoneraMovimiento);
+		
 		contenedorControles.setAcciones(acciones);
-<<<<<<< Updated upstream
 		contenedorControles.setAccionesCuartel(construirCuartel, botonRealizarConstruccionCuartel);
 		contenedorControles.setAccionesPlazaCentral(construirPlazaCentral, botonRealizarConstruccionPlazaCentral);
+		contenedorControles.setBotonera(botoneraMovimiento);
 	}
 
 	private AccionPosicionarEdificio buscarPosicionPlazaCentral(String accion) {
@@ -142,9 +143,6 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		}
 
 		return buscado;
-=======
-		contenedorControles.setAcciones(construirCuartel, botonRealizarConstruccion);
-		contenedorControles.setBotonera(botoneraMovimiento);
 	}
 
 	private AccionPosicionarEdificio buscarPosicionCuartel(String accion) {
