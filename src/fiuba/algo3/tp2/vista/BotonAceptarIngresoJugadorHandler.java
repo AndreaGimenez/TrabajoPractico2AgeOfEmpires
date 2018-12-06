@@ -85,7 +85,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 					error.mostrarVentanaError("Celda Fuera Del Mapa");
 				}
 				catch(PoblacionMaximaAlcanzadaException e) {
-					error.mostrarVentanaError("Ya Alcanzaste La Población Máxima");
+					error.mostrarVentanaError("Ya Alcanzaste La Poblaciï¿½n Mï¿½xima");
 				}
 				catch(OroInsuficienteException e) {
 					error.mostrarVentanaError("Oro Insuficiente");
@@ -123,6 +123,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
         return juego;
 	}
 

@@ -22,7 +22,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(1));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(1).desplazarVerticalmente(-1));
 
     }
 
@@ -32,7 +32,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(-2));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(-2).desplazarVerticalmente(-1));
 
     }
 
@@ -42,7 +42,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-2));
 
     }
 
@@ -52,7 +52,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1));
 
     }
 
@@ -63,7 +63,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(1));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(1));
 
     }
 
@@ -73,7 +73,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(1));
 
     }
 
@@ -83,7 +83,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-2));
 
     }
 
@@ -93,7 +93,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-2));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(-2));
 
     }
 
@@ -103,7 +103,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(1));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(1));
 
     }
 
@@ -113,7 +113,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-2));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarHorizontalmente(-2));
 
     }
 
@@ -123,7 +123,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-2));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(-1));
 
     }
 
@@ -133,7 +133,7 @@ public class PosicionarEdificio {
 
         GestionarConstruccion posicionador = new GestionarConstruccion(edificioCreado);
 
-        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(-1));
+        posicionador.posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-1));
 
     }
 
