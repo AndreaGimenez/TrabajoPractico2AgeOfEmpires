@@ -7,6 +7,7 @@ import fiuba.algo3.tp2.excepciones.UnidadNoSoportadaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.vista.MensajeDeError;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -36,19 +37,20 @@ public class BotonCreadorDeArqueroEventHandler implements EventHandler<ActionEve
 
     @Override
     public void handle(ActionEvent event) {
-
+    	
+    	MensajeDeError error = new MensajeDeError();
+    	
         try {
             this.gestorDeConstruccion.crearArquero(this.cuartel.obtenerPosicion().desplazarHorizontalmente(3), mapa);
         } catch (CeldaOcupadaException e) {
-            
-        } catch (CeldaInexistenteException e) {
-            e.printStackTrace();
-        } catch (UnidadNoSoportadaException e) {
-            e.printStackTrace();
-        } catch (EdificioEnConstruccionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            error.mostrarVentanaError("Celda Ocupada");
+         } catch (CeldaInexistenteException e) {
+         	 error.mostrarVentanaError("Celda Fuera De Mapa");
+         } catch (UnidadNoSoportadaException e) {
+         	 error.mostrarVentanaError("Unidad No Soportada");
+         } catch (EdificioEnConstruccionException e) {
+         	 error.mostrarVentanaError("Edificio En Construcción");
+ 		}
 
     }
 }

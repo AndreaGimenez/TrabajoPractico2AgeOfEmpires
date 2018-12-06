@@ -19,6 +19,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class VistaAldeano implements VistaPosicionable, VistaMovible {
@@ -129,11 +130,13 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		acciones.add(crearAccionReparar((Aldeano) posicionable));
 		
 		//Movimientos
-		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
+		GridPane botoneraMovimiento = new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable);
+		contenedorControles.getChildren().add(botoneraMovimiento);
 		
 		contenedorControles.setAcciones(acciones);
 		contenedorControles.setAccionesCuartel(construirCuartel, botonRealizarConstruccionCuartel);
 		contenedorControles.setAccionesPlazaCentral(construirPlazaCentral, botonRealizarConstruccionPlazaCentral);
+		contenedorControles.setBotonera(botoneraMovimiento);
 	}
 
 	private AccionPosicionarEdificio buscarPosicionPlazaCentral(String accion) {

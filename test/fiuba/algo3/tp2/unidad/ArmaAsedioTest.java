@@ -243,6 +243,44 @@ public class ArmaAsedioTest {
 	}
 	
 	@Test
+	public void testDadoUnArmaDeAsedioDesmontadaNoDeberiaPoderMoverseDosVecesEnElMismoTurno() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, MontajeInvalidoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+		
+		Mapa mapa = new Mapa(5,5);
+		
+		Jugador jugador = new Jugador("Ana", mapa);
+		
+		ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(2,2), mapa);
+		
+		boolean checkearRecursos = false;
+		
+		jugador.agregarUnidad(armaAsedio, mapa, checkearRecursos);
+
+		armaAsedio.mover(new DireccionArribaDerecha());
+		exceptionRule.expect(MovimientoInvalidoException.class);
+		armaAsedio.mover(new DireccionAbajoIzquierda());
+	}
+	
+	@Test
+	public void testDadoUnArmaDeAsedioDesmontadaQueSeMovioDeberiaPoderMoverseEnElSiguienteTurno() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, MontajeInvalidoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+		
+		Mapa mapa = new Mapa(5,5);
+		
+		Jugador jugador = new Jugador("Ana", mapa);
+		
+		ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(2,2), mapa);
+		
+		boolean checkearRecursos = false;
+		
+		jugador.agregarUnidad(armaAsedio, mapa, checkearRecursos);
+
+		armaAsedio.mover(new DireccionArribaDerecha());
+		jugador.avanzarTurno();
+		armaAsedio.mover(new DireccionAbajoIzquierda());
+	}
+	
+	@Test
 	public void testUnArmaAsedioEnLaPosicionX2Y1SeMueveHaciaArribaIzquierdaDeberiaEstarEnX1Y2() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		

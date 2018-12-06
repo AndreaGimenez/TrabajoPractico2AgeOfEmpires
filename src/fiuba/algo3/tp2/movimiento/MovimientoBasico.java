@@ -11,13 +11,16 @@ public class MovimientoBasico implements Movimiento {
 	private int velocidadMovimiento = 1;
 	
 	@Override
-	public void mover(Movible movible, Direccion direccion, Mapa mapa) throws MovimientoInvalidoException {
+	public void mover(Movible movible, Direccion direccion, Mapa mapa) throws MovimientoInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 		
 		Posicion coordenada = direccion.multiplicar(velocidadMovimiento);
 		try {
 			movible.desplazar(movible.obtenerPosicion().sumar(coordenada));
-		} catch (CeldaOcupadaException | CeldaInexistenteException e) {
-			throw new MovimientoInvalidoException();
+		} catch (CeldaOcupadaException e) {
+			throw new CeldaOcupadaException();
+		}
+		catch(CeldaInexistenteException e) {
+			throw new CeldaInexistenteException();
 		}
 	}
 }

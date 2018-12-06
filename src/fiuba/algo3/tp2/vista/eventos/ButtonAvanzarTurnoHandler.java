@@ -4,6 +4,7 @@ import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.vista.ContenedorControles;
+import fiuba.algo3.tp2.vista.MensajeDeError;
 import fiuba.algo3.tp2.vista.VistaEstadoJugador;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
@@ -33,6 +34,7 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		
+		MensajeDeError error = new MensajeDeError();
 		try {
 			
 			juego.avanzarJugador();
@@ -41,9 +43,12 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 			contenedorControles.clean();
 			vistaMapa.dibujarPosicionables();
 			
-		} catch (EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} 
+		catch(EdificioNoAptoParaReparacionException e) {
+			error.mostrarVentanaError("Edificio No Apto Para Reparación");
+		}
+		catch(EdificioConReparadorAsignadoException e) {
+			error.mostrarVentanaError("Este Edificio Ya Tiene Asignado Un Reparador");
 		}
 	}
 }

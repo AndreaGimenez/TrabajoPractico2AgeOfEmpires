@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.vista.botones;
 
 import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.vista.MensajeDeError;
 import fiuba.algo3.tp2.edificio.EdificioConstants;
 import fiuba.algo3.tp2.edificio.PosicionarEdificio;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
@@ -26,15 +27,17 @@ public class BotonCreadorDeCuartelEventHandler implements EventHandler<ActionEve
 
     @Override
     public void handle(ActionEvent event) {
-
+    	
+    	MensajeDeError error = new MensajeDeError();
+    	
         try {
             this.posicionador.posicionarALaDerechaPorEncima(EdificioConstants.TipoEdificio.CUARTEL);
         } catch (EdificioNoSoportadoException e) {
-            e.printStackTrace();
+        	 error.mostrarVentanaError("Edificio En Construcción");
         } catch (CeldaInexistenteException e) {
-            e.printStackTrace();
+        	error.mostrarVentanaError("Celda Fuera De Mapa");
         } catch (CeldaOcupadaException e) {
-            e.printStackTrace();
+        	 error.mostrarVentanaError("Celda Ocupada");
         }
 
     }

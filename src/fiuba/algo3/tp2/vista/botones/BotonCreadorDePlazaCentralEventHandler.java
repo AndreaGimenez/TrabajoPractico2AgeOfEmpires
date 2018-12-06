@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.vista.botones;
 
 import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.vista.MensajeDeError;
 import fiuba.algo3.tp2.edificio.EdificioConstants;
 import fiuba.algo3.tp2.edificio.PosicionarEdificio;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
@@ -25,16 +26,18 @@ public class BotonCreadorDePlazaCentralEventHandler implements EventHandler<Acti
 
     @Override
     public void handle(ActionEvent event) {
-
+    	
+    	MensajeDeError error = new MensajeDeError();
+    	
         try {
             this.posicionador.posicionarALaDerechaPorEncima(EdificioConstants.TipoEdificio.PLAZA_CENTRAL);
-        } catch (EdificioNoSoportadoException e) {
-            e.printStackTrace();
-        } catch (CeldaInexistenteException e) {
-            e.printStackTrace();
-        } catch (CeldaOcupadaException e) {
-            e.printStackTrace();
-        }
+        }catch (EdificioNoSoportadoException e) {
+       	 error.mostrarVentanaError("Edificio En Construcción");
+       } catch (CeldaInexistenteException e) {
+       	error.mostrarVentanaError("Celda Fuera De Mapa");
+       } catch (CeldaOcupadaException e) {
+       	 error.mostrarVentanaError("Celda Ocupada");
+       }
 
     }
 }

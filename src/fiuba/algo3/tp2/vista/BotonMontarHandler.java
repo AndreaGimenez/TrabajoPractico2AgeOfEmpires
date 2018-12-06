@@ -21,6 +21,7 @@ public class BotonMontarHandler implements EventHandler<ActionEvent>{
 	@Override
 	public void handle(ActionEvent event) {
 		
+		MensajeDeError error = new MensajeDeError();
 		if(armaAsedio.estaMontada()) {
 			armaAsedio.desmontar();
 			botonMontar.setText("Montar");
@@ -28,8 +29,7 @@ public class BotonMontarHandler implements EventHandler<ActionEvent>{
 			try {
 				armaAsedio.montar();
 			} catch (MontajeInvalidoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				error.mostrarVentanaError("Este Arma de Asedio No Se Puede Montar");
 			}
 			botonMontar.setText("Desmontar");
 		}

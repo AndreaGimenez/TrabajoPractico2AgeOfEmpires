@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class ContenedorControles extends VBox {
@@ -21,6 +22,12 @@ public class ContenedorControles extends VBox {
 	private Button confirmarConstruccionCuartel;
 	private ComboBox<String> construccionesPlazaCentral;
 	private Button confirmarConstruccionPlazaCentral;
+	private Label labelAcciones;
+	private Label labelConstrucciones;
+	private Collection<Button> acciones;
+	private ComboBox<String> construcciones;
+	private Button confirmarConstruccion;
+	private GridPane botonera;
 
 	public ContenedorControles() {
 		
@@ -50,6 +57,9 @@ public class ContenedorControles extends VBox {
         this.accionesMovimiento = new ArrayList<>();
         this.construccionesCuartel = new ComboBox<>();
         this.construccionesPlazaCentral = new ComboBox<>();
+        this.acciones = new ArrayList<>();
+        this.construcciones = new ComboBox<>();
+        this.botonera = new GridPane();
 	}
 
 	public void setNombreUnidad(String nombreUnidad) {
@@ -73,6 +83,10 @@ public class ContenedorControles extends VBox {
 		getChildren().addAll(this.construccionesCuartel);
 		this.confirmarConstruccionCuartel = botonRealizarConstruccion;
 		getChildren().addAll(this.confirmarConstruccionCuartel);
+	}
+	
+	public void setBotonera(GridPane botoneraMovimiento) {
+		this.botonera = botoneraMovimiento;
 	}
 
 	public void setAccionesPlazaCentral(ComboBox<String> acciones, Button botonRealizarConstruccion){
@@ -99,17 +113,19 @@ public class ContenedorControles extends VBox {
 			getChildren().removeAll(this.construccionesCuartel);
 		}
 
-		if(this.confirmarConstruccionCuartel != null)
-			getChildren().remove(this.confirmarConstruccionCuartel);
-
 		if(this.construccionesPlazaCentral != null)
 			getChildren().removeAll(this.construccionesCuartel);
-
-		if(this.confirmarConstruccionPlazaCentral != null)
-			getChildren().remove(this.confirmarConstruccionCuartel);
 
 		this.accionesMovimiento = new ArrayList<>();
 		this.construccionesCuartel = new ComboBox<>();
 		this.construccionesPlazaCentral = new ComboBox<>();
+
+		if(this.confirmarConstruccion != null)
+			getChildren().remove(this.confirmarConstruccion);
+		
+		getChildren().remove(botonera);
+		
+		this.acciones = new ArrayList<>();
+		this.construcciones = new ComboBox<>();
 	}
 }

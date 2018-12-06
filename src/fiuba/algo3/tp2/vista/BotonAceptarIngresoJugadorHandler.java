@@ -57,7 +57,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 				tfNombreJugador.setText("");
 				tfNombreJugador.requestFocus();
 			}else {
-				
+				 MensajeDeError error = new MensajeDeError();
 				try {
 					
 					Juego juego = crearJuego(nombresJugadores);
@@ -67,20 +67,33 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 			        escenaJuego.setOnKeyPressed(AplicacionOnKeyPressEventHandler);
 			        
 			        musica.detenerReproduccionMusica();
-			        
+
 					stage.setScene(escenaJuego);
 					stage.setFullScreen(true);
 					
-				} catch (TamanioInvalidoException | CantidadDeJugadoresInvalidaException | CeldaOcupadaException
-						| CeldaInexistenteException | PoblacionMaximaAlcanzadaException
-						| OroInsuficienteException e) {
-					
-					//TODO manejar una excepcion que puede ser arrojada al iniciar el juego
-					e.printStackTrace();
+				} 
+				catch(TamanioInvalidoException e) {		
+					error.mostrarVentanaError("Tamanio Invalido");
+				}
+				catch(CantidadDeJugadoresInvalidaException e) {
+					error.mostrarVentanaError("Cantidad De Jugadores Invalida");
+				}
+				catch(CeldaOcupadaException e) {
+					error.mostrarVentanaError("Celda Ocupada");
+				}
+				catch(CeldaInexistenteException e) {
+					error.mostrarVentanaError("Celda Fuera Del Mapa");
+				}
+				catch(PoblacionMaximaAlcanzadaException e) {
+					error.mostrarVentanaError("Ya Alcanzaste La Población Máxima");
+				}
+				catch(OroInsuficienteException e) {
+					error.mostrarVentanaError("Oro Insuficiente");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
 			
 		}
