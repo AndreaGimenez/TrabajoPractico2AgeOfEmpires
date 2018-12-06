@@ -41,13 +41,24 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 
 	private LinkedList<AccionPosicionarEdificio> crearConstrucciones(Aldeano aldeano) {
 		LinkedList<AccionPosicionarEdificio> acciones = new LinkedList<>();
-
+		
+		acciones.add(new ConstruirCuartelAristaSuperiorDerecha(aldeano));
+		acciones.add(new ConstruirCuartelAristaSuperiorIzquierda(aldeano));
+		
 		acciones.add(new ConstruirCuartelArribaALaDerecha(aldeano));
+		acciones.add(new ConstruirCuartelArribaALaIzquierda(aldeano));
+		
 		acciones.add(new ConstruirCuartelAbajoALaDerecha(aldeano));
 		acciones.add(new ConstruirCuartelAbajoALaIzquierda(aldeano));
+		
 		acciones.add(new ConstruirCuartelALaDerechaPorDebajo(aldeano));
 		acciones.add(new ConstruirCuartelALaDerechaPorEncima(aldeano));
-
+		
+		acciones.add(new ConstruirCuartelAristaInferiorDerecha(aldeano));
+		acciones.add(new ConstruirCuartelAristaInferiorIzquierda(aldeano));
+		
+		acciones.add(new ConstruirCuartelALaIzquierdaPorDebajo(aldeano));
+		acciones.add(new ConstruirCuartelALaIzquierdaPorEncima(aldeano));
 
 		return acciones;
 	}

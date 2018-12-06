@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.edificio;
 
 import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.unidad.Aldeano;
@@ -78,7 +79,7 @@ public class PosicionarEdificio {
 
     public void posicionarDebajoPorLaIzquierda(EdificioConstants.TipoEdificio edificio) throws EdificioNoSoportadoException, CeldaInexistenteException, CeldaOcupadaException {
 
-        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-1));
+        this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(-2));
 
     }
 
@@ -87,4 +88,5 @@ public class PosicionarEdificio {
         this.aldeano.crear(edificio).posicionar(this.aldeano.obtenerPosicion().desplazarVerticalmente(2).desplazarHorizontalmente(-1));
 
     }
+
 }
