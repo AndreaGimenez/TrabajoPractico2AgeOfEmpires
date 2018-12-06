@@ -2,20 +2,21 @@ package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.unidad.Atacador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 
 public class BotonAtacarHandler implements EventHandler<ActionEvent>{
 
-	private Arquero arquero;
+	private Atacador atacador;
 	private VistaMapa vistaMapa;
 	private VistaSeleccionador vistaSeleccionador;
 	private ContenedorMapa contenedorMapa;
 	private Juego juego;
 
-	public BotonAtacarHandler(Juego juego, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, ContenedorMapa contenedorMapa, Arquero arquero) {
-		this.arquero = arquero;
+	public BotonAtacarHandler(Juego juego, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, ContenedorMapa contenedorMapa, Atacador atacador) {
+		this.atacador = atacador;
 		this.vistaMapa = vistaMapa;
 		this.contenedorMapa = contenedorMapa;
 		this.juego = juego;
@@ -24,7 +25,7 @@ public class BotonAtacarHandler implements EventHandler<ActionEvent>{
 
 	@Override
 	public void handle(ActionEvent event) {
-		vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedAtacarStrategy(juego, vistaMapa, vistaSeleccionador, contenedorMapa, arquero));
+		vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedAtacarStrategy(juego, vistaMapa, vistaSeleccionador, contenedorMapa, atacador));
 		contenedorMapa.setCursor(Cursor.CROSSHAIR);
 	}
 }

@@ -89,7 +89,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
     private Juego crearJuego(Collection<String> nombresJugadores) 
     		throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
     	
-    	Mapa mapa = new Mapa(50, 50);
+    	Mapa mapa = new Mapa(20, 20);
         Juego juego = new Juego(mapa);
         juego.iniciar(nombresJugadores.toArray(new String[juego.CANTIDAD_DE_JUGADORES]));
         
