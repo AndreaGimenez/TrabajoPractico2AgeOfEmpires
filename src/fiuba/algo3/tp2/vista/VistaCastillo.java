@@ -45,6 +45,7 @@ public class VistaCastillo implements VistaPosicionable {
 		Castillo castillo = (Castillo) posicionable;
 		
 		contenedorControles.setNombreUnidad("Castillo");
+		contenedorControles.setVida(castillo.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionConstruirArmaAsedio(castillo));

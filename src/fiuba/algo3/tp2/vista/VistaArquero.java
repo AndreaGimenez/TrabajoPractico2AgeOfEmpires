@@ -8,6 +8,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.unidad.Atacador;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -47,23 +48,18 @@ public class VistaArquero implements VistaPosicionable, VistaMovible {
 		
 		contenedorControles.clean();
 		
+		Arquero arquero = (Arquero)posicionable;
+
 		contenedorControles.setNombreUnidad("Arquero");
+		contenedorControles.setVida(arquero.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(crearAccionAtacar((Arquero)posicionable));
+		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, contenedorMapa).crearBoton((Atacador)posicionable));
 		
 		//Movimientos
-		acciones.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable));
+		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
 
 		contenedorControles.setAcciones(acciones);
-	}
-	
-	private Button crearAccionAtacar(Arquero arquero) {
-		
-		Button botonAtacar = new Button("Atacar");
-		BotonAtacarHandler botonAtacarHandler = new BotonAtacarHandler(juego, vistaMapa, vistaSeleccionador, contenedorMapa, arquero);
-		botonAtacar.setOnAction(botonAtacarHandler);
-		return botonAtacar;
 	}
 	
 	@Override

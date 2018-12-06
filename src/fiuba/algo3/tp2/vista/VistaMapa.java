@@ -6,6 +6,8 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import javafx.scene.Node;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
@@ -64,7 +66,7 @@ public class VistaMapa {
 		}
 	}
 	
-	public void dibujarPosicionables() throws Exception {
+	public void dibujarPosicionables() {
 		
 		Mapa mapa = juego.obtenerMapa();
 		
@@ -80,6 +82,8 @@ public class VistaMapa {
 				if(posicionable != null) {
 					VistaPosicionable vistaPosicionable = VistaPosicionableMultitone.getInstance(posicionable);
 					vistaPosicionable.dibujarPosicionable(posicionable, pane);
+				}else {
+					pane.setBackground(null);
 				}
 			}
         }

@@ -91,6 +91,10 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 		vida.restarVida(ataque.obtenerDanioUnidad());
 	}
 	
+	public boolean estaMuerta() {
+		return vida.estaMuerta();
+	}
+	
 	protected boolean estaEnElRango(Posicionable posicionable) {
 		
 		boolean estaEnElRango = false;

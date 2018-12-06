@@ -34,13 +34,13 @@ public class TurnoTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Jugador jugador = new Jugador("Jugador 1");
+		Jugador jugador = new Jugador("Jugador 1", mapa);
 		Collection<Posicionable> posicionablesJugador = jugador.obtenerPosicionables();
 		Aldeano aldeano = new Aldeano(new Posicion(0, 0), mapa);
 		
 		posicionablesJugador.add(aldeano);
 		
-		Turno primerTurno = new Turno(jugador);
+		Turno primerTurno = new Turno(jugador, mapa);
 		
 		aldeano.mover(new DireccionDerecha());
 		
@@ -54,14 +54,14 @@ public class TurnoTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Jugador jugador = new Jugador("Jugador 1");
+		Jugador jugador = new Jugador("Jugador 1", mapa);
 		Collection<Posicionable> posicionablesJugador = jugador.obtenerPosicionables();
 		Aldeano aldeano = new Aldeano(new Posicion(0, 0), mapa);
 		
 		boolean checkearRecursos = false;
 		jugador.agregarUnidad(aldeano, mapa, checkearRecursos);
 		
-		Turno turno = new Turno(jugador);
+		Turno turno = new Turno(jugador, mapa);
 		aldeano.mover(new DireccionDerecha());
 		
 		turno.avanzar();

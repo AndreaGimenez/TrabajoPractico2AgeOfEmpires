@@ -13,35 +13,50 @@ public class ArmaAsedio extends Unidad implements Atacador {
 	private static final int VIDA_MAXIMA = 150;
 	private static final int COSTO_GENERACION = 200;
 	
-	boolean montada;
+	GestionadorMontajeArmaAsedio gestionadorMontaje;
 	private Ataque ataque;
 	
 	public ArmaAsedio(Posicion posicion, Mapa mapa)
 			throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, mapa, new MovimientoBasico(), new FormaArmaAsedioRectangulo(), VIDA_MAXIMA, COSTO_GENERACION );
+		
 		ataque = new AtaqueArmaAsedio();
+		this.gestionadorMontaje = new GestionadorMontajeArmaAsedio(this);
 	}
 
-	public void montar() {
+	public void montar() throws MontajeInvalidoException {
+		this.gestionadorMontaje.montar();
 		this.movimiento = new MovimientoNulo();
-		this.ataque = new AtaqueArmaAsedio();
-		this.montada = true;
 	}
 
 	public void desmontar() {
-		this.movimiento = new MovimientoBasico();
-		this.ataque = new AtaqueNulo();
-		this.montada = false;
+		this.gestionadorMontaje.desmontar();
 	}
 
 	@Override
 	public void actualizarEstadoParaSiguienteTurno() {
-		if(montada) {
+		
+		gestionadorMontaje.actualizarMontajeParaSiguienteTurno();
+		
+		if(gestionadorMontaje.montajeFinalizado()) {
+			gestionadorMontaje.finalizarMontaje();
 			this.movimiento = new MovimientoNulo();
 			this.ataque = new AtaqueArmaAsedio();
-		}else {
+		}
+		
+		if(gestionadorMontaje.desmontajeFinalizado()) {
+			gestionadorMontaje.finalizarDesmontaje();
 			this.movimiento = new MovimientoBasico();
 			this.ataque = new AtaqueNulo();	
+		}
+		
+		if(gestionadorMontaje.montajeEnCurso()){
+			this.movimiento = new MovimientoNulo();
+			this.ataque = new AtaqueNulo();	
+		}
+		
+		else {
+			ataque = new AtaqueArmaAsedio();
 		}
 	}
 
@@ -51,8 +66,8 @@ public class ArmaAsedio extends Unidad implements Atacador {
 		ataque = new AtaqueNulo();
 	}
 
-	public boolean montada() {
-		return montada;
+	public boolean estaMontada() {
+		return gestionadorMontaje.estaMontada();
 	}
 
 }

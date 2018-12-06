@@ -5,10 +5,12 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.vista.botones.BotonAldeanoReparaEdificioEventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
@@ -25,12 +27,16 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	private ContenedorMapa contenedorMapa;
 	private VistaSeleccionador vistaSeleccionador;
 	private LinkedList<AccionPosicionarEdificio> construcciones;
+	private VistaMapa vistaMapa;
+	private Juego juego;
 	
-	public VistaAldeano(ContenedorControles contenedorControles, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador) {
+	public VistaAldeano(ContenedorControles contenedorControles, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador, VistaMapa vistaMapa, Juego juego) {
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.vistaSeleccionador = vistaSeleccionador;
 		this.construcciones = new LinkedList<>();
+		this.vistaMapa = vistaMapa;
+		this.juego = juego;
 	}
 
 	private LinkedList<AccionPosicionarEdificio> crearConstrucciones(Aldeano aldeano) {
@@ -48,7 +54,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		pane.setBackground(obtenerFondoAldeano());
+		pane.setBackground(obtenerFondoAldeano((Aldeano)posicionable));
 	}
 
 	@Override
@@ -71,10 +77,10 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		botonRealizarConstruccion.setOnAction(e -> buscarEvento(construirCuartel.getEditor().getText()).realizarConstruccion());
 
 		Collection<Button> acciones = new ArrayList<>();
-		acciones.add(crearAccionReparar(/*edificio*/));
+		acciones.add(crearAccionReparar((Aldeano) posicionable));
 		
 		//Movimientos
-		acciones.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable));
+		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
 		
 		contenedorControles.setAcciones(acciones);
 		contenedorControles.setAcciones(construirCuartel, botonRealizarConstruccion);
@@ -96,12 +102,19 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		contenedorMapa.setBackground(obtenerFondoAldeano(), movible.obtenerPosicion());
+		contenedorMapa.setBackground(obtenerFondoAldeano((Aldeano)movible), movible.obtenerPosicion());
 	}
 	
-	private Background obtenerFondoAldeano() {
+	private Background obtenerFondoAldeano(Aldeano aldeano) {
 		
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/aldeano.jpg", 
+		String imagePath = "";
+		
+		if(aldeano.estaMuerta()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+		}else {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano.jpg";
+		}
+		Image imagen = new Image(imagePath, 
 			       VistaMapa.TAMANIO_NODO,
 			 	   VistaMapa.TAMANIO_NODO,
 			       false,
@@ -113,11 +126,13 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	
 	}
 
-	private Button crearAccionReparar(/*Edificio edificio*/) {
+	private Button crearAccionReparar(Aldeano aldeano) {
 		Button accionReparar = new Button("Reparar");
-		/*BotonAldeanoReparaEdificioEventHandler botonAldeanoReparaEdificioEventHandler = new BotonAldeanoReparaEdificioEventHandler(edificio);
-		botonAldeanoReparaEdificioEventHandler.seleccionarAldeano(aldeano);
-		accionReparar.setOnAction(botonAldeanoReparaEdificioEventHandler);*/
+		
+		BotonAldeanoReparaEdificioEventHandler botonAldeanoReparaEdificioEventHandler = 
+									new BotonAldeanoReparaEdificioEventHandler(aldeano, vistaMapa, contenedorMapa, juego, vistaSeleccionador);
+	
+		accionReparar.setOnAction(botonAldeanoReparaEdificioEventHandler);
 		return accionReparar;
 	}
 }

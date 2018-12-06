@@ -27,7 +27,7 @@ public class Jugador {
 	private Turno turno;
 	private String nombre;
 
-	public Jugador(String nombre) {
+	public Jugador(String nombre, Mapa mapa) {
 		
 		this.edificios = new LinkedList<>();
 		this.unidades = new LinkedList<>();
@@ -36,7 +36,7 @@ public class Jugador {
 		this.poblacion = 0;
 		this.nombre = nombre;
 		
-		this.turno = new Turno(this);
+		this.turno = new Turno(this, mapa);
 	}
 
 	public LinkedList<Posicionable> obtenerPosicionables() {
@@ -149,5 +149,10 @@ public class Jugador {
 	public boolean posicionablePerteneceAJugador(Posicionable posicionable) {
 		
 		return (posicionable != null && (edificios.contains(posicionable) || unidades.contains(posicionable)));
+	}
+
+	public void removerEdificio(Edificio edificio, Mapa mapa) {
+		edificios.remove(edificio);
+		mapa.obtenerCelda(edificio.obtenerPosicion()).liberar();
 	}
 }

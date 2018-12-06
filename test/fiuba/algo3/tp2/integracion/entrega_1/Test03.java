@@ -7,12 +7,16 @@ import org.junit.rules.ExpectedException;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.excepciones.EdificioEnConstruccionException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.excepciones.EdifioNoAptoParaContruirException;
 import fiuba.algo3.tp2.edificio.GestionarConstruccion;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
 import fiuba.algo3.tp2.excepciones.UnidadNoSoportadaException;
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
@@ -28,7 +32,7 @@ public class Test03 {
 	@Rule
 	public ExpectedException exceptionRule = ExpectedException.none();
 	
-	PLAZA CENTRAL
+	//PLAZA CENTRAL
 	
 	@Test
 	public void test_DadaUnaPlazaCentral_CrearUnAldeanoEnLaPosicionElegidaDeberidaSerValido() 
@@ -90,7 +94,7 @@ public class Test03 {
 		Aldeano unAldeano = gestorPlaza.crearAldeano(new Posicion(300, 300), mapa);
 	}
 	
-CASTILLO
+	//CASTILLO
 	
 	@Test
 	public void test_DadoUnCastilloEnLaPosicionX1Y1_DebePoderCrearUnArmaDeAsedioEnLaPosicionSolicitada() 
@@ -165,14 +169,21 @@ CASTILLO
 		ArmaAsedio armaAsedio = gestorCastillo.crearArmaAsedio(new Posicion(6,4), mapa);
 	}
 	
-	CUARTEL
+	//CUARTEL
 
 	@Test
 	public void test_DadoUnCuartelEnLaPosicionX1Y1_SeDebePoderCrearUnEspadachinEnLaPosicionIndicada()
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdificioEnConstruccionException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, UnidadNoSoportadaException, EdificioEnConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, OroInsuficienteException {
 		
 		Mapa mapa = new Mapa(250, 250);
+		Jugador jugador = new Jugador("Ana", mapa);
+		
 		Cuartel cuartel = new Cuartel(new Posicion(1, 1), mapa);
+		
+		jugador.agregarEdificio(cuartel, false);
+		jugador.avanzarTurno();
+		jugador.avanzarTurno();
+		jugador.avanzarTurno();
 		GestionarConstruccion gestorCuartel = new GestionarConstruccion(cuartel);
 		
 		Espadachin espadachin = gestorCuartel.crearEspadachin(new Posicion(4, 4), mapa);

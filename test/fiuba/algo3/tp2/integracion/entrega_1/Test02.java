@@ -42,6 +42,7 @@ import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.DireccionAbajo;
 import fiuba.algo3.tp2.unidad.Espadachin;
+import fiuba.algo3.tp2.unidad.MontajeInvalidoException;
 
 /**
  * Pruebas de Unidades
@@ -911,31 +912,12 @@ public class Test02 {
 			fail("Deberia lanzar MovimientoInvalidoException");
 		}catch(MovimientoInvalidoException e) {}
 	}
-	
-	@Test
-	public void testMovimientosDeArmaAsedioMontada() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, 
-			EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
-		
-		Mapa mapa = new Mapa(250,250);
-		
-		ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(2,1), mapa);
-		armaAsedio.montar();
-
-		try {
-			armaAsedio.mover(new DireccionDerecha());
-			fail("Deberia lanza MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
-		
-		armaAsedio.desmontar();
-		armaAsedio.mover(new DireccionDerecha());
-	}
 
 	@Test
 	public void testVerificarConstruccionDePlazaCentral() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 
 		Mapa mapa = new Mapa(250, 250);
-		Jugador ignacio = new Jugador("Jugador 1");
+		Jugador ignacio = new Jugador("Jugador 1", mapa);
 		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
 		boolean checkearRecursos = false;
 		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
@@ -951,7 +933,7 @@ public class Test02 {
 
 		GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(4,5)));
 		ignacio.agregarEdificio(gestorPlazaCentral, false);
-		Turno turno = new Turno(ignacio);
+		Turno turno = new Turno(ignacio, mapa);
 
 		// Turno 0/3
 
