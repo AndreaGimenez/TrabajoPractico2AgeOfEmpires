@@ -3,19 +3,19 @@ package fiuba.algo3.tp2.juego;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
-import fiuba.algo3.tp2.mapa.Celda;
+import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.mapa.Celda;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.mapa.PosicionesInicialesAldeanos;
-import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 
@@ -152,7 +152,8 @@ public class Juego {
     			if(unidad.estaMuerta()) {
     				jugadorActual.removerUnidad((Unidad)posicionable, mapa);
     			}
-    		}else if(posicionable instanceof Edificio) {
+    		}else if(posicionable instanceof Edificio
+    				&& !(posicionable instanceof Castillo)) {
     			Edificio edificio = (Edificio)posicionable;
     			if(edificio.estaDestruido()) {
     				jugadorActual.removerEdificio((Edificio)posicionable, mapa);
