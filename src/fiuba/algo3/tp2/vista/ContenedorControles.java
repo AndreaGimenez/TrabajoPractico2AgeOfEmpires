@@ -57,7 +57,9 @@ public class ContenedorControles extends VBox {
 		labelNombreUnidad.setText("");
 		labelVida.setText("");
 		labelAcciones.setText("");
-		
+		getChildren().removeIf(children -> !children.equals(labelNombreUnidad) 
+											&& !children.equals(labelVida)
+											&& !children.equals(labelAcciones));
 		if(this.acciones != null) {
 			getChildren().removeAll(this.acciones);
 		}

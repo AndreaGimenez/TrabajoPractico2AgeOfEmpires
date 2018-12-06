@@ -52,7 +52,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		acciones.add(crearAccionReparar((Aldeano)posicionable));
 		
 		//Movimientos
-		acciones.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable));
+		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
 		
 		contenedorControles.setAcciones(acciones);
 	}
