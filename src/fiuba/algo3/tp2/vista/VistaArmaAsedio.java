@@ -65,7 +65,7 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
 	
 	private Button crearAccionMontar(ArmaAsedio armaAsedio) {
 		
-		String textoBoton = (armaAsedio.montada()) ? "Desmontar" : "Montar";
+		String textoBoton = (armaAsedio.estaMontada()) ? "Desmontar" : "Montar";
 		Button botonMontar = new Button(textoBoton);
 		BotonMontarHandler botonMontarHandler = new BotonMontarHandler(botonMontar, armaAsedio, contenedorMapa);
 		botonMontar.setOnAction(botonMontarHandler);
@@ -89,7 +89,7 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
 	private Background obtenerFondoArmaAsedio(ArmaAsedio armaAsedio) {
 		
 		Image imagen = null;
-		if(armaAsedio.montada()) {
+		if(armaAsedio.estaMontada()) {
 			imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada.jpg", 
 					 50, 
 					 50, 
