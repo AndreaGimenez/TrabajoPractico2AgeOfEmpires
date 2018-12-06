@@ -145,7 +145,6 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 =======
 		contenedorControles.setAcciones(construirCuartel, botonRealizarConstruccion);
 		contenedorControles.setBotonera(botoneraMovimiento);
->>>>>>> Stashed changes
 	}
 
 	private AccionPosicionarEdificio buscarPosicionCuartel(String accion) {

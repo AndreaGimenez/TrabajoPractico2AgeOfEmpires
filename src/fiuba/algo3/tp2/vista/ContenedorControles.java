@@ -30,7 +30,6 @@ public class ContenedorControles extends VBox {
 	private ComboBox<String> construcciones;
 	private Button confirmarConstruccion;
 	private GridPane botonera;
->>>>>>> Stashed changes
 
 	public ContenedorControles() {
 		
@@ -65,7 +64,6 @@ public class ContenedorControles extends VBox {
         this.acciones = new ArrayList<>();
         this.construcciones = new ComboBox<>();
         this.botonera = new GridPane();
->>>>>>> Stashed changes
 	}
 
 	public void setNombreUnidad(String nombreUnidad) {
@@ -90,6 +88,10 @@ public class ContenedorControles extends VBox {
 		getChildren().addAll(this.construccionesCuartel);
 		this.confirmarConstruccionCuartel = botonRealizarConstruccion;
 		getChildren().addAll(this.confirmarConstruccionCuartel);
+	}
+	
+	public void setBotonera(GridPane botoneraMovimiento) {
+		this.botonera = botoneraMovimiento;
 	}
 
 	public void setAccionesPlazaCentral(ComboBox<String> acciones, Button botonRealizarConstruccion){
