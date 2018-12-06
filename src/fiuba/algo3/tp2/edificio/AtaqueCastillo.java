@@ -13,6 +13,9 @@ import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 
 public class AtaqueCastillo implements AtaqueZona {
 	
+	private static final int DANIO_UNIDAD = 20;
+	private static final int DANIO_EDIFICIO = 20;
+	
 	private RangoAtaque rangoAtaque;
 	private AtacadorZona atacante;
 	private Mapa mapa;
@@ -46,11 +49,11 @@ public class AtaqueCastillo implements AtaqueZona {
 
 	@Override
 	public int obtenerDanioUnidad() {
-		return 20;
+		return DANIO_UNIDAD;
 	}
 
 	@Override
 	public int obtenerDanioEdificio() {
-		return 20;
+		return DANIO_EDIFICIO;
 	}
 }

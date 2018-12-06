@@ -9,7 +9,6 @@ import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 
 public class Arquero extends Unidad implements Atacador {
 	
-	private static final int DANIO_UNIDAD = 15;
 	private static final int VIDA_MAXIMA = 75;
 	private static final int COSTO_GENERACION = 75;
 	

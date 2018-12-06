@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -14,14 +15,14 @@ public class MensajeDeError {
 		ventanaError.setTitle("Error");
 		
 		VBox box = new VBox();
-		
+		box.setAlignment(Pos.CENTER);
 		Label etiqueta = new Label();
 	    etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 25));
 
 	    etiqueta.setText(mensajeDeError);
 	    etiqueta.setTextFill(Color.web("#2E2EFE"));
 	    box.getChildren().add(etiqueta);
-	    Scene nuevaEscena = new Scene(box, 500,300);
+	    Scene nuevaEscena = new Scene(box, 300,200);
 		ventanaError.setScene(nuevaEscena);
 		ventanaError.setFullScreen(false);
 		ventanaError.show();

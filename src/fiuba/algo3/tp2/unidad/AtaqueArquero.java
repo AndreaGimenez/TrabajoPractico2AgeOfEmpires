@@ -6,6 +6,9 @@ import fiuba.algo3.tp2.mapa.Atacable;
 
 public class AtaqueArquero implements Ataque {
 
+	private static final int DANIO_UNIDAD = 15;
+	private static final int DANIO_EDIFICIO = 10;
+	
 	private RangoAtaque rangoAtaque;
 	
 	public AtaqueArquero() {
@@ -26,11 +29,11 @@ public class AtaqueArquero implements Ataque {
 	
 	@Override
 	public int obtenerDanioUnidad() {
-		return 15;
+		return DANIO_UNIDAD;
 	}
 	
 	@Override
 	public int obtenerDanioEdificio() {
-		return 10;
+		return DANIO_EDIFICIO;
 	}
 }
