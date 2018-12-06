@@ -25,15 +25,25 @@ public class ContenedorPartida extends BorderPane {
 	
     BarraDeMenu menuBar;
 
+	Musica musica;
+
     public ContenedorPartida(Stage stage, Juego juego) throws Exception {
     	
         this.setMenu(stage);
         this.setControles(juego);
         this.setMapa(juego, stage);
         this.setEstadoJugador(juego);
+        this.setMusica();
     }
 
-    private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
+    private void setMusica() {
+		// TODO Auto-generated method stub
+		
+    	this.musica = new Musica("src/fiuba/algo3/tp2/vista/musicaJuego.mp3");
+        this.musica.iniciarReproduccionMusica();
+	}
+
+	private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
     	
         contenedorControles = new ContenedorControles();        
         this.setLeft(contenedorControles);
