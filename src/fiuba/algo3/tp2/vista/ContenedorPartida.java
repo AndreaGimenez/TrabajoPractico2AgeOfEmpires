@@ -47,7 +47,7 @@ public class ContenedorPartida extends BorderPane {
     private void setMapa(Juego juego, Stage stage) throws Exception {
     	
     	mapa = juego.obtenerMapa();
-    	contenedorMapa = new ContenedorMapa();
+    	contenedorMapa = new ContenedorMapa(mapa);
     	vistaSeleccionador = new VistaSeleccionador(mapa, contenedorMapa);
     	
         ScrollPane scrollPane = new ScrollPane();
