@@ -29,11 +29,11 @@ public class ContenedorPartida extends BorderPane {
 
     public ContenedorPartida(Stage stage, Juego juego) throws Exception {
     	
-        this.setMenu(stage);
+    	this.setMusica();
+        this.setMenu(stage, this.musica);
         this.setControles(juego);
         this.setMapa(juego, stage);
         this.setEstadoJugador(juego);
-        this.setMusica();
     }
 
     private void setMusica() {
@@ -49,8 +49,8 @@ public class ContenedorPartida extends BorderPane {
         this.setLeft(contenedorControles);
     }
 
-    private void setMenu(Stage stage) {
-        this.menuBar = new BarraDeMenu(stage);
+    private void setMenu(Stage stage, Musica musica) {
+        this.menuBar = new BarraDeMenu(stage, musica);
         this.setTop(menuBar);
     }
 
