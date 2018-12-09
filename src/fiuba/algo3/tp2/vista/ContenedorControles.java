@@ -45,7 +45,7 @@ public class ContenedorControles extends VBox {
         
         setSpacing(10);
         setPadding(new Insets(15));
-        setStyle("-fx-background-color: brown;");
+        setStyle("-fx-background-color: #BDB76B;");
         setPrefWidth(200);
         
         this.accionesMovimiento = new ArrayList<>();

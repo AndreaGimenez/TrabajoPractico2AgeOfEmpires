@@ -20,7 +20,7 @@ public class MensajeDeError {
 	    etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 25));
 
 	    etiqueta.setText(mensajeDeError);
-	    etiqueta.setTextFill(Color.web("#2E2EFE"));
+	    etiqueta.setTextFill(Color.web("RED"));
 	    box.getChildren().add(etiqueta);
 	    Scene nuevaEscena = new Scene(box, 300,200);
 		ventanaError.setScene(nuevaEscena);
