@@ -1,8 +1,11 @@
 package fiuba.algo3.tp2.vista.eventos;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.vista.ContenedorControles;
 import fiuba.algo3.tp2.vista.MensajeDeError;
 import fiuba.algo3.tp2.vista.VistaEstadoJugador;
@@ -36,14 +39,21 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 		
 		MensajeDeError error = new MensajeDeError();
 		try {
-			
 			juego.avanzarJugador();
 			vistaEstadoJugador.actualizar();
 			vistaSeleccionador.deseleccionarNodoActual();
 			contenedorControles.clean();
 			vistaMapa.dibujarPosicionables();
-			
 		} 
+		catch(EdificioNoAptoParaConstruccionException e) {
+			error.mostrarVentanaError("No es posible construir este Edificio");
+		}
+		catch(EdificioConConstructorAsignadoException e) {
+			error.mostrarVentanaError("Este aldeano no puede construir este edificio porque siendo construido por otro");
+		}
+		catch(YaSeReparoEnESteTurnoException e) {
+			error.mostrarVentanaError("Este aldeano ya realizo una reparacion en este turno. Espere al siguiente turno para realizar la accion");
+		}
 		catch(EdificioNoAptoParaReparacionException e) {
 			error.mostrarVentanaError("Edificio No Apto Para Reparación");
 		}

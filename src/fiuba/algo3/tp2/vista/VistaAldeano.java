@@ -46,56 +46,6 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 	}
-	
-	
-	
-	/*private LinkedList<AccionPosicionarEdificio> crearConstruccionesPlazaCentral(Aldeano aldeano) {
-		LinkedList<AccionPosicionarEdificio> acciones = new LinkedList<>();
-
-		acciones.add(new ConstruirPlazaCentralAristaSuperiorDerecha(aldeano));
-		acciones.add(new ConstruirPlazaCentralAristaSuperiorIzquierda(aldeano));
-
-		acciones.add(new ConstruirPlazaCentralArribaALaDerecha(aldeano));
-		acciones.add(new ConstruirPlazaCentralArribaALaIzquierda(aldeano));
-
-		acciones.add(new ConstruirPlazaCentralAbajoALaDerecha(aldeano));
-		acciones.add(new ConstruirPlazaCentralAbajoALaIzquierda(aldeano));
-
-		acciones.add(new ConstruirPlazaCentralALaDerechaPorDebajo(aldeano));
-		acciones.add(new ConstruirPlazaCentralALaDerechaPorEncima(aldeano));
-
-		acciones.add(new ConstruirPlazaCentralAristaInferiorDerecha(aldeano));
-		acciones.add(new ConstruirPlazaCentralAristaInferiorIzquierda(aldeano));
-
-		acciones.add(new ConstruirPlazaCentralALaIzquierdaPorDebajo(aldeano));
-		acciones.add(new ConstruirPlazaCentralALaIzquierdaPorEncima(aldeano));
-
-		return acciones;
-	}*/
-
-	/*private LinkedList<AccionPosicionarEdificio> crearConstruccionesCuartel(Aldeano aldeano) {
-		LinkedList<AccionPosicionarEdificio> acciones = new LinkedList<>();
-		
-		acciones.add(new ConstruirCuartelAristaSuperiorDerecha(aldeano));
-		acciones.add(new ConstruirCuartelAristaSuperiorIzquierda(aldeano));
-		
-		acciones.add(new ConstruirCuartelArribaALaDerecha(aldeano));
-		acciones.add(new ConstruirCuartelArribaALaIzquierda(aldeano));
-		
-		acciones.add(new ConstruirCuartelAbajoALaDerecha(aldeano));
-		acciones.add(new ConstruirCuartelAbajoALaIzquierda(aldeano));
-		
-		acciones.add(new ConstruirCuartelALaDerechaPorDebajo(aldeano));
-		acciones.add(new ConstruirCuartelALaDerechaPorEncima(aldeano));
-		
-		acciones.add(new ConstruirCuartelAristaInferiorDerecha(aldeano));
-		acciones.add(new ConstruirCuartelAristaInferiorIzquierda(aldeano));
-		
-		acciones.add(new ConstruirCuartelALaIzquierdaPorDebajo(aldeano));
-		acciones.add(new ConstruirCuartelALaIzquierdaPorEncima(aldeano));
-
-		return acciones;
-	}*/
 
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
@@ -110,31 +60,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		contenedorControles.setNombreUnidad("Aldeano");
 		contenedorControles.setVida(((Aldeano)posicionable).obtenerVida());
 
-		//this.construccionesCuartel.addAll(crearConstruccionesCuartel((Aldeano) posicionable));
-		//this.construccionesPlazaCentral.addAll(crearConstruccionesPlazaCentral((Aldeano) posicionable));
-
 		
-		/*
-		ComboBox<String> construirCuartel = new ComboBox<>();
-		construirCuartel.getItems().addAll("Construir arriba a la derecha", "Construir arriba a la izquierda",
-				"Construir abajo a la izquierda", "Construir abajo a la derecha", "Construir a la derecha por encima",
-				"Construir a la derecha por debajo", "Construir a la izquierda por encima", "Construir a la izquierda por debajo",
-				"Construir en arista superior izquierda", "Construir en arista superior derecha", "Construir en arista inferior izquierda",
-				"Construir en arista inferior derecha");
-		construirCuartel.setPromptText("Seleccionar posicion");
-		Button botonRealizarConstruccionCuartel = new Button("Aceptar");
-
-		botonRealizarConstruccionCuartel.setOnAction(e -> buscarPosicionCuartel(construirCuartel.getValue()).realizarConstruccion());
-
-		ComboBox<String> construirPlazaCentral = new ComboBox<>();
-		construirPlazaCentral.getItems().addAll(construirCuartel.getItems());
-		construirPlazaCentral.setPromptText("Seleccionar posicion");
-		Button botonRealizarConstruccionPlazaCentral = new Button("Aceptar");
-
-		botonRealizarConstruccionPlazaCentral.setOnAction(e -> {
-			buscarPosicionPlazaCentral(construirPlazaCentral.getValue()).realizarConstruccion();
-			});
-*/
 		Collection<Button> acciones = new ArrayList<>();
 		acciones.add(crearAccionReparar((Aldeano) posicionable));
 		
@@ -153,11 +79,6 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		contenedorControles.getChildren().add(botoneraMovimiento);
 		
 		contenedorControles.setAcciones(acciones);
-		
-		/*
-		contenedorControles.setAccionesCuartel(construirCuartel, botonRealizarConstruccionCuartel);
-		contenedorControles.setAccionesPlazaCentral(construirPlazaCentral, botonRealizarConstruccionPlazaCentral);
-		*/
 	}
 
 	private AccionPosicionarEdificio buscarPosicionPlazaCentral(String accion) {

@@ -1,11 +1,14 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.AldeanoConConstruccionAsignadaException;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -36,18 +39,24 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
 		
 		MensajeDeError error = new MensajeDeError();
-		
 		try {
-			
-			aldeano.construir(new Cuartel(new Posicion(colIndex, rowIndex), juego.obtenerMapa()));
-		
-		} 
+				aldeano.construirConstruible(new Cuartel(new Posicion(colIndex, rowIndex), juego.obtenerMapa()));
+			} 
 		catch(CeldaOcupadaException e) {
 			error.mostrarVentanaError("La celda en la que intentas contruir esta ocupada");
 		}
 		catch(CeldaInexistenteException e) {
 			error.mostrarVentanaError("La celda en la que intentas contruir no existe");
-		}			
+		}
+		catch(EdificioNoAptoParaConstruccionException e) {
+			error.mostrarVentanaError("No es posible construir este Edificio");
+		}
+		catch(EdificioConConstructorAsignadoException e) {
+			error.mostrarVentanaError("Este aldeano no puede construir este edificio porque siendo construido por otro");
+		}
+		catch(AldeanoConConstruccionAsignadaException e) {
+			error.mostrarVentanaError("Este aldeano se encuentra construyendo otro edificio");
+		}
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));
 			contenedorMapa.setCursor(Cursor.DEFAULT);

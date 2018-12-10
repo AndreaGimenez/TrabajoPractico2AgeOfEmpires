@@ -7,7 +7,9 @@ import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.AldeanoConConstruccionAsignadaException;
 import javafx.animation.Animation;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
@@ -43,15 +45,21 @@ public class NodoMapaOnMouseClickedRepararEdificioStrategy implements NodoMapaOn
 		
 		if(juego.obtenerJugadorActual().posicionablePerteneceAJugador(posicionable) &&
 				posicionable instanceof Edificio) {
+
 			try {
-				reparador.repararEdificio((Edificio)posicionable);
+					reparador.repararEdificio((Edificio)posicionable);
+					Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
+					nodo.getChildren().add(nodoShape);
 				
-				Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
-				nodo.getChildren().add(nodoShape);
-				
-		        final Animation animation = new ColorTransition(Color.GREEN, nodoShape);
-		        animation.play();
+					final Animation animation = new ColorTransition(Color.GREEN, nodoShape);
+					animation.play();
 		        
+			}
+			catch(AldeanoConConstruccionAsignadaException e) {
+				error.mostrarVentanaError("Este aldeano se encuentra construyendo otro edificio");
+			}
+			catch(YaSeReparoEnESteTurnoException e) {
+				error.mostrarVentanaError("Este aldeano ya realizo una reparacion en este turno. Espere al siguiente turno para realizar la accion");
 			}
 			catch(EdificioFueraDeRangoException e) {
 				error.mostrarVentanaError("Edificio Fuera De Rango de Reparación");

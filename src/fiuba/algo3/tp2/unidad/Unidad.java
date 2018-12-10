@@ -27,7 +27,7 @@ public abstract class Unidad extends Observable implements Movible, Posicionable
 	protected Forma forma;
 	protected int costoGeneracion;
 	private VidaUnidad vida;
-	private Mapa mapa;
+	protected Mapa mapa;
 	
 	
 	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento, Forma forma, int vidaMaxima, int costoGeneracion)

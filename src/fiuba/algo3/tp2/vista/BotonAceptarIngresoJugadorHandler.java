@@ -3,6 +3,8 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.Collection;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
@@ -15,6 +17,7 @@ import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
@@ -110,16 +113,20 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         juego.obtenerJugadorActual().agregarUnidad(new Arquero(new Posicion(10, 10), mapa), mapa, false);
         juego.obtenerJugadorActual().agregarUnidad(new Espadachin(new Posicion(11, 10), mapa), mapa, false);
         juego.obtenerJugadorActual().agregarUnidad(new ArmaAsedio(new Posicion(12, 10), mapa), mapa, false);
-        try {
-			juego.avanzarJugador();
-		} catch (EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        
+			try {
+				juego.avanzarJugador();
+			} catch (EdificioNoAptoParaConstruccionException | EdificioConConstructorAsignadoException
+					| YaSeReparoEnESteTurnoException | EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
         juego.obtenerJugadorActual().agregarUnidad(new Aldeano(new Posicion(13, 10), mapa), mapa, false);
         try {
 			juego.avanzarJugador();
-		} catch (EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
+		} catch (EdificioNoAptoParaConstruccionException | EdificioConConstructorAsignadoException
+				| YaSeReparoEnESteTurnoException | EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

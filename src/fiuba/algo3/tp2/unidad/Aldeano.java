@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.unidad;
 
+import java.util.Collection;
+
 import fiuba.algo3.tp2.construccion.Constructor;
 import fiuba.algo3.tp2.construccion.Construible;
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
@@ -54,6 +56,15 @@ public class Aldeano extends Unidad implements Constructor, Reparador {
 			this.movimiento = new MovimientoNulo();
 		}
 		else {
+			Edificio edificioAConstruir = (Edificio)construible;
+			Mapa mapa = obtenerMapa();
+			
+			Collection<Posicion>posicionesOcupadas = edificioAConstruir.obtenerPosicionesOcupadasEnMapa();
+			
+			for(Posicion posicionActual : posicionesOcupadas) {
+				mapa.obtenerCelda(posicionActual).liberar();
+			}
+			
 			throw new AldeanoConConstruccionAsignadaException();
 		}
 	}	
