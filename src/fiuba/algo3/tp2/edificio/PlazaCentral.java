@@ -57,4 +57,11 @@ public class PlazaCentral extends Edificio implements Construible{
 	}
 
 
+	@Override
+	public boolean estaEnElContornoDe(Constructor constructor) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 }

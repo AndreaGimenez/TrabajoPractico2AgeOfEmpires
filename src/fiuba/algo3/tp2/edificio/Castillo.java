@@ -7,7 +7,7 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.reparacion.ReparacionDesactivada;
 
-public class Castillo extends Edificio implements /*GeneradorUnidades,*/ AtacadorZona {
+public class Castillo extends Edificio implements AtacadorZona {
 	
 	private static final int VIDA_MAXIMA = 1000;
 	private static final int SALUD_RECUPERADA_POR_TURNO = 15;

@@ -12,6 +12,7 @@ import fiuba.algo3.tp2.reparacion.Reparacion;
 import fiuba.algo3.tp2.reparacion.ReparacionActivada;
 import fiuba.algo3.tp2.reparacion.Reparador;
 import fiuba.algo3.tp2.formas.Forma;
+import fiuba.algo3.tp2.generacionDeUnidades.GeneradorUnidades;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -20,11 +21,11 @@ import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.vida.VidaEdificio;
 
-public abstract class Edificio implements Posicionable, Atacable{
+public abstract class Edificio implements Posicionable, Atacable, GeneradorUnidades{
 
-	private Posicion posicion;
+	protected Posicion posicion;
 	protected Reparacion reparacion;
-	private Forma forma;
+	protected Forma forma;
 	protected Mapa mapa;
 	private Reparador reparadorAsignadoParaReparar;
 	private Constructor constructorAsignadoParaConstruir;

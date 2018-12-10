@@ -4,6 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.construccion.ConstruccionFueraDeRangoException;
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Cuartel;
@@ -35,21 +36,21 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoEnX0Y0ConstruyeUnaPlazaCentralEnX1Y0() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException {
 		
 		Mapa mapa = new Mapa(10,10);
 		
-		Aldeano aldeano = new Aldeano(new Posicion(0,0), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(5,5), mapa);
 		
-		aldeano.construirConstruible(new PlazaCentral(new Posicion (1,0), mapa));
+		aldeano.construirConstruible(new PlazaCentral(new Posicion (5,6), mapa));
 		
 		exceptionRule.expect(CeldaOcupadaException.class);
-		new Aldeano(new Posicion(1,0), mapa);
+		new Aldeano(new Posicion(5,6), mapa);
 	}
 	
 	@Test
 	public void testUnAldeanoEnX0Y0ConstruyeUnaPlazaCentralEnX1Y0DeberiaEstarEnConstruccion() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException {
 		
 		Mapa mapa = new Mapa(10,10);
 		
@@ -63,7 +64,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoEnX0Y0ConstruyeUnCuartelEnX1Y0() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException {
 		
 		Mapa mapa = new Mapa(10,10);
 		
@@ -77,7 +78,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoEnX0Y0ConstruyeUnCuartelEnX1Y0DeberiaEstarEnConstruccion() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException {
 		
 		Mapa mapa = new Mapa(10,10);
 		
@@ -93,7 +94,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoEnX5Y3ConstruyeUnaPlazaCentralEnX6Y3DeberiaTardar3TurnosEnConstruirse() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		
 		Mapa mapa = new Mapa(20,20);
 		
@@ -128,7 +129,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoEnX5Y3ConstruyeUnCuartelEnX6Y3DeberiaTardar3TurnosEnConstruirse() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		
 		Mapa mapa = new Mapa(20,20);
 		
@@ -161,9 +162,33 @@ public class ConstruccionTest {
 		assertEquals(true, cuartel.estaConstruido());
 	}
 	
+	/*@Test
+	public void testUnAldeanoEnX0Y0NoPuedeConstruirUnCuartelEnX5Y5() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException{
+		
+		Mapa mapa = new Mapa(20,20);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(0,0), mapa);
+		
+		exceptionRule.expect(ConstruccionFueraDeRangoException.class);
+		aldeano.construirConstruible(new Cuartel(new Posicion (5,5), mapa));	
+	}*/
+	
+	@Test
+	public void testUnAldeanoEnX1Y1NoPuedeConstruirUnCuartelEnX0Y0() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException{
+		
+		Mapa mapa = new Mapa(20,20);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
+		
+		exceptionRule.expect(CeldaOcupadaException.class);
+		aldeano.construirConstruible(new Cuartel(new Posicion (0,0), mapa));	
+	}
+	
 	@Test
 	public void testUnAldeanoQueEstaConstruyendoUnCuartelNoPuedeMoverse() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		Mapa mapa = new Mapa(20,20);
 		
 		Juego juego = new Juego(mapa);
@@ -188,7 +213,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoQueEstaConstruyendoUnCuartelPuedeMoverseAlTerminarLaConstruccion() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		Mapa mapa = new Mapa(20,20);
 		
 		Juego juego = new Juego(mapa);
@@ -218,7 +243,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoQueEstaConstruyendoUnCuartelNoPuedeConstruirOtraEdificio() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		Mapa mapa = new Mapa(30,30);
 		
 		Juego juego = new Juego(mapa);
@@ -245,7 +270,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoQueEstaConstruyendoUnCuartelPuedeConstruirOtroEdificioAlFinalizar() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		
 		Mapa mapa = new Mapa(30,30);
 		
@@ -278,7 +303,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoQueEstaConstruyendoUnCuartelNoPuedeRepararOtroEdificio() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, EdificioFueraDeRangoException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, EdificioFueraDeRangoException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		Mapa mapa = new Mapa(30,30);
 		
 		Juego juego = new Juego(mapa);
@@ -307,7 +332,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoQueEstaConstruyendoUnCuartelPuedeRepararOtroEdificio() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, EdificioFueraDeRangoException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, EdificioFueraDeRangoException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		Mapa mapa = new Mapa(30,30);
 		
 		Juego juego = new Juego(mapa);
@@ -336,7 +361,7 @@ public class ConstruccionTest {
 	
 	@Test
 	public void testUnAldeanoQueEstaConstruyendoUnCuartelPuedeRepararOtroEdificioAlFinalizarLaConstruccion() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, EdificioFueraDeRangoException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, EdificioFueraDeRangoException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		Mapa mapa = new Mapa(30,30);
 		
 		Juego juego = new Juego(mapa);
@@ -345,7 +370,7 @@ public class ConstruccionTest {
 		
 		Jugador jugador1 = juego.obtenerJugadorActual();
 		
-		Aldeano aldeano =new Aldeano(new Posicion(8,15), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(8,15), mapa);
 		jugador1.agregarUnidad(aldeano, mapa, false);
 		
 		Cuartel cuartel = new Cuartel(new Posicion(7,16), mapa);	

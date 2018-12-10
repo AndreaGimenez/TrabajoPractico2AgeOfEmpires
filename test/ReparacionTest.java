@@ -2,6 +2,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.construccion.ConstruccionFueraDeRangoException;
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Cuartel;
@@ -32,7 +33,7 @@ public class ReparacionTest {
 	
 	@Test
 	public void testUnAldeanoQueEstaReparandoUnCuartelNoPuedeMoverse() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioFueraDeRangoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioFueraDeRangoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		Mapa mapa = new Mapa(20,20);
 		
 		Juego juego = new Juego(mapa);
@@ -79,7 +80,7 @@ public class ReparacionTest {
 	
 	@Test
 	public void testUnAldeanoQueEstaConstruyendoUnCuartelPuedeMoverseAlTerminarLaConstruccion() 
-			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioFueraDeRangoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, TamanioInvalidoException, EdificioConConstructorAsignadoException, MovimientoInvalidoException, EdificioNoAptoParaConstruccionException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioFueraDeRangoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		Mapa mapa = new Mapa(20,20);
 		
 		Juego juego = new Juego(mapa);
@@ -132,7 +133,7 @@ public class ReparacionTest {
 			CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, 
 			EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, 
 			AldeanoConConstruccionAsignadaException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, 
-			EdificioFueraDeRangoException, YaSeReparoEnESteTurnoException {
+			EdificioFueraDeRangoException, YaSeReparoEnESteTurnoException, ConstruccionFueraDeRangoException {
 		
 		Mapa mapa = new Mapa(20,20);
 		

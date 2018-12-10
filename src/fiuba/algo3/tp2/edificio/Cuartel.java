@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.edificio;
 
+import java.util.Collection;
+
 import fiuba.algo3.tp2.construccion.Constructor;
 import fiuba.algo3.tp2.construccion.Construible;
 import fiuba.algo3.tp2.construccion.EstadoConstruccion;
@@ -9,6 +11,7 @@ import fiuba.algo3.tp2.formas.FormaCuartelRectangulo;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.reparacion.ReparacionDesactivada;
+import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class Cuartel extends Edificio implements Construible{
 	
@@ -60,5 +63,11 @@ public class Cuartel extends Edificio implements Construible{
 		
 	}
 
-
+	@Override
+	public boolean estaEnElContornoDe(Constructor constructor) {
+		
+		Collection<Posicion> posicionesContornoConstructor = constructor.obtenerPosicionesContorno();
+		
+		return posicionesContornoConstructor.contains(this.posicion);
+	}
 }

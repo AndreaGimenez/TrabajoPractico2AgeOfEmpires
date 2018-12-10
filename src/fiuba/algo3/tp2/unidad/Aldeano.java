@@ -2,6 +2,7 @@ package fiuba.algo3.tp2.unidad;
 
 import java.util.Collection;
 
+import fiuba.algo3.tp2.construccion.ConstruccionFueraDeRangoException;
 import fiuba.algo3.tp2.construccion.Constructor;
 import fiuba.algo3.tp2.construccion.Construible;
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
@@ -15,6 +16,7 @@ import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 import fiuba.algo3.tp2.recursos.OroPorTurno;
@@ -28,6 +30,8 @@ public class Aldeano extends Unidad implements Constructor, Reparador {
 	private static final int VIDA_MAXIMA = 50;
 	private static final int COSTO_GENERACION = 25;
 	
+	
+	
 	private Construible construibleEnConstruccion;
 	
 	private ReparadorEdificio reparadorEdificio;
@@ -37,19 +41,53 @@ public class Aldeano extends Unidad implements Constructor, Reparador {
 	
 	public OroPorTurno oroPorTurno;
 
+	
+	
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA, COSTO_GENERACION);
 		
 		this.reparadorEdificio = new ReparadorEdificioAldeano(this);
 		this.oroPorTurno = new OroPorTurno();
 		this.rangoReparacion = new RangoReparacion();
+		this.construibleEnConstruccion = null;
 	}
+	
+	/*@Override
+	public void construirConstruible(Construible construible)
+			throws EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException, CeldaOcupadaException {
+		
+		if(this.construibleEnConstruccion == null && construible.estaEnElContornoDe(this) && !seSuperponenPosiciones(construible)) {
+			this.construibleEnConstruccion = construible;
+			construible.asignarConstructor(this);
+			this.movimiento = new MovimientoNulo();
+		}
+		else {
+			Edificio edificioAConstruir = (Edificio)construible;
+			Mapa mapa = obtenerMapa();
+			
+			Collection<Posicion>posicionesOcupadas = edificioAConstruir.obtenerPosicionesOcupadasEnMapa();
+			
+			for(Posicion posicionActual : posicionesOcupadas) {
+				mapa.obtenerCelda(posicionActual).liberar();
+			}
+			
+			if(this.construibleEnConstruccion != null) {
+				throw new AldeanoConConstruccionAsignadaException(); 
+			}
+			if(construible.estaEnElContornoDe(this)) {
+				throw new ConstruccionFueraDeRangoException();
+			}
+			if(seSuperponenPosiciones(construible)) {
+				throw new CeldaOcupadaException();
+			}
+		}
+	}	*/
 	
 	@Override
 	public void construirConstruible(Construible construible)
 			throws EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
 		
-		if(this.construibleEnConstruccion == null) {
+		if(this.construibleEnConstruccion == null ) {
 			this.construibleEnConstruccion = construible;
 			construible.asignarConstructor(this);
 			
@@ -134,5 +172,10 @@ public class Aldeano extends Unidad implements Constructor, Reparador {
 	public int recolectarOro() {
 		return oroPorTurno.recolectarOroDelTurno();
 	}
+
+	public Collection<Posicion> obtenerPosicionesContorno() {
+		return forma.obtenerPosicionesContorno(this.posicion);
+	}
+
 	
 }

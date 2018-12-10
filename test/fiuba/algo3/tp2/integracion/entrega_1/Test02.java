@@ -8,6 +8,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.construccion.ConstruccionFueraDeRangoException;
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Cuartel;
@@ -920,7 +921,7 @@ public class Test02 {
 			EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, 
 			EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, 
 			PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, 
-			EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
+			EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException {
 
 		Mapa mapa = new Mapa(250, 250);
 		Jugador jugador1 = new Jugador("Jugador 1", mapa);
@@ -972,7 +973,7 @@ public class Test02 {
 			EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, 
 			EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, 
 			PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, 
-			EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
+			EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException {
 
 		Mapa mapa = new Mapa(250, 250);
 		
