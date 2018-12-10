@@ -2,6 +2,7 @@ package fiuba.algo3.tp2.unidad;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
 
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
@@ -19,7 +20,7 @@ import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 import fiuba.algo3.tp2.vida.VidaUnidad;
 
-public abstract class Unidad implements Movible, Posicionable, Atacable {
+public abstract class Unidad extends Observable implements Movible, Posicionable, Atacable {
 
 	protected Posicion posicion;
 	protected Movimiento movimiento;

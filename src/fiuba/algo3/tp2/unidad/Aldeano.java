@@ -1,32 +1,32 @@
 package fiuba.algo3.tp2.unidad;
 
-import fiuba.algo3.tp2.construccion.ConstructorEdificios;
-import fiuba.algo3.tp2.construccion.CreadorEdificio;
-import fiuba.algo3.tp2.construccion.CreadorEdificioAldeano;
+import fiuba.algo3.tp2.construccion.Constructor;
+import fiuba.algo3.tp2.construccion.Construible;
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Edificio;
-import fiuba.algo3.tp2.edificio.EdificioConstants.TipoEdificio;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioFueraDeRangoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
-import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
 import fiuba.algo3.tp2.formas.FormaAldeanoRectangulo;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.movimiento.MovimientoBasico;
+import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 import fiuba.algo3.tp2.recursos.OroPorTurno;
 import fiuba.algo3.tp2.reparacion.Reparador;
 import fiuba.algo3.tp2.reparacion.ReparadorEdificio;
 import fiuba.algo3.tp2.reparacion.ReparadorEdificioAldeano;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 
-public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
+public class Aldeano extends Unidad implements Constructor, Reparador {
 	
 	private static final int VIDA_MAXIMA = 50;
 	private static final int COSTO_GENERACION = 25;
 	
-	private CreadorEdificio creadorEdificio;
-	private Edificio edificioEnConstruccion;
+	private Construible construibleEnConstruccion;
 	
 	private ReparadorEdificio reparadorEdificio;
 	private Edificio edificioEnReparacion;
@@ -38,52 +38,81 @@ public class Aldeano extends Unidad implements ConstructorEdificios, Reparador {
 	public Aldeano(Posicion posicion, Mapa mapa) throws CeldaOcupadaException, CeldaInexistenteException {
 		super(posicion, mapa, new MovimientoBasico(), new FormaAldeanoRectangulo(), VIDA_MAXIMA, COSTO_GENERACION);
 		
-		this.creadorEdificio = new CreadorEdificioAldeano(mapa, this);
-		this.reparadorEdificio = new ReparadorEdificioAldeano();
+		this.reparadorEdificio = new ReparadorEdificioAldeano(this);
 		this.oroPorTurno = new OroPorTurno();
 		this.rangoReparacion = new RangoReparacion();
 	}
-
-	public Edificio crear(TipoEdificio tipoEdificio)
-			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException {
+	
+	@Override
+	public void construirConstruible(Construible construible)
+			throws EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
 		
-		Edificio edificio = creadorEdificio.crear(tipoEdificio);
-		this.edificioEnConstruccion = edificio;
-		return edificio;
-	}
+		if(this.construibleEnConstruccion == null) {
+			this.construibleEnConstruccion = construible;
+			construible.asignarConstructor(this);
+			
+			this.movimiento = new MovimientoNulo();
+		}
+		else {
+			throw new AldeanoConConstruccionAsignadaException();
+		}
+	}	
 
 	@Override
 	public void repararEdificio(Edificio edificio)
-			throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+			throws EdificioFueraDeRangoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException {
 		
+		if(this.construibleEnConstruccion != null) {
+			throw new AldeanoConConstruccionAsignadaException();
+		}
 		if(!rangoReparacion.estaEnRango(this, edificio)) {
 			throw new EdificioFueraDeRangoException();
 		}
-		reparadorEdificio.repararEdificio(edificio, this);
+		reparadorEdificio.repararEdificio(edificio);
 		this.edificioEnReparacion = edificio;
+		
+		this.movimiento = new MovimientoNulo();
 	}
 
 	@Override
-	public void actualizarEstadoParaSiguienteTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
-
-		this.reparadorEdificio.esPosibileVolverAReparar();
-
+	public void actualizarEstadoParaSiguienteTurno() 
+			throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException  {
+		
+		//REPARACION
+		reparadorEdificio.habilitarReparacionEsteTurno();
 		if(this.edificioEnReparacion != null && this.edificioEnReparacion.estaReparado()) {
+			
 			this.edificioEnReparacion = null;
 		}
 
 		if(this.edificioEnReparacion != null) {
-
-			this.reparadorEdificio.repararEdificio(this.edificioEnReparacion, this);
+			
+			this.reparadorEdificio.repararEdificio(this.edificioEnReparacion);
 		}
 		
+		//CONSTRUCCION
+		if(this.construibleEnConstruccion != null) {
+			
+			construibleEnConstruccion.avanzarConstruccion();
+		}
+		
+		if((this.construibleEnConstruccion != null) && (this.construibleEnConstruccion.estaConstruido())){
+			this.construibleEnConstruccion = null;
+		}
+		
+		//ORO
 		actualizarRecolectorOro();
-		movimiento = new MovimientoBasico();
+		
+		if(this.construibleEnConstruccion == null &&  this.edificioEnReparacion == null) {
+			
+			movimiento = new MovimientoBasico();
+		}
+		
 	}
 
 	private void actualizarRecolectorOro() {
 		
-		if(this.edificioEnReparacion == null && this.edificioEnConstruccion == null ){
+		if(this.edificioEnReparacion == null && this.construibleEnConstruccion == null ){
 			oroPorTurno.activarRecolector();
 		}
 		else {

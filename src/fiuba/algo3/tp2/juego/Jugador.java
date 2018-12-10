@@ -3,12 +3,15 @@ package fiuba.algo3.tp2.juego;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
@@ -126,7 +129,7 @@ public class Jugador {
 		poblacion -=1;
 	}
 
-	public void avanzarTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+	public void avanzarTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		turno.avanzar();
 	}
 

@@ -7,6 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.juego.Juego;
@@ -16,6 +18,7 @@ import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
@@ -35,7 +38,7 @@ public class TestFinDelJuego {
 	public void test_AlEliminarCastilloDeUnJugadorElJuegoDebeFinalizar() 
 			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, 
 			CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, 
-			OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+			OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
@@ -66,7 +69,7 @@ public class TestFinDelJuego {
 	public void test_AlNoEliminarCastilloDeUnJugadorElJuegoNoDebeFinalizar() 
 			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, 
 			CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, 
-			OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+			OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 
 		Mapa mapa = new Mapa(250, 250);
 

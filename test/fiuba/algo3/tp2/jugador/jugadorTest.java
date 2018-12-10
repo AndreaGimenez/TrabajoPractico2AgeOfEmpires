@@ -6,6 +6,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.Jugador;
@@ -14,6 +16,7 @@ import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
@@ -27,7 +30,7 @@ public class jugadorTest {
 	//ORO
 	@Test
 	public void testAlIniciarUnNuevoJuegoElOroDeCadaJugadorDeberiaSer100() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
@@ -45,7 +48,7 @@ public class jugadorTest {
 	
 	@Test
 	public void  testUnJugadorCon3AldeanosQueNoEstanReparandoNiConstruyendoGenera60UnidadesDeOro()
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 
 		Mapa mapa = new Mapa(250, 250);
 		

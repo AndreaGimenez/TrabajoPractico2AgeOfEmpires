@@ -3,29 +3,32 @@ package fiuba.algo3.tp2.integracion.entrega_1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.mock;
 
-
-import fiuba.algo3.tp2.juego.Jugador;
-import fiuba.algo3.tp2.juego.OroInsuficienteException;
-import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
-import fiuba.algo3.tp2.edificio.Edificio;
-import fiuba.algo3.tp2.edificio.EdificioConstants;
-import fiuba.algo3.tp2.excepciones.EdificioEnConstruccionException;
-import fiuba.algo3.tp2.excepciones.EdifioNoAptoParaContruirException;
-import fiuba.algo3.tp2.edificio.GestionarConstruccion;
-import fiuba.algo3.tp2.edificio.PosicionarEdificio;
-import fiuba.algo3.tp2.excepciones.UnidadNoSoportadaException;
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
+import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioFueraDeRangoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.EdificioNoSoportadoException;
+import fiuba.algo3.tp2.excepciones.EdifioNoAptoParaContruirException;
+import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
+import fiuba.algo3.tp2.excepciones.UnidadNoSoportadaException;
+import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionArriba;
@@ -33,16 +36,14 @@ import fiuba.algo3.tp2.movimiento.DireccionArribaDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
-import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
-import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
-import fiuba.algo3.tp2.turno.Turno;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.AldeanoConConstruccionAsignadaException;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.unidad.AtaqueArquero;
 import fiuba.algo3.tp2.unidad.DireccionAbajo;
 import fiuba.algo3.tp2.unidad.Espadachin;
-import fiuba.algo3.tp2.unidad.MontajeInvalidoException;
 
 /**
  * Pruebas de Unidades
@@ -185,7 +186,7 @@ public class Test02 {
 		try {
 			aldeano.mover(new DireccionAbajo());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -199,7 +200,7 @@ public class Test02 {
 		try {
 			aldeano.mover(new DireccionIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -213,7 +214,7 @@ public class Test02 {
 		try {
 			aldeano.mover(new DireccionAbajoIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	@Test
 	public void testMovimientoHaciaAbajoALaDerechaDeAldeanoQueSeEncuentraEnElBordeDelMapa() 
@@ -226,7 +227,7 @@ public class Test02 {
 		try {
 			aldeano.mover(new DireccionAbajoDerecha());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -240,7 +241,7 @@ public class Test02 {
 		try {
 			aldeano.mover(new DireccionArribaIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -254,7 +255,7 @@ public class Test02 {
 		try {
 			aldeano.mover(new DireccionArriba());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -268,7 +269,7 @@ public class Test02 {
 		try {
 			aldeano.mover(new DireccionArribaDerecha());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	//Espadachin
@@ -400,7 +401,7 @@ public class Test02 {
 		try {
 			espadachin.mover(new DireccionAbajo());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -414,7 +415,7 @@ public class Test02 {
 		try {
 			espadachin.mover(new DireccionIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -428,7 +429,7 @@ public class Test02 {
 		try {
 			espadachin.mover(new DireccionAbajoIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	@Test
 	public void testMovimientoHaciaAbajoALaDerechaDeEspadachinQueSeEncuentraEnElBordeDelMapa() 
@@ -441,7 +442,7 @@ public class Test02 {
 		try {
 			espadachin.mover(new DireccionAbajoDerecha());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -455,7 +456,7 @@ public class Test02 {
 		try {
 			espadachin.mover(new DireccionArribaIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -469,7 +470,7 @@ public class Test02 {
 		try {
 			espadachin.mover(new DireccionArriba());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -483,7 +484,7 @@ public class Test02 {
 		try {
 			espadachin.mover(new DireccionArribaDerecha());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	//Arquero
@@ -614,7 +615,7 @@ public class Test02 {
 		try {
 			arquero.mover(new DireccionAbajo());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -628,7 +629,7 @@ public class Test02 {
 		try {
 			arquero.mover(new DireccionIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -642,7 +643,7 @@ public class Test02 {
 		try {
 			arquero.mover(new DireccionAbajoIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	@Test
 	public void testMovimientoHaciaAbajoALaDerechaDeArqueroQueSeEncuentraEnElBordeDelMapa() 
@@ -655,7 +656,7 @@ public class Test02 {
 		try {
 			arquero.mover(new DireccionAbajoDerecha());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -669,7 +670,7 @@ public class Test02 {
 		try {
 			arquero.mover(new DireccionArribaIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -683,7 +684,7 @@ public class Test02 {
 		try {
 			arquero.mover(new DireccionArriba());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -697,7 +698,7 @@ public class Test02 {
 		try {
 			arquero.mover(new DireccionArribaDerecha());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	//ARAMA ASEDIO
 	@Test
@@ -827,7 +828,7 @@ public class Test02 {
 		try {
 			armaAsedio.mover(new DireccionAbajo());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -841,7 +842,7 @@ public class Test02 {
 		try {
 			armaAsedio.mover(new DireccionIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -855,7 +856,7 @@ public class Test02 {
 		try {
 			armaAsedio.mover(new DireccionAbajoIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	@Test
 	public void testMovimientoHaciaAbajoALaDerechaDeArmaAsedioQueSeEncuentraEnElBordeDelMapa() 
@@ -868,7 +869,7 @@ public class Test02 {
 		try {
 			armaAsedio.mover(new DireccionAbajoDerecha());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -882,7 +883,7 @@ public class Test02 {
 		try {
 			armaAsedio.mover(new DireccionArribaIzquierda());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -896,7 +897,7 @@ public class Test02 {
 		try {
 			armaAsedio.mover(new DireccionArriba());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 	
 	@Test
@@ -910,249 +911,172 @@ public class Test02 {
 		try {
 			armaAsedio.mover(new DireccionArribaDerecha());
 			fail("Deberia lanzar MovimientoInvalidoException");
-		}catch(MovimientoInvalidoException e) {}
+		}catch(CeldaInexistenteException e) {}
 	}
 
 	@Test
-	public void testVerificarConstruccionDePlazaCentral() throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+	public void testAldeanoConstruyePlazaCentralLasPosicionesQueOcupaDeberianEstarOcupadas() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, 
+			EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, 
+			EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, 
+			PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, 
+			EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
 
 		Mapa mapa = new Mapa(250, 250);
-		Jugador ignacio = new Jugador("Jugador 1", mapa);
-		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
-		boolean checkearRecursos = false;
-		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
-		PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
-
-		posicionador.posicionarALaIzquierdaPorEncima(EdificioConstants.TipoEdificio.PLAZA_CENTRAL);
-
-		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-1)).estaOcupada());
-		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(1).desplazarHorizontalmente(-2)).estaOcupada());
-		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-2)).estaOcupada());
-		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(-1)).estaOcupada());
-
-
-		GestionarConstruccion gestorPlazaCentral = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(4,5)));
-		ignacio.agregarEdificio(gestorPlazaCentral, false);
-		Turno turno = new Turno(ignacio, mapa);
-
-		// Turno 0/3
-
-		try{
-
-			gestorPlazaCentral.crearAldeano(new Posicion(6, 5), mapa);
-
-			fail();
-
-		} catch (EdificioEnConstruccionException e) {
-
-		}
-
-		turno.avanzar();
-
-		// Turno 1/3
-
-		try{
-
-			gestorPlazaCentral.crearAldeano(new Posicion(6, 5), mapa);
-
-			fail();
-
-		} catch (EdificioEnConstruccionException e) {
-
-		}
-
-		turno.avanzar();
-
-		// Turno 2/3
-
-		try{
-
-			gestorPlazaCentral.crearAldeano(new Posicion(6, 5), mapa);
-
-			fail();
-
-		} catch (EdificioEnConstruccionException e) {
-
-		}
-
-		turno.avanzar();
-
-		//Turno 3/3
-
-		try{
-
-			gestorPlazaCentral.crearAldeano(new Posicion(5, 6), mapa);
-
-		} catch (EdificioEnConstruccionException e) {
-
-			fail();
-
-		}
-	}
-
-	/*@Test
-	public void testVerificarConstruccionDeCuartel()
-			throws CeldaOcupadaException, CeldaInexistenteException, EdificioNoSoportadoException, TamanioInvalidoException, EdificioEnConstruccionException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
-
-		Mapa mapa = new Mapa(250, 250);
-		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
-		PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
-		Jugador ignacio = new Jugador();
+		Jugador jugador1 = new Jugador("Jugador 1", mapa);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(20, 20), mapa);
 		
 		boolean checkearRecursos = false;
-		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
-		ignacio.setOro(250);
-
-		posicionador.posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
-
-		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-1).desplazarHorizontalmente(1)).estaOcupada());
-		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarVerticalmente(-2).desplazarHorizontalmente(2)).estaOcupada());
-		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(2).desplazarVerticalmente(-1)).estaOcupada());
-		assertTrue(mapa.obtenerCelda(aldeano.obtenerPosicion().desplazarHorizontalmente(1).desplazarVerticalmente(-2)).estaOcupada());
-
-
-		GestionarConstruccion gestorCuartel = new GestionarConstruccion((Edificio) mapa.obtenerPosicionable(new Posicion(6,6)));
-		ignacio.agregarEdificio(gestorCuartel);
-		Turno turno = new Turno(ignacio);
-
-
-		// Turno 0/3
-
-		try{
-
-			gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 4));
-
+		
+		jugador1.agregarUnidad(aldeano, mapa, checkearRecursos);
+		
+		PlazaCentral plazaCentral = new PlazaCentral(new Posicion(21,20), mapa);
+		
+		jugador1.agregarEdificio(plazaCentral, checkearRecursos);
+		
+		aldeano.construirConstruible(plazaCentral);
+		
+		try {
+			new Aldeano(new Posicion(21,20), mapa);
 			fail();
-
-		} catch (EdificioEnConstruccionException e){
-
 		}
-
-		try{
-
-			gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(5, 4));
-
+		catch(CeldaOcupadaException e) {
+		}
+		
+		try {
+			new Aldeano(new Posicion(21,21), mapa);
 			fail();
-
-		} catch (EdificioEnConstruccionException e) {
-
 		}
-
-		turno.avanzar();
-
-		// Turno 1/3
-
-		try{
-
-			gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 4));
-
+		catch(CeldaOcupadaException e) {
+		}
+		
+		try {
+			new Aldeano(new Posicion(22,20), mapa);
 			fail();
-
-		} catch (EdificioEnConstruccionException e){
-
 		}
-
-		try{
-
-			gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(5, 4));
-
+		catch(CeldaOcupadaException e) {
+		}
+		
+		try {
+			new Aldeano(new Posicion(22,21), mapa);
 			fail();
-
-		} catch (EdificioEnConstruccionException e) {
-
 		}
-
-
-		turno.avanzar();
-
-		// Turno 2/3
-
-		try{
-
-			gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(5, 4));
-
-			fail();
-
-		} catch (EdificioEnConstruccionException e){
-
+		catch(CeldaOcupadaException e) {
 		}
+}
 
-		try{
-
-			gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(5, 4));
-
-			fail();
-
-		} catch (EdificioEnConstruccionException e) {
-
-		}
-
-		turno.avanzar();
-
-		// Turno 3/3
-
-		try{
-
-			Unidad espadachin = gestorCuartel.crear(UnidadConstants.TipoUnidad.ESPADACHIN, new Posicion(6, 5));
-
-			Unidad arquero = gestorCuartel.crear(UnidadConstants.TipoUnidad.ARQUERO, new Posicion(7, 5));
-
-
-		} catch (EdificioEnConstruccionException e){
-
-			fail();
-
-		}
-
-
-		assertEquals(0, ignacio.obtenerOro());
-	}
-*/
-
-/*	@Test
-	public void testDeReparacionDeCuartel() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, EdificioNoSoportadoException, EdificioFueraDeRangoException, EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, OroInsuficienteException {
+	@Test
+	public void testAldeanoConstruyeCuartelLasPosicionesQueOcupaDeberianEstarOcupadas() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, 
+			EdificioNoSoportadoException, EdifioNoAptoParaContruirException, UnidadNoSoportadaException, 
+			EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, 
+			PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, 
+			EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException {
 
 		Mapa mapa = new Mapa(250, 250);
-		Aldeano aldeano = new Aldeano(new Posicion(5, 5), mapa);
-		PosicionarEdificio posicionador = new PosicionarEdificio(aldeano);
-		Jugador ignacio = new Jugador();
+		
+		Jugador jugador1 = new Jugador("Jugador 1", mapa);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(20, 20), mapa);
 		
 		boolean checkearRecursos = false;
-		ignacio.agregarUnidad(aldeano, mapa, checkearRecursos);
-		ignacio.setOro(250);
-		Ataque ataque = mock(Ataque.class);
-		when(ataque.obtenerDanioEdificio()).thenReturn(249);
+		
+		jugador1.agregarUnidad(aldeano, mapa, checkearRecursos);
+		
+		Cuartel cuartel = new Cuartel(new Posicion(21,20), mapa);
+		
+		jugador1.agregarEdificio(cuartel, checkearRecursos);
+		
+		aldeano.construirConstruible(cuartel);
+		
+		try {
+			new Aldeano(new Posicion(21,20), mapa);
+			fail();
+		}
+		catch(CeldaOcupadaException e) {
+		}
+		
+		try {
+			new Aldeano(new Posicion(21,21), mapa);
+			fail();
+		}
+		catch(CeldaOcupadaException e) {
+		}
+		
+		try {
+			new Aldeano(new Posicion(22,20), mapa);
+			fail();
+		}
+		catch(CeldaOcupadaException e) {
+		}
+		
+		try {
+			new Aldeano(new Posicion(22,21), mapa);
+			fail();
+		}
+		catch(CeldaOcupadaException e) {
+		}
+}
 
-		posicionador.posicionarEnAristaInferiorDerecha(EdificioConstants.TipoEdificio.CUARTEL);
+	@Test
+	public void testDeReparacionDeCuartel() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, 
+			PoblacionMaximaAlcanzadaException, EdificioNoSoportadoException, EdificioFueraDeRangoException, 
+			EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, 
+			OroInsuficienteException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, 
+			EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, CantidadDeJugadoresInvalidaException {
 
-		Edificio cuartel = (Edificio) mapa.obtenerPosicionable(new Posicion(6,6));
+		Mapa mapa = new Mapa(250, 250);
+		
+		Juego juego = new Juego(mapa);
+		
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
+		
+		Aldeano aldeano = new Aldeano(new Posicion(20, 20), mapa);
 
-		ignacio.agregarEdificio(cuartel);
-		Turno turno = new Turno(ignacio);
+		Jugador jugador1 = juego.obtenerJugadorActual();
+		
+		boolean checkearRecursos = false;
+		jugador1.agregarUnidad(aldeano, mapa, checkearRecursos);
+		
+		Cuartel cuartel = new Cuartel(new Posicion(21,20), mapa);
 
-		cuartel.recibirDanio(ataque);
-
+		jugador1.agregarEdificio(cuartel, checkearRecursos);
+		
+		juego.avanzarJugador();
+		juego.avanzarJugador();
+		
+		for(int i = 0 ; i < 24 ; i++) {
+			cuartel.recibirDanio(new AtaqueArquero());
+		}
+		
+		juego.avanzarJugador();
+		juego.avanzarJugador();
+		
 		aldeano.repararEdificio(cuartel);
 
-		assertEquals(51, cuartel.obtenerVida());
+		assertEquals(60, cuartel.obtenerVida());
 
-		turno.avanzar();
+		juego.avanzarJugador();
+		juego.avanzarJugador();
 
-		assertEquals(101, cuartel.obtenerVida());
+		assertEquals(110, cuartel.obtenerVida());
 
-		turno.avanzar();
+		juego.avanzarJugador();
+		juego.avanzarJugador();
 
-		assertEquals(151, cuartel.obtenerVida());
+		assertEquals(160, cuartel.obtenerVida());
 
-		turno.avanzar();
+		juego.avanzarJugador();
+		juego.avanzarJugador();
 
-		assertEquals(201, cuartel.obtenerVida());
+		assertEquals(210, cuartel.obtenerVida());
 
-		turno.avanzar();
+		juego.avanzarJugador();
+		juego.avanzarJugador();
 
 		assertEquals(250, cuartel.obtenerVida());
 
 	}
-*/
-
 }

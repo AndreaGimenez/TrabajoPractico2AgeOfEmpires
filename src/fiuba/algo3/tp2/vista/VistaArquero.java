@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -18,13 +20,14 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
-public class VistaArquero implements VistaPosicionable, VistaMovible {
+public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 
 	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
 	private VistaSeleccionador vistaSeleccionador;
 	private VistaMapa vistaMapa;
 	private Juego juego;
+	private Button botonAtacar;
 
 	public VistaArquero(ContenedorControles contenedorControles, 
 						ContenedorMapa contenedorMapa, 
@@ -54,7 +57,9 @@ public class VistaArquero implements VistaPosicionable, VistaMovible {
 		contenedorControles.setVida(arquero.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, contenedorMapa).crearBoton((Atacador)posicionable));
+		
+		botonAtacar = new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, contenedorMapa).crearBoton((Atacador)posicionable);
+		acciones.add(botonAtacar);
 		
 		//Movimientos
 		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
@@ -80,4 +85,11 @@ public class VistaArquero implements VistaPosicionable, VistaMovible {
 
         return new Background(fondoAldeano);
 	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		botonAtacar.setDisable(true);
+	}
+
 }

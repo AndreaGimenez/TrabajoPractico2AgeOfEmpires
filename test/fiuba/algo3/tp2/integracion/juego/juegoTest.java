@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.integracion.juego;
 
 import org.junit.Test;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.Jugador;
@@ -14,6 +16,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
@@ -23,7 +26,7 @@ public class juegoTest {
 	
 	@Test
 	public void testSeIniciaUnJuegoYSeRealizanAccionesDeCadaJugadorEnSuTurnoCorrespondiente() 
-			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+			throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = new Mapa(250,250);
 		Juego juego = new Juego(mapa);

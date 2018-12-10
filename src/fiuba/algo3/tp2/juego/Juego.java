@@ -3,6 +3,8 @@ package fiuba.algo3.tp2.juego;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
@@ -16,6 +18,7 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.mapa.PosicionesInicialesAldeanos;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
 
@@ -137,7 +140,7 @@ public class Juego {
 		return ronda.obtenerJugadorActual();
 	}
 
-	public void avanzarJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+	public void avanzarJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		obtenerJugadorActual().avanzarTurno();
 		ronda.avanzar();
 		
