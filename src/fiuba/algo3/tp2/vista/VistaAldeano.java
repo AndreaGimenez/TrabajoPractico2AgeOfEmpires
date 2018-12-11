@@ -21,14 +21,12 @@ import javafx.scene.layout.Pane;
 
 public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	
-	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
 	private VistaSeleccionador vistaSeleccionador;
 	private VistaMapa vistaMapa;
 	private Juego juego;
 	
 	public VistaAldeano(ContenedorControles contenedorControles, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador, VistaMapa vistaMapa, Juego juego) {
-		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.vistaSeleccionador = vistaSeleccionador;
 		this.vistaMapa = vistaMapa;
@@ -43,10 +41,10 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 		
-		contenedorControles.clean();
+		ContenedorPartida.contenedorControles.clean();
 		
-		contenedorControles.setNombreUnidad("Aldeano");
-		contenedorControles.setVida(((Aldeano)posicionable).obtenerVida());
+		ContenedorPartida.contenedorControles.setNombreUnidad("Aldeano");
+		ContenedorPartida.contenedorControles.setVida(((Aldeano)posicionable).obtenerVida());
 
 		
 		Collection<Button> acciones = new ArrayList<>();
@@ -58,25 +56,25 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		acciones.add(construirPlazaCentral);
 		
 		Button construirCuartel = new Button("Construir Cuartel");
-		BotonConstruirCuartelHandler botonConstruirCuartel = new BotonConstruirCuartelHandler((Aldeano) posicionable, vistaMapa, contenedorMapa, juego, vistaSeleccionador);
+		BotonConstruirCuartelHandler botonConstruirCuartel = new BotonConstruirCuartelHandler((Aldeano) posicionable, vistaMapa, ContenedorPartida.contenedorMapa, juego, vistaSeleccionador);
 		construirCuartel.setOnAction(botonConstruirCuartel);
 		acciones.add(construirCuartel);
 		
 		//Movimientos
-		GridPane botoneraMovimiento = new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable);
-		contenedorControles.getChildren().add(botoneraMovimiento);
+		GridPane botoneraMovimiento = new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones((Movible)posicionable);
+		ContenedorPartida.contenedorControles.getChildren().add(botoneraMovimiento);
 		
-		contenedorControles.setAcciones(acciones);
+		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		if(this.juego.obtenerJugadorActual().posicionablePerteneceAJugador(movible)){
-			contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-			contenedorMapa.setBackground(obtenerFondoAldeanoDeJugadorActual((Aldeano) movible), movible.obtenerPosicion());
+			ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoAldeanoDeJugadorActual((Aldeano) movible), movible.obtenerPosicion());
 		}else{
-			contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-			contenedorMapa.setBackground(obtenerFondoAldeano((Aldeano) movible), movible.obtenerPosicion());
+			ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoAldeano((Aldeano) movible), movible.obtenerPosicion());
 		}
 	}
 

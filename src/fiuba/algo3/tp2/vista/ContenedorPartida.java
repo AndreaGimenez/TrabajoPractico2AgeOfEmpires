@@ -16,24 +16,24 @@ public class ContenedorPartida extends BorderPane {
 	
 	Mapa mapa;
 	
-	ContenedorControles contenedorControles;
-	ContenedorMapa contenedorMapa;
-	ContenedorEstadoJugador contenedorEstadoJugador;
+	public static ContenedorControles contenedorControles;
+	public static ContenedorMapa contenedorMapa;
+	public static ContenedorEstadoJugador contenedorEstadoJugador;
 	
-	VistaSeleccionador vistaSeleccionador;
-	VistaMapa vistaMapa;
+	public static VistaSeleccionador vistaSeleccionador;
+	public static VistaMapa vistaMapa;
 	
-    BarraDeMenu menuBar;
+	public static BarraDeMenu menuBar;
 
 	Musica musica;
 
-    public ContenedorPartida(Stage stage, Juego juego) throws Exception {
+    public ContenedorPartida(Stage stage) throws Exception {
     	
     	this.setMusica();
         this.setMenu(stage, this.musica);
-        this.setControles(juego);
-        this.setMapa(juego, stage);
-        this.setEstadoJugador(juego);
+//        this.setControles(juego);
+//        this.setMapa(juego, stage);
+//        this.setEstadoJugador(juego);
     }
 
     private void setMusica() {
@@ -43,50 +43,50 @@ public class ContenedorPartida extends BorderPane {
         this.musica.iniciarReproduccionMusica();
 	}
 
-	private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
+	public void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
     	
-        contenedorControles = new ContenedorControles();        
-        this.setLeft(contenedorControles);
+        ContenedorPartida.contenedorControles = new ContenedorControles();        
+        this.setLeft(ContenedorPartida.contenedorControles);
     }
 
-    private void setMenu(Stage stage, Musica musica) {
-        this.menuBar = new BarraDeMenu(stage, musica);
+    public void setMenu(Stage stage, Musica musica) {
+        ContenedorPartida.menuBar = new BarraDeMenu(stage, musica);
         this.setTop(menuBar);
     }
 
-    private void setMapa(Juego juego, Stage stage) throws Exception {
+    public void setMapa(Juego juego, Stage stage){
     	
     	mapa = juego.obtenerMapa();
-    	contenedorMapa = new ContenedorMapa(mapa);
-    	vistaSeleccionador = new VistaSeleccionador(mapa, contenedorMapa);
+    	ContenedorPartida.contenedorMapa = new ContenedorMapa(mapa);
+    	ContenedorPartida.vistaSeleccionador = new VistaSeleccionador(mapa, contenedorMapa);
     	
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setContent(contenedorMapa);
+        scrollPane.setContent(ContenedorPartida.contenedorMapa);
 
-        vistaMapa = new VistaMapa(juego, contenedorMapa, vistaSeleccionador);
-        VistaPosicionableMultitone.init(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, mapa, juego);
+        ContenedorPartida.vistaMapa = new VistaMapa(juego, contenedorMapa, vistaSeleccionador);
+        VistaPosicionableMultitone.init(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, mapa, juego);
         
-        vistaMapa.dibujarTerreno();
-        vistaMapa.dibujarPosicionables();
+        ContenedorPartida.vistaMapa.dibujarTerreno();
+        ContenedorPartida.vistaMapa.dibujarPosicionables();
         
         this.setCenter(scrollPane);
     }
 
-    private void setEstadoJugador(Juego juego) {
+    public void setEstadoJugador(Juego juego) {
     	
-    	contenedorEstadoJugador = new ContenedorEstadoJugador();
+    	ContenedorPartida.contenedorEstadoJugador = new ContenedorEstadoJugador();
         Button botonAvanzarTurno = new Button("Avanzar Turno");
-        VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, contenedorEstadoJugador);
+        VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, ContenedorPartida.contenedorEstadoJugador);
         
-        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, contenedorControles, vistaSeleccionador, vistaMapa, juego);
+        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, ContenedorPartida.contenedorControles, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
         botonAvanzarTurno.setOnAction(botonAvanzarTurnoHandler);
-        contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
+        ContenedorPartida.contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
         
         vistaEstadoJugador.actualizar();
         
-        this.setBottom(contenedorEstadoJugador);
+        this.setBottom(ContenedorPartida.contenedorEstadoJugador);
     }
 
     public BarraDeMenu getBarraDeMenu() {

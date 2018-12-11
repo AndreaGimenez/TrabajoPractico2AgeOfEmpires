@@ -23,7 +23,7 @@ public class CreadorBotonAtaque {
 	public Button crearBoton(Atacador atacador) {
 		
 		Button botonAtacar = new Button("Atacar");
-		BotonAtacarHandler botonAtacarHandler = new BotonAtacarHandler(juego, vistaMapa, vistaSeleccionador, contenedorMapa, atacador);
+		BotonAtacarHandler botonAtacarHandler = new BotonAtacarHandler(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa, atacador);
 		botonAtacar.setOnAction(botonAtacarHandler);
 		return botonAtacar;
 	}

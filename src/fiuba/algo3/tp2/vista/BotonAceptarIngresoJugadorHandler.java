@@ -17,6 +17,7 @@ import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.PosicionesInicialesAldeanos;
 import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
@@ -38,8 +39,11 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 	private Label labelAdvertencia;
 	private Label labelNombreJugador;
 	private Musica musica;
+	private ContenedorPartida contenedorJuego;
 	
-	public BotonAceptarIngresoJugadorHandler(Stage stage, Label labelAdvertencia, Label labelNombreJugador, TextField tfNombreJugador, Collection<String> nombresJugadores, Musica musica) {
+	public BotonAceptarIngresoJugadorHandler
+	(Stage stage, Label labelAdvertencia, Label labelNombreJugador, TextField tfNombreJugador, 
+			Collection<String> nombresJugadores, Musica musica) {
 		this.nombresJugadores = nombresJugadores;
 		this.tfNombreJugador = tfNombreJugador;
 		this.labelAdvertencia = labelAdvertencia;
@@ -62,9 +66,9 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 			}else {
 				 MensajeDeError error = new MensajeDeError();
 				try {
-					
+					this.contenedorJuego = new ContenedorPartida(stage);
 					Juego juego = crearJuego(nombresJugadores);
-					ContenedorPartida contenedorJuego = new ContenedorPartida(stage, juego);
+					//this.contenedorJuego = new ContenedorPartida(stage, juego);
 					Scene escenaJuego = new Scene(contenedorJuego);
 					AplicacionOnKeyPressEventHandler AplicacionOnKeyPressEventHandler = new AplicacionOnKeyPressEventHandler(stage, contenedorJuego.getBarraDeMenu());
 			        escenaJuego.setOnKeyPressed(AplicacionOnKeyPressEventHandler);
@@ -102,13 +106,27 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 		}
 	}
 	
-    private Juego crearJuego(Collection<String> nombresJugadores) 
-    		throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
+    private Juego crearJuego(Collection<String> nombresJugadores) throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
     	
     	Mapa mapa = new Mapa(20, 20);
         Juego juego = new Juego(mapa);
         juego.iniciar(nombresJugadores.toArray(new String[juego.CANTIDAD_DE_JUGADORES]));
         
+        this.contenedorJuego.setControles(juego);
+        this.contenedorJuego.setMapa(juego, stage);
+        this.contenedorJuego.setEstadoJugador(juego);
+  
+        //Asigno a cada celda del mapa que contiene un edificio/unidad inicial del jugador 1 su vista
+        mapa.obtenerCelda(PosicionesInicialesAldeanos.POSICION_INICIAL_1).agregarVistaPosicionable(new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego));
+		mapa.obtenerCelda(PosicionesInicialesAldeanos.POSICION_INICIAL_2).agregarVistaPosicionable(new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego));
+		mapa.obtenerCelda(PosicionesInicialesAldeanos.POSICION_INICIAL_3).agregarVistaPosicionable(new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego));
+
+      //Asigno a cada celda del mapa que contiene un edificio/unidad inicial del jugador 2 su vista
+        mapa.obtenerCelda(new Posicion(mapa.getTamanioX()-4, mapa.getTamanioY()-6)).agregarVistaPosicionable(new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego));
+        mapa.obtenerCelda(new Posicion(mapa.getTamanioX()-6, mapa.getTamanioY()-6)).agregarVistaPosicionable(new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego));
+        mapa.obtenerCelda(new Posicion(mapa.getTamanioX()-6, mapa.getTamanioY()-4)).agregarVistaPosicionable(new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego));
+        
+        //agrego unidades y edificios EXTRA para probar funcionalidad
         juego.obtenerJugadorActual().agregarEdificio(new Cuartel(new Posicion(8, 0), mapa), false);
         juego.obtenerJugadorActual().agregarUnidad(new Arquero(new Posicion(10, 10), mapa), mapa, false);
         juego.obtenerJugadorActual().agregarUnidad(new Espadachin(new Posicion(11, 10), mapa), mapa, false);

@@ -16,8 +16,8 @@ public class VistaEstadoJugador {
 	public void actualizar() {
 		
 		Jugador jugadorActual = juego.obtenerJugadorActual();
-		contenedorEstadoJugador.actualizarOro(jugadorActual.obtenerOro());
-		contenedorEstadoJugador.actualizarPoblacion(jugadorActual.obtenerPoblacionActual());
-		contenedorEstadoJugador.actualizarNombreJugador(jugadorActual.obtenerNombre());
+		ContenedorPartida.contenedorEstadoJugador.actualizarOro(jugadorActual.obtenerOro());
+		ContenedorPartida.contenedorEstadoJugador.actualizarPoblacion(jugadorActual.obtenerPoblacionActual());
+		ContenedorPartida.contenedorEstadoJugador.actualizarNombreJugador(jugadorActual.obtenerNombre());
 	}
 }

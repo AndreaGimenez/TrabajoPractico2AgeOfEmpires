@@ -24,7 +24,7 @@ public class BotonAtacarHandler implements EventHandler<ActionEvent>{
 
 	@Override
 	public void handle(ActionEvent event) {
-		vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedAtacarStrategy(juego, vistaMapa, vistaSeleccionador, contenedorMapa, atacador));
+		vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedAtacarStrategy(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa, atacador));
 		contenedorMapa.setCursor(Cursor.CROSSHAIR);
 	}
 }

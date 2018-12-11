@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.movimiento.Direccion;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoIzquierda;
@@ -29,11 +31,12 @@ public class CreadorBotonesMovimiento {
 	
 	private VistaSeleccionador vistaSeleccionador;
 	private VistaPosicionable vistaPosicionable;
+	private Mapa mapa;
 
-
-	public CreadorBotonesMovimiento(VistaPosicionable vistaPosicionable, VistaSeleccionador vistaSeleccionador) {
+	public CreadorBotonesMovimiento(VistaPosicionable vistaPosicionable, VistaSeleccionador vistaSeleccionador, Mapa mapa) {
 		this.vistaSeleccionador = vistaSeleccionador;
 		this.vistaPosicionable = vistaPosicionable;
+		this.mapa = mapa;
 	}
 	
 	public GridPane crearBotones(Movible movible) {
@@ -99,7 +102,7 @@ public class CreadorBotonesMovimiento {
 		botonMovimiento.setPrefWidth(TAMANIO_BOTON);
 		botonMovimiento.setBackground(new Background(fondoBoton));
 		
-		BotonMovimientoHandler botonMovimientoHandler = new BotonMovimientoHandler(movible, direccion, vistaPosicionable, vistaSeleccionador);
+		BotonMovimientoHandler botonMovimientoHandler = new BotonMovimientoHandler(movible, direccion, vistaPosicionable, vistaSeleccionador, mapa);
 		botonMovimiento.setOnAction(botonMovimientoHandler);
 		
 		return botonMovimiento;

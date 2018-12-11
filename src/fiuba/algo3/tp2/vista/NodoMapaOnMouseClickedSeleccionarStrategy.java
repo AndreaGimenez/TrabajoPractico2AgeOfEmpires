@@ -3,6 +3,7 @@ package fiuba.algo3.tp2.vista;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.unidad.Aldeano;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -23,13 +24,21 @@ public class NodoMapaOnMouseClickedSeleccionarStrategy implements NodoMapaOnMous
 	public void handle(MouseEvent event) {
 		
 		Pane nodo = (Pane)event.getSource();
-		int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
-		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
+		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(nodo);
+		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(nodo);
+		
 		Posicionable posicionable = juego.obtenerMapa().obtenerPosicionable(new Posicion(colIndex, rowIndex));
+		VistaPosicionable vistaPosicionable = juego.obtenerMapa().obtenerCelda(new Posicion(colIndex, rowIndex)).obtenerVistaPosicionable();
 		
 		if(juego.obtenerJugadorActual().posicionablePerteneceAJugador(posicionable)) {
 			try {
+				if(posicionable instanceof Aldeano && vistaPosicionable instanceof VistaPosicionable) {
+					
+					vistaPosicionable.dibujarControles(posicionable);
+				}
+				else {
 				VistaPosicionableMultitone.getInstance(posicionable).dibujarControles(posicionable);
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

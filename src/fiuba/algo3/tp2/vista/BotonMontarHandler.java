@@ -35,7 +35,7 @@ public class BotonMontarHandler implements EventHandler<ActionEvent>{
 		}
 		
 		try {
-			VistaPosicionableMultitone.getInstance(armaAsedio).dibujarPosicionable(armaAsedio, contenedorMapa.obtenerNodo(armaAsedio.obtenerPosicion()));
+			VistaPosicionableMultitone.getInstance(armaAsedio).dibujarPosicionable(armaAsedio, ContenedorPartida.contenedorMapa.obtenerNodo(armaAsedio.obtenerPosicion()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

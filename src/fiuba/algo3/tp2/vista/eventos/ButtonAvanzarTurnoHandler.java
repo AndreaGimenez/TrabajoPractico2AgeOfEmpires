@@ -7,6 +7,7 @@ import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.vista.ContenedorControles;
+import fiuba.algo3.tp2.vista.ContenedorPartida;
 import fiuba.algo3.tp2.vista.MensajeDeError;
 import fiuba.algo3.tp2.vista.VistaEstadoJugador;
 import fiuba.algo3.tp2.vista.VistaMapa;
@@ -42,7 +43,7 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 			juego.avanzarJugador();
 			vistaEstadoJugador.actualizar();
 			vistaSeleccionador.deseleccionarNodoActual();
-			contenedorControles.clean();
+			ContenedorPartida.contenedorControles.clean();
 			vistaMapa.dibujarPosicionables();
 		} 
 		catch(EdificioNoAptoParaConstruccionException e) {

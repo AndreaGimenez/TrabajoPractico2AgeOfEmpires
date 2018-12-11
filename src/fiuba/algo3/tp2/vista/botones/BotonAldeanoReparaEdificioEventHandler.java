@@ -3,6 +3,7 @@ package fiuba.algo3.tp2.vista.botones;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vista.ContenedorMapa;
+import fiuba.algo3.tp2.vista.ContenedorPartida;
 import fiuba.algo3.tp2.vista.NodoMapaOnMouseClickedRepararEdificioStrategy;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
@@ -29,8 +30,8 @@ public class BotonAldeanoReparaEdificioEventHandler implements EventHandler<Acti
 
     @Override
     public void handle(ActionEvent event) {
-    	vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedRepararEdificioStrategy(contenedorMapa, juego, aldeano, vistaMapa, vistaSeleccionador));
-    	contenedorMapa.setCursor(Cursor.HAND);
+    	vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedRepararEdificioStrategy(ContenedorPartida.contenedorMapa, juego, aldeano, vistaMapa, vistaSeleccionador));
+    	ContenedorPartida.contenedorMapa.setCursor(Cursor.HAND);
     }
 
 }

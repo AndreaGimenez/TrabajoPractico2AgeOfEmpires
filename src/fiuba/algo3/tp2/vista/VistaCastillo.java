@@ -45,17 +45,17 @@ public class VistaCastillo implements VistaPosicionable {
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 		
-		contenedorControles.clean();
+		ContenedorPartida.contenedorControles.clean();
 		
 		Castillo castillo = (Castillo) posicionable;
 		
-		contenedorControles.setNombreUnidad("Castillo");
-		contenedorControles.setVida(castillo.obtenerVida());
+		ContenedorPartida.contenedorControles.setNombreUnidad("Castillo");
+		ContenedorPartida.contenedorControles.setVida(castillo.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionConstruirArmaAsedio(castillo));
 
-		contenedorControles.setAcciones(acciones);
+		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 
 	private Button crearAccionConstruirArmaAsedio(Castillo castillo) {
@@ -63,15 +63,15 @@ public class VistaCastillo implements VistaPosicionable {
 		Button crearArmaAsedio = new Button("Crear Arma de Asedio");
 		
 		crearArmaAsedio.setOnAction(new BotonCreadorDeArmaDeAsedioEventHandler
-									(crearArmaAsedio, castillo, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
+									(crearArmaAsedio, castillo, mapa, vistaMapa, ContenedorPartida.contenedorMapa, juego, vistaSeleccionador));
 		return crearArmaAsedio;
 	}
 	
 	private Background obtenerFondoCastillo(Posicionable posicionable, Pane pane) {
 		
 		
-		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
-		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
+		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
+		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
 		
 		String nombreImagen = new Posicion(colIndex, rowIndex).restar(posicionable.obtenerPosicion()).toString();
 		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/castillo/" + nombreImagen + ".jpg", 

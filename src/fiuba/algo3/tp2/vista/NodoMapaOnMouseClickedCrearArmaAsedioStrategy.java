@@ -33,8 +33,8 @@ public class NodoMapaOnMouseClickedCrearArmaAsedioStrategy implements NodoMapaOn
 	@Override
 	public void handle(MouseEvent event) {
 		Pane nodo = (Pane) event.getSource();
-		int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
-		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
+		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(nodo);
+		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(nodo);
 		
 		MensajeDeError error = new MensajeDeError();
 		try {
@@ -59,8 +59,8 @@ public class NodoMapaOnMouseClickedCrearArmaAsedioStrategy implements NodoMapaOn
 			error.mostrarVentanaError("No puede crear una nueva arma de asedio porque no tiene suficiente oro","");
 		}
 		finally {
-			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));
-			contenedorMapa.setCursor(Cursor.DEFAULT);
+			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, ContenedorPartida.contenedorMapa, vistaSeleccionador));
+			ContenedorPartida.contenedorMapa.setCursor(Cursor.DEFAULT);
 		}
 	}
 
