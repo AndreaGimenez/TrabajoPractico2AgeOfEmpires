@@ -25,29 +25,39 @@ public class ContenedorPartida extends BorderPane {
 	
     BarraDeMenu menuBar;
 
+	Musica musica;
+
     public ContenedorPartida(Stage stage, Juego juego) throws Exception {
     	
-        this.setMenu(stage);
+    	this.setMusica();
+        this.setMenu(stage, this.musica);
         this.setControles(juego);
         this.setMapa(juego, stage);
         this.setEstadoJugador(juego);
     }
 
-    private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
+    private void setMusica() {
+		// TODO Auto-generated method stub
+		
+    	this.musica = new Musica("src/fiuba/algo3/tp2/vista/musicaJuego.mp3");
+        this.musica.iniciarReproduccionMusica();
+	}
+
+	private void setControles(Juego juego) throws CeldaInexistenteException, TamanioInvalidoException, CeldaOcupadaException {
     	
         contenedorControles = new ContenedorControles();        
         this.setLeft(contenedorControles);
     }
 
-    private void setMenu(Stage stage) {
-        this.menuBar = new BarraDeMenu(stage);
+    private void setMenu(Stage stage, Musica musica) {
+        this.menuBar = new BarraDeMenu(stage, musica);
         this.setTop(menuBar);
     }
 
     private void setMapa(Juego juego, Stage stage) throws Exception {
     	
     	mapa = juego.obtenerMapa();
-    	contenedorMapa = new ContenedorMapa();
+    	contenedorMapa = new ContenedorMapa(mapa);
     	vistaSeleccionador = new VistaSeleccionador(mapa, contenedorMapa);
     	
         ScrollPane scrollPane = new ScrollPane();
@@ -70,7 +80,7 @@ public class ContenedorPartida extends BorderPane {
         Button botonAvanzarTurno = new Button("Avanzar Turno");
         VistaEstadoJugador vistaEstadoJugador = new VistaEstadoJugador(juego, contenedorEstadoJugador);
         
-        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, contenedorControles, vistaSeleccionador, juego);
+        ButtonAvanzarTurnoHandler botonAvanzarTurnoHandler = new ButtonAvanzarTurnoHandler(vistaEstadoJugador, contenedorControles, vistaSeleccionador, vistaMapa, juego);
         botonAvanzarTurno.setOnAction(botonAvanzarTurnoHandler);
         contenedorEstadoJugador.getChildren().add(botonAvanzarTurno);
         

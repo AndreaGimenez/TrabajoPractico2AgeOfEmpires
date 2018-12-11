@@ -5,6 +5,6 @@ import javafx.scene.layout.Pane;
 
 public interface VistaPosicionable {
 
-	public void dibujarPosicionable(Posicionable posicionable, Pane pane);
-	public void dibujarControles(Posicionable posicionable);
+	void dibujarPosicionable(Posicionable posicionable, Pane pane);
+	void dibujarControles(Posicionable posicionable);
 }

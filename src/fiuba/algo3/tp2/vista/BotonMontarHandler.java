@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
+import fiuba.algo3.tp2.unidad.MontajeInvalidoException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -20,11 +21,16 @@ public class BotonMontarHandler implements EventHandler<ActionEvent>{
 	@Override
 	public void handle(ActionEvent event) {
 		
-		if(armaAsedio.montada()) {
+		MensajeDeError error = new MensajeDeError();
+		if(armaAsedio.estaMontada()) {
 			armaAsedio.desmontar();
 			botonMontar.setText("Montar");
 		}else {
-			armaAsedio.montar();
+			try {
+				armaAsedio.montar();
+			} catch (MontajeInvalidoException e) {
+				error.mostrarVentanaError("Este Arma de Asedio No Se Puede Montar", "Necesita desmontarla primero");
+			}
 			botonMontar.setText("Desmontar");
 		}
 		

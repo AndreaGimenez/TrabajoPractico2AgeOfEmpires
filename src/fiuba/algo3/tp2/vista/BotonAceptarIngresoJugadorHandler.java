@@ -3,6 +3,8 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.Collection;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
@@ -15,6 +17,7 @@ import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
@@ -57,7 +60,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 				tfNombreJugador.setText("");
 				tfNombreJugador.requestFocus();
 			}else {
-				
+				 MensajeDeError error = new MensajeDeError();
 				try {
 					
 					Juego juego = crearJuego(nombresJugadores);
@@ -67,20 +70,33 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 			        escenaJuego.setOnKeyPressed(AplicacionOnKeyPressEventHandler);
 			        
 			        musica.detenerReproduccionMusica();
-			        
+
 					stage.setScene(escenaJuego);
 					stage.setFullScreen(true);
 					
-				} catch (TamanioInvalidoException | CantidadDeJugadoresInvalidaException | CeldaOcupadaException
-						| CeldaInexistenteException | PoblacionMaximaAlcanzadaException
-						| OroInsuficienteException e) {
-					
-					//TODO manejar una excepcion que puede ser arrojada al iniciar el juego
-					e.printStackTrace();
+				} 
+				catch(TamanioInvalidoException e) {		
+					error.mostrarVentanaError("Tamanio Invalido", "");
+				}
+				catch(CantidadDeJugadoresInvalidaException e) {
+					error.mostrarVentanaError("Cantidad De Jugadores Invalida", "La cantidad de jugadores debe ser igual a 2");
+				}
+				catch(CeldaOcupadaException e) {
+					error.mostrarVentanaError("Celda Ocupada", "Una celda no admite mas de un posicionable");
+				}
+				catch(CeldaInexistenteException e) {
+					error.mostrarVentanaError("Celda Fuera Del Mapa", "Intente nuevamente con una celda dentro del mapa");
+				}
+				catch(PoblacionMaximaAlcanzadaException e) {
+					error.mostrarVentanaError("Ya Alcanzaste La Poblacion Maxima", "Solo puede tener 50 de Poblacion");
+				}
+				catch(OroInsuficienteException e) {
+					error.mostrarVentanaError("Oro Insuficiente", "Debe ganar mas oro para realizar la accion");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
 			
 		}
@@ -89,7 +105,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
     private Juego crearJuego(Collection<String> nombresJugadores) 
     		throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
     	
-    	Mapa mapa = new Mapa(50, 50);
+    	Mapa mapa = new Mapa(20, 20);
         Juego juego = new Juego(mapa);
         juego.iniciar(nombresJugadores.toArray(new String[juego.CANTIDAD_DE_JUGADORES]));
         
@@ -97,19 +113,24 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         juego.obtenerJugadorActual().agregarUnidad(new Arquero(new Posicion(10, 10), mapa), mapa, false);
         juego.obtenerJugadorActual().agregarUnidad(new Espadachin(new Posicion(11, 10), mapa), mapa, false);
         juego.obtenerJugadorActual().agregarUnidad(new ArmaAsedio(new Posicion(12, 10), mapa), mapa, false);
-        try {
-			juego.avanzarJugador();
-		} catch (EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        
+			try {
+				juego.avanzarJugador();
+			} catch (EdificioNoAptoParaConstruccionException | EdificioConConstructorAsignadoException
+					| YaSeReparoEnESteTurnoException | EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
         juego.obtenerJugadorActual().agregarUnidad(new Aldeano(new Posicion(13, 10), mapa), mapa, false);
         try {
 			juego.avanzarJugador();
-		} catch (EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
+		} catch (EdificioNoAptoParaConstruccionException | EdificioConConstructorAsignadoException
+				| YaSeReparoEnESteTurnoException | EdificioNoAptoParaReparacionException | EdificioConReparadorAsignadoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
         return juego;
 	}
 

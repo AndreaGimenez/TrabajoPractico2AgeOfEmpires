@@ -49,17 +49,19 @@ public class VistaSeleccionador {
 
 	private void deseleccionarNodo(Pane nodo) {
 		
-		int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
-		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
-		
-		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
-		if(posicionable == null) {
-			nodo.setBorder(Border.EMPTY);
-		}else {
-			Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
-			for(Posicion posicion: posicionesPosicionable) {
-				Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion);
-				nodoPosicion.setBorder(Border.EMPTY);
+		if(nodo != null) {
+			int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
+			int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
+			
+			Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
+			if(posicionable == null) {
+				nodo.setBorder(Border.EMPTY);
+			}else {
+				Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
+				for(Posicion posicion: posicionesPosicionable) {
+					Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion);
+					nodoPosicion.setBorder(Border.EMPTY);
+				}
 			}
 		}
 	}

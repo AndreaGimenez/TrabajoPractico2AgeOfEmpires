@@ -1,48 +1,41 @@
 package fiuba.algo3.tp2.vista.botones;
 
-import fiuba.algo3.tp2.excepciones.EdificioEnConstruccionException;
-import fiuba.algo3.tp2.edificio.GestionarConstruccion;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
-import fiuba.algo3.tp2.excepciones.UnidadNoSoportadaException;
-import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
-import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.vista.ContenedorMapa;
+import fiuba.algo3.tp2.vista.NodoMapaOnMouseClickedCrearAldeanoStrategy;
+import fiuba.algo3.tp2.vista.VistaMapa;
+import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 
 
 public class BotonCreadorDeAldeanosEventHandler implements EventHandler<ActionEvent> {
 
-    private Button boton;
     private PlazaCentral plazaCentral;
-	private GestionarConstruccion gestorDeConstruccion;
-	private Mapa mapa;
+	private VistaMapa vistaMapa;
+	private ContenedorMapa contenedorMapa;
+	private Juego juego;
+	private VistaSeleccionador vistaSeleccionador;
 
-    public BotonCreadorDeAldeanosEventHandler(Button botonCreadorDeAldeanos, PlazaCentral plazaCentral, Mapa mapa) {
+    public BotonCreadorDeAldeanosEventHandler
+    (Button botonCreadorDeAldeanos, PlazaCentral plazaCentral, Mapa mapa, VistaMapa vistaMapa, ContenedorMapa contenedorMapa, Juego juego, VistaSeleccionador vistaSeleccionador) {
 
-        this.boton = botonCreadorDeAldeanos;
         this.plazaCentral = plazaCentral;
-        this.gestorDeConstruccion = new GestionarConstruccion(this.plazaCentral);
-        this.mapa = mapa;
+        this.vistaMapa = vistaMapa;
+        this.contenedorMapa = contenedorMapa;
+        this.juego = juego;
+        this.vistaSeleccionador = vistaSeleccionador;
 
     }
 
     @Override
     public void handle(ActionEvent event) {
-
-        try {
-            this.gestorDeConstruccion.crearAldeano(this.plazaCentral.obtenerPosicion().desplazarHorizontalmente(3), this.mapa);
-        } catch (CeldaOcupadaException e) {
-            e.printStackTrace();
-        } catch (CeldaInexistenteException e) {
-            e.printStackTrace();
-        } catch (UnidadNoSoportadaException e) {
-            e.printStackTrace();
-        } catch (EdificioEnConstruccionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+    	
+    	vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedCrearAldeanoStrategy(contenedorMapa, plazaCentral, juego, vistaMapa, vistaSeleccionador));
+		contenedorMapa.setCursor(Cursor.CROSSHAIR);
     }
 }

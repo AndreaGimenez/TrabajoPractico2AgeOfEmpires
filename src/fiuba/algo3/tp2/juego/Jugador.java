@@ -3,12 +3,16 @@ package fiuba.algo3.tp2.juego;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.turno.Turno;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
@@ -20,6 +24,7 @@ public class Jugador {
 	
 	private int oro;
 	private int poblacion;
+	private Mapa mapa;
 	private Collection<Posicionable> edificios ;
 	private Collection<Posicionable> unidades ;
 	private Collection<Aldeano> recolectoresOro;
@@ -27,7 +32,7 @@ public class Jugador {
 	private Turno turno;
 	private String nombre;
 
-	public Jugador(String nombre) {
+	public Jugador(String nombre, Mapa mapa) {
 		
 		this.edificios = new LinkedList<>();
 		this.unidades = new LinkedList<>();
@@ -35,8 +40,9 @@ public class Jugador {
 		this.oro = ORO_INICIAL;
 		this.poblacion = 0;
 		this.nombre = nombre;
+		this.mapa = mapa;
 		
-		this.turno = new Turno(this);
+		this.turno = new Turno(this, mapa);
 	}
 
 	public LinkedList<Posicionable> obtenerPosicionables() {
@@ -89,13 +95,17 @@ public class Jugador {
 	public void agregarEdificio(Edificio edificio, boolean checkearRecursos) throws OroInsuficienteException {
 		
 		if(checkearRecursos) {
-			
-			this.oro = this.oro - edificio.costo();
-			
+
 			if(this.oro >= edificio.costo()) {
 				this.oro = this.oro - edificio.costo();
 			}
 			else {
+				
+				Collection<Posicion> posicionesQueOcupa = edificio.obtenerPosicionesOcupadasEnMapa();
+				for(Posicion posicionActual : posicionesQueOcupa) {
+					mapa.obtenerCelda(posicionActual).liberar();
+				}
+				
 				throw new OroInsuficienteException();
 			}
 		}
@@ -122,11 +132,11 @@ public class Jugador {
 	public void removerUnidad(Unidad unidadARemover, Mapa mapa) {
 		unidades.remove(unidadARemover);
 		recolectoresOro.remove(unidadARemover);
-		mapa.obtenerCelda(unidadARemover.obtenerPosicion()).liberar();
+		unidadARemover.liberarCeldas(mapa);
 		poblacion -=1;
 	}
 
-	public void avanzarTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+	public void avanzarTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		turno.avanzar();
 	}
 
@@ -149,5 +159,10 @@ public class Jugador {
 	public boolean posicionablePerteneceAJugador(Posicionable posicionable) {
 		
 		return (posicionable != null && (edificios.contains(posicionable) || unidades.contains(posicionable)));
+	}
+
+	public void removerEdificio(Edificio edificio, Mapa mapa) {
+		edificios.remove(edificio);
+		mapa.obtenerCelda(edificio.obtenerPosicion()).liberar();
 	}
 }

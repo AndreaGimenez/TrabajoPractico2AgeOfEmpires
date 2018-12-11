@@ -6,7 +6,9 @@ import fiuba.algo3.tp2.excepciones.UnidadNoAtacableException;
 import fiuba.algo3.tp2.mapa.Atacable;
 
 public class AtaqueArmaAsedio implements Ataque {
-
+	
+	private static final int DANIO_EDIFICIO = 75;
+	
 	private RangoAtaque rangoAtaque;
 	
 	public AtaqueArmaAsedio() {
@@ -32,6 +34,6 @@ public class AtaqueArmaAsedio implements Ataque {
 	
 	@Override
 	public int obtenerDanioEdificio() {
-		return 75;
+		return DANIO_EDIFICIO;
 	}
 }

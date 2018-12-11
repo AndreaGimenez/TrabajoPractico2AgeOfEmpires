@@ -1,9 +1,5 @@
 package fiuba.algo3.tp2.vista;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.movimiento.Direccion;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionAbajoIzquierda;
@@ -13,13 +9,24 @@ import fiuba.algo3.tp2.movimiento.DireccionArribaIzquierda;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
 import fiuba.algo3.tp2.movimiento.DireccionIzquierda;
 import fiuba.algo3.tp2.movimiento.Movible;
-import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.DireccionAbajo;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 
 public class CreadorBotonesMovimiento {
 
+	private static final int TAMANIO_BOTON = 50;
+	
 	private VistaSeleccionador vistaSeleccionador;
 	private VistaPosicionable vistaPosicionable;
 	private ContenedorControles contenedorControles;
@@ -29,82 +36,73 @@ public class CreadorBotonesMovimiento {
 		this.vistaPosicionable = vistaPosicionable;
 		this.contenedorControles = contenedorControles;
 	}
-
-
-	public Collection<Button> crearBotones(Movible movible) {
+	
+	public GridPane crearBotones(Movible movible) {
 		
-		Collection<Button> botones = new ArrayList<Button>();
-		
-		Button boton1 = crearAccionMover(movible, "Arriba", new DireccionArriba());
-		botones.add(boton1);
-		Button boton2 = crearAccionMover(movible, "ArribaDerecha", new DireccionArribaDerecha());
-		botones.add(boton2);
-		Button boton3 = crearAccionMover(movible, "Derecha", new DireccionDerecha());
-		botones.add(boton3);
-		Button boton4 = crearAccionMover(movible, "AbajoDerecha", new DireccionAbajoDerecha());
-		botones.add(boton4);
-		Button boton5 = crearAccionMover(movible, "Abajo", new DireccionAbajo());
-		botones.add(boton5);
-		Button boton6 = crearAccionMover(movible, "AbajoIzquierda", new DireccionAbajoIzquierda());
-		botones.add(boton6);
-		Button boton7 = crearAccionMover(movible, "Izquierda", new DireccionIzquierda());
-		botones.add(boton7);
-		Button boton8 = crearAccionMover(movible, "ArribaIzquierda", new DireccionArribaIzquierda());
-		botones.add(boton8);
-		
-		/*botones.add(crearAccionMover(movible, "Arriba", new DireccionArriba()));
-		botones.add(crearAccionMover(movible, "ArribaDerecha", new DireccionArribaDerecha()));
-		botones.add(crearAccionMover(movible, "Derecha", new DireccionDerecha()));
-		botones.add(crearAccionMover(movible, "AbajoDerecha", new DireccionAbajoDerecha()));
-		botones.add(crearAccionMover(movible, "Abajo", new DireccionAbajo()));
-		botones.add(crearAccionMover(movible, "AbajoIzquierda", new DireccionAbajoIzquierda()));
-		botones.add(crearAccionMover(movible, "Izquierda", new DireccionIzquierda()));
-		botones.add(crearAccionMover(movible, "ArribaIzquierda", new DireccionArribaIzquierda()));*/
-		
-		crearBotoneraMovimiento(botones, contenedorControles);
-		return botones;
+		GridPane contenedorBotones = new GridPane();
+		for (int i = 0; i < 3; i++) {
+            RowConstraints row = new RowConstraints(TAMANIO_BOTON);
+            contenedorBotones.getRowConstraints().add(row);
+        }
+        for (int i = 0; i < 3; i++) {
+            ColumnConstraints col = new ColumnConstraints(TAMANIO_BOTON);
+            contenedorBotones.getColumnConstraints().add(col);
+        }
+        
+        contenedorBotones.add(crearAccionMover(movible, "arriba", new DireccionArriba()), 1, 0);
+        contenedorBotones.add(crearAccionMover(movible, "arribaderecha", new DireccionArribaDerecha()), 2, 0);
+        contenedorBotones.add(crearAccionMover(movible, "derecha", new DireccionDerecha()), 2, 1);
+        contenedorBotones.add(crearAccionMover(movible, "abajoderecha", new DireccionAbajoDerecha()), 2, 2);
+        contenedorBotones.add(crearAccionMover(movible, "abajo", new DireccionAbajo()), 1, 2);
+        contenedorBotones.add(crearAccionMover(movible, "abajoizquierda", new DireccionAbajoIzquierda()), 0, 2);
+        contenedorBotones.add(crearAccionMover(movible, "izquierda", new DireccionIzquierda()), 0, 1);
+        contenedorBotones.add(crearAccionMover(movible, "arribaizquierda", new DireccionArribaIzquierda()), 0, 0);
+        
+        contenedorBotones.add(crearCentroContenedorBotones(), 1, 1);
+        
+		return contenedorBotones;
 	}
 	
+	private Node crearCentroContenedorBotones() {
+		
+		Pane centro = new Pane();
 
-	private void crearBotoneraMovimiento(Collection<Button> botonesMovimiento,ContenedorControles contenedorControles) {
+		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/movimiento.jpg", 
+								TAMANIO_BOTON, 
+								TAMANIO_BOTON, 
+								false, 
+								true);
 		
-		GridPane botonera = new GridPane();
+
+		BackgroundImage fondoCentro = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		
-		Posicion posicionesBotones[] = cargarPosicionesBotones();
+		centro.setPrefHeight(TAMANIO_BOTON);
+		centro.setPrefWidth(TAMANIO_BOTON);
+		centro.setBackground(new Background(fondoCentro));
 		
-		int i = 0;
-		
-		for(Button botonActual : botonesMovimiento) {
-			Posicion posicion = posicionesBotones[i];
-			botonera.add(botonActual, posicion.getY(), posicion.getX(),1,1);
-			i++;
-		}
-		
-		contenedorControles.getChildren().add(botonera);
+		return centro;
 	}
 
-	private Posicion[] cargarPosicionesBotones() {
-		Posicion posicionesBotones[] = new Posicion[8];
-		
-		posicionesBotones[0] = new Posicion(1,0);
-		posicionesBotones[1] = new Posicion(2,0);
-		posicionesBotones[2] = new Posicion(2,1);
-		posicionesBotones[3] = new Posicion(2,2);
-		posicionesBotones[4] = new Posicion(1,0);
-		posicionesBotones[5] = new Posicion(1,2);
-		posicionesBotones[6] = new Posicion(0,1);
-		posicionesBotones[7] = new Posicion(0,0);
-	
-		return posicionesBotones;
-	}
-	
-	private Button crearAccionMover(Movible movible, String textoBoton, Direccion direccion) {
+	private Button crearAccionMover(Movible movible, String nombre, Direccion direccion) {
 
-		Button botonMovimiento = new Button(textoBoton);
+		Button botonMovimiento = new Button();
+
+		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/flechas/" + nombre + ".gif", 
+								TAMANIO_BOTON, 
+								TAMANIO_BOTON, 
+								false, 
+								true);
+		
+
+		BackgroundImage fondoBoton = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		
+		botonMovimiento.setPrefHeight(TAMANIO_BOTON);
+		botonMovimiento.setPrefWidth(TAMANIO_BOTON);
+		botonMovimiento.setBackground(new Background(fondoBoton));
+		
 		BotonMovimientoHandler botonMovimientoHandler = new BotonMovimientoHandler(movible, direccion, vistaPosicionable, vistaSeleccionador);
 		botonMovimiento.setOnAction(botonMovimientoHandler);
 		
 		return botonMovimiento;
 	}
-
 }

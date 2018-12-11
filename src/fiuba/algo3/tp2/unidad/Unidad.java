@@ -2,12 +2,14 @@ package fiuba.algo3.tp2.unidad;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
 
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
 import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 import fiuba.algo3.tp2.formas.Forma;
+import fiuba.algo3.tp2.generacionDeUnidades.Generable;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -19,14 +21,14 @@ import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 import fiuba.algo3.tp2.vida.VidaUnidad;
 
-public abstract class Unidad implements Movible, Posicionable, Atacable {
+public abstract class Unidad extends Observable implements Movible, Posicionable, Atacable, Generable {
 
 	protected Posicion posicion;
 	protected Movimiento movimiento;
 	protected Forma forma;
 	protected int costoGeneracion;
 	private VidaUnidad vida;
-	private Mapa mapa;
+	protected Mapa mapa;
 	
 	
 	public Unidad(Posicion posicion, Mapa mapa, Movimiento movimiento, Forma forma, int vidaMaxima, int costoGeneracion)
@@ -77,7 +79,7 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 	}
 	
 	@Override
-	public void mover(Direccion direccion) throws MovimientoInvalidoException {
+	public void mover(Direccion direccion) throws MovimientoInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
 		movimiento.mover(this, direccion, mapa);
 		movimiento = new MovimientoNulo();
 	}
@@ -89,6 +91,10 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 	@Override
 	public void recibirDanio(Ataque ataque) {
 		vida.restarVida(ataque.obtenerDanioUnidad());
+	}
+	
+	public boolean estaMuerta() {
+		return vida.estaMuerta();
 	}
 	
 	protected boolean estaEnElRango(Posicionable posicionable) {
@@ -112,5 +118,15 @@ public abstract class Unidad implements Movible, Posicionable, Atacable {
 
 	public int obtenerCosto() {
 		return this.costoGeneracion;
+	}
+	
+	@Override
+	public void liberarCeldas(Mapa mapa) {
+		
+		Collection<Posicion>posicionesOcupadas = this.obtenerPosicionesOcupadasEnMapa();
+		
+		for(Posicion posicionActual : posicionesOcupadas) {
+			mapa.obtenerCelda(posicionActual).liberar();
+		}
 	}
 }

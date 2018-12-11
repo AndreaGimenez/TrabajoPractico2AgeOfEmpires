@@ -30,13 +30,13 @@ public class VistaPosicionableMultitone {
 									Mapa mapa,
 									Juego juego) {
 		
-		vistaAldeano = new VistaAldeano(contenedorControles, contenedorMapa, vistaSeleccionador);
-		vistaEspadachin = new VistaEspadachin(contenedorControles, contenedorMapa, vistaSeleccionador);
+		vistaAldeano = new VistaAldeano(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
+		vistaEspadachin = new VistaEspadachin(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
 		vistaArquero = new VistaArquero(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
-		vistaArmaAsedio = new VistaArmaAsedio(contenedorControles, contenedorMapa, vistaSeleccionador);
-		vistaCuartel = new VistaCuartel(contenedorMapa, contenedorControles, mapa);
-		vistaPlazaCentral = new VistaPlazaCentral(contenedorMapa, contenedorControles, mapa);
-		vistaCastillo = new VistaCastillo(contenedorMapa, contenedorControles, mapa);
+		vistaArmaAsedio = new VistaArmaAsedio(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
+		vistaCuartel = new VistaCuartel(contenedorMapa, contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
+		vistaPlazaCentral = new VistaPlazaCentral(contenedorMapa, contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
+		vistaCastillo = new VistaCastillo(contenedorMapa, contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
 	}
 	
 	public static void init(ContenedorControles contenedorControles,
@@ -52,11 +52,11 @@ public class VistaPosicionableMultitone {
 		
 	}
 	
-	public static VistaPosicionable getInstance(Posicionable posicionable) throws Exception {
+	public static VistaPosicionable getInstance(Posicionable posicionable) {
 		if(multitone != null) {
 			return multitone.obtenerVista(posicionable);
 		}else {
-			throw new Exception("Debe inicializar antes de obtener una instancia");
+			throw new RuntimeException("Debe inicializar antes de obtener una instancia");
 		}
 	}
 

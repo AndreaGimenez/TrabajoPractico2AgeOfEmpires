@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
+import fiuba.algo3.tp2.mapa.Mapa;
 
 public class RondaTest {
 	
@@ -21,11 +23,13 @@ public class RondaTest {
 	}
 	
 	@Test
-	public void testSeAgreganDosJugadoresAUnaRondaVaciaAhoraDeberiaTenerDosJugadores() {
+	public void testSeAgreganDosJugadoresAUnaRondaVaciaAhoraDeberiaTenerDosJugadores() throws TamanioInvalidoException {
+		
+		Mapa mapa = new Mapa(2,2);
 		
 		Ronda ronda = new Ronda();
-		Jugador jugadorUno = new Jugador("Jugador 1");
-		Jugador jugadorDos = new Jugador("Jugador 1");
+		Jugador jugadorUno = new Jugador("Jugador 1", mapa);
+		Jugador jugadorDos = new Jugador("Jugador 2", mapa);
 		
 		ronda.agregarJugador(jugadorUno);
 		ronda.agregarJugador(jugadorDos);
@@ -36,10 +40,11 @@ public class RondaTest {
 	}
 	
 	@Test
-	public void testAlIniciarElRecorridoDeUnaRondaDeberiaApuntarAlPrimerJugador() {
+	public void testAlIniciarElRecorridoDeUnaRondaDeberiaApuntarAlPrimerJugador() throws TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(2,2);
 		Ronda ronda = new Ronda();
-		Jugador jugador = new Jugador("Jugador 1");
+		Jugador jugador = new Jugador("Jugador 1", mapa);
 		
 		ronda.agregarJugador(jugador);
 		
@@ -49,10 +54,11 @@ public class RondaTest {
 	}
 	
 	@Test
-	public void testAlRecorrerUnaRondaDeUnJugadorSiempreDevuelveElMismoJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+	public void testAlRecorrerUnaRondaDeUnJugadorSiempreDevuelveElMismoJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(2,2);
 		Ronda ronda = new Ronda();
-		Jugador jugador = new Jugador("Jugador 1");
+		Jugador jugador = new Jugador("Jugador 1", mapa);
 		
 		ronda.agregarJugador(jugador);
 		
@@ -70,11 +76,12 @@ public class RondaTest {
 	}
 	
 	@Test
-	public void testAlRecorrerUnaRondaDeDosJugadoresDeberiaDevolverAlternadamenteUnoYOtro() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+	public void testAlRecorrerUnaRondaDeDosJugadoresDeberiaDevolverAlternadamenteUnoYOtro() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, TamanioInvalidoException {
 		
+		Mapa mapa = new Mapa(2,2);
 		Ronda ronda = new Ronda();
-		Jugador jugadorUno = new Jugador("Jugador 1");
-		Jugador jugadorDos = new Jugador("Jugador 1");
+		Jugador jugadorUno = new Jugador("Jugador 1", mapa);
+		Jugador jugadorDos = new Jugador("Jugador 2", mapa);
 		
 		ronda.agregarJugador(jugadorUno);
 		ronda.agregarJugador(jugadorDos);

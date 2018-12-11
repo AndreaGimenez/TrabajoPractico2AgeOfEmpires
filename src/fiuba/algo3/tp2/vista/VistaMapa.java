@@ -12,8 +12,6 @@ import javafx.scene.layout.RowConstraints;
 
 public class VistaMapa {
 	
-	private NodoMapaOnMouseClickedStrategy nodoMapaOnMouseClickedStrategy;
-	
 	public static int TAMANIO_NODO = 50;
 	
 	private Juego juego;
@@ -64,7 +62,7 @@ public class VistaMapa {
 		}
 	}
 	
-	public void dibujarPosicionables() throws Exception {
+	public void dibujarPosicionables() {
 		
 		Mapa mapa = juego.obtenerMapa();
 		
@@ -80,6 +78,8 @@ public class VistaMapa {
 				if(posicionable != null) {
 					VistaPosicionable vistaPosicionable = VistaPosicionableMultitone.getInstance(posicionable);
 					vistaPosicionable.dibujarPosicionable(posicionable, pane);
+				}else {
+					pane.setBackground(null);
 				}
 			}
         }

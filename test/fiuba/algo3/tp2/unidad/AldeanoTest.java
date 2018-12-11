@@ -148,19 +148,19 @@ public class AldeanoTest {
 	}
 	
 	@Test
-	public void testDadoUnMapaDe5x5UnAldeanoEnLaPosicionX4Y0SeMueveHaciaDerechaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnMapaDe5x5UnAldeanoEnLaPosicionX4Y0SeMueveHaciaDerechaDeberiaLanzarCeldaInexistenteException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
 		Aldeano aldeano = new Aldeano(new Posicion(4,0), mapa);
 		
-		exceptionRule.expect(MovimientoInvalidoException.class);
+		exceptionRule.expect(CeldaInexistenteException.class);
 		aldeano.mover(new DireccionDerecha());
 	}
 	
 	@Test
-	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX2Y2CuandoElPrimeroSeMueveHaciaDerechaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX2Y2CuandoElPrimeroSeMueveHaciaDerechaDeberiaLanzarCeldaOcupadaException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
@@ -168,12 +168,12 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano(new Posicion(2,2), mapa);
 		Aldeano aldeanoAMover = new Aldeano(new Posicion(1,2), mapa);
 		
-		exceptionRule.expect(MovimientoInvalidoException.class);
+		exceptionRule.expect(CeldaOcupadaException.class);
 		aldeanoAMover.mover(new DireccionDerecha());
 	}
 	
 	@Test
-	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX0Y2CuandoElPrimeroSeMueveHaciaIzquierdaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX0Y2CuandoElPrimeroSeMueveHaciaIzquierdaDeberiaLanzarCeldaOcupadaException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
@@ -181,12 +181,12 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano(new Posicion(0,2), mapa);
 		Aldeano aldeanoAMover = new Aldeano(new Posicion(1,2), mapa);
 		
-		exceptionRule.expect(MovimientoInvalidoException.class);
+		exceptionRule.expect(CeldaOcupadaException.class);
 		aldeanoAMover.mover(new DireccionIzquierda());
 	}
 	
 	@Test
-	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX1Y1CuandoElPrimeroSeMueveHaciaAbajoDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX1Y1CuandoElPrimeroSeMueveHaciaAbajoDeberiaLanzarCeldaOcupadaException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
@@ -194,12 +194,12 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano(new Posicion(1,1), mapa);
 		Aldeano aldeanoAMover = new Aldeano(new Posicion(1,2), mapa);
 		
-		exceptionRule.expect(MovimientoInvalidoException.class);
+		exceptionRule.expect(CeldaOcupadaException.class);
 		aldeanoAMover.mover(new DireccionAbajo());
 	}
 	
 	@Test
-	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX1Y3CuandoElPrimeroSeMueveHaciaArribaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX1Y3CuandoElPrimeroSeMueveHaciaArribaDeberiaLanzarCeldaOcupadaException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
@@ -207,12 +207,12 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano(new Posicion(1,3), mapa);
 		Aldeano aldeanoAMover = new Aldeano(new Posicion(1,2), mapa);
 		
-		exceptionRule.expect(MovimientoInvalidoException.class);
+		exceptionRule.expect(CeldaOcupadaException.class);
 		aldeanoAMover.mover(new DireccionArriba());
 	}
 	
 	@Test
-	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX2Y3CuandoElPrimeroSeMueveHaciaArribaDerechaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX2Y3CuandoElPrimeroSeMueveHaciaArribaDerechaDeberiaLanzarCeldaOcupadaException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
@@ -220,12 +220,12 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano(new Posicion(2,3), mapa);
 		Aldeano aldeanoAMover = new Aldeano(new Posicion(1,2), mapa);
 		
-		exceptionRule.expect(MovimientoInvalidoException.class);
+		exceptionRule.expect(CeldaOcupadaException.class);
 		aldeanoAMover.mover(new DireccionArribaDerecha());
 	}
 	
 	@Test
-	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX0Y3CuandoElPrimeroSeMueveHaciaArribaIzquierdaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX0Y3CuandoElPrimeroSeMueveHaciaArribaIzquierdaDeberiaLanzarCeldaOcupadaException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
@@ -233,12 +233,12 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano(new Posicion(0,3), mapa);
 		Aldeano aldeanoAMover = new Aldeano(new Posicion(1,2), mapa);
 		
-		exceptionRule.expect(MovimientoInvalidoException.class);
+		exceptionRule.expect(CeldaOcupadaException.class);
 		aldeanoAMover.mover(new DireccionArribaIzquierda());
 	}
 	
 	@Test
-	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX2Y1CuandoElPrimeroSeMueveHaciaAbajoDerechaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX2Y1CuandoElPrimeroSeMueveHaciaAbajoDerechaDeberiaLanzarCeldaOcupadaException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
@@ -246,12 +246,12 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano(new Posicion(2,1), mapa);
 		Aldeano aldeanoAMover = new Aldeano(new Posicion(1,2), mapa);
 		
-		exceptionRule.expect(MovimientoInvalidoException.class);
+		exceptionRule.expect(CeldaOcupadaException.class);
 		aldeanoAMover.mover(new DireccionAbajoDerecha());
 	}
 	
 	@Test
-	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX0Y1CuandoElPrimeroSeMueveHaciaAbajoIzquierdaDeberiaLanzarMovimientoInvalidoException() 
+	public void testDadoUnAldeanoEnLaPosicionX1Y2YUnAldeanoEnLaPosicionX0Y1CuandoElPrimeroSeMueveHaciaAbajoIzquierdaDeberiaLanzarCeldaOcupadaException() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
@@ -259,7 +259,7 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano(new Posicion(0,1), mapa);
 		Aldeano aldeanoAMover = new Aldeano(new Posicion(1,2), mapa);
 		
-		exceptionRule.expect(MovimientoInvalidoException.class);
+		exceptionRule.expect(CeldaOcupadaException.class);
 		aldeanoAMover.mover(new DireccionAbajoIzquierda());
 	}
 	/*

@@ -55,7 +55,7 @@ public class Posicion {
 
 	public Posicion desplazarVerticalmente(int i) {
 
-		return new Posicion(this.coordenadaX, this.coordenadaY-i);
+		return new Posicion(this.coordenadaX, this.coordenadaY+i);
 	}
 
 	public boolean esIgualA(Posicion otraPosicion) {

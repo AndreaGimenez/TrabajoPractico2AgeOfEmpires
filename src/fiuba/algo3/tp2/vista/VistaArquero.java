@@ -2,12 +2,15 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.Arquero;
+import fiuba.algo3.tp2.unidad.Atacador;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -17,13 +20,14 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
-public class VistaArquero implements VistaPosicionable, VistaMovible {
+public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 
 	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
 	private VistaSeleccionador vistaSeleccionador;
 	private VistaMapa vistaMapa;
 	private Juego juego;
+	private Button botonAtacar;
 
 	public VistaArquero(ContenedorControles contenedorControles, 
 						ContenedorMapa contenedorMapa, 
@@ -47,23 +51,20 @@ public class VistaArquero implements VistaPosicionable, VistaMovible {
 		
 		contenedorControles.clean();
 		
+		Arquero arquero = (Arquero)posicionable;
+
 		contenedorControles.setNombreUnidad("Arquero");
+		contenedorControles.setVida(arquero.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(crearAccionAtacar((Arquero)posicionable));
+		
+		botonAtacar = new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, contenedorMapa).crearBoton((Atacador)posicionable);
+		acciones.add(botonAtacar);
 		
 		//Movimientos
-		acciones.addAll(new CreadorBotonesMovimiento(this, vistaSeleccionador, contenedorControles).crearBotones((Movible)posicionable));
+		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
 
 		contenedorControles.setAcciones(acciones);
-	}
-	
-	private Button crearAccionAtacar(Arquero arquero) {
-		
-		Button botonAtacar = new Button("Atacar");
-		BotonAtacarHandler botonAtacarHandler = new BotonAtacarHandler(juego, vistaMapa, vistaSeleccionador, contenedorMapa, arquero);
-		botonAtacar.setOnAction(botonAtacarHandler);
-		return botonAtacar;
 	}
 	
 	@Override
@@ -84,4 +85,11 @@ public class VistaArquero implements VistaPosicionable, VistaMovible {
 
         return new Background(fondoAldeano);
 	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		botonAtacar.setDisable(true);
+	}
+
 }

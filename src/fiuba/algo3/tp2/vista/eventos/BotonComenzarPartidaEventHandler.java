@@ -3,7 +3,6 @@ package fiuba.algo3.tp2.vista.eventos;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class BotonComenzarPartidaEventHandler implements EventHandler<ActionEvent> {

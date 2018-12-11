@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -12,8 +13,12 @@ public class ContenedorControles extends VBox {
 	
 	private Label labelNombreUnidad;
 	private Label labelVida;
-	private Label labelAcciones;
-	private Collection<Button> acciones;
+	private Label labelAccionesMovimiento;
+	private Collection<Button> accionesMovimiento;
+	private ComboBox<String> construccionesCuartel;
+	private Button confirmarConstruccionCuartel;
+	private ComboBox<String> construccionesPlazaCentral;
+	private Button confirmarConstruccionPlazaCentral;
 
 	public ContenedorControles() {
 		
@@ -25,16 +30,19 @@ public class ContenedorControles extends VBox {
         labelVida.setText("");
         getChildren().add(labelVida);
         
-        labelAcciones = new Label();
-        labelAcciones.setText("");
-        getChildren().add(labelAcciones);
+        labelAccionesMovimiento = new Label();
+        labelAccionesMovimiento.setText("");
+        getChildren().add(labelAccionesMovimiento);
+
         
         setSpacing(10);
         setPadding(new Insets(15));
-        setStyle("-fx-background-color: brown;");
+        setStyle("-fx-background-color: #BDB76B;");
         setPrefWidth(200);
         
-        this.acciones = new ArrayList<Button>();
+        this.accionesMovimiento = new ArrayList<>();
+        this.construccionesCuartel = new ComboBox<>();
+        this.construccionesPlazaCentral = new ComboBox<>();
 	}
 
 	public void setNombreUnidad(String nombreUnidad) {
@@ -47,20 +55,34 @@ public class ContenedorControles extends VBox {
 	
 	public void setAcciones(Collection<Button> acciones) {
 		
-		labelAcciones.setText("Acciones");
-		this.acciones.addAll(acciones);
-		getChildren().addAll(this.acciones);
+		labelAccionesMovimiento.setText("Acciones");
+		this.accionesMovimiento.addAll(acciones);
+		getChildren().addAll(this.accionesMovimiento);
+	}
+
+	public void setAccionesCuartel(ComboBox<String> acciones, Button botonRealizarConstruccion){
+		this.construccionesCuartel = acciones;
+		getChildren().addAll(this.construccionesCuartel);
+		this.confirmarConstruccionCuartel = botonRealizarConstruccion;
+		getChildren().addAll(this.confirmarConstruccionCuartel);
+	}
+
+	public void setAccionesPlazaCentral(ComboBox<String> acciones, Button botonRealizarConstruccion){
+		this.construccionesPlazaCentral = acciones;
+		getChildren().addAll(this.construccionesPlazaCentral);
+		this.confirmarConstruccionPlazaCentral = botonRealizarConstruccion;
+		getChildren().addAll(this.confirmarConstruccionPlazaCentral);
 	}
 
 	public void clean() {
 		
 		labelNombreUnidad.setText("");
 		labelVida.setText("");
-		labelAcciones.setText("");
-		
-		if(this.acciones != null) {
-			getChildren().removeAll(this.acciones);
-		}
-		this.acciones = new ArrayList<Button>();
+		labelAccionesMovimiento.setText("");
+
+		getChildren().removeIf(children -> !(children instanceof Label));
+		this.accionesMovimiento = new ArrayList<>();
+		this.construccionesCuartel = new ComboBox<>();
+		this.construccionesPlazaCentral = new ComboBox<>();
 	}
 }

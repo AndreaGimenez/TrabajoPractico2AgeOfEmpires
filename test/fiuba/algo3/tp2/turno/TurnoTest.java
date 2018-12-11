@@ -1,26 +1,27 @@
 package fiuba.algo3.tp2.turno;
 
-import static org.junit.Assert.fail;
-
 import java.util.Collection;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
-import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
-import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
-import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.movimiento.DireccionDerecha;
-import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
-import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 
 public class TurnoTest {
@@ -34,13 +35,13 @@ public class TurnoTest {
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Jugador jugador = new Jugador("Jugador 1");
+		Jugador jugador = new Jugador("Jugador 1", mapa);
 		Collection<Posicionable> posicionablesJugador = jugador.obtenerPosicionables();
 		Aldeano aldeano = new Aldeano(new Posicion(0, 0), mapa);
 		
 		posicionablesJugador.add(aldeano);
 		
-		Turno primerTurno = new Turno(jugador);
+		Turno primerTurno = new Turno(jugador, mapa);
 		
 		aldeano.mover(new DireccionDerecha());
 		
@@ -50,18 +51,18 @@ public class TurnoTest {
 	
 	@Test
 	public void testDadoUnAldeanoQueYaSeMovioEnUnTurnoDeberiaPoderMoverseEnUnNuevoTurno() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException{
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException{
 		
 		Mapa mapa = new Mapa(250, 250);
 		
-		Jugador jugador = new Jugador("Jugador 1");
+		Jugador jugador = new Jugador("Jugador 1", mapa);
 		Collection<Posicionable> posicionablesJugador = jugador.obtenerPosicionables();
 		Aldeano aldeano = new Aldeano(new Posicion(0, 0), mapa);
 		
 		boolean checkearRecursos = false;
 		jugador.agregarUnidad(aldeano, mapa, checkearRecursos);
 		
-		Turno turno = new Turno(jugador);
+		Turno turno = new Turno(jugador, mapa);
 		aldeano.mover(new DireccionDerecha());
 		
 		turno.avanzar();
