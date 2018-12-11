@@ -65,7 +65,7 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 		catch(CeldaInexistenteException e) {
 			error.mostrarVentanaError("La celda en la que intentas contruir no existe", "Intente con una celda del mapa");
 		} catch (OroInsuficienteException e) {
-			error.mostrarVentanaError("No puede crear una nueva plazaCentral porque no tiene suficiente oro");
+			error.mostrarVentanaError("No puede crear una nueva plazaCentral porque no tiene suficiente oro","");
 		}			
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));

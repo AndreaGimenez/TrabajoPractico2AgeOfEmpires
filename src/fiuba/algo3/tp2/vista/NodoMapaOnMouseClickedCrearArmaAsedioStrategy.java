@@ -44,19 +44,19 @@ public class NodoMapaOnMouseClickedCrearArmaAsedioStrategy implements NodoMapaOn
 			juego.obtenerJugadorActual().agregarUnidad(armaAsedio, mapa);
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
-			error.mostrarVentanaError("No es Posible Generar El Arma de Asedio porque ya fue generada una en este turno");
+			error.mostrarVentanaError("No es Posible Generar El Arma de Asedio porque ya fue generada una en este turno","");
 		}
 		catch(CeldaOcupadaException e) {
-			error.mostrarVentanaError("La Celda en la que deseas posicionar el Arma de Asedio esta ocupada");
+			error.mostrarVentanaError("La Celda en la que deseas posicionar el Arma de Asedio esta ocupada","");
 		}
 		catch(CeldaInexistenteException e) {
-			error.mostrarVentanaError("La Celda en la que deseas posicionar el Arma de Asedio no existe");
+			error.mostrarVentanaError("La Celda en la que deseas posicionar el Arma de Asedio no existe","");
 		}
 		catch(PoblacionMaximaAlcanzadaException e) {
-			error.mostrarVentanaError("No puede crear una nueva arma de asedio porque ya ha alcanzado la poblacion máxima");
+			error.mostrarVentanaError("No puede crear una nueva arma de asedio porque ya ha alcanzado la poblacion máxima","");
 		}
 		catch(OroInsuficienteException e) {
-			error.mostrarVentanaError("No puede crear una nueva arma de asedio porque no tiene suficiente oro");
+			error.mostrarVentanaError("No puede crear una nueva arma de asedio porque no tiene suficiente oro","");
 		}
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));

@@ -44,19 +44,19 @@ public class NodoMapaOnMouseClickedCrearAldeanoStrategy implements NodoMapaOnMou
 			juego.obtenerJugadorActual().agregarUnidad(aldeano, mapa);
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
-			error.mostrarVentanaError("No es Posible Generar el aldeano porque ya fue generada una en este turno");
+			error.mostrarVentanaError("No es Posible Generar el aldeano porque ya fue generada una en este turno","");
 		}
 		catch(CeldaOcupadaException e) {
-			error.mostrarVentanaError("La Celda en la que deseas posicionar el aldeano esta ocupada");
+			error.mostrarVentanaError("La Celda en la que deseas posicionar el aldeano esta ocupada","");
 		}
 		catch(CeldaInexistenteException e) {
-			error.mostrarVentanaError("La Celda en la que deseas posicionar el aldeano no existe");
+			error.mostrarVentanaError("La Celda en la que deseas posicionar el aldeano no existe","");
 		}
 		catch(PoblacionMaximaAlcanzadaException e) {
-			error.mostrarVentanaError("No puede crear un nuevo aldeano porque ya ha alcanzado la poblacion máxima");
+			error.mostrarVentanaError("No puede crear un nuevo aldeano porque ya ha alcanzado la poblacion máxima","");
 		}
 		catch(OroInsuficienteException e) {
-			error.mostrarVentanaError("No puede crear un nuevo aldeano porque no tiene suficiente oro");
+			error.mostrarVentanaError("No puede crear un nuevo aldeano porque no tiene suficiente oro","");
 		}
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));

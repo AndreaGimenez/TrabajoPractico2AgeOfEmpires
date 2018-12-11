@@ -60,9 +60,9 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 			error.mostrarVentanaError("Aldeno constructor Error", "Este aldeano no puede construir este edificio porque siendo construido por otro");
 		}
 		catch(AldeanoConConstruccionAsignadaException e) {
-			error.mostrarVentanaError("Este aldeano se encuentra construyendo otro edificio");
+			error.mostrarVentanaError("Este aldeano se encuentra construyendo otro edificio","");
 		} catch (OroInsuficienteException e) {
-			error.mostrarVentanaError("No puede crear un nuevo cuartel porque no tiene suficiente oro");
+			error.mostrarVentanaError("No puede crear un nuevo cuartel porque no tiene suficiente oro","");
 		}
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));
