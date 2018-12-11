@@ -43,13 +43,13 @@ public class BotonCreadorDeArqueroEventHandler implements EventHandler<ActionEve
         try {
             this.gestorDeConstruccion.crearArquero(this.cuartel.obtenerPosicion().desplazarHorizontalmente(3), mapa);
         } catch (CeldaOcupadaException e) {
-            error.mostrarVentanaError("Celda Ocupada");
-         } catch (CeldaInexistenteException e) {
-         	 error.mostrarVentanaError("Celda Fuera De Mapa");
-         } catch (UnidadNoSoportadaException e) {
-         	 error.mostrarVentanaError("Unidad No Soportada");
-         } catch (EdificioEnConstruccionException e) {
-         	 error.mostrarVentanaError("Edificio En Construcción");
+        	 error.mostrarVentanaError("Celda Ocupada", "Una celda soporta solo un posicionable");
+        } catch (CeldaInexistenteException e) {
+        	 error.mostrarVentanaError("Celda Fuera De Mapa", "Intente con una celda dentro del mapa");
+        } catch (UnidadNoSoportadaException e) {
+        	 error.mostrarVentanaError("Unidad No Soportada", "Elija otra unidad");
+        } catch (EdificioEnConstruccionException e) {
+        	 error.mostrarVentanaError("Edificio En Construccion", "Debe esperar a que el edifico termine de construirse");
  		}
 
     }

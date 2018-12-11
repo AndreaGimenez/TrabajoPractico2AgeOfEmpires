@@ -56,19 +56,19 @@ public class NodoMapaOnMouseClickedRepararEdificioStrategy implements NodoMapaOn
 		        
 			}
 			catch(AldeanoConConstruccionAsignadaException e) {
-				error.mostrarVentanaError("Este aldeano se encuentra construyendo otro edificio");
+				error.mostrarVentanaError("Error de aldeano constructor","Este aldeano se encuentra construyendo otro edificio");
 			}
 			catch(YaSeReparoEnESteTurnoException e) {
-				error.mostrarVentanaError("Este aldeano ya realizo una reparacion en este turno. Espere al siguiente turno para realizar la accion");
+				error.mostrarVentanaError("Este aldeano ya realizo una reparacion en este turno"," Espere al siguiente turno para realizar la accion");
 			}
 			catch(EdificioFueraDeRangoException e) {
-				error.mostrarVentanaError("Edificio Fuera De Rango de Reparación");
+				error.mostrarVentanaError("Edificio Fuera De Rango de Reparacion", "");
 			}
 			catch(EdificioNoAptoParaReparacionException e) {
-				error.mostrarVentanaError("Edificio No Apto Para Reparación");
+				error.mostrarVentanaError("Edificio No Apto Para Reparacion", "El edificio ya fue reparado o esta muerto");
 			}
 			catch(EdificioConReparadorAsignadoException e) {
-				error.mostrarVentanaError("Este Edificio Ya Tiene Asignado Un Reparador");
+				error.mostrarVentanaError("Este Edificio Ya Tiene Asignado Un Reparador", "");
 			}
 			finally {
 				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));

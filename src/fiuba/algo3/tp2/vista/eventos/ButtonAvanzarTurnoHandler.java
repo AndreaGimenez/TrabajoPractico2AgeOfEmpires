@@ -46,19 +46,19 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 			vistaMapa.dibujarPosicionables();
 		} 
 		catch(EdificioNoAptoParaConstruccionException e) {
-			error.mostrarVentanaError("No es posible construir este Edificio");
+			error.mostrarVentanaError("No es posible construir este Edificio", "No posee recursos suficientes");
 		}
 		catch(EdificioConConstructorAsignadoException e) {
-			error.mostrarVentanaError("Este aldeano no puede construir este edificio porque siendo construido por otro");
+			error.mostrarVentanaError("Constructor equivocado","Este aldeano no puede construir este edificio porque siendo construido por otro");
 		}
 		catch(YaSeReparoEnESteTurnoException e) {
-			error.mostrarVentanaError("Este aldeano ya realizo una reparacion en este turno. Espere al siguiente turno para realizar la accion");
+			error.mostrarVentanaError("Este aldeano ya realizo una reparacion en este turno", "Espere al siguiente turno para realizar la accion");
 		}
 		catch(EdificioNoAptoParaReparacionException e) {
-			error.mostrarVentanaError("Edificio No Apto Para Reparación");
+			error.mostrarVentanaError("Edificio No Apto Para Reparacion", "El edificio ya fue reparado o se murio");
 		}
 		catch(EdificioConReparadorAsignadoException e) {
-			error.mostrarVentanaError("Este Edificio Ya Tiene Asignado Un Reparador");
+			error.mostrarVentanaError("Este Edificio Ya Tiene Asignado Un Reparador", "Un edificio solo puede tener un solo reparador");
 		}
 	}
 }

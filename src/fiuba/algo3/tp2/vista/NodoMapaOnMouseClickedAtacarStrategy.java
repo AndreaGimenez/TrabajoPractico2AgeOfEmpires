@@ -62,16 +62,16 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 				
 			} 
 			catch(UnidadMuertaException e) {
-				error.mostrarVentanaError("Esta Unidad Ya Fue Destruida");
+				error.mostrarVentanaError("Esta Unidad Ya Fue Destruida", "");
 			}
 			catch(EdificioDestruidoException e) {
-				error.mostrarVentanaError("Este Edificio Ya Fue Destruido");
+				error.mostrarVentanaError("Este Edificio Ya Fue Destruido", "");
 			}
 			catch(AtaqueFueraDeRangoException e) {
-				error.mostrarVentanaError("Ataque Fuera De Rango");
+				error.mostrarVentanaError("Ataque Fuera De Rango", "");
 			}
 			catch(AtaqueInvalidoException e) {
-				error.mostrarVentanaError("Ataque Inválido");
+				error.mostrarVentanaError("Ataque Invalido", "");
 			}
 			finally {
 				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));

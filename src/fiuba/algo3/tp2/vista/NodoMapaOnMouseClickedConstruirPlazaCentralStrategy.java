@@ -45,19 +45,19 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 			}
 		
 		catch(EdificioNoAptoParaConstruccionException e) {
-			error.mostrarVentanaError("No es posible construir este Edificio");
+			error.mostrarVentanaError("No es posible construir este Edificio", "No tiene recursos suficientes");
 		}
 		catch(EdificioConConstructorAsignadoException e) {
-			error.mostrarVentanaError("Este aldeano no puede construir este edificio porque siendo construido por otro");
+			error.mostrarVentanaError("Error de aldeano constructor", "Este aldeano no puede construir este edificio porque siendo construido por otro");
 		}
 		catch(AldeanoConConstruccionAsignadaException e) {
-			error.mostrarVentanaError("Este aldeano se encuentra construyendo otro edificio");
+			error.mostrarVentanaError("Error de aldeano constructor","Este aldeano se encuentra construyendo otro edificio");
 		}
 		catch(CeldaOcupadaException e) {
-			error.mostrarVentanaError("La celda en la que intentas contruir esta ocupada");
+			error.mostrarVentanaError("La celda en la que intentas contruir esta ocupada", "Intente con una celda libre");
 		}
 		catch(CeldaInexistenteException e) {
-			error.mostrarVentanaError("La celda en la que intentas contruir no existe");
+			error.mostrarVentanaError("La celda en la que intentas contruir no existe", "Intente con una celda del mapa");
 		}			
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));

@@ -29,7 +29,7 @@ public class BotonMontarHandler implements EventHandler<ActionEvent>{
 			try {
 				armaAsedio.montar();
 			} catch (MontajeInvalidoException e) {
-				error.mostrarVentanaError("Este Arma de Asedio No Se Puede Montar");
+				error.mostrarVentanaError("Este Arma de Asedio No Se Puede Montar", "Necesita desmontarla primero");
 			}
 			botonMontar.setText("Desmontar");
 		}

@@ -43,19 +43,19 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 				aldeano.construirConstruible(new Cuartel(new Posicion(colIndex, rowIndex), juego.obtenerMapa()));
 			} 
 		catch(CeldaOcupadaException e) {
-			error.mostrarVentanaError("La celda en la que intentas contruir esta ocupada");
+			error.mostrarVentanaError("La celda en la que intentas contruir esta ocupada", "Intente nuevamente con otra celda libre");
 		}
 		catch(CeldaInexistenteException e) {
-			error.mostrarVentanaError("La celda en la que intentas contruir no existe");
+			error.mostrarVentanaError("La celda en la que intentas contruir no existe", "Intente nuevamente con una celda dentro del mapa");
 		}
 		catch(EdificioNoAptoParaConstruccionException e) {
-			error.mostrarVentanaError("No es posible construir este Edificio");
+			error.mostrarVentanaError("No es posible construir este Edificio", "No tiene recursos para contruir este edificio");
 		}
 		catch(EdificioConConstructorAsignadoException e) {
-			error.mostrarVentanaError("Este aldeano no puede construir este edificio porque siendo construido por otro");
+			error.mostrarVentanaError("Aldeno constructor Error", "Este aldeano no puede construir este edificio porque siendo construido por otro");
 		}
 		catch(AldeanoConConstruccionAsignadaException e) {
-			error.mostrarVentanaError("Este aldeano se encuentra construyendo otro edificio");
+			error.mostrarVentanaError("Este aldeano se encuentra construyendo otro edificio", "");
 		}
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));

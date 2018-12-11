@@ -76,22 +76,22 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 					
 				} 
 				catch(TamanioInvalidoException e) {		
-					error.mostrarVentanaError("Tamanio Invalido");
+					error.mostrarVentanaError("Tamanio Invalido", "");
 				}
 				catch(CantidadDeJugadoresInvalidaException e) {
-					error.mostrarVentanaError("Cantidad De Jugadores Invalida");
+					error.mostrarVentanaError("Cantidad De Jugadores Invalida", "La cantidad de jugadores debe ser igual a 2");
 				}
 				catch(CeldaOcupadaException e) {
-					error.mostrarVentanaError("Celda Ocupada");
+					error.mostrarVentanaError("Celda Ocupada", "Una celda no admite mas de un posicionable");
 				}
 				catch(CeldaInexistenteException e) {
-					error.mostrarVentanaError("Celda Fuera Del Mapa");
+					error.mostrarVentanaError("Celda Fuera Del Mapa", "Intente nuevamente con una celda dentro del mapa");
 				}
 				catch(PoblacionMaximaAlcanzadaException e) {
-					error.mostrarVentanaError("Ya Alcanzaste La Poblaci�n M�xima");
+					error.mostrarVentanaError("Ya Alcanzaste La Poblacion Maxima", "Solo puede tener 50 de Poblacion");
 				}
 				catch(OroInsuficienteException e) {
-					error.mostrarVentanaError("Oro Insuficiente");
+					error.mostrarVentanaError("Oro Insuficiente", "Debe ganar mas oro para realizar la accion");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

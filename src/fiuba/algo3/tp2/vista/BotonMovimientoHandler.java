@@ -33,12 +33,12 @@ public class BotonMovimientoHandler implements EventHandler<ActionEvent>{
 			vistaSeleccionador.seleccionarNodo(movible);
 			musica.iniciarReproduccionMusica();
 		} catch (MovimientoInvalidoException e) {
-			error.mostrarVentanaError("Movimiento Invalido");
+			error.mostrarVentanaError("Movimiento Invalido", "Intente nuevamente");
 		} catch (CeldaOcupadaException e) {
-			error.mostrarVentanaError("Celda Ocupada");
+			error.mostrarVentanaError("Celda Ocupada", "No puede moverse hacia una celda ocupada");
 		}
 		catch (CeldaInexistenteException e) {
-			error.mostrarVentanaError("Movimiento fuera del mapa");
+			error.mostrarVentanaError("Movimiento fuera del mapa", "Intente nuevamente en direccion adentro del mapa");
 		}
 	}
 }

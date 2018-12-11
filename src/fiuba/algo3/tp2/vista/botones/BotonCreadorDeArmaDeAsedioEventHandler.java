@@ -42,13 +42,13 @@ public class BotonCreadorDeArmaDeAsedioEventHandler implements EventHandler<Acti
         try {
             this.gestorDeConstruccion.crearArmaAsedio(this.castillo.obtenerPosicion().desplazarHorizontalmente(5), mapa);
         } catch (CeldaOcupadaException e) {
-           error.mostrarVentanaError("Celda Ocupada");
+           error.mostrarVentanaError("Celda Ocupada", "Una celda soporta solo un posicionable");
         } catch (CeldaInexistenteException e) {
-        	 error.mostrarVentanaError("Celda Fuera De Mapa");
+        	 error.mostrarVentanaError("Celda Fuera De Mapa", "Intente con una celda dentro del mapa");
         } catch (UnidadNoSoportadaException e) {
-        	 error.mostrarVentanaError("Unidad No Soportada");
+        	 error.mostrarVentanaError("Unidad No Soportada", "Elija otra unidad");
         } catch (EdificioEnConstruccionException e) {
-        	 error.mostrarVentanaError("Edificio En Construcción");
+        	 error.mostrarVentanaError("Edificio En Construccion", "Debe esperar a que el edifico termine de construirse");
 		}
     }
 }
