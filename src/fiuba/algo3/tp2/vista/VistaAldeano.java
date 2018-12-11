@@ -114,10 +114,36 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
-		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		contenedorMapa.setBackground(obtenerFondoAldeano((Aldeano)movible), movible.obtenerPosicion());
+		if(this.juego.obtenerJugadorActual().posicionablePerteneceAJugador(movible)){
+			contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+			contenedorMapa.setBackground(obtenerFondoAldeanoDeJugadorActual((Aldeano) movible), movible.obtenerPosicion());
+		}else{
+			contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+			contenedorMapa.setBackground(obtenerFondoAldeano((Aldeano) movible), movible.obtenerPosicion());
+		}
 	}
-	
+
+
+	//COPIE Y PEGUE. LO VOY A CAMBIAR
+	private Background obtenerFondoAldeanoDeJugadorActual(Aldeano aldeano) {
+		String imagePath;
+
+		if(aldeano.estaMuerta()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+		}else {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano_jugador_actual.jpg";
+		}
+		Image imagen = new Image(imagePath,
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoAldeano);
+	}
+
 	private Background obtenerFondoAldeano(Aldeano aldeano) {
 		
 		String imagePath = "";
