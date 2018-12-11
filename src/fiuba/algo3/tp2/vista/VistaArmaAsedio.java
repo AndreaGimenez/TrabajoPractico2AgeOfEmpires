@@ -46,28 +46,28 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 		
-		contenedorControles.clean();
+		ContenedorPartida.contenedorControles.clean();
 		
 		ArmaAsedio armaAsedio = (ArmaAsedio)posicionable;
 		
-		contenedorControles.setNombreUnidad("Arma de Asedio");
-		contenedorControles.setVida(armaAsedio.obtenerVida());
+		ContenedorPartida.contenedorControles.setNombreUnidad("Arma de Asedio");
+		ContenedorPartida.contenedorControles.setVida(armaAsedio.obtenerVida());
 		
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionMontar((ArmaAsedio)posicionable));
 		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, contenedorMapa).crearBoton((Atacador)posicionable));
 		
 		//Movimientos
-		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
+		ContenedorPartida.contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones((Movible)posicionable)));
 		
-		contenedorControles.setAcciones(acciones);
+		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 	
 	private Button crearAccionMontar(ArmaAsedio armaAsedio) {
 		
 		String textoBoton = (armaAsedio.estaMontada()) ? "Desmontar" : "Montar";
 		Button botonMontar = new Button(textoBoton);
-		BotonMontarHandler botonMontarHandler = new BotonMontarHandler(botonMontar, armaAsedio, contenedorMapa);
+		BotonMontarHandler botonMontarHandler = new BotonMontarHandler(botonMontar, armaAsedio, ContenedorPartida.contenedorMapa);
 		botonMontar.setOnAction(botonMontarHandler);
 		
 		
@@ -76,8 +76,8 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
 	
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
-		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		contenedorMapa.setBackground(obtenerFondoArmaAsedio((ArmaAsedio)movible), movible.obtenerPosicion());
+		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+		ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedio((ArmaAsedio)movible), movible.obtenerPosicion());
 	}
 
 	private Background obtenerFondoArmaAsedio(ArmaAsedio armaAsedio) {

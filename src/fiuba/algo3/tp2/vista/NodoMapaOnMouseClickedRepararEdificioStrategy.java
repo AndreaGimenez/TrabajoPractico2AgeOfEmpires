@@ -37,8 +37,8 @@ public class NodoMapaOnMouseClickedRepararEdificioStrategy implements NodoMapaOn
 	@Override
 	public void handle(MouseEvent event) {
 		Pane nodo = (Pane)event.getSource();
-		int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
-		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
+		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(nodo);
+		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(nodo);
 		Posicionable posicionable = juego.obtenerMapa().obtenerPosicionable(new Posicion(colIndex, rowIndex));
 		
 		MensajeDeError error = new MensajeDeError();
@@ -71,8 +71,8 @@ public class NodoMapaOnMouseClickedRepararEdificioStrategy implements NodoMapaOn
 				error.mostrarVentanaError("Este Edificio Ya Tiene Asignado Un Reparador", "");
 			}
 			finally {
-				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));
-				contenedorMapa.setCursor(Cursor.DEFAULT);
+				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, ContenedorPartida.contenedorMapa, vistaSeleccionador));
+				ContenedorPartida.contenedorMapa.setCursor(Cursor.DEFAULT);
 			}
 			
 		}

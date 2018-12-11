@@ -13,12 +13,12 @@ public class VistaCeldaSinOcupar {
 
         Collection<Button> acciones = new ArrayList<Button>();
 
-        contenedorControles.setAcciones(acciones);
+        ContenedorPartida.contenedorControles.setAcciones(acciones);
 
     }
 
     public void setContenedorControles(ContenedorControles contenedorControles) {
-        this.contenedorControles = contenedorControles;
+        this.contenedorControles = ContenedorPartida.contenedorControles;
 
     }
 }

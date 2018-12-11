@@ -46,26 +46,26 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible {
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 		
-		contenedorControles.clean();
+		ContenedorPartida.contenedorControles.clean();
 		
 		Espadachin espadachin = (Espadachin)posicionable;
 		
-		contenedorControles.setNombreUnidad("Espadachin");
-		contenedorControles.setVida(espadachin.obtenerVida());
+		ContenedorPartida.contenedorControles.setNombreUnidad("Espadachin");
+		ContenedorPartida.contenedorControles.setVida(espadachin.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, contenedorMapa).crearBoton((Atacador)posicionable));
+		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa).crearBoton((Atacador)posicionable));
 		
 		//Movimientos
-		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
+		ContenedorPartida.contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones((Movible)posicionable)));
 
-		contenedorControles.setAcciones(acciones);
+		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
-		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		contenedorMapa.setBackground(obtenerFondoEspadachin(), movible.obtenerPosicion());
+		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+		ContenedorPartida.contenedorMapa.setBackground(obtenerFondoEspadachin(), movible.obtenerPosicion());
 	}
 	
 	public Background obtenerFondoEspadachin() {

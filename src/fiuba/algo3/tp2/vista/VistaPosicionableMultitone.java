@@ -30,13 +30,13 @@ public class VistaPosicionableMultitone {
 									Mapa mapa,
 									Juego juego) {
 		
-		vistaAldeano = new VistaAldeano(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
-		vistaEspadachin = new VistaEspadachin(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
-		vistaArquero = new VistaArquero(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
-		vistaArmaAsedio = new VistaArmaAsedio(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
-		vistaCuartel = new VistaCuartel(contenedorMapa, contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
-		vistaPlazaCentral = new VistaPlazaCentral(contenedorMapa, contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
-		vistaCastillo = new VistaCastillo(contenedorMapa, contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
+		vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego);
+		vistaEspadachin = new VistaEspadachin(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego);
+		vistaArquero = new VistaArquero(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego);
+		vistaArmaAsedio = new VistaArmaAsedio(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego);
+		vistaCuartel = new VistaCuartel(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
+		vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
+		vistaCastillo = new VistaCastillo(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
 	}
 	
 	public static void init(ContenedorControles contenedorControles,
@@ -47,7 +47,7 @@ public class VistaPosicionableMultitone {
 					 		Juego juego) {
 		
 		if(multitone == null) {
-			multitone = new VistaPosicionableMultitone(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, mapa, juego);
+			multitone = new VistaPosicionableMultitone(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, mapa, juego);
 		}
 		
 	}

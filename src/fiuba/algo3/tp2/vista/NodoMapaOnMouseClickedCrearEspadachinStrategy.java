@@ -36,8 +36,8 @@ public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOn
 	public void handle(MouseEvent event) {
 		
 		Pane nodo = (Pane) event.getSource();
-		int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
-		int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
+		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(nodo);
+		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(nodo);
 		
 		MensajeDeError error = new MensajeDeError();
 		
@@ -63,8 +63,8 @@ public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOn
 			error.mostrarVentanaError("No puede crear un nuevo arquero porque no tiene suficiente oro","");
 		}
 		finally {
-			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));
-			contenedorMapa.setCursor(Cursor.DEFAULT);
+			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, ContenedorPartida.contenedorMapa, vistaSeleccionador));
+			ContenedorPartida.contenedorMapa.setCursor(Cursor.DEFAULT);
 		}
 
 	}

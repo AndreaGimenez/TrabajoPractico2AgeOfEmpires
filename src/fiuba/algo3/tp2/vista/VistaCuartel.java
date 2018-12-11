@@ -45,17 +45,17 @@ public class VistaCuartel implements VistaPosicionable {
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 		
-		contenedorControles.clean();
+		ContenedorPartida.contenedorControles.clean();
 		
 		Cuartel cuartel = (Cuartel) posicionable;
-		contenedorControles.setNombreUnidad("Cuartel");
-		contenedorControles.setVida(cuartel.obtenerVida());
+		ContenedorPartida.contenedorControles.setNombreUnidad("Cuartel");
+		ContenedorPartida.contenedorControles.setVida(cuartel.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionCrearArquero(cuartel));
 		acciones.add(crearAccionCrearEspadachin(cuartel));
 
-		contenedorControles.setAcciones(acciones);
+		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 
 	private Button crearAccionCrearEspadachin(Cuartel cuartel) {

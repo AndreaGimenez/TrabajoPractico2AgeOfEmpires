@@ -45,30 +45,30 @@ public class VistaPlazaCentral implements VistaPosicionable {
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 
-		contenedorControles.clean();
+		ContenedorPartida.contenedorControles.clean();
 		
 		PlazaCentral plazaCentral = (PlazaCentral) posicionable;
 		
-		contenedorControles.setNombreUnidad("Plaza Central");
-		contenedorControles.setVida(plazaCentral.obtenerVida());
+		ContenedorPartida.contenedorControles.setNombreUnidad("Plaza Central");
+		ContenedorPartida.contenedorControles.setVida(plazaCentral.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionCrearAldeano(plazaCentral));
 
-		contenedorControles.setAcciones(acciones);
+		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 
 	private Button crearAccionCrearAldeano(PlazaCentral plazaCentral) {
 		Button crearAldeano = new Button("Crear Aldeano");
 		crearAldeano.setOnAction(new BotonCreadorDeAldeanosEventHandler
-				(crearAldeano, plazaCentral, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
+				(crearAldeano, plazaCentral, mapa, vistaMapa, ContenedorPartida.contenedorMapa, juego, vistaSeleccionador));
 		return crearAldeano;
 	}
 	
 	private Background obtenerFondoPlazaCentral(Posicionable posicionable, Pane pane) {
 		
-		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
-		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
+		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
+		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
 		
 		String nombreImagen = new Posicion(colIndex, rowIndex).restar(posicionable.obtenerPosicion()).toString();
 		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/plaza-central/" + nombreImagen + ".jpg", 

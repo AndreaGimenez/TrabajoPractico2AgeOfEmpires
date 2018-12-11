@@ -4,6 +4,7 @@ import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.vista.ContenedorMapa;
+import fiuba.algo3.tp2.vista.ContenedorPartida;
 import fiuba.algo3.tp2.vista.NodoMapaOnMouseClickedCrearArmaAsedioStrategy;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
@@ -33,7 +34,7 @@ public class BotonCreadorDeArmaDeAsedioEventHandler implements EventHandler<Acti
     @Override
     public void handle(ActionEvent event) {
     	
-    	vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedCrearArmaAsedioStrategy(contenedorMapa, castillo, juego, vistaMapa, vistaSeleccionador));
-		contenedorMapa.setCursor(Cursor.CROSSHAIR);
+    	vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedCrearArmaAsedioStrategy(ContenedorPartida.contenedorMapa, castillo, juego, vistaMapa, vistaSeleccionador));
+    	ContenedorPartida.contenedorMapa.setCursor(Cursor.CROSSHAIR);
     }
 }

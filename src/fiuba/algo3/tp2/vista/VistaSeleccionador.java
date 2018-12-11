@@ -32,8 +32,8 @@ public class VistaSeleccionador {
 			deseleccionarNodo(nodoAnterior);
 		}
 		
-		int colIndex = contenedorMapa.obtenerColumnIndex(nodoSeleccionado);
-		int rowIndex = contenedorMapa.obtenerRowIndex(nodoSeleccionado);
+		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(nodoSeleccionado);
+		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(nodoSeleccionado);
 		
 		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
 		if(posicionable == null) {
@@ -41,7 +41,7 @@ public class VistaSeleccionador {
 		}else {
 			Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
 			for(Posicion posicion: posicionesPosicionable) {
-				Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion);
+				Pane nodoPosicion = ContenedorPartida.contenedorMapa.obtenerNodo(posicion);
 				nodoPosicion.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, null, BorderStroke.THICK)));
 			}
 		}
@@ -50,8 +50,8 @@ public class VistaSeleccionador {
 	private void deseleccionarNodo(Pane nodo) {
 		
 		if(nodo != null) {
-			int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
-			int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
+			int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(nodo);
+			int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(nodo);
 			
 			Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
 			if(posicionable == null) {
@@ -59,7 +59,7 @@ public class VistaSeleccionador {
 			}else {
 				Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
 				for(Posicion posicion: posicionesPosicionable) {
-					Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion);
+					Pane nodoPosicion = ContenedorPartida.contenedorMapa.obtenerNodo(posicion);
 					nodoPosicion.setBorder(Border.EMPTY);
 				}
 			}

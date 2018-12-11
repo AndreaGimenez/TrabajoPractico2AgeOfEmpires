@@ -26,11 +26,13 @@ import javafx.stage.Stage;
 public class ContenedorIngresoJugadores extends VBox {
 
 	private Collection<String> nombresJugadores;
+	
 	public ContenedorIngresoJugadores(Stage stage, Musica musica) {
 	
 	    super();
 	
 	    this.nombresJugadores = new ArrayList<String>();
+	    
 	    this.setAlignment(Pos.CENTER);
 	    this.setSpacing(20);
 	    this.setPadding(new Insets(25));
@@ -64,7 +66,10 @@ public class ContenedorIngresoJugadores extends VBox {
 	    tfNombreJugador.setPrefWidth(250);
 	    tfNombreJugador.setMaxWidth(250);
 	    
-	    BotonAceptarIngresoJugadorHandler botonAceptarIngresoJugadorHandler = new BotonAceptarIngresoJugadorHandler(stage, labelAdvertencia, labelNombreJugador, tfNombreJugador, nombresJugadores, musica);
+	   // ContenedorControles ContenedorControles;
+		BotonAceptarIngresoJugadorHandler botonAceptarIngresoJugadorHandler = new BotonAceptarIngresoJugadorHandler
+	    		(stage, labelAdvertencia, labelNombreJugador, tfNombreJugador, nombresJugadores, musica);
+	    
 	    botonAceptarIngresoJugador.setOnAction(botonAceptarIngresoJugadorHandler);
 	    
 	    TextBoxNombreJugadorHandler tfNombreJugadorHandler = new TextBoxNombreJugadorHandler(botonAceptarIngresoJugador);

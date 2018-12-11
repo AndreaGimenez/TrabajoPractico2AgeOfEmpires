@@ -49,28 +49,28 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 		
-		contenedorControles.clean();
+		ContenedorPartida.contenedorControles.clean();
 		
 		Arquero arquero = (Arquero)posicionable;
 
-		contenedorControles.setNombreUnidad("Arquero");
-		contenedorControles.setVida(arquero.obtenerVida());
+		ContenedorPartida.contenedorControles.setNombreUnidad("Arquero");
+		ContenedorPartida.contenedorControles.setVida(arquero.obtenerVida());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		
-		botonAtacar = new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, contenedorMapa).crearBoton((Atacador)posicionable);
+		botonAtacar = new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa).crearBoton((Atacador)posicionable);
 		acciones.add(botonAtacar);
 		
 		//Movimientos
-		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
+		ContenedorPartida.contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones((Movible)posicionable)));
 
-		contenedorControles.setAcciones(acciones);
+		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 	
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
-		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		contenedorMapa.setBackground(obtenerFondoArquero(), movible.obtenerPosicion());
+		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+		ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArquero(), movible.obtenerPosicion());
 	}
 
 	public Background obtenerFondoArquero() {
