@@ -35,7 +35,7 @@ public class BotonMovimientoHandler implements EventHandler<ActionEvent>{
 			movible.mover(direccion);
 			
 			if(movible instanceof Aldeano) {
-				VistaPosicionable vistaMovible = mapa.obtenerCelda(posicionAnterior).obtenerVistaPosicionable();
+				VistaPosicionable vistaMovible = mapa.obtenerCelda(movible.obtenerPosicion()).obtenerVistaPosicionable();
 				((VistaMovible)vistaMovible).dibujarPosicionable(movible, posicionAnterior);
 				vistaSeleccionador.seleccionarNodo(movible);
 			}
