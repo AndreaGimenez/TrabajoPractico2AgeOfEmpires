@@ -26,10 +26,7 @@ public class BotonConstruirCuartelHandler implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		
 		vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedConstruirCuartelStrategy(ContenedorPartida.contenedorMapa, juego, aldeano, vistaMapa, vistaSeleccionador));
 		contenedorMapa.setCursor(Cursor.CROSSHAIR);
-
 	}
-
 }
