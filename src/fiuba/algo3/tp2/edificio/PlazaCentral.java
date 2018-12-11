@@ -1,11 +1,15 @@
 package fiuba.algo3.tp2.edificio;
 
+import java.util.Collection;
+
 import fiuba.algo3.tp2.construccion.Constructor;
 import fiuba.algo3.tp2.construccion.Construible;
 import fiuba.algo3.tp2.construccion.EstadoConstruccion;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.formas.FormaPlazaCentralRectangulo;
+import fiuba.algo3.tp2.generacionDeUnidades.Generable;
+import fiuba.algo3.tp2.generacionDeUnidades.YaSeGeneraronUnidadesEnEsteTurnoException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.reparacion.ReparacionDesactivada;
@@ -30,7 +34,7 @@ public class PlazaCentral extends Edificio implements Construible{
 
 	@Override
 	public void actualizarEstadoParaSiguienteTurno() {
-		
+		this.generable = null;
 	}
 	
 	@Override
@@ -62,6 +66,13 @@ public class PlazaCentral extends Edificio implements Construible{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public void liberarCeldas(Mapa mapa) {
+		Collection<Posicion>posicionesOcupadas = this.obtenerPosicionesOcupadasEnMapa();
 
-
+		for(Posicion posicionActual : posicionesOcupadas) {
+			mapa.obtenerCelda(posicionActual).liberar();
+		}
+	}
 }

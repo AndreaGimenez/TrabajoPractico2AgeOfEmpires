@@ -6,15 +6,11 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import javafx.scene.Node;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 
 public class VistaMapa {
-	
-	private NodoMapaOnMouseClickedStrategy nodoMapaOnMouseClickedStrategy;
 	
 	public static int TAMANIO_NODO = 50;
 	

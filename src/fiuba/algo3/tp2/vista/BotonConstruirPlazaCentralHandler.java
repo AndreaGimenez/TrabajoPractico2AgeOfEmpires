@@ -1,7 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.juego.Juego;
-import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

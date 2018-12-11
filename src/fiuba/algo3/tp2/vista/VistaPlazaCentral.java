@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
@@ -11,25 +12,29 @@ import fiuba.algo3.tp2.vista.botones.BotonCreadorDeAldeanosEventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 public class VistaPlazaCentral implements VistaPosicionable {
 
 	private ContenedorControles contenedorControles;
 	private Mapa mapa;
 	private ContenedorMapa contenedorMapa;
+	private VistaMapa vistaMapa;
+	private Juego juego;
+	private VistaSeleccionador vistaSeleccionador;
 
 	
-	public VistaPlazaCentral(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, Mapa mapa) {
+	public VistaPlazaCentral(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, Mapa mapa, VistaMapa vistaMapa, Juego juego, VistaSeleccionador vistaSeleccionador) {
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.mapa = mapa;
+		this.vistaMapa = vistaMapa;
+		this.juego = juego;
+		this.vistaSeleccionador = vistaSeleccionador;
 	}
 	
 	@Override
@@ -55,7 +60,8 @@ public class VistaPlazaCentral implements VistaPosicionable {
 
 	private Button crearAccionCrearAldeano(PlazaCentral plazaCentral) {
 		Button crearAldeano = new Button("Crear Aldeano");
-		crearAldeano.setOnAction(new BotonCreadorDeAldeanosEventHandler(crearAldeano, plazaCentral, mapa));
+		crearAldeano.setOnAction(new BotonCreadorDeAldeanosEventHandler
+				(crearAldeano, plazaCentral, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
 		return crearAldeano;
 	}
 	

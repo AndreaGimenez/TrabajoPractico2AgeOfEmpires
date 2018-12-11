@@ -2,10 +2,13 @@ package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
+import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
+import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.AldeanoConConstruccionAsignadaException;
@@ -41,7 +44,10 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 		MensajeDeError error = new MensajeDeError();
 
 		try {
-				aldeano.construirConstruible(new PlazaCentral(new Posicion(colIndex, rowIndex), juego.obtenerMapa()));
+			Mapa mapa = juego.obtenerMapa();
+			PlazaCentral plazaCentral= new PlazaCentral(new Posicion(colIndex, rowIndex), mapa);
+			aldeano.construirConstruible(plazaCentral);
+			juego.obtenerJugadorActual().agregarEdificio(plazaCentral);
 			}
 		
 		catch(EdificioNoAptoParaConstruccionException e) {
@@ -58,6 +64,8 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 		}
 		catch(CeldaInexistenteException e) {
 			error.mostrarVentanaError("La celda en la que intentas contruir no existe", "Intente con una celda del mapa");
+		} catch (OroInsuficienteException e) {
+			error.mostrarVentanaError("No puede crear una nueva plazaCentral porque no tiene suficiente oro");
 		}			
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador));

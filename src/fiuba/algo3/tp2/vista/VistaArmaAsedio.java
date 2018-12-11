@@ -73,12 +73,6 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
 		
 		return botonMontar;
 	}
-
-	private Button crearAccionAtacar() {
-		Button botonAtacar = new Button("Atacar");
-		//TODO agregar event handler.
-		return botonAtacar;
-	}
 	
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {

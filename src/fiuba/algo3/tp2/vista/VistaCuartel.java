@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
@@ -12,24 +13,28 @@ import fiuba.algo3.tp2.vista.botones.BotonCreadorDeEspadachinEventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 public class VistaCuartel implements VistaPosicionable {
 
 	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
 	private Mapa mapa;
+	private VistaMapa vistaMapa;
+	private Juego juego;
+	private VistaSeleccionador vistaSeleccionador;
 
-	public VistaCuartel(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, Mapa mapa) {
+	public VistaCuartel(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, Mapa mapa, VistaMapa vistaMapa, Juego juego, VistaSeleccionador vistaSeleccionador) {
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.mapa = mapa;
+		this.vistaMapa = vistaMapa;
+		this.juego = juego;
+		this.vistaSeleccionador = vistaSeleccionador;
 	}
 	
 	@Override
@@ -57,7 +62,7 @@ public class VistaCuartel implements VistaPosicionable {
 
 		Button botonCrearEspadachin = new Button("Crear Espadachin");
 
-		botonCrearEspadachin.setOnAction(new BotonCreadorDeEspadachinEventHandler(botonCrearEspadachin, cuartel, mapa));
+		botonCrearEspadachin.setOnAction(new BotonCreadorDeEspadachinEventHandler(botonCrearEspadachin, cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
 
 		return botonCrearEspadachin;
 
@@ -67,7 +72,8 @@ public class VistaCuartel implements VistaPosicionable {
 
 		Button botonCrearArquero = new Button("Crear Arquero");
 
-		botonCrearArquero.setOnAction(new BotonCreadorDeArqueroEventHandler(botonCrearArquero, cuartel, mapa));
+		botonCrearArquero.setOnAction(new BotonCreadorDeArqueroEventHandler
+						(botonCrearArquero, cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
 
 		return botonCrearArquero;
 	}

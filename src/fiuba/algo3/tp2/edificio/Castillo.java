@@ -1,6 +1,8 @@
 package fiuba.algo3.tp2.edificio;
 
 import fiuba.algo3.tp2.formas.FormaCastilloRectangulo;
+import fiuba.algo3.tp2.generacionDeUnidades.Generable;
+import fiuba.algo3.tp2.generacionDeUnidades.YaSeGeneraronUnidadesEnEsteTurnoException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -19,11 +21,6 @@ public class Castillo extends Edificio implements AtacadorZona {
 		super(posicion, new FormaCastilloRectangulo(), new ReparacionDesactivada(), VIDA_MAXIMA, SALUD_RECUPERADA_POR_TURNO, COSTO_CONSTRUCCION, mapa);
 		//this.generadorUnidades = new CreadorUnidadCastillo(mapa);
 		this.ataque = new AtaqueCastillo(this, mapa);
-	}
-
-	@Override
-	public void actualizarEstadoParaSiguienteTurno() {
-
 	}
 
 	@Override

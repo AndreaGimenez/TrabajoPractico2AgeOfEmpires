@@ -34,9 +34,9 @@ public class VistaPosicionableMultitone {
 		vistaEspadachin = new VistaEspadachin(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
 		vistaArquero = new VistaArquero(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
 		vistaArmaAsedio = new VistaArmaAsedio(contenedorControles, contenedorMapa, vistaSeleccionador, vistaMapa, juego);
-		vistaCuartel = new VistaCuartel(contenedorMapa, contenedorControles, mapa);
-		vistaPlazaCentral = new VistaPlazaCentral(contenedorMapa, contenedorControles, mapa);
-		vistaCastillo = new VistaCastillo(contenedorMapa, contenedorControles, mapa);
+		vistaCuartel = new VistaCuartel(contenedorMapa, contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
+		vistaPlazaCentral = new VistaPlazaCentral(contenedorMapa, contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
+		vistaCastillo = new VistaCastillo(contenedorMapa, contenedorControles, mapa, vistaMapa, juego, vistaSeleccionador);
 	}
 	
 	public static void init(ContenedorControles contenedorControles,

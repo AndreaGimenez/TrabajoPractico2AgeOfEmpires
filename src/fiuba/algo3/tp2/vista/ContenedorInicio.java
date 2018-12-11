@@ -1,7 +1,5 @@
 package fiuba.algo3.tp2.vista;
 
-import java.io.File;
-
 import fiuba.algo3.tp2.vista.eventos.BotonComenzarPartidaEventHandler;
 import fiuba.algo3.tp2.vista.eventos.BotonSalirEventHandler;
 import javafx.geometry.Insets;
@@ -10,15 +8,12 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;

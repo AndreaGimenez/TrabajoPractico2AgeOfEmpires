@@ -3,21 +3,20 @@ package fiuba.algo3.tp2.edificio;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.construccion.Constructor;
-import fiuba.algo3.tp2.construccion.Construible;
-import fiuba.algo3.tp2.construccion.EstadoConstruccion;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
-import fiuba.algo3.tp2.reparacion.Reparacion;
-import fiuba.algo3.tp2.reparacion.ReparacionActivada;
-import fiuba.algo3.tp2.reparacion.Reparador;
 import fiuba.algo3.tp2.formas.Forma;
+import fiuba.algo3.tp2.generacionDeUnidades.Generable;
 import fiuba.algo3.tp2.generacionDeUnidades.GeneradorUnidades;
+import fiuba.algo3.tp2.generacionDeUnidades.YaSeGeneraronUnidadesEnEsteTurnoException;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
-import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.reparacion.Reparacion;
+import fiuba.algo3.tp2.reparacion.ReparacionActivada;
+import fiuba.algo3.tp2.reparacion.Reparador;
 import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.vida.VidaEdificio;
 
@@ -27,10 +26,12 @@ public abstract class Edificio implements Posicionable, Atacable, GeneradorUnida
 	protected Reparacion reparacion;
 	protected Forma forma;
 	protected Mapa mapa;
+	protected Generable generable;
 	private Reparador reparadorAsignadoParaReparar;
 	private Constructor constructorAsignadoParaConstruir;
 	private VidaEdificio vida;
 	private int costoConstruccion;
+	
 	
 	/*
 	 * La coordenada es la celda inferior izquierda del edificio
@@ -42,6 +43,7 @@ public abstract class Edificio implements Posicionable, Atacable, GeneradorUnida
 		this.reparacion = reparacion;
 		this.vida = new VidaEdificio(vidaMaxima, puntosDeRecuperacionPorTurno);
 		this.costoConstruccion = costoConstruccion;
+		this.generable = null;
 		posicionar(posicion);
 	}
 	
@@ -49,7 +51,10 @@ public abstract class Edificio implements Posicionable, Atacable, GeneradorUnida
 		// TODO Auto-generated constructor stub
 	}
 
-	public abstract void actualizarEstadoParaSiguienteTurno();
+    @Override
+	public void actualizarEstadoParaSiguienteTurno() {
+		this.generable = null;
+	}
     
 	public void posicionar(Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException {
 		
@@ -69,6 +74,17 @@ public abstract class Edificio implements Posicionable, Atacable, GeneradorUnida
 	public Collection<Posicion> obtenerPosicionesOcupadasEnMapa(){
 		
 		return forma.obtenerPosiciones(posicion);
+	}
+	
+	public void crear(Generable generable) throws YaSeGeneraronUnidadesEnEsteTurnoException {
+		
+		if(this.generable != null) {
+			generable.liberarCeldas(this.mapa);
+			throw new YaSeGeneraronUnidadesEnEsteTurnoException();
+		}
+		
+		this.generable = generable;
+		
 	}
 
 	public void reparar() throws EdificioNoAptoParaReparacionException{

@@ -2,8 +2,6 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.ListIterator;
 
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -12,7 +10,6 @@ import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vista.botones.BotonAldeanoReparaEdificioEventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -27,22 +24,13 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
 	private VistaSeleccionador vistaSeleccionador;
-	private LinkedList<AccionPosicionarEdificio> construccionesCuartel;
-	private LinkedList<AccionPosicionarEdificio> construccionesPlazaCentral;
 	private VistaMapa vistaMapa;
 	private Juego juego;
-	
-	private Button botonConstruirPlazaCentral;
-	private Button botonConstruirCuartel;
-	
-	private Aldeano aldeano;
 	
 	public VistaAldeano(ContenedorControles contenedorControles, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador, VistaMapa vistaMapa, Juego juego) {
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.vistaSeleccionador = vistaSeleccionador;
-		this.construccionesCuartel = new LinkedList<>();
-		this.construccionesPlazaCentral = new LinkedList<>();
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 	}
@@ -79,37 +67,6 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 		contenedorControles.getChildren().add(botoneraMovimiento);
 		
 		contenedorControles.setAcciones(acciones);
-	}
-
-	private AccionPosicionarEdificio buscarPosicionPlazaCentral(String accion) {
-
-		System.out.println(accion);
-
-		AccionPosicionarEdificio buscado = null;
-
-		ListIterator<AccionPosicionarEdificio> iterador = this.construccionesPlazaCentral.listIterator();
-
-		while(iterador.hasNext() && (buscado == null)){
-			buscado = iterador.next().coincideAccion(accion);
-		}
-
-		return buscado;
-	}
-
-	private AccionPosicionarEdificio buscarPosicionCuartel(String accion) {
-
-		System.out.println(accion);
-
-		AccionPosicionarEdificio buscado = null;
-
-		ListIterator<AccionPosicionarEdificio> iterador = this.construccionesCuartel.listIterator();
-
-		while(iterador.hasNext() && (buscado == null)){
-			buscado = iterador.next().coincideAccion(accion);
-		}
-
-		return buscado;
-
 	}
 
 	@Override

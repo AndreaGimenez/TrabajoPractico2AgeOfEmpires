@@ -4,8 +4,6 @@ import fiuba.algo3.tp2.vista.Musica;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
-import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
 
 public class OpcionMuteEventHandler implements EventHandler<ActionEvent>{
 	

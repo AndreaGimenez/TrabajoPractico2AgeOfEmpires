@@ -61,13 +61,7 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible {
 
 		contenedorControles.setAcciones(acciones);
 	}
-	
-	private Button crearAccionAtacar() {
-		Button botonAtacar = new Button("Atacar");
-		//TODO agregar event handler.
-		return botonAtacar;
-	}
-	
+
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);

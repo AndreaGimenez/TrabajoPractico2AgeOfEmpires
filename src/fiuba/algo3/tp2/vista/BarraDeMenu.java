@@ -1,8 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
 
-import java.awt.Button;
-
 import fiuba.algo3.tp2.vista.eventos.OpcionAcercaDeEventHandler;
 import fiuba.algo3.tp2.vista.eventos.OpcionMuteEventHandler;
 import fiuba.algo3.tp2.vista.eventos.OpcionPantallaCompletaEventHandler;
@@ -11,7 +9,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class BarraDeMenu extends MenuBar {

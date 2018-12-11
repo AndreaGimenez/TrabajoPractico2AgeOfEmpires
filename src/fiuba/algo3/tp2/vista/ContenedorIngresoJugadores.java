@@ -25,17 +25,12 @@ import javafx.stage.Stage;
 
 public class ContenedorIngresoJugadores extends VBox {
 
-	private Stage stage;
 	private Collection<String> nombresJugadores;
-	private Musica musica;
 	public ContenedorIngresoJugadores(Stage stage, Musica musica) {
 	
 	    super();
 	
-	    this.stage = stage;
 	    this.nombresJugadores = new ArrayList<String>();
-	    this.musica = musica;
-	    
 	    this.setAlignment(Pos.CENTER);
 	    this.setSpacing(20);
 	    this.setPadding(new Insets(25));
