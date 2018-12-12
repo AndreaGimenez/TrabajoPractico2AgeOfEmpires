@@ -53,7 +53,7 @@ public class ContenedorPartida extends BorderPane {
     private void setMusica() {
 		// TODO Auto-generated method stub
 		
-    	this.musica = new Musica("src/fiuba/algo3/tp2/vista/musicaJuego.mp3");
+    	this.musica = new Musica("src/fiuba/algo3/tp2/vista/musica/musicaJuego.mp3");
         this.musica.iniciarReproduccionMusica();
 	}
 
