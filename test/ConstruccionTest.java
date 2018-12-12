@@ -35,7 +35,7 @@ public class ConstruccionTest {
 	public ExpectedException exceptionRule = ExpectedException.none();
 	
 	@Test
-	public void testUnAldeanoEnX0Y0ConstruyeUnaPlazaCentralEnX1Y0() 
+	public void testUnAldeanoEnX5Y5ConstruyeUnaPlazaCentralEnX5Y6() 
 			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException {
 		
 		Mapa mapa = new Mapa(10,10);
@@ -47,6 +47,21 @@ public class ConstruccionTest {
 		exceptionRule.expect(CeldaOcupadaException.class);
 		new Aldeano(new Posicion(5,6), mapa);
 	}
+	
+	@Test
+	public void testUnAldeanoEnX0Y0NoPuedeConstruirUnCuartelEnX50Y5() 
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, AldeanoConConstruccionAsignadaException, ConstruccionFueraDeRangoException {
+		
+		Mapa mapa = new Mapa(10,10);
+		
+		Aldeano aldeano = new Aldeano(new Posicion(0,0), mapa);
+		
+		aldeano.construirConstruible(new Cuartel(new Posicion (5,5), mapa));
+		
+		//exceptionRule.expect(CeldaOcupadaException.class);
+		//new Aldeano(new Posicion(5,6), mapa);
+	}
+	
 	
 	@Test
 	public void testUnAldeanoEnX0Y0ConstruyeUnaPlazaCentralEnX1Y0DeberiaEstarEnConstruccion() 

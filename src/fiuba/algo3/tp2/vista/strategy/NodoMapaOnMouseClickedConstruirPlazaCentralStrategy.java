@@ -14,6 +14,7 @@ import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.AldeanoConConstruccionAsignadaException;
 import fiuba.algo3.tp2.vista.MensajeDeError;
 import fiuba.algo3.tp2.vista.VistaMapa;
+import fiuba.algo3.tp2.vista.VistaPlazaCentral;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -50,7 +51,9 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 
 		try {
 			Mapa mapa = juego.obtenerMapa();
+			VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego);
 			PlazaCentral plazaCentral= new PlazaCentral(new Posicion(colIndex, rowIndex), mapa);
+			plazaCentral.addObserver(vistaPlazaCentral);
 			aldeano.construirConstruible(plazaCentral);
 			juego.obtenerJugadorActual().agregarEdificio(plazaCentral);
 			}
