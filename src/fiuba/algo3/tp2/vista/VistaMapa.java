@@ -42,7 +42,7 @@ public class VistaMapa {
         for (int i = 0 ; i < mapa.getTamanioX() ; i++) {
             for (int j = 0; j < mapa.getTamanioY(); j++) {
             	
-            	Pane pane = new Pane();
+            	Pane pane = new PaneMapa();
             	
             	NodoMapaOnMouseClickedStrategy strategy = new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador);
             	NodoMapaOnMouseClickedEventHandler nodoMapaOnMouseClickedEventHandler = new NodoMapaOnMouseClickedEventHandler(strategy);

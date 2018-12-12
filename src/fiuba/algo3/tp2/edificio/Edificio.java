@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.edificio;
 
 import java.util.Collection;
+import java.util.Observable;
 
 import fiuba.algo3.tp2.construccion.Constructor;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
@@ -20,7 +21,7 @@ import fiuba.algo3.tp2.reparacion.Reparador;
 import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.vida.VidaEdificio;
 
-public abstract class Edificio implements Posicionable, Atacable, GeneradorUnidades{
+public abstract class Edificio extends Observable implements Posicionable, Atacable, GeneradorUnidades{
 
 	protected Posicion posicion;
 	protected Reparacion reparacion;

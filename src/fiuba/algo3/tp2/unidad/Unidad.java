@@ -2,12 +2,14 @@ package fiuba.algo3.tp2.unidad;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
-import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 import fiuba.algo3.tp2.formas.Forma;
 import fiuba.algo3.tp2.generacionDeUnidades.Generable;
 import fiuba.algo3.tp2.mapa.Atacable;
@@ -80,8 +82,12 @@ public abstract class Unidad extends Observable implements Movible, Posicionable
 	
 	@Override
 	public void mover(Direccion direccion) throws MovimientoInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+		Posicion posicionaAnterior = this.posicion;
 		movimiento.mover(this, direccion, mapa);
 		movimiento = new MovimientoNulo();
+		
+		setChanged();
+		notifyObservers(posicionaAnterior);
 	}
 
 	public void iniciar() {

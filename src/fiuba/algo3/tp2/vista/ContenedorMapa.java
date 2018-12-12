@@ -42,17 +42,25 @@ public class ContenedorMapa extends GridPane {
 		obtenerNodo(posicion).setBackground(fondo);
 	}
 
-	public Pane obtenerNodo(Posicion posicion) {
+	public PaneMapa obtenerNodo(Posicion posicion) {
 		
-		Pane nodoADevolver = null;
+		PaneMapa nodoADevolver = null;
 		for(Node nodo : getChildren()) {
 			if(nodoADevolver == null
-					&& nodo instanceof Pane
+					&& nodo instanceof PaneMapa
 					&& new Posicion(obtenerColumnIndex(nodo), obtenerRowIndex(nodo)).esIgualA(posicion)) {
 				
-				nodoADevolver = (Pane)nodo;
+				nodoADevolver = (PaneMapa)nodo;
 			}
 		}
 		return nodoADevolver;
+	}
+
+	public void agregarVistaPosicionable(VistaPosicionable vistaPosicionable, Posicion posicion) {
+		obtenerNodo(posicion).setVistaPosicionable(vistaPosicionable);
+	}
+	
+	public VistaPosicionable obtenerVistaPosicionable(Posicion posicion) {
+		return obtenerNodo(posicion).obtenerVistaPosicionable();
 	}
 }

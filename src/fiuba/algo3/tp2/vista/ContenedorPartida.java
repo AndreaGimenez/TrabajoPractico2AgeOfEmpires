@@ -69,7 +69,7 @@ public class ContenedorPartida extends BorderPane {
         VistaPosicionableMultitone.init(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, mapa, juego);
         
         ContenedorPartida.vistaMapa.dibujarTerreno();
-        ContenedorPartida.vistaMapa.dibujarPosicionables();
+        //ContenedorPartida.vistaMapa.dibujarPosicionables();
         
         this.setCenter(scrollPane);
     }

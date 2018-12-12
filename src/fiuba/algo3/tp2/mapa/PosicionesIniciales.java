@@ -3,8 +3,11 @@ package fiuba.algo3.tp2.mapa;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class PosicionesInicialesAldeanos extends LinkedList<Posicion>{
+public class PosicionesIniciales extends LinkedList<Posicion>{
 
+	public static final Posicion POSICION_CASTILLO_1 = new Posicion(0, 0);
+	public static final Posicion POSICION_PLAZA_CENTRAL_1 = new Posicion(5, 0);
+	
 	public static final Posicion POSICION_INICIAL_1 = new Posicion(5, 3);
 	public static final Posicion POSICION_INICIAL_2 = new Posicion(5, 5);
 	public static final Posicion POSICION_INICIAL_3 = new Posicion(3, 5);
@@ -13,7 +16,7 @@ public class PosicionesInicialesAldeanos extends LinkedList<Posicion>{
 	private Mapa mapa;
 	private LinkedList<Posicion> posiciones;
 
-	public PosicionesInicialesAldeanos(Mapa mapa) {
+	public PosicionesIniciales(Mapa mapa) {
 
 		this.mapa = mapa;
 		this.posiciones = iniciarPosiciones();

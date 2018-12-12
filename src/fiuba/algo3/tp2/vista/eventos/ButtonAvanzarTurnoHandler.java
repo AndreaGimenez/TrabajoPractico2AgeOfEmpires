@@ -44,7 +44,7 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 			vistaEstadoJugador.actualizar();
 			vistaSeleccionador.deseleccionarNodoActual();
 			ContenedorPartida.contenedorControles.clean();
-			vistaMapa.dibujarPosicionables();
+			//vistaMapa.dibujarPosicionables();
 		} 
 		catch(EdificioNoAptoParaConstruccionException e) {
 			error.mostrarVentanaError("No es posible construir este Edificio", "No posee recursos suficientes");

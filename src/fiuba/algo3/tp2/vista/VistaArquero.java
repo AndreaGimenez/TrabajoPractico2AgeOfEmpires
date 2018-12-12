@@ -9,6 +9,7 @@ import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
+import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Atacador;
 import javafx.scene.control.Button;
@@ -44,6 +45,11 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
 		pane.setBackground(obtenerFondoArquero());
+	}
+	
+	public void dibujarPosicionable(Arquero arquero) {
+		Pane nodo = contenedorMapa.obtenerNodo(arquero.obtenerPosicion());
+		dibujarPosicionable(arquero, nodo);
 	}
 	
 	@Override
@@ -89,7 +95,9 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		botonAtacar.setDisable(true);
+		Arquero arquero = (Arquero)o;
+		Posicion posicionAnterior = (Posicion) arg;
+		
+		dibujarPosicionable(arquero, posicionAnterior);
 	}
-
 }
