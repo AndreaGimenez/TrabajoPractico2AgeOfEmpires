@@ -11,8 +11,8 @@ public class Musica {
 	Media cancion;
 	
 	public Musica(String cancionInicioJuego) {
-		//String cancionInicioJuego = "src/fiuba/algo3/tp2/vista/MusicaDeInicio.mp3";
-		this.cancion = new Media(new File(cancionInicioJuego).toURI().toString());
+		String cancionInicioJuego1 = "src/fiuba/algo3/tp2/vista/musica/musicaJuego.mp3";
+		this.cancion = new Media(new File(cancionInicioJuego1).toURI().toString());
 		this.mediaPlayer = new MediaPlayer(cancion);
 	}
 	
