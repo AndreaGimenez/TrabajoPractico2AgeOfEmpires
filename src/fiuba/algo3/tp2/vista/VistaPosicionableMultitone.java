@@ -10,6 +10,9 @@ import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Espadachin;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 
 public class VistaPosicionableMultitone {	
 	

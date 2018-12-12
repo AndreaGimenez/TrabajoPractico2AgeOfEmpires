@@ -1,13 +1,13 @@
-package fiuba.algo3.tp2.vista.botones;
+package fiuba.algo3.tp2.vista.handlers;
 
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.vista.ContenedorMapa;
-import fiuba.algo3.tp2.vista.ContenedorPartida;
-import fiuba.algo3.tp2.vista.NodoMapaOnMouseClickedCrearArmaAsedioStrategy;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
+import fiuba.algo3.tp2.vista.strategy.NodoMapaOnMouseClickedCrearArmaAsedioStrategy;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;

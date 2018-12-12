@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.vista.eventos;
+package fiuba.algo3.tp2.vista.handlers;
 
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
@@ -6,12 +6,12 @@ import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
-import fiuba.algo3.tp2.vista.ContenedorControles;
-import fiuba.algo3.tp2.vista.ContenedorPartida;
 import fiuba.algo3.tp2.vista.MensajeDeError;
 import fiuba.algo3.tp2.vista.VistaEstadoJugador;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

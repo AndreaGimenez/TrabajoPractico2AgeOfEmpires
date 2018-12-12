@@ -1,7 +1,10 @@
-package fiuba.algo3.tp2.vista;
+package fiuba.algo3.tp2.vista.contenedores;
 
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.vista.PaneMapa;
+import fiuba.algo3.tp2.vista.VistaMapa;
+import fiuba.algo3.tp2.vista.VistaPosicionable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;

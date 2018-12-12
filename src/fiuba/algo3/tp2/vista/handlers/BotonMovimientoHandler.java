@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.vista;
+package fiuba.algo3.tp2.vista.handlers;
 
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
@@ -8,6 +8,10 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.movimiento.Direccion;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.vista.MensajeDeError;
+import fiuba.algo3.tp2.vista.VistaPosicionable;
+import fiuba.algo3.tp2.vista.VistaSeleccionador;
+import fiuba.algo3.tp2.vista.musica.Musica;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

@@ -1,6 +1,6 @@
-package fiuba.algo3.tp2.vista.eventos;
+package fiuba.algo3.tp2.vista.handlers;
 
-import fiuba.algo3.tp2.vista.Musica;
+import fiuba.algo3.tp2.vista.musica.Musica;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;

@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.vista;
+package fiuba.algo3.tp2.vista.strategy;
 
 
 
@@ -11,6 +11,13 @@ import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Atacador;
+import fiuba.algo3.tp2.vista.ColorTransition;
+import fiuba.algo3.tp2.vista.MensajeDeError;
+import fiuba.algo3.tp2.vista.VistaMapa;
+import fiuba.algo3.tp2.vista.VistaPosicionableMultitone;
+import fiuba.algo3.tp2.vista.VistaSeleccionador;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import javafx.animation.Animation;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;

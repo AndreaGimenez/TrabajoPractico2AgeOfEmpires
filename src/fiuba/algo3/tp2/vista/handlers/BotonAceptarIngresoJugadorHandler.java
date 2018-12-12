@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.vista;
+package fiuba.algo3.tp2.vista.handlers;
 
 
 import java.util.Collection;
@@ -25,7 +25,16 @@ import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Espadachin;
-import fiuba.algo3.tp2.vista.eventos.AplicacionOnKeyPressEventHandler;
+import fiuba.algo3.tp2.vista.MensajeDeError;
+import fiuba.algo3.tp2.vista.VistaAldeano;
+import fiuba.algo3.tp2.vista.VistaArmaAsedio;
+import fiuba.algo3.tp2.vista.VistaArquero;
+import fiuba.algo3.tp2.vista.VistaCastillo;
+import fiuba.algo3.tp2.vista.VistaCuartel;
+import fiuba.algo3.tp2.vista.VistaEspadachin;
+import fiuba.algo3.tp2.vista.VistaPlazaCentral;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
+import fiuba.algo3.tp2.vista.musica.Musica;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

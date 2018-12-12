@@ -1,9 +1,14 @@
-package fiuba.algo3.tp2.vista;
+package fiuba.algo3.tp2.vista.strategy;
 
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.vista.VistaPosicionable;
+import fiuba.algo3.tp2.vista.VistaPosicionableMultitone;
+import fiuba.algo3.tp2.vista.VistaSeleccionador;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 

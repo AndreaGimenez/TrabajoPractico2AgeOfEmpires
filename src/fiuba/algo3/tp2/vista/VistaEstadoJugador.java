@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.vista;
 
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorEstadoJugador;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 
 public class VistaEstadoJugador {
 

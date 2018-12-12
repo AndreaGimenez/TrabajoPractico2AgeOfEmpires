@@ -1,5 +1,8 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.vista.contenedores.ContenedorIngresoJugadores;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorInicio;
+import fiuba.algo3.tp2.vista.musica.Musica;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

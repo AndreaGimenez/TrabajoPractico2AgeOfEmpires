@@ -1,4 +1,4 @@
-package fiuba.algo3.tp2.vista;
+package fiuba.algo3.tp2.vista.contenedores;
 
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;

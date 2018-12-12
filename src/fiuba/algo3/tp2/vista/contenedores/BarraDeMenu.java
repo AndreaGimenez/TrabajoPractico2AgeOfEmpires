@@ -1,10 +1,11 @@
-package fiuba.algo3.tp2.vista;
+package fiuba.algo3.tp2.vista.contenedores;
 
 
-import fiuba.algo3.tp2.vista.eventos.OpcionAcercaDeEventHandler;
-import fiuba.algo3.tp2.vista.eventos.OpcionMuteEventHandler;
-import fiuba.algo3.tp2.vista.eventos.OpcionPantallaCompletaEventHandler;
-import fiuba.algo3.tp2.vista.eventos.OpcionSalirEventHandler;
+import fiuba.algo3.tp2.vista.handlers.OpcionAcercaDeEventHandler;
+import fiuba.algo3.tp2.vista.handlers.OpcionMuteEventHandler;
+import fiuba.algo3.tp2.vista.handlers.OpcionPantallaCompletaEventHandler;
+import fiuba.algo3.tp2.vista.handlers.OpcionSalirEventHandler;
+import fiuba.algo3.tp2.vista.musica.Musica;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;

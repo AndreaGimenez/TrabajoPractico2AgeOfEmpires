@@ -1,5 +1,6 @@
-package fiuba.algo3.tp2.vista;
+package fiuba.algo3.tp2.vista.handlers;
 
+import fiuba.algo3.tp2.vista.strategy.NodoMapaOnMouseClickedStrategy;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 

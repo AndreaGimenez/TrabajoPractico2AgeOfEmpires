@@ -1,9 +1,12 @@
-package fiuba.algo3.tp2.vista;
+package fiuba.algo3.tp2.vista.contenedores;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import fiuba.algo3.tp2.vista.eventos.BotonSalirEventHandler;
+import fiuba.algo3.tp2.vista.handlers.BotonAceptarIngresoJugadorHandler;
+import fiuba.algo3.tp2.vista.handlers.BotonSalirEventHandler;
+import fiuba.algo3.tp2.vista.handlers.TextBoxNombreJugadorHandler;
+import fiuba.algo3.tp2.vista.musica.Musica;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
