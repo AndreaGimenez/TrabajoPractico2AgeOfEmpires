@@ -123,9 +123,7 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		
 		if(objetoQueCambio instanceof EstadoConstruccion) {
 			//considerar si se termino de construir o si se avanzo en la construccion
-			if(((EstadoConstruccion)objetoQueCambio).estaConstruido()) {
-			actualizarCambiosEnLaConstruccion();
-			}
+			actualizarCambiosEnLaConstruccion(((EstadoConstruccion)objetoQueCambio));
 		}
 		
 		if(objetoQueCambio instanceof Generable) {
@@ -136,12 +134,21 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	}
 
 	private void actualizarCambiosEnLaGeneracion(Object objetoQueCambio) {
-		// TODO Auto-generated method stub
-		
+		if(objetoQueCambio == null) {
+			//activar botoon de generar unidades
+		}
+		else {
+			//desactivar boton de generar unidades
+		}
 	}
 
-	private void actualizarCambiosEnLaConstruccion() {
+	private void actualizarCambiosEnLaConstruccion(EstadoConstruccion objetoQueCambio) {
+		if(objetoQueCambio.estaConstruido()) {
 			//poner imagen de cuartel construido
+		}
+		else {
+			//poner imagen de cuartel en cimientos
+		}
 	}
 
 	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {

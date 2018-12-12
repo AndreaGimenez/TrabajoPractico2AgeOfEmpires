@@ -103,16 +103,47 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 	@Override
 	public void update(Observable observable, Object objetoQueCambio) {
 		if(objetoQueCambio instanceof VidaEdificio) {
-			//considerar si sufrio danio, se destruyo, se recupero vida,  se termino de reparar(vida full) 
+			//considerar si sufrio danio, se destruyo, se recupero vida,  se termino de reparar(vida full)
+			actualizarCambiosEnLaVida(((VidaEdificio) objetoQueCambio).obtenerVida(), ((VidaEdificio) objetoQueCambio).obtenerVidaMaxima());
 		}
 		
 		if(objetoQueCambio instanceof EstadoConstruccion) {
 			//considerar si se termino de construir o si se avanzo en la construccion
+			actualizarCambiosEnLaConstruccion(((EstadoConstruccion)objetoQueCambio));
 		}
 		
 		if(objetoQueCambio instanceof Generable) {
 			//considerar si se muestran o anulan los botones de generar unidad
+			actualizarCambiosEnLaGeneracion(objetoQueCambio);
+
 		}
-		
+	}
+
+	private void actualizarCambiosEnLaGeneracion(Object objetoQueCambio) {
+		if(objetoQueCambio == null) {
+			//activar botoon de generar unidades
+		}
+		else {
+			//desactivar boton de generar unidades
+		}
+	}
+
+	private void actualizarCambiosEnLaConstruccion(EstadoConstruccion objetoQueCambio) {
+		if(objetoQueCambio.estaConstruido()) {
+			//poner imagen de la plaza central construido
+		}
+		else {
+			//poner imagen de la plaza central en cimientos
+		}
+	}
+
+	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
+		//Si la vida esta entre el 50% y el 100%
+		if(vidaActual >= vidaMaxima/2 ) {
+			//mostrar foto dde la plaza central sin daños
+		}
+		else {
+			//mostrar foto de la plaza central con daños
+		}
 	}
 }
