@@ -51,6 +51,7 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 			Cuartel cuartel = new Cuartel(new Posicion(colIndex, rowIndex), mapa);
 			aldeano.construirConstruible(cuartel);
 			juego.obtenerJugadorActual().agregarEdificio(cuartel);
+			vistaMapa.dibujarPosicionables();
 			} 
 		catch(CeldaOcupadaException e) {
 			error.mostrarVentanaError("La celda en la que intentas contruir esta ocupada", "Intente nuevamente con otra celda libre");

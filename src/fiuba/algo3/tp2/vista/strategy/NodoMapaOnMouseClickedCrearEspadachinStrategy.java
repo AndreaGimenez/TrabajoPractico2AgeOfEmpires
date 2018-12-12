@@ -51,6 +51,7 @@ public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOn
 			Espadachin espadachin = new Espadachin(new Posicion(colIndex, rowIndex), mapa);
 			cuartel.crear(espadachin);
 			juego.obtenerJugadorActual().agregarUnidad(espadachin, mapa);
+			vistaMapa.dibujarPosicionables();
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar El Arquero porque ya fue generada una en este turno","");

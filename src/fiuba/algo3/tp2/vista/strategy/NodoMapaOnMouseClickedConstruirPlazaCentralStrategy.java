@@ -53,6 +53,7 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 			PlazaCentral plazaCentral= new PlazaCentral(new Posicion(colIndex, rowIndex), mapa);
 			aldeano.construirConstruible(plazaCentral);
 			juego.obtenerJugadorActual().agregarEdificio(plazaCentral);
+			vistaMapa.dibujarPosicionables();
 			}
 		
 		catch(EdificioNoAptoParaConstruccionException e) {

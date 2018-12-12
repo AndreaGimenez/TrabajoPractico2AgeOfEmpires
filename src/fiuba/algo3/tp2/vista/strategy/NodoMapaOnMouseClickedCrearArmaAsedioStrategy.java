@@ -47,6 +47,7 @@ public class NodoMapaOnMouseClickedCrearArmaAsedioStrategy implements NodoMapaOn
 			ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(colIndex, rowIndex), mapa);
 			castillo.crear(armaAsedio);
 			juego.obtenerJugadorActual().agregarUnidad(armaAsedio, mapa);
+			vistaMapa.dibujarPosicionables();
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar El Arma de Asedio porque ya fue generada una en este turno","");

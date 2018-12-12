@@ -51,6 +51,7 @@ public class NodoMapaOnMouseClickedCrearArqueroStrategy implements NodoMapaOnMou
 			Arquero arquero= new Arquero(new Posicion(colIndex, rowIndex), mapa);
 			cuartel.crear(arquero);
 			juego.obtenerJugadorActual().agregarUnidad(arquero, mapa);
+			vistaMapa.dibujarPosicionables();
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar El Arquero porque ya fue generada una en este turno","");

@@ -47,6 +47,7 @@ public class NodoMapaOnMouseClickedCrearAldeanoStrategy implements NodoMapaOnMou
 			Aldeano aldeano = new Aldeano(new Posicion(colIndex, rowIndex), mapa);
 			plazaCentral.crear(aldeano);
 			juego.obtenerJugadorActual().agregarUnidad(aldeano, mapa);
+			vistaMapa.dibujarPosicionables();
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar el aldeano porque ya fue generada una en este turno","");
