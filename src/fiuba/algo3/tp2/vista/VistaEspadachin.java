@@ -58,8 +58,8 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 		
 		Espadachin espadachin = (Espadachin)posicionable;
 		
-		ContenedorPartida.contenedorControles.setNombreUnidad("Espadachin");
-		ContenedorPartida.contenedorControles.setVida(espadachin.obtenerVida());
+		contenedorControles.setNombreUnidad("Espadachin");
+		contenedorControles.setVida(espadachin.obtenerVida(), espadachin.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa).crearBoton((Atacador)posicionable));
@@ -69,7 +69,7 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
-
+	
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);

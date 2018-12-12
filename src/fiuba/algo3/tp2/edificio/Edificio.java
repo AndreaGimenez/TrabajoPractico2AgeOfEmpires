@@ -102,6 +102,10 @@ public abstract class Edificio extends Observable implements Posicionable, Ataca
 		return vida.obtenerVida();
 	}
 
+	public int obtenerVidaMaxima() {
+		return vida.obtenerVidaMaxima();
+	}
+
     public void curar(){
     	
     	vida.recuperarVida();

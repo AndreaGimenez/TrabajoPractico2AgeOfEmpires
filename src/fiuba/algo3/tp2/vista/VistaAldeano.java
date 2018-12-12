@@ -50,8 +50,10 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		
 		ContenedorPartida.contenedorControles.clean();
 		
+		Aldeano aldeano = (Aldeano)posicionable;
+		
 		ContenedorPartida.contenedorControles.setNombreUnidad("Aldeano");
-		ContenedorPartida.contenedorControles.setVida(((Aldeano)posicionable).obtenerVida());
+		ContenedorPartida.contenedorControles.setVida(aldeano.obtenerVida(), aldeano.obtenerVidaMaxima());
 
 		
 		Collection<Button> acciones = new ArrayList<>();

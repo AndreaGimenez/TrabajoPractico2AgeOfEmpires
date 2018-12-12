@@ -79,6 +79,10 @@ public abstract class Unidad extends Observable implements Movible, Posicionable
 	public int obtenerVida() {
 		return vida.obtenerVida();
 	}
+
+	public int obtenerVidaMaxima() {
+		return vida.obtenerVidaMaxima();
+	}
 	
 	@Override
 	public void mover(Direccion direccion) throws MovimientoInvalidoException, CeldaOcupadaException, CeldaInexistenteException {

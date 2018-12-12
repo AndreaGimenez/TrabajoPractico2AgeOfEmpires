@@ -58,8 +58,8 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 		
 		ArmaAsedio armaAsedio = (ArmaAsedio)posicionable;
 		
-		ContenedorPartida.contenedorControles.setNombreUnidad("Arma de Asedio");
-		ContenedorPartida.contenedorControles.setVida(armaAsedio.obtenerVida());
+		contenedorControles.setNombreUnidad("Arma de Asedio");
+		contenedorControles.setVida(armaAsedio.obtenerVida(), armaAsedio.obtenerVidaMaxima());
 		
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionMontar((ArmaAsedio)posicionable));

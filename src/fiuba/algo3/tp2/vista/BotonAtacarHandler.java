@@ -4,7 +4,6 @@ import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.unidad.Atacador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Cursor;
 
 public class BotonAtacarHandler implements EventHandler<ActionEvent>{
 
@@ -25,6 +24,6 @@ public class BotonAtacarHandler implements EventHandler<ActionEvent>{
 	@Override
 	public void handle(ActionEvent event) {
 		vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedAtacarStrategy(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa, atacador));
-		contenedorMapa.setCursor(Cursor.CROSSHAIR);
+		contenedorMapa.setCursorAtaque();
 	}
 }

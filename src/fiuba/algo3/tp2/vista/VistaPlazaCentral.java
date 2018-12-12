@@ -62,8 +62,8 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 		
 		PlazaCentral plazaCentral = (PlazaCentral) posicionable;
 		
-		ContenedorPartida.contenedorControles.setNombreUnidad("Plaza Central");
-		ContenedorPartida.contenedorControles.setVida(plazaCentral.obtenerVida());
+		contenedorControles.setNombreUnidad("Plaza Central");
+		contenedorControles.setVida(plazaCentral.obtenerVida(), plazaCentral.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionCrearAldeano(plazaCentral));

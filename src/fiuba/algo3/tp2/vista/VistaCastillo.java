@@ -60,8 +60,8 @@ public class VistaCastillo implements VistaPosicionable, Observer {
 		
 		Castillo castillo = (Castillo) posicionable;
 		
-		ContenedorPartida.contenedorControles.setNombreUnidad("Castillo");
-		ContenedorPartida.contenedorControles.setVida(castillo.obtenerVida());
+		contenedorControles.setNombreUnidad("Castillo");
+		contenedorControles.setVida(castillo.obtenerVida(), castillo.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionConstruirArmaAsedio(castillo));

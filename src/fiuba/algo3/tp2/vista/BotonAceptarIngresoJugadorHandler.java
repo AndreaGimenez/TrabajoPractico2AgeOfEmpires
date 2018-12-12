@@ -115,7 +115,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 																	    PoblacionMaximaAlcanzadaException, 
 																	    OroInsuficienteException {
     	
-    	Mapa mapa = new Mapa(20, 20);
+    	Mapa mapa = new Mapa(35, 20);
         Juego juego = new Juego(mapa);
         juego.iniciar(nombresJugadores.toArray(new String[juego.CANTIDAD_DE_JUGADORES]));
         

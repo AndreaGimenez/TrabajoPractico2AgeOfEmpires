@@ -14,7 +14,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class ContenedorMapa extends GridPane {
+	
+	private ContenedorCentral contenedorPadre;
 
+	
 	public ContenedorMapa(Mapa mapa) {
 		
     	setAlignment(Pos.CENTER);
@@ -62,5 +65,21 @@ public class ContenedorMapa extends GridPane {
 	
 	public VistaPosicionable obtenerVistaPosicionable(Posicion posicion) {
 		return obtenerNodo(posicion).obtenerVistaPosicionable();
+	}
+
+	public void setContenedorPadre(ContenedorCentral contenedorPadre) {
+		this.contenedorPadre = contenedorPadre;
+	}
+
+	public void setCursorDefault() {
+		this.contenedorPadre.setCursorDefault();
+	}
+
+	public void setCursorAtaque() {
+		this.contenedorPadre.setCursorAtaque();
+	}
+
+	public void setCursorReparar() {
+		this.contenedorPadre.setCursorReparar();
 	}
 }

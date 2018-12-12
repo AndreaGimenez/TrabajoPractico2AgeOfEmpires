@@ -30,11 +30,11 @@ public class VistaMapa {
 		
 		Mapa mapa = juego.obtenerMapa();
 		
-		for (int i = 0; i < mapa.getTamanioX(); i++) {
+		for (int i = 0; i < mapa.getTamanioY(); i++) {
             RowConstraints row = new RowConstraints(TAMANIO_NODO);
             ContenedorPartida.contenedorMapa.getRowConstraints().add(row);
         }
-        for (int i = 0; i < mapa.getTamanioY(); i++) {
+        for (int i = 0; i < mapa.getTamanioX(); i++) {
             ColumnConstraints col = new ColumnConstraints(TAMANIO_NODO);
             ContenedorPartida.contenedorMapa.getColumnConstraints().add(col);
         }

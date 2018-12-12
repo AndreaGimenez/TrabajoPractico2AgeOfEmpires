@@ -60,8 +60,8 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		ContenedorPartida.contenedorControles.clean();
 		
 		Cuartel cuartel = (Cuartel) posicionable;
-		ContenedorPartida.contenedorControles.setNombreUnidad("Cuartel");
-		ContenedorPartida.contenedorControles.setVida(cuartel.obtenerVida());
+		contenedorControles.setNombreUnidad("Cuartel");
+		contenedorControles.setVida(cuartel.obtenerVida(), cuartel.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionCrearArquero(cuartel));

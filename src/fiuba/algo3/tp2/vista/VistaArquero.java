@@ -59,8 +59,8 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 		
 		Arquero arquero = (Arquero)posicionable;
 
-		ContenedorPartida.contenedorControles.setNombreUnidad("Arquero");
-		ContenedorPartida.contenedorControles.setVida(arquero.obtenerVida());
+		contenedorControles.setNombreUnidad("Arquero");
+		contenedorControles.setVida(arquero.obtenerVida(), arquero.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		
