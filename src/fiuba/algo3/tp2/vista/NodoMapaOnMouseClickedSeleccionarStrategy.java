@@ -32,12 +32,12 @@ public class NodoMapaOnMouseClickedSeleccionarStrategy implements NodoMapaOnMous
 		
 		if(juego.obtenerJugadorActual().posicionablePerteneceAJugador(posicionable)) {
 			try {
-				if(posicionable instanceof Aldeano && vistaPosicionable instanceof VistaPosicionable) {
+				if(posicionable instanceof Aldeano) {
 					
-					vistaPosicionable.dibujarControles(posicionable);
+					contenedorMapa.obtenerVistaPosicionable(new Posicion(colIndex, rowIndex)).dibujarControles(posicionable);
 				}
 				else {
-				VistaPosicionableMultitone.getInstance(posicionable).dibujarControles(posicionable);
+					VistaPosicionableMultitone.getInstance(posicionable).dibujarControles(posicionable);
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

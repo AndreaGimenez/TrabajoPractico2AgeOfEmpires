@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.juego.Juego;
@@ -18,7 +20,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
-public class VistaCastillo implements VistaPosicionable {
+public class VistaCastillo implements VistaPosicionable, Observer {
 	
 	private Mapa mapa;
 	private ContenedorControles contenedorControles;
@@ -28,8 +30,8 @@ public class VistaCastillo implements VistaPosicionable {
 	private VistaSeleccionador vistaSeleccionador;
 
 	
-	public VistaCastillo(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, Mapa mapa, VistaMapa vistaMapa, Juego juego, VistaSeleccionador vistaSeleccionador) {
-		this.mapa = mapa;
+	public VistaCastillo(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego) {
+		this.mapa = juego.obtenerMapa();
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.vistaMapa = vistaMapa;
@@ -41,6 +43,15 @@ public class VistaCastillo implements VistaPosicionable {
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
 		pane.setBackground(obtenerFondoCastillo(posicionable, pane));
 	}
+	
+	public void dibujarPosicionable(Castillo castillo) {
+		
+		for(Posicion posicion : castillo.obtenerPosicionesOcupadasEnMapa()) {
+			
+			Pane nodo = contenedorMapa.obtenerNodo(posicion);
+			dibujarPosicionable(castillo, nodo);
+		}
+	}
 
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
@@ -49,8 +60,8 @@ public class VistaCastillo implements VistaPosicionable {
 		
 		Castillo castillo = (Castillo) posicionable;
 		
-		ContenedorPartida.contenedorControles.setNombreUnidad("Castillo");
-		ContenedorPartida.contenedorControles.setVida(castillo.obtenerVida());
+		contenedorControles.setNombreUnidad("Castillo");
+		contenedorControles.setVida(castillo.obtenerVida(), castillo.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionConstruirArmaAsedio(castillo));
@@ -83,5 +94,11 @@ public class VistaCastillo implements VistaPosicionable {
 		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		
 		return new Background(fondoCastillo);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -5,13 +5,19 @@ import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 public class VidaUnidad{
 	
 	private int vidaActual;
+	private int vidaMaxima;
 	
 	public VidaUnidad(int vidaMaxima) {
 		this.vidaActual = vidaMaxima;
+		this.vidaMaxima = vidaMaxima;
 	}
 	
 	public int obtenerVida() {
 		return this.vidaActual;
+	}
+	
+	public int obtenerVidaMaxima() {
+		return this.vidaMaxima;
 	}
 	
 	public void restarVida(int danio) {

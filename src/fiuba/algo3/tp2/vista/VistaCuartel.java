@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.juego.Juego;
@@ -19,7 +21,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
-public class VistaCuartel implements VistaPosicionable {
+public class VistaCuartel implements VistaPosicionable, Observer {
 
 	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
@@ -28,10 +30,10 @@ public class VistaCuartel implements VistaPosicionable {
 	private Juego juego;
 	private VistaSeleccionador vistaSeleccionador;
 
-	public VistaCuartel(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, Mapa mapa, VistaMapa vistaMapa, Juego juego, VistaSeleccionador vistaSeleccionador) {
+	public VistaCuartel(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego) {
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
-		this.mapa = mapa;
+		this.mapa = juego.obtenerMapa();
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 		this.vistaSeleccionador = vistaSeleccionador;
@@ -42,14 +44,24 @@ public class VistaCuartel implements VistaPosicionable {
 		pane.setBackground(obtenerFondoCuartel(posicionable, pane));
 	}
 	
+	public void dibujarPosicionable(Posicionable posicionable) {
+		
+		Cuartel cuartel = (Cuartel)posicionable;
+		for(Posicion posicion : cuartel.obtenerPosicionesOcupadasEnMapa()) {
+			
+			Pane nodo = contenedorMapa.obtenerNodo(posicion);
+			dibujarPosicionable(posicionable, nodo);
+		}
+	}
+	
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 		
 		ContenedorPartida.contenedorControles.clean();
 		
 		Cuartel cuartel = (Cuartel) posicionable;
-		ContenedorPartida.contenedorControles.setNombreUnidad("Cuartel");
-		ContenedorPartida.contenedorControles.setVida(cuartel.obtenerVida());
+		contenedorControles.setNombreUnidad("Cuartel");
+		contenedorControles.setVida(cuartel.obtenerVida(), cuartel.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionCrearArquero(cuartel));
@@ -94,5 +106,11 @@ public class VistaCuartel implements VistaPosicionable {
 		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		
 		return new Background(fondoCastillo);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

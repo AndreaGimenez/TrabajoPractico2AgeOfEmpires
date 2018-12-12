@@ -14,7 +14,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class ContenedorMapa extends GridPane {
+	
+	private ContenedorCentral contenedorPadre;
 
+	
 	public ContenedorMapa(Mapa mapa) {
 		
     	setAlignment(Pos.CENTER);
@@ -42,17 +45,41 @@ public class ContenedorMapa extends GridPane {
 		obtenerNodo(posicion).setBackground(fondo);
 	}
 
-	public Pane obtenerNodo(Posicion posicion) {
+	public PaneMapa obtenerNodo(Posicion posicion) {
 		
-		Pane nodoADevolver = null;
+		PaneMapa nodoADevolver = null;
 		for(Node nodo : getChildren()) {
 			if(nodoADevolver == null
-					&& nodo instanceof Pane
+					&& nodo instanceof PaneMapa
 					&& new Posicion(obtenerColumnIndex(nodo), obtenerRowIndex(nodo)).esIgualA(posicion)) {
 				
-				nodoADevolver = (Pane)nodo;
+				nodoADevolver = (PaneMapa)nodo;
 			}
 		}
 		return nodoADevolver;
+	}
+
+	public void agregarVistaPosicionable(VistaPosicionable vistaPosicionable, Posicion posicion) {
+		obtenerNodo(posicion).setVistaPosicionable(vistaPosicionable);
+	}
+	
+	public VistaPosicionable obtenerVistaPosicionable(Posicion posicion) {
+		return obtenerNodo(posicion).obtenerVistaPosicionable();
+	}
+
+	public void setContenedorPadre(ContenedorCentral contenedorPadre) {
+		this.contenedorPadre = contenedorPadre;
+	}
+
+	public void setCursorDefault() {
+		this.contenedorPadre.setCursorDefault();
+	}
+
+	public void setCursorAtaque() {
+		this.contenedorPadre.setCursorAtaque();
+	}
+
+	public void setCursorReparar() {
+		this.contenedorPadre.setCursorReparar();
 	}
 }

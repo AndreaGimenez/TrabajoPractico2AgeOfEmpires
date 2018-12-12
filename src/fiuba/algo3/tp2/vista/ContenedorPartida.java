@@ -6,10 +6,19 @@ import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.vista.eventos.ButtonAvanzarTurnoHandler;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class ContenedorPartida extends BorderPane {
@@ -57,19 +66,21 @@ public class ContenedorPartida extends BorderPane {
     public void setMapa(Juego juego, Stage stage){
     	
     	mapa = juego.obtenerMapa();
+    	
     	ContenedorPartida.contenedorMapa = new ContenedorMapa(mapa);
     	ContenedorPartida.vistaSeleccionador = new VistaSeleccionador(mapa, contenedorMapa);
+    	ContenedorCentral contenedorCentral = new ContenedorCentral(contenedorMapa);
+    	contenedorMapa.setContenedorPadre(contenedorCentral);
     	
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setContent(ContenedorPartida.contenedorMapa);
-
+        scrollPane.setContent(contenedorCentral);
         ContenedorPartida.vistaMapa = new VistaMapa(juego, contenedorMapa, vistaSeleccionador);
         VistaPosicionableMultitone.init(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, mapa, juego);
         
         ContenedorPartida.vistaMapa.dibujarTerreno();
-        ContenedorPartida.vistaMapa.dibujarPosicionables();
+        //ContenedorPartida.vistaMapa.dibujarPosicionables();
         
         this.setCenter(scrollPane);
     }

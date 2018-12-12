@@ -4,16 +4,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class ContenedorControles extends VBox {
 	
 	private Label labelNombreUnidad;
-	private Label labelVida;
-	private Label labelAccionesMovimiento;
 	private Collection<Button> accionesMovimiento;
 	private ComboBox<String> construccionesCuartel;
 	private Button confirmarConstruccionCuartel;
@@ -24,15 +34,8 @@ public class ContenedorControles extends VBox {
 		
     	labelNombreUnidad = new Label();
         labelNombreUnidad.setText("");
+        labelNombreUnidad.setFont(Font.font(15));
         getChildren().add(labelNombreUnidad);
-        
-        labelVida = new Label();
-        labelVida.setText("");
-        getChildren().add(labelVida);
-        
-        labelAccionesMovimiento = new Label();
-        labelAccionesMovimiento.setText("");
-        getChildren().add(labelAccionesMovimiento);
 
         
         setSpacing(10);
@@ -49,13 +52,33 @@ public class ContenedorControles extends VBox {
 		labelNombreUnidad.setText(nombreUnidad);
 	}
 	
-	public void setVida(int vida) {
-		labelVida.setText(String.valueOf(vida));
+	public void setVida(int vida, int vidaMaxima) {
+		
+        StackPane barraVida = new StackPane();
+        barraVida.setAlignment(Pos.CENTER_LEFT);
+        barraVida.setBackground(new Background(new BackgroundFill(Color.WHITE.deriveColor(0, 1, 1, 0.5), new CornerRadii(5), null)));
+        barraVida.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(1))));
+        barraVida.setPrefWidth(150);
+        barraVida.setMaxWidth(150);
+        barraVida.setPrefHeight(15);
+        getChildren().add(barraVida);
+        
+        Pane vidaActual = new Pane();
+        
+        vidaActual.setMaxWidth((vida * 1.0 / vidaMaxima * 1.0) * 150.0);
+        vidaActual.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
+        
+        Label vidaActualTexto = new Label(vida + "/" + vidaMaxima);
+        vidaActualTexto.setMaxWidth(150);
+        vidaActualTexto.setAlignment(Pos.CENTER);
+        
+        barraVida.getChildren().add(vidaActual);
+        barraVida.getChildren().add(vidaActualTexto);
 	}
 	
 	public void setAcciones(Collection<Button> acciones) {
 		
-		labelAccionesMovimiento.setText("Acciones");
+		//labelAccionesMovimiento.setText("Acciones");
 		this.accionesMovimiento.addAll(acciones);
 		getChildren().addAll(this.accionesMovimiento);
 	}
@@ -77,9 +100,7 @@ public class ContenedorControles extends VBox {
 	public void clean() {
 		
 		labelNombreUnidad.setText("");
-		labelVida.setText("");
-		labelAccionesMovimiento.setText("");
-
+		
 		getChildren().removeIf(children -> !(children instanceof Label));
 		this.accionesMovimiento = new ArrayList<>();
 		this.construccionesCuartel = new ComboBox<>();

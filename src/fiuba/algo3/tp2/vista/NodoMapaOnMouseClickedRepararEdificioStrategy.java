@@ -72,7 +72,7 @@ public class NodoMapaOnMouseClickedRepararEdificioStrategy implements NodoMapaOn
 			}
 			finally {
 				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, ContenedorPartida.contenedorMapa, vistaSeleccionador));
-				ContenedorPartida.contenedorMapa.setCursor(Cursor.DEFAULT);
+				contenedorMapa.setCursorDefault();
 			}
 			
 		}

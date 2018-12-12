@@ -47,5 +47,9 @@ public class VidaEdificio {
 	public boolean estaDestruido() {
 		return vidaActual == 0;
 	}
+
+	public int obtenerVidaMaxima() {
+		return vidaMaxima;
+	}
 }
 

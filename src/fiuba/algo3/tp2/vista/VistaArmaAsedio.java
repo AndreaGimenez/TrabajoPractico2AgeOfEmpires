@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -9,6 +11,7 @@ import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Atacador;
+import fiuba.algo3.tp2.unidad.Espadachin;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -18,7 +21,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
-public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
+public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observer {
 
 	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
@@ -42,6 +45,11 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
 		pane.setBackground(obtenerFondoArmaAsedio((ArmaAsedio)posicionable));
 	}
+	
+	public void dibujarPosicionable(ArmaAsedio armaAsedio) {
+		Pane nodo = contenedorMapa.obtenerNodo(armaAsedio.obtenerPosicion());
+		dibujarPosicionable(armaAsedio, nodo);
+	}
 
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
@@ -50,8 +58,8 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
 		
 		ArmaAsedio armaAsedio = (ArmaAsedio)posicionable;
 		
-		ContenedorPartida.contenedorControles.setNombreUnidad("Arma de Asedio");
-		ContenedorPartida.contenedorControles.setVida(armaAsedio.obtenerVida());
+		contenedorControles.setNombreUnidad("Arma de Asedio");
+		contenedorControles.setVida(armaAsedio.obtenerVida(), armaAsedio.obtenerVidaMaxima());
 		
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionMontar((ArmaAsedio)posicionable));
@@ -101,5 +109,14 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible {
        BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
        return new Background(fondoAldeano);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		ArmaAsedio armaAsedio = (ArmaAsedio)o;
+		Posicion posicionAnterior = (Posicion) arg;
+		
+		dibujarPosicionable(armaAsedio, posicionAnterior);
 	}
 }

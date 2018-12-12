@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -19,7 +21,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public class VistaAldeano implements VistaPosicionable, VistaMovible {
+public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 	
 	private ContenedorMapa contenedorMapa;
 	private VistaSeleccionador vistaSeleccionador;
@@ -37,14 +39,21 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
 		pane.setBackground(obtenerFondoAldeano((Aldeano)posicionable));
 	}
-
+	
+	public void dibujarPosicionable(Posicionable posicionable) {
+		Pane nodo = contenedorMapa.obtenerNodo(posicionable.obtenerPosicion());
+		dibujarPosicionable(posicionable, nodo);
+	}
+	
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 		
 		ContenedorPartida.contenedorControles.clean();
 		
+		Aldeano aldeano = (Aldeano)posicionable;
+		
 		ContenedorPartida.contenedorControles.setNombreUnidad("Aldeano");
-		ContenedorPartida.contenedorControles.setVida(((Aldeano)posicionable).obtenerVida());
+		ContenedorPartida.contenedorControles.setVida(aldeano.obtenerVida(), aldeano.obtenerVidaMaxima());
 
 		
 		Collection<Button> acciones = new ArrayList<>();
@@ -128,5 +137,14 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible {
 	
 		accionReparar.setOnAction(botonAldeanoReparaEdificioEventHandler);
 		return accionReparar;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		Aldeano aldeano = (Aldeano)o;
+		Posicion posicionAnterior = (Posicion) arg;
+		
+		dibujarPosicionable(aldeano, posicionAnterior);
 	}
 }

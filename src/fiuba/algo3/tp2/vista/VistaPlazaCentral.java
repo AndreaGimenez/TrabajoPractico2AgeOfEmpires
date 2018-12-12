@@ -2,7 +2,10 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
+import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -18,7 +21,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
-public class VistaPlazaCentral implements VistaPosicionable {
+public class VistaPlazaCentral implements VistaPosicionable, Observer {
 
 	private ContenedorControles contenedorControles;
 	private Mapa mapa;
@@ -28,10 +31,10 @@ public class VistaPlazaCentral implements VistaPosicionable {
 	private VistaSeleccionador vistaSeleccionador;
 
 	
-	public VistaPlazaCentral(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, Mapa mapa, VistaMapa vistaMapa, Juego juego, VistaSeleccionador vistaSeleccionador) {
+	public VistaPlazaCentral(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego) {
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
-		this.mapa = mapa;
+		this.mapa = juego.obtenerMapa();
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 		this.vistaSeleccionador = vistaSeleccionador;
@@ -41,6 +44,16 @@ public class VistaPlazaCentral implements VistaPosicionable {
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
 		pane.setBackground(obtenerFondoPlazaCentral(posicionable, pane));
 	}
+	
+	public void dibujarPosicionable(PlazaCentral plazaCentral) {
+		
+		PlazaCentral cuartel = (PlazaCentral)plazaCentral;
+		for(Posicion posicion : cuartel.obtenerPosicionesOcupadasEnMapa()) {
+			
+			Pane nodo = contenedorMapa.obtenerNodo(posicion);
+			dibujarPosicionable(plazaCentral, nodo);
+		}
+	}
 
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
@@ -49,8 +62,8 @@ public class VistaPlazaCentral implements VistaPosicionable {
 		
 		PlazaCentral plazaCentral = (PlazaCentral) posicionable;
 		
-		ContenedorPartida.contenedorControles.setNombreUnidad("Plaza Central");
-		ContenedorPartida.contenedorControles.setVida(plazaCentral.obtenerVida());
+		contenedorControles.setNombreUnidad("Plaza Central");
+		contenedorControles.setVida(plazaCentral.obtenerVida(), plazaCentral.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
 		acciones.add(crearAccionCrearAldeano(plazaCentral));
@@ -80,5 +93,11 @@ public class VistaPlazaCentral implements VistaPosicionable {
 		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		
 		return new Background(fondoCastillo);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

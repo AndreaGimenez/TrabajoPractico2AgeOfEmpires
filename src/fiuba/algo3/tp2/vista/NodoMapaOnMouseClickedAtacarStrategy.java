@@ -75,7 +75,7 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 			}
 			finally {
 				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, ContenedorPartida.contenedorMapa, vistaSeleccionador));
-				ContenedorPartida.contenedorMapa.setCursor(Cursor.DEFAULT);
+				contenedorMapa.setCursorDefault();
 			}
 			
 		}

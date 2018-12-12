@@ -23,7 +23,6 @@ public class BotonMovimientoHandler implements EventHandler<ActionEvent>{
 		this.movible = movible;
 		this.direccion = direccion;
 		this.vistaSeleccionador = vistaSeleccionador;
-		//this.musica = new Musica("src/fiuba/algo3/tp2/vista/aldeanoCaminando.mp3");
 		this.mapa = mapa;
 	}
 
@@ -31,17 +30,8 @@ public class BotonMovimientoHandler implements EventHandler<ActionEvent>{
 	public void handle(ActionEvent event) {
 		MensajeDeError error = new MensajeDeError();
 		try {
-			Posicion posicionAnterior = movible.obtenerPosicion();
 			movible.mover(direccion);
-			
-			if(movible instanceof Aldeano) {
-				VistaPosicionable vistaMovible = mapa.obtenerCelda(movible.obtenerPosicion()).obtenerVistaPosicionable();
-				((VistaMovible)vistaMovible).dibujarPosicionable(movible, posicionAnterior);
-				vistaSeleccionador.seleccionarNodo(movible);
-			}
-			((VistaMovible)VistaPosicionableMultitone.getInstance(movible)).dibujarPosicionable(movible, posicionAnterior);
 			vistaSeleccionador.seleccionarNodo(movible);
-			//musica.iniciarReproduccionMusica();
 		} catch (MovimientoInvalidoException e) {
 			error.mostrarVentanaError("Movimiento Invalido", "Intente nuevamente");
 		} catch (CeldaOcupadaException e) {

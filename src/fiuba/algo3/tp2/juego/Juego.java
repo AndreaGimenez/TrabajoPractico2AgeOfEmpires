@@ -17,7 +17,7 @@ import fiuba.algo3.tp2.mapa.Celda;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
-import fiuba.algo3.tp2.mapa.PosicionesInicialesAldeanos;
+import fiuba.algo3.tp2.mapa.PosicionesIniciales;
 import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Unidad;
@@ -83,7 +83,7 @@ public class Juego {
 
 	private Posicion buscarPosicionAldeano() {
 		
-		PosicionesInicialesAldeanos posiciones = new PosicionesInicialesAldeanos(this.mapa);
+		PosicionesIniciales posiciones = new PosicionesIniciales(this.mapa);
 		
 		Posicion posicion = posiciones.buscarPosicion();
 		return posicion;
