@@ -5,11 +5,14 @@ import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
+import fiuba.algo3.tp2.construccion.EstadoConstruccion;
 import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.generacionDeUnidades.Generable;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.vida.VidaEdificio;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -112,8 +115,42 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable observable, Object objetoQueCambio) {
+		if(objetoQueCambio instanceof VidaEdificio) {
+			//considerar si sufrio danio, se destruyo, se recupero vida,  se termino de reparar(vida full)
+			actualizarCambiosEnLaVida(((VidaEdificio) objetoQueCambio).obtenerVida(), ((VidaEdificio) objetoQueCambio).obtenerVidaMaxima());
+		}
+		
+		if(objetoQueCambio instanceof EstadoConstruccion) {
+			//considerar si se termino de construir o si se avanzo en la construccion
+			if(((EstadoConstruccion)objetoQueCambio).estaConstruido()) {
+			actualizarCambiosEnLaConstruccion();
+			}
+		}
+		
+		if(objetoQueCambio instanceof Generable) {
+			//considerar si se muestran o anulan los botones de generar unidad
+			actualizarCambiosEnLaGeneracion(objetoQueCambio);
+
+		}
+	}
+
+	private void actualizarCambiosEnLaGeneracion(Object objetoQueCambio) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	private void actualizarCambiosEnLaConstruccion() {
+			//poner imagen de cuartel construido
+	}
+
+	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
+		//Si la vida esta entre el 50% y el 100%
+		if(vidaActual >= vidaMaxima/2 ) {
+			//mostrar foto del cuartel sin daños
+		}
+		else {
+			//mostrar foto del cuartel con daños
+		}
 	}
 }

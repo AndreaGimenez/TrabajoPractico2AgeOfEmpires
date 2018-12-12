@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,12 +18,17 @@ import org.mockito.Mockito;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 
 public class CastilloTest {
@@ -83,7 +90,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnAldeanoQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = new Castillo(new Posicion(1,1), mapa);
@@ -95,7 +102,9 @@ public class CastilloTest {
 		Mockito.when(mapa.obtenerPosicionables(Mockito.any())).thenReturn(posicionables);
 		
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
 		
 		//Como verifico si el aldeano esta muerto?
@@ -103,7 +112,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnAldeanoQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca4Veces_ElAldeanoDeberiaEstarMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = new Castillo(new Posicion(1,1), mapa);
@@ -115,8 +124,11 @@ public class CastilloTest {
 		Mockito.when(mapa.obtenerPosicionables(Mockito.any())).thenReturn(posicionables);
 		
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
 		
 		//Como verifico si el aldeano esta muerto?
@@ -124,7 +136,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnAldeanoQueSeEncuentraFueraDeLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarVivo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = new Castillo(new Posicion(1,1), mapa);
@@ -133,7 +145,9 @@ public class CastilloTest {
 		when(mapa.obtenerPosicionables(any())).thenReturn(posicionables);
 		
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
 		
 		//?? Ni siquiera necesito el aldeano, tiene sentido como test unitario?
@@ -141,7 +155,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnCuartelQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca14Veces_ElEdificioDeberiaEstarDestruido() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = new Castillo(new Posicion(1,1), mapa);
@@ -154,6 +168,7 @@ public class CastilloTest {
 		
 		for(int i = 1; i <= 14; i++) {
 			castillo.atacar();
+			castillo.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		//Como verifico si el cuartel esta destruido?
@@ -161,7 +176,7 @@ public class CastilloTest {
 	
 	@Test
 	public void test_DadoUnCuartelYUnAldeanoQueSeEncuentranEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca14Veces_ElEdificioDeberiaEstarDestruidoYElAldeanoMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = new Castillo(new Posicion(1,1), mapa);
@@ -176,6 +191,7 @@ public class CastilloTest {
 		
 		for(int i = 1; i <= 14; i++) {
 			castillo.atacar();
+			castillo.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		//Como verifico si el cuartel esta destruido y el aldeano muerto?

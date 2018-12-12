@@ -38,6 +38,8 @@ public class PlazaCentral extends Edificio implements Construible{
 	@Override
 	public void avanzarConstruccion() {
 		estadoConstruccion.avanzarConstruccion();
+		setChanged();
+		notifyObservers(this.estadoConstruccion);
 	}
 	
 	@Override
@@ -50,7 +52,6 @@ public class PlazaCentral extends Edificio implements Construible{
 		this.constructor = constructor;
 		
 	}
-
 
 	@Override
 	public boolean verificarConstructor(Constructor constructor) {

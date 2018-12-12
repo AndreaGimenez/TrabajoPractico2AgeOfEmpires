@@ -12,6 +12,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.AldeanoConConstruccionAsignadaException;
 import fiuba.algo3.tp2.vista.MensajeDeError;
+import fiuba.algo3.tp2.vista.VistaCuartel;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
@@ -48,7 +49,9 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 		MensajeDeError error = new MensajeDeError();
 		try {
 			Mapa mapa = juego.obtenerMapa();
+			VistaCuartel vistaCuartel = new VistaCuartel(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego);
 			Cuartel cuartel = new Cuartel(new Posicion(colIndex, rowIndex), mapa);
+			cuartel.addObserver(vistaCuartel);
 			aldeano.construirConstruible(cuartel);
 			juego.obtenerJugadorActual().agregarEdificio(cuartel);
 			} 

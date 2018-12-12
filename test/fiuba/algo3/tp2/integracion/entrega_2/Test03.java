@@ -212,7 +212,7 @@ public class Test03 {
 	
 	@Test
 	public void testUnCastilloAtacaUnaZonaEnLaQueHayUnAldeanoHastaMatarlo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
@@ -220,7 +220,9 @@ public class Test03 {
 		Atacable aldeano = new Aldeano(new Posicion(10,5), mapa);
 		
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
@@ -229,7 +231,7 @@ public class Test03 {
 	
 	@Test
 	public void testUnCastilloAtacaUnaZonaEnLaQueHayUnAldeanoHastaMatarloYContinuaAtacando() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
@@ -237,10 +239,15 @@ public class Test03 {
 		Atacable aldeano = new Aldeano(new Posicion(10,5), mapa);
 		
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
 		
 		exceptionRule.expect(UnidadMuertaException.class);
@@ -258,7 +265,9 @@ public class Test03 {
 		Atacable aldeano = new Aldeano(new Posicion(12,5), mapa);
 		
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
+		castillo.actualizarEstadoParaSiguienteTurno();
 		castillo.atacar();
 		
 		espadachin.atacar(aldeano);
@@ -272,7 +281,7 @@ public class Test03 {
 	
 	@Test
 	public void testUnCastilloAtacaUnCuartelQueSeEncuentraEnLaZonaDeAtaque() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
@@ -281,6 +290,7 @@ public class Test03 {
 		
 		for(int i = 1; i <= 14; i++) {
 			castillo.atacar();
+			castillo.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
@@ -299,6 +309,7 @@ public class Test03 {
 		
 		for(int i = 1; i <= 14; i++) {
 			castillo.atacar();
+			castillo.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		for(int i = 1; i <= 17; i++) {
@@ -312,7 +323,7 @@ public class Test03 {
 	@Test
 	public void testUnCastilloUbicadoEnLaEsquinaInferiorIzquierdaAtacaUnCuartelDentroDeLaZonaDeAtaque() 
 			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException,
-			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(0,0), mapa);
@@ -321,6 +332,7 @@ public class Test03 {
 		
 		for(int i = 1; i <= 14; i++) {
 			castillo.atacar();
+			castillo.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		exceptionRule.expect(EdificioDestruidoException.class);
@@ -330,7 +342,7 @@ public class Test03 {
 	@Test
 	public void testUnCastilloUbicadoEnLaEsquinaSuperiorDerechoAtacaUnAldeanoDentroDeLaZonaDeAtaque() 
 			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException,
-			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException {
+			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = new Mapa(250, 250);
 		AtacadorZona castillo = new Castillo(new Posicion(246,246), mapa);
@@ -339,6 +351,7 @@ public class Test03 {
 		
 		for(int i = 1; i <= 3; i++) {
 			castillo.atacar();
+			castillo.actualizarEstadoParaSiguienteTurno();
 		}
 		
 		exceptionRule.expect(UnidadMuertaException.class);

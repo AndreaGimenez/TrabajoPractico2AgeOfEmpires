@@ -5,11 +5,14 @@ import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
+import fiuba.algo3.tp2.construccion.EstadoConstruccion;
 import fiuba.algo3.tp2.edificio.Castillo;
+import fiuba.algo3.tp2.generacionDeUnidades.Generable;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.vida.VidaEdificio;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -100,8 +103,14 @@ public class VistaCastillo implements VistaPosicionable, Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+	public void update(Observable observable, Object objetoQueCambio) {
+		if(objetoQueCambio instanceof VidaEdificio) {
+			//considerar si sufrio danio, se destruyo, se recupero vida,  se termino de reparar(vida full) 
+		}
+		
+		if(objetoQueCambio instanceof Generable) {
+			//considerar si se muestran o anulan los botones de generar unidad
+		}
 		
 	}
 }
