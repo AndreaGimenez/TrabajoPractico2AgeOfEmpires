@@ -2,13 +2,16 @@ package fiuba.algo3.tp2.unidad;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
-import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 import fiuba.algo3.tp2.formas.Forma;
+import fiuba.algo3.tp2.generacionDeUnidades.Generable;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -20,7 +23,7 @@ import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.movimiento.MovimientoNulo;
 import fiuba.algo3.tp2.vida.VidaUnidad;
 
-public abstract class Unidad extends Observable implements Movible, Posicionable, Atacable {
+public abstract class Unidad extends Observable implements Movible, Posicionable, Atacable, Generable {
 
 	protected Posicion posicion;
 	protected Movimiento movimiento;
@@ -76,11 +79,19 @@ public abstract class Unidad extends Observable implements Movible, Posicionable
 	public int obtenerVida() {
 		return vida.obtenerVida();
 	}
+
+	public int obtenerVidaMaxima() {
+		return vida.obtenerVidaMaxima();
+	}
 	
 	@Override
 	public void mover(Direccion direccion) throws MovimientoInvalidoException, CeldaOcupadaException, CeldaInexistenteException {
+		Posicion posicionaAnterior = this.posicion;
 		movimiento.mover(this, direccion, mapa);
 		movimiento = new MovimientoNulo();
+		
+		setChanged();
+		notifyObservers(posicionaAnterior);
 	}
 
 	public void iniciar() {
@@ -117,5 +128,15 @@ public abstract class Unidad extends Observable implements Movible, Posicionable
 
 	public int obtenerCosto() {
 		return this.costoGeneracion;
+	}
+	
+	@Override
+	public void liberarCeldas(Mapa mapa) {
+		
+		Collection<Posicion>posicionesOcupadas = this.obtenerPosicionesOcupadasEnMapa();
+		
+		for(Posicion posicionActual : posicionesOcupadas) {
+			mapa.obtenerCelda(posicionActual).liberar();
+		}
 	}
 }

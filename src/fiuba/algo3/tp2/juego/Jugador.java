@@ -10,6 +10,7 @@ import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.turno.Turno;
@@ -23,6 +24,7 @@ public class Jugador {
 	
 	private int oro;
 	private int poblacion;
+	private Mapa mapa;
 	private Collection<Posicionable> edificios ;
 	private Collection<Posicionable> unidades ;
 	private Collection<Aldeano> recolectoresOro;
@@ -38,6 +40,7 @@ public class Jugador {
 		this.oro = ORO_INICIAL;
 		this.poblacion = 0;
 		this.nombre = nombre;
+		this.mapa = mapa;
 		
 		this.turno = new Turno(this, mapa);
 	}
@@ -92,13 +95,17 @@ public class Jugador {
 	public void agregarEdificio(Edificio edificio, boolean checkearRecursos) throws OroInsuficienteException {
 		
 		if(checkearRecursos) {
-			
-			this.oro = this.oro - edificio.costo();
-			
+
 			if(this.oro >= edificio.costo()) {
 				this.oro = this.oro - edificio.costo();
 			}
 			else {
+				
+				Collection<Posicion> posicionesQueOcupa = edificio.obtenerPosicionesOcupadasEnMapa();
+				for(Posicion posicionActual : posicionesQueOcupa) {
+					mapa.obtenerCelda(posicionActual).liberar();
+				}
+				
 				throw new OroInsuficienteException();
 			}
 		}
@@ -125,7 +132,7 @@ public class Jugador {
 	public void removerUnidad(Unidad unidadARemover, Mapa mapa) {
 		unidades.remove(unidadARemover);
 		recolectoresOro.remove(unidadARemover);
-		mapa.obtenerCelda(unidadARemover.obtenerPosicion()).liberar();
+		unidadARemover.liberarCeldas(mapa);
 		poblacion -=1;
 	}
 

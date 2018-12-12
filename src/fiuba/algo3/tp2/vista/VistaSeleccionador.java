@@ -5,6 +5,8 @@ import java.util.Collection;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -32,8 +34,8 @@ public class VistaSeleccionador {
 			deseleccionarNodo(nodoAnterior);
 		}
 		
-		int colIndex = contenedorMapa.obtenerColumnIndex(nodoSeleccionado);
-		int rowIndex = contenedorMapa.obtenerRowIndex(nodoSeleccionado);
+		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(nodoSeleccionado);
+		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(nodoSeleccionado);
 		
 		Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
 		if(posicionable == null) {
@@ -41,7 +43,7 @@ public class VistaSeleccionador {
 		}else {
 			Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
 			for(Posicion posicion: posicionesPosicionable) {
-				Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion);
+				Pane nodoPosicion = ContenedorPartida.contenedorMapa.obtenerNodo(posicion);
 				nodoPosicion.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.SOLID, null, BorderStroke.THICK)));
 			}
 		}
@@ -50,8 +52,8 @@ public class VistaSeleccionador {
 	private void deseleccionarNodo(Pane nodo) {
 		
 		if(nodo != null) {
-			int colIndex = contenedorMapa.obtenerColumnIndex(nodo);
-			int rowIndex = contenedorMapa.obtenerRowIndex(nodo);
+			int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(nodo);
+			int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(nodo);
 			
 			Posicionable posicionable = mapa.obtenerPosicionable(new Posicion(colIndex, rowIndex));
 			if(posicionable == null) {
@@ -59,7 +61,7 @@ public class VistaSeleccionador {
 			}else {
 				Collection<Posicion> posicionesPosicionable = posicionable.obtenerPosicionesOcupadasEnMapa();
 				for(Posicion posicion: posicionesPosicionable) {
-					Pane nodoPosicion = contenedorMapa.obtenerNodo(posicion);
+					Pane nodoPosicion = ContenedorPartida.contenedorMapa.obtenerNodo(posicion);
 					nodoPosicion.setBorder(Border.EMPTY);
 				}
 			}

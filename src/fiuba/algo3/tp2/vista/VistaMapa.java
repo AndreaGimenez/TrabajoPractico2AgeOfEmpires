@@ -5,16 +5,17 @@ import fiuba.algo3.tp2.mapa.Celda;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
+import fiuba.algo3.tp2.vista.handlers.NodoMapaOnMouseClickedEventHandler;
+import fiuba.algo3.tp2.vista.strategy.NodoMapaOnMouseClickedSeleccionarStrategy;
+import fiuba.algo3.tp2.vista.strategy.NodoMapaOnMouseClickedStrategy;
 import javafx.scene.Node;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 
 public class VistaMapa {
-	
-	private NodoMapaOnMouseClickedStrategy nodoMapaOnMouseClickedStrategy;
 	
 	public static int TAMANIO_NODO = 50;
 	
@@ -34,32 +35,32 @@ public class VistaMapa {
 		
 		Mapa mapa = juego.obtenerMapa();
 		
-		for (int i = 0; i < mapa.getTamanioX(); i++) {
+		for (int i = 0; i < mapa.getTamanioY(); i++) {
             RowConstraints row = new RowConstraints(TAMANIO_NODO);
-            contenedorMapa.getRowConstraints().add(row);
+            ContenedorPartida.contenedorMapa.getRowConstraints().add(row);
         }
-        for (int i = 0; i < mapa.getTamanioY(); i++) {
+        for (int i = 0; i < mapa.getTamanioX(); i++) {
             ColumnConstraints col = new ColumnConstraints(TAMANIO_NODO);
-            contenedorMapa.getColumnConstraints().add(col);
+            ContenedorPartida.contenedorMapa.getColumnConstraints().add(col);
         }
         
         for (int i = 0 ; i < mapa.getTamanioX() ; i++) {
             for (int j = 0; j < mapa.getTamanioY(); j++) {
             	
-            	Pane pane = new Pane();
+            	Pane pane = new PaneMapa();
             	
             	NodoMapaOnMouseClickedStrategy strategy = new NodoMapaOnMouseClickedSeleccionarStrategy(juego, contenedorMapa, vistaSeleccionador);
             	NodoMapaOnMouseClickedEventHandler nodoMapaOnMouseClickedEventHandler = new NodoMapaOnMouseClickedEventHandler(strategy);
             	pane.setOnMouseClicked(nodoMapaOnMouseClickedEventHandler);
             	
-            	contenedorMapa.add(pane, i, Math.abs(j - (mapa.getTamanioY() - 1)));
+            	ContenedorPartida.contenedorMapa.add(pane, i, Math.abs(j - (mapa.getTamanioY() - 1)));
             }
         }
 	}
 	
 	public void setNodoMapaOnMouseClickedStrategy(NodoMapaOnMouseClickedStrategy strategy){
 		
-		for(Node nodo : contenedorMapa.getChildren()) {
+		for(Node nodo : ContenedorPartida.contenedorMapa.getChildren()) {
 			if(nodo instanceof Pane) {
 				((NodoMapaOnMouseClickedEventHandler)nodo.getOnMouseClicked()).setStrategy(strategy);
 			}
@@ -70,12 +71,12 @@ public class VistaMapa {
 		
 		Mapa mapa = juego.obtenerMapa();
 		
-        for(Node nodo : contenedorMapa.getChildren()) {
+        for(Node nodo : ContenedorPartida.contenedorMapa.getChildren()) {
 			if(nodo instanceof Pane) {
 				
 				Pane pane = (Pane) nodo;
-				int colIndex = contenedorMapa.obtenerColumnIndex(pane);
-				int rowIndex = contenedorMapa.obtenerRowIndex(pane);
+				int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
+				int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
 				Celda celda = mapa.obtenerCelda(new Posicion(colIndex, rowIndex));
 				Posicionable posicionable = celda.obtenerPosicionable();
 				

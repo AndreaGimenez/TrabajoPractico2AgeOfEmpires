@@ -2,13 +2,21 @@ package fiuba.algo3.tp2.vista;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
+import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Atacador;
 import fiuba.algo3.tp2.unidad.Espadachin;
+import fiuba.algo3.tp2.vista.botones.CreadorBotonAtaque;
+import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -18,7 +26,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
-public class VistaEspadachin implements VistaPosicionable, VistaMovible {
+public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observer {
 
 	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
@@ -43,35 +51,34 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible {
 		pane.setBackground(obtenerFondoEspadachin());
 	}
 
+	public void dibujarPosicionable(Espadachin espadachin) {
+		Pane nodo = contenedorMapa.obtenerNodo(espadachin.obtenerPosicion());
+		dibujarPosicionable(espadachin, nodo);
+	}
+	
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
 		
-		contenedorControles.clean();
+		ContenedorPartida.contenedorControles.clean();
 		
 		Espadachin espadachin = (Espadachin)posicionable;
 		
 		contenedorControles.setNombreUnidad("Espadachin");
-		contenedorControles.setVida(espadachin.obtenerVida());
+		contenedorControles.setVida(espadachin.obtenerVida(), espadachin.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, contenedorMapa).crearBoton((Atacador)posicionable));
+		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa).crearBoton((Atacador)posicionable));
 		
 		//Movimientos
-		contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador).crearBotones((Movible)posicionable)));
+		ContenedorPartida.contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones((Movible)posicionable)));
 
-		contenedorControles.setAcciones(acciones);
-	}
-	
-	private Button crearAccionAtacar() {
-		Button botonAtacar = new Button("Atacar");
-		//TODO agregar event handler.
-		return botonAtacar;
+		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 	
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
-		contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		contenedorMapa.setBackground(obtenerFondoEspadachin(), movible.obtenerPosicion());
+		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+		ContenedorPartida.contenedorMapa.setBackground(obtenerFondoEspadachin(), movible.obtenerPosicion());
 	}
 	
 	public Background obtenerFondoEspadachin() {
@@ -85,5 +92,14 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible {
         BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
         return new Background(fondoAldeano);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		Espadachin espadachin = (Espadachin)o;
+		Posicion posicionAnterior = (Posicion) arg;
+		
+		dibujarPosicionable(espadachin, posicionAnterior);
 	}
 }

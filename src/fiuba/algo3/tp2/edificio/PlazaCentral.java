@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.edificio;
 
+import java.util.Collection;
+
 import fiuba.algo3.tp2.construccion.Constructor;
 import fiuba.algo3.tp2.construccion.Construible;
 import fiuba.algo3.tp2.construccion.EstadoConstruccion;
@@ -30,7 +32,7 @@ public class PlazaCentral extends Edificio implements Construible{
 
 	@Override
 	public void actualizarEstadoParaSiguienteTurno() {
-		
+		this.generable = null;
 	}
 	
 	@Override
@@ -62,6 +64,13 @@ public class PlazaCentral extends Edificio implements Construible{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public void liberarCeldas(Mapa mapa) {
+		Collection<Posicion>posicionesOcupadas = this.obtenerPosicionesOcupadasEnMapa();
 
-
+		for(Posicion posicionActual : posicionesOcupadas) {
+			mapa.obtenerCelda(posicionActual).liberar();
+		}
+	}
 }
