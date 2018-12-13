@@ -19,7 +19,6 @@ import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import fiuba.algo3.tp2.vista.handlers.BotonCreadorDeArqueroEventHandler;
 import fiuba.algo3.tp2.vista.handlers.BotonCreadorDeEspadachinEventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -50,12 +49,11 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		this.cuartel = cuartel;
 		this.botonCrearEspadachin = crearAccionCrearEspadachin();
 		this.botonCrearArquero = crearAccionCrearArquero();
-		
 	}
 	
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		pane.setBackground(obtenerFondoCuartel(posicionable, pane));
+		pane.setBackground(obtenerFondoCuartel((Cuartel)posicionable, pane));
 	}
 	
 	public void dibujarPosicionable(Posicionable posicionable) {
@@ -98,18 +96,39 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		return botonCrearArquero;
 	}
 	
-	private Background obtenerFondoCuartel(Posicionable posicionable, Pane pane) {
-		
+	private Background obtenerFondoCuartel(Cuartel unCuartel, Pane pane) {
 		
 		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
 		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
 		
-		String nombreImagen = new Posicion(colIndex, rowIndex).restar(posicionable.obtenerPosicion()).toString();
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg", 
+		String imagePath = "";
+		String nombreImagen = new Posicion(colIndex, rowIndex).restar(unCuartel.obtenerPosicion()).toString();
+		
+		if(unCuartel.estaConstruido()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel" + nombreImagen + ".jpg";
+		}
+		else {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2" + nombreImagen + ".jpg";
+		}
+		Image imagen = new Image(imagePath, 
 			       VistaMapa.TAMANIO_NODO,
 			 	   VistaMapa.TAMANIO_NODO,
 			       false,
 			       true);
+		 
+//		String imagePath = "";
+//		
+//		if(aldeano.estaMuerta()) {
+//			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+//		}else {
+//			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano.jpg";
+//		}
+//		Image imagen = new Image(imagePath, 
+//			       VistaMapa.TAMANIO_NODO,
+//			 	   VistaMapa.TAMANIO_NODO,
+//			       false,
+//			       true); 
+//		}
 		
 		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		
@@ -151,15 +170,16 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		else {
 			//poner imagen de cuartel en cimientos
 		}
+		
 	}
 
 	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
 		//Si la vida esta entre el 50% y el 100%
 		if(vidaActual >= vidaMaxima/2 ) {
-			//mostrar foto del cuartel sin da�os
+			//mostrar foto del cuartel sin ddanios
 		}
-		else {
-			//mostrar foto del cuartel con da�os
+		else { 
+			//mostrar foto del cuartel con danios
 		}
 	}
 }

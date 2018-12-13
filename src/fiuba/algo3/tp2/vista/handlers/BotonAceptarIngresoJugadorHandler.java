@@ -8,6 +8,7 @@ import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
@@ -91,7 +92,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 				} 
 				catch(TamanioInvalidoException e) {		
 					error.mostrarVentanaError("Tamanio Invalido", "");
-				}
+				} 
 				catch(CantidadDeJugadoresInvalidaException e) {
 					error.mostrarVentanaError("Cantidad De Jugadores Invalida", "La cantidad de jugadores debe ser igual a 2");
 				}
@@ -121,7 +122,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 																	    CeldaOcupadaException, 
 																	    CeldaInexistenteException, 
 																	    PoblacionMaximaAlcanzadaException, 
-																	    OroInsuficienteException {
+																	    OroInsuficienteException, AtaqueInvalidoException {
     	
     	Mapa mapa = new Mapa(35, 20);
         Juego juego = new Juego(mapa);
@@ -149,8 +150,8 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 		
 		return resultado;
 	}
-	
-	private void inicializarPosicionables(Mapa mapa, Juego juego) throws CeldaOcupadaException, CeldaInexistenteException, OroInsuficienteException, PoblacionMaximaAlcanzadaException {
+	 
+	private void inicializarPosicionables(Mapa mapa, Juego juego) throws CeldaOcupadaException, CeldaInexistenteException, OroInsuficienteException, PoblacionMaximaAlcanzadaException, AtaqueInvalidoException {
 		
 		inicializarPosicionablesJugador1(mapa, juego);
 		inicializarPosicionablesJugador2(mapa, juego);
@@ -195,7 +196,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 			e.printStackTrace();
 		}
 		
-        Aldeano aldeano = new Aldeano(new Posicion(13, 10), mapa);
+        Aldeano aldeano = new Aldeano(new Posicion(0, 5), mapa);
         VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, aldeano);
         aldeano.addObserver(vistaAldeano);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());

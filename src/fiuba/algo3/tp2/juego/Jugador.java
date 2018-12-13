@@ -7,6 +7,7 @@ import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -136,7 +137,7 @@ public class Jugador {
 		poblacion -=1;
 	}
 
-	public void avanzarTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+	public void avanzarTurno() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
 		turno.avanzar();
 	}
 
@@ -150,9 +151,9 @@ public class Jugador {
 
 	}
 
-	private Castillo obtenerCastillo() {
+	public Castillo obtenerCastillo() {
 
-		return (Castillo) this.obtenerPosicionables().getFirst();
+		return (Castillo) this.obtenerPosicionables().getFirst(); 
 
 	}
 	

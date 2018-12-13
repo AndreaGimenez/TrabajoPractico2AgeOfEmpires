@@ -21,7 +21,7 @@ public class VistaMapa {
 	
 	private Juego juego;
 	private ContenedorMapa contenedorMapa;
-	
+	 
 	private VistaSeleccionador vistaSeleccionador;
 	
 
@@ -63,26 +63,25 @@ public class VistaMapa {
 		for(Node nodo : ContenedorPartida.contenedorMapa.getChildren()) {
 			if(nodo instanceof Pane) {
 				((NodoMapaOnMouseClickedEventHandler)nodo.getOnMouseClicked()).setStrategy(strategy);
-			}
+			} 
 		}
 	}
-	
-	public void dibujarPosicionables() {
-		
+	 
+public void dibujarPosicionables() {
+		 
 		Mapa mapa = juego.obtenerMapa();
 		
         for(Node nodo : ContenedorPartida.contenedorMapa.getChildren()) {
-			if(nodo instanceof Pane) {
+			if(nodo instanceof PaneMapa) {
 				
-				Pane pane = (Pane) nodo;
+				PaneMapa pane = (PaneMapa) nodo;
 				int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
 				int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
 				Celda celda = mapa.obtenerCelda(new Posicion(colIndex, rowIndex));
 				Posicionable posicionable = celda.obtenerPosicionable();
 				
 				if(posicionable != null) {
-					VistaPosicionable vistaPosicionable = VistaPosicionableMultitone.getInstance(posicionable);
-					vistaPosicionable.dibujarPosicionable(posicionable, pane);
+					pane.obtenerVistaPosicionable().dibujarPosicionable(posicionable, pane);
 				}else {
 					pane.setBackground(null);
 				}

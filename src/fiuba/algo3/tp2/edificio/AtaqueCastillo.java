@@ -8,6 +8,7 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.unidad.Atacador;
 import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.unidad.RangoAtaque;
 import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 
@@ -24,22 +25,11 @@ public class AtaqueCastillo implements AtaqueZona {
 	public AtaqueCastillo(AtacadorZona atacante, Mapa mapa) {
 		rangoAtaque = new RangoAtaqueCastillo(mapa);
 		this.atacante = atacante;
-		this.mapa = mapa;
+		this.mapa = mapa; 
 	}
 
-	@Override
 	public void atacar() {
 		
-		Collection<Posicionable> posicionablesEnRango = mapa.obtenerPosicionables(rangoAtaque.obtenerPosicionesRango(atacante));
-		
-		for(Posicionable posicionableEnRango : posicionablesEnRango) {
-			try {
-				if(posicionableEnRango instanceof Atacable) {
-					((Atacable)posicionableEnRango).recibirDanio(this);
-				}
-				
-			}catch(EdificioDestruidoException | UnidadMuertaException e) {}
-		}
 	}
 
 	@Override
@@ -55,5 +45,20 @@ public class AtaqueCastillo implements AtaqueZona {
 	@Override
 	public int obtenerDanioEdificio() {
 		return DANIO_EDIFICIO;
+	}
+
+	@Override
+	public void atacar(Collection<Posicionable> pocisionablesEnemigos) throws AtaqueInvalidoException {
+		Collection<Posicionable> posicionablesEnRango = mapa.obtenerPosicionables(rangoAtaque.obtenerPosicionesRango(atacante));
+		
+		for(Posicionable posicionableEnRango : posicionablesEnRango) { 
+			try {
+				if(posicionableEnRango instanceof Atacable && pocisionablesEnemigos.contains(posicionableEnRango)) {
+					((Atacable)posicionableEnRango).recibirDanio(this);
+				}
+				
+			}catch(EdificioDestruidoException | UnidadMuertaException e) {}
+		}
+		
 	}
 }

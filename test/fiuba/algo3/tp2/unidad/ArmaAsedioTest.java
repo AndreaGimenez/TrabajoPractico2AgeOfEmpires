@@ -1,12 +1,5 @@
 package fiuba.algo3.tp2.unidad;
 
-import fiuba.algo3.tp2.excepciones.*;
-import fiuba.algo3.tp2.juego.Jugador;
-import fiuba.algo3.tp2.juego.OroInsuficienteException;
-import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
-
-import static org.junit.Assert.assertFalse;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,6 +7,20 @@ import org.junit.rules.ExpectedException;
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Cuartel;
+import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.MovimientoInvalidoException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
+import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
+import fiuba.algo3.tp2.excepciones.UnidadNoAtacableException;
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
@@ -184,7 +191,7 @@ public class ArmaAsedioTest {
 	
 	@Test
 	public void testDadoUnArmaDeAsedioDesmontadaSiSeMontaEnUnTurnoEnElSiguienteNoDeberiaPoderMoverse() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, MontajeInvalidoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, MontajeInvalidoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
@@ -202,7 +209,7 @@ public class ArmaAsedioTest {
 	
 	@Test
 	public void testDadoUnArmaDeAsedioMontadaDesmontarlaEIntentarMoverlaEnElMismoTurnoDeberiaSerInvalido() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, MontajeInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, MontajeInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
@@ -222,7 +229,7 @@ public class ArmaAsedioTest {
 	
 	@Test
 	public void testDadoUnArmaDeAsedioMontadaSiSeDesmontaEnUnTurnoEnElSiguienteDeberiaPoderMoverse() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, MontajeInvalidoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, MontajeInvalidoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		
@@ -266,7 +273,7 @@ public class ArmaAsedioTest {
 	
 	@Test
 	public void testDadoUnArmaDeAsedioDesmontadaQueSeMovioDeberiaPoderMoverseEnElSiguienteTurno() 
-			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, MontajeInvalidoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+			throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, MovimientoInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, MontajeInvalidoException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
 		
 		Mapa mapa = new Mapa(5,5);
 		

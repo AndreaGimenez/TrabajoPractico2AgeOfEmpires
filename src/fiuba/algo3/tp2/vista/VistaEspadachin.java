@@ -19,6 +19,7 @@ import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
+import javafx.animation.Animation;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -28,6 +29,9 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observer {
 
@@ -83,7 +87,7 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 		ContenedorPartida.contenedorControles.getChildren().add(accionesMovimiento);
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
-	
+	 
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
@@ -125,6 +129,12 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 			if(espadachin.estaMuerta()) {
 				contenedorMapa.removerVista(espadachin.obtenerPosicion());
 			}
+			
+			Pane nodo = contenedorMapa.obtenerNodo(espadachin.obtenerPosicion());
+			Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
+			nodo.getChildren().add(nodoShape);
+			final Animation animation = new ColorTransition(Color.RED, nodoShape);
+	        animation.play();
 			
 		}else {
 			

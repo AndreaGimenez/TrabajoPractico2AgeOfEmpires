@@ -56,16 +56,16 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 		
 		if(!juego.obtenerJugadorActual().posicionablePerteneceAJugador(posicionable)
 				&& posicionable instanceof Atacable) {
-			
+			 
 			try {
 				atacador.atacar((Atacable)posicionable);
 				//contenedorMapa.obtenerVistaPosicionable(new Posicion(colIndex, rowIndex)).dibujarPosicionable(posicionable, nodo);
 				
-				Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
-				nodo.getChildren().add(nodoShape);
+//				Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
+//				nodo.getChildren().add(nodoShape);
 				
-		        final Animation animation = new ColorTransition(Color.RED, nodoShape);
-		        animation.play();
+//		        final Animation animation = new ColorTransition(Color.RED, nodoShape);
+//		        animation.play();
 				
 			} 
 			catch(UnidadMuertaException e) {

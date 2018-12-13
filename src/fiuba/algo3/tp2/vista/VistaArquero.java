@@ -17,6 +17,7 @@ import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
+import javafx.animation.Animation;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -26,6 +27,9 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 
@@ -67,7 +71,7 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 	
 	@Override
 	public void dibujarControles(Posicionable posicionable) {
-		
+		 
 		ContenedorPartida.contenedorControles.clean();
 		
 		Arquero arquero = (Arquero)posicionable;
@@ -123,6 +127,12 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 			if(arquero.estaMuerta()) {
 				contenedorMapa.removerVista(arquero.obtenerPosicion());
 			}
+			
+			Pane nodo = contenedorMapa.obtenerNodo(arquero.obtenerPosicion());
+			Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
+			nodo.getChildren().add(nodoShape);
+			final Animation animation = new ColorTransition(Color.RED, nodoShape);
+	        animation.play();
 		}else {
 			
 			this.accionesMovimiento.setDisable(false);

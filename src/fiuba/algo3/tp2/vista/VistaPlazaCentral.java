@@ -142,10 +142,10 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
 		//Si la vida esta entre el 50% y el 100%
 		if(vidaActual >= vidaMaxima/2 ) {
-			//mostrar foto dde la plaza central sin da�os
+			//mostrar foto dde la plaza central sin danios
 		}
 		else {
-			//mostrar foto de la plaza central con da�os
+			//mostrar foto de la plaza central con danios
 		}
 	}
 }

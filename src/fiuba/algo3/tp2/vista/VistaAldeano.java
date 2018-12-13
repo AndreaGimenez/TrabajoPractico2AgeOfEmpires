@@ -21,6 +21,7 @@ import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import fiuba.algo3.tp2.vista.handlers.BotonAldeanoReparaEdificioEventHandler;
 import fiuba.algo3.tp2.vista.handlers.BotonConstruirCuartelHandler;
 import fiuba.algo3.tp2.vista.handlers.BotonConstruirPlazaCentralHandler;
+import javafx.animation.Animation;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -30,6 +31,9 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 	
@@ -52,7 +56,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 						Aldeano aldeano) {
 		
 		this.contenedorMapa = contenedorMapa;
-		this.vistaSeleccionador = vistaSeleccionador;
+		this.vistaSeleccionador = vistaSeleccionador; 
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 		
@@ -84,7 +88,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		
 		ContenedorPartida.contenedorControles.clean();
 		
-		Aldeano aldeano = (Aldeano)posicionable;
+		Aldeano aldeano = (Aldeano)posicionable; 
 		
 		ContenedorPartida.contenedorControles.setNombreUnidad("Aldeano");
 		ContenedorPartida.contenedorControles.setVida(aldeano.obtenerVida(), aldeano.obtenerVidaMaxima());
@@ -109,7 +113,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		}
 	}
 
-
+ 
 	//COPIE Y PEGUE. LO VOY A CAMBIAR
 	private Background obtenerFondoAldeanoDeJugadorActual(Aldeano aldeano) {
 		String imagePath;
@@ -160,7 +164,7 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		accionReparar.setOnAction(botonAldeanoReparaEdificioEventHandler);
 		return accionReparar;
 	}
-
+ 
 	@Override
 	public void update(Observable o, Object arg) {
 		
@@ -190,6 +194,12 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 			if(aldeano.estaMuerta()) {
 				contenedorMapa.removerVista(aldeano.obtenerPosicion());
 			}
+			
+			Pane nodo = contenedorMapa.obtenerNodo(aldeano.obtenerPosicion());
+			Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
+			nodo.getChildren().add(nodoShape);
+			final Animation animation = new ColorTransition(Color.RED, nodoShape);
+	        animation.play();
 			
 		}else {
 			
