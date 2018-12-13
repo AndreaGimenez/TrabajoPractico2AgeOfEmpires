@@ -21,7 +21,6 @@ import javafx.scene.layout.Pane;
 
 public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOnMouseClickedStrategy {
 	
-	private ContenedorMapa contenedorMapa;
 	private Cuartel cuartel;
 	private Juego juego;
 	private VistaMapa vistaMapa;
@@ -30,7 +29,6 @@ public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOn
 	public NodoMapaOnMouseClickedCrearEspadachinStrategy(ContenedorMapa contenedorMapa, Cuartel cuartel, Juego juego,
 			VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador) {
 		
-		this.contenedorMapa = contenedorMapa;
 		this.cuartel = cuartel;
 		this.juego = juego;
 		this.vistaMapa = vistaMapa;
@@ -51,6 +49,7 @@ public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOn
 			Espadachin espadachin = new Espadachin(new Posicion(colIndex, rowIndex), mapa);
 			cuartel.crear(espadachin);
 			juego.obtenerJugadorActual().agregarUnidad(espadachin, mapa);
+			vistaMapa.dibujarPosicionables();
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar El Arquero porque ya fue generada una en este turno","");

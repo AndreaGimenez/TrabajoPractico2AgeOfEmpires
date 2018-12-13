@@ -19,6 +19,7 @@ import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import fiuba.algo3.tp2.vista.handlers.BotonCreadorDeArqueroEventHandler;
 import fiuba.algo3.tp2.vista.handlers.BotonCreadorDeEspadachinEventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -35,6 +36,8 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	private VistaMapa vistaMapa;
 	private Juego juego;
 	private VistaSeleccionador vistaSeleccionador;
+	private Button botonCrearArquero;
+	private Button botonCrearEspadachin;
 
 	public VistaCuartel(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego) {
 		this.contenedorControles = contenedorControles;
@@ -43,6 +46,8 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 		this.vistaSeleccionador = vistaSeleccionador;
+		this.botonCrearEspadachin = new Button("Crear Espadachin");
+		this.botonCrearArquero = new Button("Crear Arquero");
 	}
 	
 	@Override
@@ -78,21 +83,22 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 
 	private Button crearAccionCrearEspadachin(Cuartel cuartel) {
 
-		Button botonCrearEspadachin = new Button("Crear Espadachin");
+		//Button botonCrearEspadachin = new Button("Crear Espadachin");
 
-		botonCrearEspadachin.setOnAction(new BotonCreadorDeEspadachinEventHandler(botonCrearEspadachin, cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
-
+		botonCrearEspadachin.setOnAction(new BotonCreadorDeEspadachinEventHandler
+				(botonCrearEspadachin, cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
+		this.botonCrearEspadachin = botonCrearEspadachin;
 		return botonCrearEspadachin;
 
 	}
 
 	private Button crearAccionCrearArquero(Cuartel cuartel) {
 
-		Button botonCrearArquero = new Button("Crear Arquero");
+		//Button botonCrearArquero = new Button("Crear Arquero");
 
 		botonCrearArquero.setOnAction(new BotonCreadorDeArqueroEventHandler
 						(botonCrearArquero, cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
-
+		this.botonCrearArquero = botonCrearArquero;
 		return botonCrearArquero;
 	}
 	
@@ -134,11 +140,19 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	}
 
 	private void actualizarCambiosEnLaGeneracion(Object objetoQueCambio) {
-		if(objetoQueCambio == null) {
-			//activar botoon de generar unidades
+		if(objetoQueCambio != null) {
+			this.botonCrearArquero.setDisable(true);
+			this.botonCrearEspadachin.setDisable(true);
+			botonCrearArquero.setTooltip(
+				    new Tooltip("Espera al proximo turno para crear un arquero")
+				);
+			botonCrearEspadachin.setTooltip(
+				    new Tooltip("Espera al proximo turno para crear un espadachin")
+				);
 		}
 		else {
-			//desactivar boton de generar unidades
+			this.botonCrearArquero.setDisable(false);
+			this.botonCrearEspadachin.setDisable(false);
 		}
 	}
 
