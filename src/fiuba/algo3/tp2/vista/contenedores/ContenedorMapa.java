@@ -3,7 +3,6 @@ package fiuba.algo3.tp2.vista.contenedores;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.vista.PaneMapa;
-import fiuba.algo3.tp2.vista.VistaAldeano;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaPosicionable;
 import javafx.geometry.Pos;
@@ -15,7 +14,6 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
 public class ContenedorMapa extends GridPane {
 	
@@ -94,5 +92,9 @@ public class ContenedorMapa extends GridPane {
 	public void actualizarPosicionVistaPosicionable(VistaPosicionable vista, Posicion posicionActual, Posicion nuevaPosicion) {
 		obtenerNodo(posicionActual).setVistaPosicionable(null);
 		obtenerNodo(nuevaPosicion).setVistaPosicionable(vista);
+	}
+
+	public void removerVista(Posicion posicion) {
+		obtenerNodo(posicion).setVistaPosicionable(null);
 	}
 }

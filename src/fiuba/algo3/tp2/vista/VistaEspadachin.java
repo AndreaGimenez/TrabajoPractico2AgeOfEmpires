@@ -11,7 +11,9 @@ import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Atacador;
+import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.unidad.Espadachin;
+import fiuba.algo3.tp2.vida.VidaUnidad;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonAtaque;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
@@ -24,6 +26,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observer {
@@ -33,17 +36,25 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 	private VistaSeleccionador vistaSeleccionador;
 	private VistaMapa vistaMapa;
 	private Juego juego;
+	
+	private Button accionAtacar;
+	private GridPane accionesMovimiento;
 
 	public VistaEspadachin(ContenedorControles contenedorControles, 
 							ContenedorMapa contenedorMapa, 
 							VistaSeleccionador vistaSeleccionador,
 							VistaMapa vistaMapa,
-							Juego juego) {
+							Juego juego,
+							Espadachin espadachin) {
+		
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.vistaSeleccionador = vistaSeleccionador;
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
+		
+		this.accionAtacar = new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa).crearBoton(espadachin);
+		this.accionesMovimiento = new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones(espadachin);
 	}
 
 	@Override
@@ -67,11 +78,9 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 		contenedorControles.setVida(espadachin.obtenerVida(), espadachin.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa).crearBoton((Atacador)posicionable));
-		
-		//Movimientos
-		ContenedorPartida.contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones((Movible)posicionable)));
+		acciones.add(accionAtacar);
 
+		ContenedorPartida.contenedorControles.getChildren().add(accionesMovimiento);
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 	
@@ -98,8 +107,29 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 	public void update(Observable o, Object arg) {
 		
 		Espadachin espadachin = (Espadachin)o;
-		Posicion posicionAnterior = (Posicion) arg;
 		
-		dibujarPosicionable(espadachin, posicionAnterior);
+		if(arg instanceof Posicion) {
+			
+			Posicion posicionAnterior = (Posicion)arg;
+			contenedorMapa.actualizarPosicionVistaPosicionable(this, posicionAnterior, espadachin.obtenerPosicion());
+			this.accionesMovimiento.setDisable(true);
+			dibujarPosicionable(espadachin, posicionAnterior);
+			
+		}else if(arg instanceof Ataque) {
+			
+			this.accionAtacar.setDisable(true);
+			
+		}else if(arg instanceof VidaUnidad) {
+			
+			dibujarPosicionable(espadachin);
+			if(espadachin.estaMuerta()) {
+				contenedorMapa.removerVista(espadachin.obtenerPosicion());
+			}
+			
+		}else {
+			
+			this.accionesMovimiento.setDisable(false);
+			this.accionAtacar.setDisable(false);
+		}
 	}
 }

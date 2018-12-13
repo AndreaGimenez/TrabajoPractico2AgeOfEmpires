@@ -11,6 +11,7 @@ import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Ataque;
+import fiuba.algo3.tp2.vida.VidaUnidad;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonAtaque;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
@@ -103,7 +104,6 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		
 		Arquero arquero = (Arquero)o;
 		
 		if(arg instanceof Posicion) {
@@ -117,6 +117,12 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 			
 			this.accionAtacar.setDisable(true);
 			
+		}else if(arg instanceof VidaUnidad) {
+			
+			dibujarPosicionable(arquero);
+			if(arquero.estaMuerta()) {
+				contenedorMapa.removerVista(arquero.obtenerPosicion());
+			}
 		}else {
 			
 			this.accionesMovimiento.setDisable(false);

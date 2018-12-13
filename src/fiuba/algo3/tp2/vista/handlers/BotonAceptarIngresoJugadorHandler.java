@@ -173,14 +173,14 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         vistaArquero.dibujarPosicionable(arquero);
         
         Espadachin espadachin = new Espadachin(new Posicion(11, 10), mapa);
-        VistaEspadachin vistaEspadachin = new VistaEspadachin(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
+        VistaEspadachin vistaEspadachin = new VistaEspadachin(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, espadachin);
         espadachin.addObserver(vistaEspadachin);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaEspadachin, espadachin.obtenerPosicion());
         juego.obtenerJugadorActual().agregarUnidad(espadachin, mapa, false);
         vistaEspadachin.dibujarPosicionable(espadachin);
         
         ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(12, 10), mapa);
-        VistaArmaAsedio vistaArmaAsedio = new VistaArmaAsedio(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
+        VistaArmaAsedio vistaArmaAsedio = new VistaArmaAsedio(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, armaAsedio);
         armaAsedio.addObserver(vistaArmaAsedio);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaArmaAsedio, armaAsedio.obtenerPosicion());
         juego.obtenerJugadorActual().agregarUnidad(armaAsedio, mapa, false);

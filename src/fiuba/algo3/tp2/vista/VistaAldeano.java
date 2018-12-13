@@ -13,6 +13,7 @@ import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.movimiento.MovimientoBasico;
 import fiuba.algo3.tp2.reparacion.ReparadorEdificio;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.vida.VidaUnidad;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
@@ -183,6 +184,13 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		}else if(arg instanceof MovimientoBasico) {
 			
 			this.accionesMovimiento.setDisable(false);
+		}else if(arg instanceof VidaUnidad) {
+			
+			dibujarPosicionable(aldeano);
+			if(aldeano.estaMuerta()) {
+				contenedorMapa.removerVista(aldeano.obtenerPosicion());
+			}
+			
 		}else {
 			
 			this.accionesMovimiento.setDisable(false);

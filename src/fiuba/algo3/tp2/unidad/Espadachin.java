@@ -29,12 +29,17 @@ public class Espadachin extends Unidad implements Atacador {
 	public void actualizarEstadoParaSiguienteTurno() {
 		movimiento = new MovimientoBasico();
 		ataque = new AtaqueEspadachin();
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override
 	public void atacar(Atacable atacable) throws AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException {
 		ataque.atacar(this, atacable);
 		ataque = new AtaqueNulo();
+		
+		setChanged();
+		notifyObservers(ataque);
 	}
-
 }
