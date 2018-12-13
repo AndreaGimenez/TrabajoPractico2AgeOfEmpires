@@ -35,6 +35,7 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 	private Juego juego;
 	private VistaSeleccionador vistaSeleccionador;
 	private Button botonCrearAldeano;
+	private PlazaCentral plazaCentral;
 
 	
 	public VistaPlazaCentral(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego, PlazaCentral plazaCentral) {
@@ -45,8 +46,8 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 		this.juego = juego;
 		this.vistaSeleccionador = vistaSeleccionador;
 		this.botonCrearAldeano = crearAccionCrearAldeano(plazaCentral);
+		this.plazaCentral = plazaCentral;
 	}
-	
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
 		pane.setBackground(obtenerFondoPlazaCentral(posicionable, pane));
@@ -76,7 +77,7 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 		acciones.add(botonCrearAldeano);
 
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
-	}
+	} 
 
 	private Button crearAccionCrearAldeano(PlazaCentral plazaCentral) {
 		Button crearAldeano = new Button("Crear Aldeano");
@@ -90,12 +91,21 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
 		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
 		
-		String nombreImagen = new Posicion(colIndex, rowIndex).restar(posicionable.obtenerPosicion()).toString();
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/plaza-central/" + nombreImagen + ".jpg", 
-			       VistaMapa.TAMANIO_NODO,
-			 	   VistaMapa.TAMANIO_NODO,
-			       false,
-			       true);
+		String imagePath = "";
+		String nombreImagen = new Posicion(colIndex, rowIndex).restar(plazaCentral.obtenerPosicion()).toString();
+		
+		if(plazaCentral.estaConstruido()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/plaza-central/" + nombreImagen + ".jpg";
+		}
+		else {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
+		}
+			
+		Image imagen = new Image(imagePath, 
+	       VistaMapa.TAMANIO_NODO,
+	 	   VistaMapa.TAMANIO_NODO,
+	       false,
+	       true);
 		
 		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		
@@ -132,10 +142,7 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 
 	private void actualizarCambiosEnLaConstruccion(EstadoConstruccion objetoQueCambio) {
 		if(objetoQueCambio.estaConstruido()) {
-			//poner imagen de la plaza central construido
-		}
-		else {
-			//poner imagen de la plaza central en cimientos
+			dibujarPosicionable(plazaCentral);
 		}
 	}
 

@@ -96,43 +96,29 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		return botonCrearArquero;
 	}
 	
-	private Background obtenerFondoCuartel(Cuartel unCuartel, Pane pane) {
+	private Background obtenerFondoCuartel(Posicionable posicionable, Pane pane) {
 		
 		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
 		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
 		
 		String imagePath = "";
-		String nombreImagen = new Posicion(colIndex, rowIndex).restar(unCuartel.obtenerPosicion()).toString();
+		String nombreImagen = new Posicion(colIndex, rowIndex).restar(cuartel.obtenerPosicion()).toString();
 		
-		if(unCuartel.estaConstruido()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel" + nombreImagen + ".jpg";
+		if(cuartel.estaConstruido()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg";
 		}
 		else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2" + nombreImagen + ".jpg";
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
 		}
 		Image imagen = new Image(imagePath, 
 			       VistaMapa.TAMANIO_NODO,
 			 	   VistaMapa.TAMANIO_NODO,
 			       false,
 			       true);
-		 
-//		String imagePath = "";
-//		
-//		if(aldeano.estaMuerta()) {
-//			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
-//		}else {
-//			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano.jpg";
-//		}
-//		Image imagen = new Image(imagePath, 
-//			       VistaMapa.TAMANIO_NODO,
-//			 	   VistaMapa.TAMANIO_NODO,
-//			       false,
-//			       true); 
-//		}
 		
 		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		
-		return new Background(fondoCastillo);
+		return new Background(fondoCastillo);     
 	}
 
 	@Override
@@ -150,7 +136,7 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 			actualizarCambiosEnLaGeneracion(null);
 		}
 	}
-
+    
 	private void actualizarCambiosEnLaGeneracion(Generable objetoQueCambio) {
 		if(objetoQueCambio != null) {
 			this.botonCrearArquero.setDisable(true);
@@ -164,13 +150,7 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	}
 
 	private void actualizarCambiosEnLaConstruccion(EstadoConstruccion objetoQueCambio) {
-		if(objetoQueCambio.estaConstruido()) {
-			//poner imagen de cuartel construido
-		}
-		else {
-			//poner imagen de cuartel en cimientos
-		}
-		
+		dibujarPosicionable(cuartel);
 	}
 
 	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
