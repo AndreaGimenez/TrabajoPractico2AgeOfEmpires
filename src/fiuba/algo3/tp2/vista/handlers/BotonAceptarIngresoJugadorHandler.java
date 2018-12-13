@@ -155,39 +155,6 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 		
 		inicializarPosicionablesJugador1(mapa, juego);
 		inicializarPosicionablesJugador2(mapa, juego);
-		
-        
-        //agrego unidades y edificios EXTRA para probar funcionalidad
-        Cuartel cuartel = new Cuartel(new Posicion(8, 0), mapa);
-        VistaCuartel vistaCuartel = new VistaCuartel(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego, cuartel);
-        cuartel.addObserver(vistaCuartel);
-        ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaCuartel, cuartel.obtenerPosicion());
-        juego.obtenerJugadorActual().agregarEdificio(cuartel, false);
-        vistaCuartel.dibujarPosicionable(cuartel);
-        
-        
-        Arquero arquero = new Arquero(new Posicion(10, 10), mapa);
-        VistaArquero vistaArquero = new VistaArquero(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, arquero);
-        arquero.addObserver(vistaArquero);
-        ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaArquero, arquero.obtenerPosicion());
-        juego.obtenerJugadorActual().agregarUnidad(arquero, mapa, false);
-        vistaArquero.dibujarPosicionable(arquero);
-        
-        Espadachin espadachin = new Espadachin(new Posicion(11, 10), mapa);
-        VistaEspadachin vistaEspadachin = new VistaEspadachin(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, espadachin);
-        espadachin.addObserver(vistaEspadachin);
-        ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaEspadachin, espadachin.obtenerPosicion());
-        juego.obtenerJugadorActual().agregarUnidad(espadachin, mapa, false);
-        vistaEspadachin.dibujarPosicionable(espadachin);
-        
-        ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(12, 10), mapa);
-        VistaArmaAsedio vistaArmaAsedio = new VistaArmaAsedio(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, armaAsedio);
-        armaAsedio.addObserver(vistaArmaAsedio);
-        ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaArmaAsedio, armaAsedio.obtenerPosicion());
-        juego.obtenerJugadorActual().agregarUnidad(armaAsedio, mapa, false);
-        vistaArmaAsedio.dibujarPosicionable(armaAsedio);
-        
-        
 		try {
 			juego.avanzarJugador();
 		} catch (EdificioNoAptoParaConstruccionException | EdificioConConstructorAsignadoException
@@ -195,20 +162,6 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-        Aldeano aldeano = new Aldeano(new Posicion(0, 5), mapa);
-        VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, aldeano);
-        aldeano.addObserver(vistaAldeano);
-        ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());
-        vistaAldeano.dibujarPosicionable(aldeano);
-        juego.obtenerJugadorActual().agregarUnidad(aldeano, mapa, false);
-        
-        arquero = new Arquero(new Posicion(0, 4), mapa);
-        vistaArquero = new VistaArquero(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, arquero);
-        arquero.addObserver(vistaArquero);
-        ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaArquero, arquero.obtenerPosicion());
-        juego.obtenerJugadorActual().agregarUnidad(arquero, mapa, false);
-        vistaArquero.dibujarPosicionable(arquero);
         
         try {
 			juego.avanzarJugador();
