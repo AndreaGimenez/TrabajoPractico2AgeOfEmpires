@@ -23,7 +23,6 @@ import javafx.scene.layout.Pane;
 
 public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaOnMouseClickedStrategy {
 	
-	private ContenedorMapa contenedorMapa;
 	private Juego juego;
 	private Aldeano aldeano;
 	private VistaMapa vistaMapa;
@@ -31,7 +30,7 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 	
 	public NodoMapaOnMouseClickedConstruirCuartelStrategy(ContenedorMapa contenedorMapa, Juego juego, Aldeano aldeano,
 			VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador) {
-		this.contenedorMapa = contenedorMapa;
+
 		this.juego = juego;
 		this.aldeano = aldeano;
 		this.vistaMapa = vistaMapa;
@@ -54,6 +53,7 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 			cuartel.addObserver(vistaCuartel);
 			aldeano.construirConstruible(cuartel);
 			juego.obtenerJugadorActual().agregarEdificio(cuartel);
+			vistaMapa.dibujarPosicionables();
 			} 
 		catch(CeldaOcupadaException e) {
 			error.mostrarVentanaError("La celda en la que intentas contruir esta ocupada", "Intente nuevamente con otra celda libre");

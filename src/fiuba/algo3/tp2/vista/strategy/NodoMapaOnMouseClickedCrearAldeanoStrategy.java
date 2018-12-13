@@ -21,14 +21,13 @@ import javafx.scene.layout.Pane;
 
 public class NodoMapaOnMouseClickedCrearAldeanoStrategy implements NodoMapaOnMouseClickedStrategy {
 	
-	private ContenedorMapa contenedorMapa;
 	private PlazaCentral plazaCentral;
 	private Juego juego;
 	private VistaMapa vistaMapa;
 	private VistaSeleccionador vistaSeleccionador;
 	
 	public NodoMapaOnMouseClickedCrearAldeanoStrategy(ContenedorMapa contenedorMapa, PlazaCentral plazaCentral, Juego juego, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador) {
-		this.contenedorMapa = contenedorMapa;
+
 		this.plazaCentral = plazaCentral;
 		this.juego = juego;
 		this.vistaMapa = vistaMapa;
@@ -47,6 +46,7 @@ public class NodoMapaOnMouseClickedCrearAldeanoStrategy implements NodoMapaOnMou
 			Aldeano aldeano = new Aldeano(new Posicion(colIndex, rowIndex), mapa);
 			plazaCentral.crear(aldeano);
 			juego.obtenerJugadorActual().agregarUnidad(aldeano, mapa);
+			vistaMapa.dibujarPosicionables();
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar el aldeano porque ya fue generada una en este turno","");
