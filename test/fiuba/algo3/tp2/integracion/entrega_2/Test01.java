@@ -8,6 +8,7 @@ import org.junit.rules.ExpectedException;
 
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.Jugador;
@@ -46,7 +47,7 @@ public class Test01 {
 	
 	@Test
 	public void test_alIniciarJuegoElJugador2DeberiaTener_100_Oro() 
-			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+			throws CantidadDeJugadoresInvalidaException, TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
 		
 		Juego juego = new Juego(new Mapa(250, 250));
 		

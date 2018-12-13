@@ -19,7 +19,7 @@ public class Aplicacion extends Application {
 
         stage.setTitle("Age of Empires");
         
-        Musica musica = new Musica("src/fiuba/algo3/tp2/vista/MusicaDeInicio.mp3");
+        Musica musica = new Musica("src/fiuba/algo3/tp2/vista/musica/MusicaDeInicio.mp3");
         musica.iniciarReproduccionMusica();
 
        

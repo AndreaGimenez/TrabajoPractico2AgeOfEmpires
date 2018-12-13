@@ -13,6 +13,7 @@ import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
@@ -1026,7 +1027,7 @@ public class Test02 {
 			PoblacionMaximaAlcanzadaException, EdificioNoSoportadoException, EdificioFueraDeRangoException, 
 			EdificioConReparadorAsignadoException, EdificioNoAptoParaReparacionException, 
 			OroInsuficienteException, AldeanoConConstruccionAsignadaException, YaSeReparoEnESteTurnoException, 
-			EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, CantidadDeJugadoresInvalidaException {
+			EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, CantidadDeJugadoresInvalidaException, AtaqueInvalidoException {
 
 		Mapa mapa = new Mapa(250, 250);
 		

@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.edificio;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -17,11 +20,16 @@ import org.mockito.Mockito;
 import fiuba.algo3.tp2.mapa.Atacable;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
 import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.Unidad;
+import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
+import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
 import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
@@ -33,7 +41,7 @@ public class AtaqueCastilloTest {
 	
 	@Test
 	public void test_DadoUnAldeanoQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = mock(Castillo.class);
@@ -46,11 +54,15 @@ public class AtaqueCastilloTest {
 		posicionables.add(aldeano);
 		when(mapa.obtenerPosicionables(any())).thenReturn(posicionables);
 		
-		ataque.atacar();
-		ataque.atacar();
-		ataque.atacar();
+		ataque.atacar(posicionables);
+		castillo.actualizarEstadoParaSiguienteTurno();
+		ataque.atacar(posicionables);
+		castillo.actualizarEstadoParaSiguienteTurno();
+		ataque.atacar(posicionables); 
+		castillo.actualizarEstadoParaSiguienteTurno();
+		ataque.atacar(posicionables); 
 		
-		//? Como probar que el aldeano esta muerto?
+		assertEquals(true,((Unidad)aldeano).estaMuerta());
 	}
 	
 	@Test
@@ -68,10 +80,10 @@ public class AtaqueCastilloTest {
 		posicionables.add(aldeano);
 		when(mapa.obtenerPosicionables(Mockito.any())).thenReturn(posicionables);
 		
-		ataque.atacar();
-		ataque.atacar();
-		ataque.atacar();
-		ataque.atacar();
+		ataque.atacar(posicionables);
+		ataque.atacar(posicionables);
+		ataque.atacar(posicionables);
+		ataque.atacar(posicionables);
 		
 		//? Como verificar que el aldeano esta muerto?
 	}
@@ -88,9 +100,9 @@ public class AtaqueCastilloTest {
 		Collection<Posicionable> posicionables = new ArrayList<Posicionable>();
 		when(mapa.obtenerPosicionables(any())).thenReturn(posicionables);
 		
-		ataque.atacar();
-		ataque.atacar();
-		ataque.atacar();
+		ataque.atacar(posicionables);
+		ataque.atacar(posicionables);
+		ataque.atacar(posicionables);
 		
 		//Como checkear que el aldeano esta vivo?
 	}
@@ -112,7 +124,7 @@ public class AtaqueCastilloTest {
 		Mockito.when(mapa.obtenerPosicionables(Mockito.any())).thenReturn(posicionables);
 		
 		for(int i = 1; i <= 14; i++) {
-			ataque.atacar();
+			ataque.atacar(posicionables);
 		}
 		
 		//? Como verificar que el cuartel esta destruido?
@@ -137,7 +149,7 @@ public class AtaqueCastilloTest {
 		when(mapa.obtenerPosicionables(Mockito.any())).thenReturn(posicionables);
 		
 		for(int i = 1; i <= 14; i++) {
-			ataque.atacar();
+			ataque.atacar(posicionables);
 		}
 		
 		//? Como verificar que el cuartel esta destruido y el aldeano muerto?

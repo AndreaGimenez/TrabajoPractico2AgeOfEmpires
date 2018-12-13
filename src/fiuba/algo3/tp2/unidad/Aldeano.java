@@ -57,6 +57,9 @@ public class Aldeano extends Unidad implements Constructor, Reparador {
 			construible.asignarConstructor(this);
 			
 			this.movimiento = new MovimientoNulo();
+			
+			setChanged();
+			notifyObservers(construibleEnConstruccion);
 		}
 		else {
 			construible.liberarCeldas(obtenerMapa());
@@ -78,6 +81,9 @@ public class Aldeano extends Unidad implements Constructor, Reparador {
 		this.edificioEnReparacion = edificio;
 		
 		this.movimiento = new MovimientoNulo();
+		
+		setChanged();
+		notifyObservers(reparadorEdificio);
 	}
 
 	@Override
@@ -89,6 +95,9 @@ public class Aldeano extends Unidad implements Constructor, Reparador {
 		if(this.edificioEnReparacion != null && this.edificioEnReparacion.estaReparado()) {
 			
 			this.edificioEnReparacion = null;
+			
+			setChanged();
+			notifyObservers();
 		}
 
 		if(this.edificioEnReparacion != null) {
@@ -104,6 +113,9 @@ public class Aldeano extends Unidad implements Constructor, Reparador {
 		
 		if((this.construibleEnConstruccion != null) && (this.construibleEnConstruccion.estaConstruido())){
 			this.construibleEnConstruccion = null;
+			
+			setChanged();
+			notifyObservers();
 		}
 		
 		//ORO
@@ -112,6 +124,9 @@ public class Aldeano extends Unidad implements Constructor, Reparador {
 		if(this.construibleEnConstruccion == null &&  this.edificioEnReparacion == null) {
 			
 			movimiento = new MovimientoBasico();
+			
+			setChanged();
+			notifyObservers(movimiento);
 		}
 		
 	}

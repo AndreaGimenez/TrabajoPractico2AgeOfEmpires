@@ -1,11 +1,14 @@
 package fiuba.algo3.tp2.edificio;
 
+import java.util.Collection;
+
 import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
 import fiuba.algo3.tp2.formas.FormaCastilloRectangulo;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.reparacion.ReparacionDesactivada;
 
 public class Castillo extends Edificio implements AtacadorZona {
@@ -20,15 +23,14 @@ public class Castillo extends Edificio implements AtacadorZona {
 		super(posicion, new FormaCastilloRectangulo(), new ReparacionDesactivada(), VIDA_MAXIMA, SALUD_RECUPERADA_POR_TURNO, COSTO_CONSTRUCCION, mapa);
 		this.ataque = new AtaqueCastillo(this, mapa);
 	}
-
-	@Override
-	public void atacar() throws AtaqueInvalidoException {
-		ataque.atacar();
+	
+	public void atacar(Collection<Posicionable> pocisionablesEnemigos) throws AtaqueInvalidoException {
+		ataque.atacar(pocisionablesEnemigos);
 		ataque = new AtaqueNuloCastillo();
 		setChanged();
 		notifyObservers(this.ataque);
 	}
-	
+	 
     @Override
 	public void actualizarEstadoParaSiguienteTurno() {
 		this.generable = null;
@@ -40,5 +42,11 @@ public class Castillo extends Edificio implements AtacadorZona {
 		
 		setChanged();
 		notifyObservers(this.ataque);
+	}
+
+	@Override
+	public void atacar() throws AtaqueInvalidoException {
+		// TODO Auto-generated method stub
+		
 	}
 }

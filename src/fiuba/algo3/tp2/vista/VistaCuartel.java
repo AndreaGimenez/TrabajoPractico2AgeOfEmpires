@@ -19,7 +19,6 @@ import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import fiuba.algo3.tp2.vista.handlers.BotonCreadorDeArqueroEventHandler;
 import fiuba.algo3.tp2.vista.handlers.BotonCreadorDeEspadachinEventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -38,21 +37,23 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	private VistaSeleccionador vistaSeleccionador;
 	private Button botonCrearArquero;
 	private Button botonCrearEspadachin;
+	private Cuartel cuartel;
 
-	public VistaCuartel(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego) {
+	public VistaCuartel(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego, Cuartel cuartel) {
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.mapa = juego.obtenerMapa();
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 		this.vistaSeleccionador = vistaSeleccionador;
-		this.botonCrearEspadachin = new Button("Crear Espadachin");
-		this.botonCrearArquero = new Button("Crear Arquero");
+		this.cuartel = cuartel;
+		this.botonCrearEspadachin = crearAccionCrearEspadachin();
+		this.botonCrearArquero = crearAccionCrearArquero();
 	}
 	
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		pane.setBackground(obtenerFondoCuartel(posicionable, pane));
+		pane.setBackground(obtenerFondoCuartel((Cuartel)posicionable, pane));
 	}
 	
 	public void dibujarPosicionable(Posicionable posicionable) {
@@ -75,41 +76,41 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		contenedorControles.setVida(cuartel.obtenerVida(), cuartel.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(crearAccionCrearArquero(cuartel));
-		acciones.add(crearAccionCrearEspadachin(cuartel));
+		acciones.add(botonCrearArquero);
+		acciones.add(botonCrearEspadachin);
 
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 
-	private Button crearAccionCrearEspadachin(Cuartel cuartel) {
-
-		//Button botonCrearEspadachin = new Button("Crear Espadachin");
-
+	private Button crearAccionCrearEspadachin() {
+		Button botonCrearEspadachin = new Button("Crear Espadachin");
 		botonCrearEspadachin.setOnAction(new BotonCreadorDeEspadachinEventHandler
-				(botonCrearEspadachin, cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
-		this.botonCrearEspadachin = botonCrearEspadachin;
+				(botonCrearEspadachin, this.cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
 		return botonCrearEspadachin;
-
 	}
 
-	private Button crearAccionCrearArquero(Cuartel cuartel) {
-
-		//Button botonCrearArquero = new Button("Crear Arquero");
-
+	private Button crearAccionCrearArquero() {
+		Button botonCrearArquero = new Button("Crear Arquero");
 		botonCrearArquero.setOnAction(new BotonCreadorDeArqueroEventHandler
-						(botonCrearArquero, cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
-		this.botonCrearArquero = botonCrearArquero;
+						(botonCrearArquero, this.cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
 		return botonCrearArquero;
 	}
 	
 	private Background obtenerFondoCuartel(Posicionable posicionable, Pane pane) {
 		
-		
 		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
 		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
 		
-		String nombreImagen = new Posicion(colIndex, rowIndex).restar(posicionable.obtenerPosicion()).toString();
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg", 
+		String imagePath = "";
+		String nombreImagen = new Posicion(colIndex, rowIndex).restar(cuartel.obtenerPosicion()).toString();
+		
+		if(cuartel.estaConstruido()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg";
+		}
+		else {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
+		}
+		Image imagen = new Image(imagePath, 
 			       VistaMapa.TAMANIO_NODO,
 			 	   VistaMapa.TAMANIO_NODO,
 			       false,
@@ -117,7 +118,7 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		
 		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		
-		return new Background(fondoCastillo);
+		return new Background(fondoCastillo);     
 	}
 
 	@Override
@@ -125,30 +126,22 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		if(objetoQueCambio instanceof VidaEdificio) {
 			//considerar si sufrio danio, se destruyo, se recupero vida,  se termino de reparar(vida full)
 			actualizarCambiosEnLaVida(((VidaEdificio) objetoQueCambio).obtenerVida(), ((VidaEdificio) objetoQueCambio).obtenerVidaMaxima());
-		}
-		
-		if(objetoQueCambio instanceof EstadoConstruccion) {
+		}else if(objetoQueCambio instanceof EstadoConstruccion) {
 			//considerar si se termino de construir o si se avanzo en la construccion
 			actualizarCambiosEnLaConstruccion(((EstadoConstruccion)objetoQueCambio));
-		}
-		
-		if(objetoQueCambio instanceof Generable) {
+		}else if(objetoQueCambio instanceof Generable) {
 			//considerar si se muestran o anulan los botones de generar unidad
-			actualizarCambiosEnLaGeneracion(objetoQueCambio);
-
+			actualizarCambiosEnLaGeneracion((Generable) objetoQueCambio);
+		}else {
+			actualizarCambiosEnLaGeneracion(null);
 		}
 	}
-
-	private void actualizarCambiosEnLaGeneracion(Object objetoQueCambio) {
+    
+	private void actualizarCambiosEnLaGeneracion(Generable objetoQueCambio) {
 		if(objetoQueCambio != null) {
 			this.botonCrearArquero.setDisable(true);
 			this.botonCrearEspadachin.setDisable(true);
-			botonCrearArquero.setTooltip(
-				    new Tooltip("Espera al proximo turno para crear un arquero")
-				);
-			botonCrearEspadachin.setTooltip(
-				    new Tooltip("Espera al proximo turno para crear un espadachin")
-				);
+			
 		}
 		else {
 			this.botonCrearArquero.setDisable(false);
@@ -157,21 +150,16 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	}
 
 	private void actualizarCambiosEnLaConstruccion(EstadoConstruccion objetoQueCambio) {
-		if(objetoQueCambio.estaConstruido()) {
-			//poner imagen de cuartel construido
-		}
-		else {
-			//poner imagen de cuartel en cimientos
-		}
+		dibujarPosicionable(cuartel);
 	}
 
 	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
 		//Si la vida esta entre el 50% y el 100%
 		if(vidaActual >= vidaMaxima/2 ) {
-			//mostrar foto del cuartel sin daños
+			//mostrar foto del cuartel sin ddanios
 		}
-		else {
-			//mostrar foto del cuartel con daños
+		else { 
+			//mostrar foto del cuartel con danios
 		}
 	}
 }

@@ -128,10 +128,10 @@ public class VistaCastillo implements VistaPosicionable, Observer {
 	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
 		//Si la vida esta entre el 50% y el 100%
 		if(vidaActual >= vidaMaxima/2 ) {
-			//mostrar foto del cuartel sin daños
+			//mostrar foto del cuartel sin danios
 		}
 		else {
-			//mostrar foto del cuartel con daños
+			//mostrar foto del cuartel con danios
 		}
 	}
 }

@@ -32,7 +32,7 @@ public class BotonConstruirPlazaCentralHandler implements EventHandler<ActionEve
 	public void handle(ActionEvent event) {
 		
 		vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedConstruirPlazaCentralStrategy(ContenedorPartida.contenedorMapa, juego, aldeano, vistaMapa, vistaSeleccionador));
-		contenedorMapa.setCursor(Cursor.CROSSHAIR);
+		ContenedorPartida.contenedorMapa.setCursorReparar();
 	}
 
 }

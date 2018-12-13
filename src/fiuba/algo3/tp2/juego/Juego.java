@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.juego;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -8,6 +9,7 @@ import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.edificio.Castillo;
 import fiuba.algo3.tp2.edificio.Edificio;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
@@ -30,7 +32,7 @@ public class Juego {
 	
 	public LinkedList<Jugador> jugadores;
 	public Mapa mapa;
-	private Ronda ronda;
+	private Ronda ronda; 
 	private boolean estaTerminado;
 
 	public Juego(Mapa mapa) 
@@ -47,7 +49,7 @@ public class Juego {
 		
 		for(int i = 0; i < CANTIDAD_DE_JUGADORES; i++) {
 			agregarJugador(nombreJugadores[i]);
-		}
+		} 
 		ronda.iniciar();
 	}
 
@@ -140,7 +142,9 @@ public class Juego {
 		return ronda.obtenerJugadorActual();
 	}
 
-	public void avanzarJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+	public void avanzarJugador() throws EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
+		Collection<Posicionable> pocisionablesEnemigos = obtenerJugadorActual().obtenerPosicionables();
+		
 		obtenerJugadorActual().avanzarTurno();
 		ronda.avanzar();
 		
@@ -166,6 +170,7 @@ public class Juego {
 		if(obtenerJugadorActual().castilloDestruido()) {
 			this.estaTerminado = true ;
 		}
+		jugadorActual.obtenerCastillo().atacar(pocisionablesEnemigos);
 	}
 
 	public boolean estaTerminado() {

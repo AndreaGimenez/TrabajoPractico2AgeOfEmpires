@@ -2,6 +2,7 @@ package fiuba.algo3.tp2.vista.handlers;
 
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
 import fiuba.algo3.tp2.juego.Juego;
@@ -38,13 +39,13 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		
-		MensajeDeError error = new MensajeDeError();
+		MensajeDeError error = new MensajeDeError(); 
 		try {
 			juego.avanzarJugador();
 			vistaEstadoJugador.actualizar();
 			vistaSeleccionador.deseleccionarNodoActual();
 			ContenedorPartida.contenedorControles.clean();
-			//vistaMapa.dibujarPosicionables();
+			vistaMapa.dibujarPosicionables();
 		} 
 		catch(EdificioNoAptoParaConstruccionException e) {
 			error.mostrarVentanaError("No es posible construir este Edificio", "No posee recursos suficientes");
@@ -60,6 +61,9 @@ public class ButtonAvanzarTurnoHandler implements EventHandler<ActionEvent> {
 		}
 		catch(EdificioConReparadorAsignadoException e) {
 			error.mostrarVentanaError("Este Edificio Ya Tiene Asignado Un Reparador", "Un edificio solo puede tener un solo reparador");
+		} catch (AtaqueInvalidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

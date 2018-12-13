@@ -48,12 +48,12 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 
 		try {
 			Mapa mapa = juego.obtenerMapa();
-			VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego);
 			PlazaCentral plazaCentral= new PlazaCentral(new Posicion(colIndex, rowIndex), mapa);
+			VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego, plazaCentral);
 			plazaCentral.addObserver(vistaPlazaCentral);
 			aldeano.construirConstruible(plazaCentral);
 			juego.obtenerJugadorActual().agregarEdificio(plazaCentral);
-			vistaMapa.dibujarPosicionables();
+			vistaPlazaCentral.dibujarPosicionable(plazaCentral);
 			}
 		
 		catch(EdificioNoAptoParaConstruccionException e) {
@@ -75,7 +75,7 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 		}			
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, ContenedorPartida.contenedorMapa, vistaSeleccionador));
-			ContenedorPartida.contenedorMapa.setCursor(Cursor.DEFAULT);
+			ContenedorPartida.contenedorMapa.setCursorDefault();
 		}
 	}
 

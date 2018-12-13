@@ -56,16 +56,16 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 		
 		if(!juego.obtenerJugadorActual().posicionablePerteneceAJugador(posicionable)
 				&& posicionable instanceof Atacable) {
-			
+			 
 			try {
 				atacador.atacar((Atacable)posicionable);
-				VistaPosicionableMultitone.getInstance(posicionable).dibujarPosicionable(posicionable, nodo);
+				//contenedorMapa.obtenerVistaPosicionable(new Posicion(colIndex, rowIndex)).dibujarPosicionable(posicionable, nodo);
 				
-				Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
-				nodo.getChildren().add(nodoShape);
+//				Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
+//				nodo.getChildren().add(nodoShape);
 				
-		        final Animation animation = new ColorTransition(Color.RED, nodoShape);
-		        animation.play();
+//		        final Animation animation = new ColorTransition(Color.RED, nodoShape);
+//		        animation.play();
 				
 			} 
 			catch(UnidadMuertaException e) {
@@ -82,7 +82,7 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 			}
 			finally {
 				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, ContenedorPartida.contenedorMapa, vistaSeleccionador));
-				contenedorMapa.setCursorDefault();
+				ContenedorPartida.contenedorMapa.setCursorDefault();
 			}
 			
 		}

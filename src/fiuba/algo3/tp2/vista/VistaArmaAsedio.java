@@ -11,8 +11,12 @@ import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
+import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Atacador;
+import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.unidad.Espadachin;
+import fiuba.algo3.tp2.unidad.GestionadorMontajeArmaAsedio;
+import fiuba.algo3.tp2.vida.VidaUnidad;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonAtaque;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
@@ -26,6 +30,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observer {
@@ -35,17 +40,28 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 	private VistaSeleccionador vistaSeleccionador;
 	private VistaMapa vistaMapa;
 	private Juego juego;
+	
+	private Button accionAtacar;
+	private GridPane accionesMovimiento;
+	private Button accionMontar;
+
 
 	public VistaArmaAsedio(ContenedorControles contenedorControles, 
 							ContenedorMapa contenedorMapa, 
 							VistaSeleccionador vistaSeleccionador, 
 							VistaMapa vistaMapa, 
-							Juego juego) {
+							Juego juego,
+							ArmaAsedio armaAsedio) {
+		
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.vistaSeleccionador = vistaSeleccionador;
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
+		
+		this.accionMontar = crearAccionMontar(armaAsedio);
+		this.accionAtacar = new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa).crearBoton(armaAsedio);
+		this.accionesMovimiento = new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones(armaAsedio);
 	}
 
 	@Override
@@ -120,11 +136,11 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 		contenedorControles.setVida(armaAsedio.obtenerVida(), armaAsedio.obtenerVidaMaxima());
 		
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(crearAccionMontar((ArmaAsedio)posicionable));
-		acciones.add(new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, contenedorMapa).crearBoton((Atacador)posicionable));
+		acciones.add(accionMontar);
+		acciones.add(accionAtacar);
 		
 		//Movimientos
-		ContenedorPartida.contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones((Movible)posicionable)));
+		ContenedorPartida.contenedorControles.getChildren().add(accionesMovimiento);
 		
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
@@ -145,9 +161,9 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
 
-		if(this.juego.posicionablePerteneceAPrimerJugador(movible)) {
+		if (this.juego.posicionablePerteneceAPrimerJugador(movible)) {
 			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedioDeJugadorRojo((ArmaAsedio) movible), movible.obtenerPosicion());
-		}else{
+		} else {
 			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedioDeJugadorAzul((ArmaAsedio) movible), movible.obtenerPosicion());
 		}
 	}
@@ -156,8 +172,55 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 	public void update(Observable o, Object arg) {
 		
 		ArmaAsedio armaAsedio = (ArmaAsedio)o;
-		Posicion posicionAnterior = (Posicion) arg;
 		
-		dibujarPosicionable(armaAsedio, posicionAnterior);
+		if(arg instanceof Posicion) {
+			
+			Posicion posicionAnterior = (Posicion)arg;
+			contenedorMapa.actualizarPosicionVistaPosicionable(this, posicionAnterior, armaAsedio.obtenerPosicion());
+			this.accionesMovimiento.setDisable(true);
+			dibujarPosicionable(armaAsedio, posicionAnterior);
+			
+		}else if(arg instanceof Ataque) {
+			
+			this.accionAtacar.setDisable(true);
+			
+		}else if(arg instanceof VidaUnidad) {
+			
+			dibujarPosicionable(armaAsedio);
+			if(armaAsedio.estaMuerta()) {
+				contenedorMapa.removerVista(armaAsedio.obtenerPosicion());
+			}
+			
+		}else if(arg instanceof GestionadorMontajeArmaAsedio) {
+			
+			GestionadorMontajeArmaAsedio gestionadorMontajeArmaAsedio = (GestionadorMontajeArmaAsedio)arg;
+			
+			if(gestionadorMontajeArmaAsedio.montajeEnCurso()) {
+				this.accionMontar.setText("Montando...");
+				this.accionMontar.setDisable(true);
+				this.accionesMovimiento.setDisable(true);
+				this.accionAtacar.setDisable(true);
+			}else if(gestionadorMontajeArmaAsedio.desmontajeEnCurso()) {
+				this.accionMontar.setText("Desmontando...");
+				this.accionMontar.setDisable(true);
+				this.accionesMovimiento.setDisable(true);
+				this.accionAtacar.setDisable(true);
+			}else if(gestionadorMontajeArmaAsedio.estaMontada()) {
+				this.accionMontar.setText("Desmontar");
+				this.accionMontar.setDisable(false);
+				this.accionesMovimiento.setDisable(true);
+				this.accionAtacar.setDisable(false);
+			}else if(!gestionadorMontajeArmaAsedio.estaMontada()) {
+				this.accionMontar.setText("Montar");
+				this.accionMontar.setDisable(false);
+				this.accionesMovimiento.setDisable(false);
+				this.accionAtacar.setDisable(true);
+			}
+			
+		}else {
+			
+			this.accionesMovimiento.setDisable(false);
+			this.accionAtacar.setDisable(false);
+		}
 	}
 }

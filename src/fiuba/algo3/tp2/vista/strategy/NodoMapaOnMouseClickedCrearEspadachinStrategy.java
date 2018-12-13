@@ -11,6 +11,7 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.Espadachin;
 import fiuba.algo3.tp2.vista.MensajeDeError;
+import fiuba.algo3.tp2.vista.VistaEspadachin;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
@@ -47,9 +48,10 @@ public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOn
 		try {
 			Mapa mapa = juego.obtenerMapa();
 			Espadachin espadachin = new Espadachin(new Posicion(colIndex, rowIndex), mapa);
+			VistaEspadachin vistaESpadachin = new VistaEspadachin(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego, espadachin);
 			cuartel.crear(espadachin);
 			juego.obtenerJugadorActual().agregarUnidad(espadachin, mapa);
-			vistaMapa.dibujarPosicionables();
+			vistaESpadachin.dibujarPosicionable(espadachin);
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar El Arquero porque ya fue generada una en este turno","");

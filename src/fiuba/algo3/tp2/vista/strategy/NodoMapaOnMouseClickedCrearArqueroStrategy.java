@@ -11,8 +11,10 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.vista.MensajeDeError;
+import fiuba.algo3.tp2.vista.VistaArquero;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
+import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
 import javafx.scene.Cursor;
@@ -46,9 +48,11 @@ public class NodoMapaOnMouseClickedCrearArqueroStrategy implements NodoMapaOnMou
 		try {
 			Mapa mapa = juego.obtenerMapa();
 			Arquero arquero= new Arquero(new Posicion(colIndex, rowIndex), mapa);
+			VistaArquero vistaArquero = new VistaArquero(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego, arquero);
 			cuartel.crear(arquero);
+			arquero.addObserver(vistaArquero);
 			juego.obtenerJugadorActual().agregarUnidad(arquero, mapa);
-			vistaMapa.dibujarPosicionables();
+			vistaArquero.dibujarPosicionable(arquero);
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar El Arquero porque ya fue generada una en este turno","");
