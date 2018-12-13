@@ -53,7 +53,7 @@ public abstract class Edificio extends Observable implements Posicionable, Ataca
 		this.generable = null;
 		
 		setChanged();
-		notifyObservers(this.generable);
+		notifyObservers((Generable)this.generable);
 	}
     
 	public void posicionar(Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException {

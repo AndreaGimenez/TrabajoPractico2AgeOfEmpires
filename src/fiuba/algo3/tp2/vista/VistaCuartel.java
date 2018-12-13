@@ -38,16 +38,19 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	private VistaSeleccionador vistaSeleccionador;
 	private Button botonCrearArquero;
 	private Button botonCrearEspadachin;
+	private Cuartel cuartel;
 
-	public VistaCuartel(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego) {
+	public VistaCuartel(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego, Cuartel cuartel) {
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.mapa = juego.obtenerMapa();
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 		this.vistaSeleccionador = vistaSeleccionador;
-		this.botonCrearEspadachin = new Button("Crear Espadachin");
-		this.botonCrearArquero = new Button("Crear Arquero");
+		this.cuartel = cuartel;
+		this.botonCrearEspadachin = crearAccionCrearEspadachin();
+		this.botonCrearArquero = crearAccionCrearArquero();
+		
 	}
 	
 	@Override
@@ -75,30 +78,23 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		contenedorControles.setVida(cuartel.obtenerVida(), cuartel.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(crearAccionCrearArquero(cuartel));
-		acciones.add(crearAccionCrearEspadachin(cuartel));
+		acciones.add(botonCrearArquero);
+		acciones.add(botonCrearEspadachin);
 
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 
-	private Button crearAccionCrearEspadachin(Cuartel cuartel) {
-
-		//Button botonCrearEspadachin = new Button("Crear Espadachin");
-
+	private Button crearAccionCrearEspadachin() {
+		Button botonCrearEspadachin = new Button("Crear Espadachin");
 		botonCrearEspadachin.setOnAction(new BotonCreadorDeEspadachinEventHandler
-				(botonCrearEspadachin, cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
-		this.botonCrearEspadachin = botonCrearEspadachin;
+				(botonCrearEspadachin, this.cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
 		return botonCrearEspadachin;
-
 	}
 
-	private Button crearAccionCrearArquero(Cuartel cuartel) {
-
-		//Button botonCrearArquero = new Button("Crear Arquero");
-
+	private Button crearAccionCrearArquero() {
+		Button botonCrearArquero = new Button("Crear Arquero");
 		botonCrearArquero.setOnAction(new BotonCreadorDeArqueroEventHandler
-						(botonCrearArquero, cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
-		this.botonCrearArquero = botonCrearArquero;
+						(botonCrearArquero, this.cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
 		return botonCrearArquero;
 	}
 	
@@ -125,30 +121,22 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		if(objetoQueCambio instanceof VidaEdificio) {
 			//considerar si sufrio danio, se destruyo, se recupero vida,  se termino de reparar(vida full)
 			actualizarCambiosEnLaVida(((VidaEdificio) objetoQueCambio).obtenerVida(), ((VidaEdificio) objetoQueCambio).obtenerVidaMaxima());
-		}
-		
-		if(objetoQueCambio instanceof EstadoConstruccion) {
+		}else if(objetoQueCambio instanceof EstadoConstruccion) {
 			//considerar si se termino de construir o si se avanzo en la construccion
 			actualizarCambiosEnLaConstruccion(((EstadoConstruccion)objetoQueCambio));
-		}
-		
-		if(objetoQueCambio instanceof Generable) {
+		}else if(objetoQueCambio instanceof Generable) {
 			//considerar si se muestran o anulan los botones de generar unidad
-			actualizarCambiosEnLaGeneracion(objetoQueCambio);
-
+			actualizarCambiosEnLaGeneracion((Generable) objetoQueCambio);
+		}else {
+			actualizarCambiosEnLaGeneracion(null);
 		}
 	}
 
-	private void actualizarCambiosEnLaGeneracion(Object objetoQueCambio) {
+	private void actualizarCambiosEnLaGeneracion(Generable objetoQueCambio) {
 		if(objetoQueCambio != null) {
 			this.botonCrearArquero.setDisable(true);
 			this.botonCrearEspadachin.setDisable(true);
-			botonCrearArquero.setTooltip(
-				    new Tooltip("Espera al proximo turno para crear un arquero")
-				);
-			botonCrearEspadachin.setTooltip(
-				    new Tooltip("Espera al proximo turno para crear un espadachin")
-				);
+			
 		}
 		else {
 			this.botonCrearArquero.setDisable(false);
@@ -168,10 +156,10 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
 		//Si la vida esta entre el 50% y el 100%
 		if(vidaActual >= vidaMaxima/2 ) {
-			//mostrar foto del cuartel sin daños
+			//mostrar foto del cuartel sin daï¿½os
 		}
 		else {
-			//mostrar foto del cuartel con daños
+			//mostrar foto del cuartel con daï¿½os
 		}
 	}
 }

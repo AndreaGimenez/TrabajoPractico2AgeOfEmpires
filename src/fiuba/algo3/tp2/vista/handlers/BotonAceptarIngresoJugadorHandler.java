@@ -158,7 +158,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         
         //agrego unidades y edificios EXTRA para probar funcionalidad
         Cuartel cuartel = new Cuartel(new Posicion(8, 0), mapa);
-        VistaCuartel vistaCuartel = new VistaCuartel(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego);
+        VistaCuartel vistaCuartel = new VistaCuartel(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego, cuartel);
         cuartel.addObserver(vistaCuartel);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaCuartel, cuartel.obtenerPosicion());
         juego.obtenerJugadorActual().agregarEdificio(cuartel, false);
@@ -228,8 +228,9 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         juego.obtenerJugadorActual().agregarEdificio(castillo, false);
         vistaCastillo.dibujarPosicionable(castillo);
         
-        VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego);
+        
         PlazaCentral plazaCentral = (PlazaCentral)mapa.obtenerPosicionable(PosicionesIniciales.POSICION_PLAZA_CENTRAL_1);
+        VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego, plazaCentral);
         plazaCentral.addObserver(vistaPlazaCentral);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaPlazaCentral, plazaCentral.obtenerPosicion());
         juego.obtenerJugadorActual().agregarEdificio(plazaCentral, false);
@@ -267,8 +268,8 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         juego.obtenerJugadorActual().agregarEdificio(castillo, false);
         vistaCastillo.dibujarPosicionable(castillo);
         
-        VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego);
         PlazaCentral plazaCentral = (PlazaCentral)mapa.obtenerPosicionable(new Posicion(mapa.getTamanioX()-7, mapa.getTamanioY()-2));
+        VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego, plazaCentral);
         plazaCentral.addObserver(vistaPlazaCentral);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaPlazaCentral, plazaCentral.obtenerPosicion());
         juego.obtenerJugadorActual().agregarEdificio(plazaCentral, false);

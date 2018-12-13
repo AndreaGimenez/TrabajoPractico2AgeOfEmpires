@@ -34,15 +34,17 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 	private VistaMapa vistaMapa;
 	private Juego juego;
 	private VistaSeleccionador vistaSeleccionador;
+	private Button botonCrearAldeano;
 
 	
-	public VistaPlazaCentral(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego) {
+	public VistaPlazaCentral(ContenedorMapa contenedorMapa, ContenedorControles contenedorControles, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador, Juego juego, PlazaCentral plazaCentral) {
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.mapa = juego.obtenerMapa();
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
 		this.vistaSeleccionador = vistaSeleccionador;
+		this.botonCrearAldeano = crearAccionCrearAldeano(plazaCentral);
 	}
 	
 	@Override
@@ -71,7 +73,7 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 		contenedorControles.setVida(plazaCentral.obtenerVida(), plazaCentral.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
-		acciones.add(crearAccionCrearAldeano(plazaCentral));
+		acciones.add(botonCrearAldeano);
 
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
@@ -120,11 +122,11 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 	}
 
 	private void actualizarCambiosEnLaGeneracion(Object objetoQueCambio) {
-		if(objetoQueCambio == null) {
-			//activar botoon de generar unidades
+		if(objetoQueCambio != null) {
+			this.botonCrearAldeano.setDisable(true);
 		}
 		else {
-			//desactivar boton de generar unidades
+			this.botonCrearAldeano.setDisable(false);
 		}
 	}
 
@@ -140,10 +142,10 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
 		//Si la vida esta entre el 50% y el 100%
 		if(vidaActual >= vidaMaxima/2 ) {
-			//mostrar foto dde la plaza central sin daños
+			//mostrar foto dde la plaza central sin daï¿½os
 		}
 		else {
-			//mostrar foto de la plaza central con daños
+			//mostrar foto de la plaza central con daï¿½os
 		}
 	}
 }
