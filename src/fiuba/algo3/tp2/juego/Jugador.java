@@ -74,6 +74,7 @@ public class Jugador {
 				this.oro = this.oro - unidad.obtenerCosto();
 			}
 			else {
+				removerUnidad(unidad, mapa);
 				throw new OroInsuficienteException();
 			}
 		}
