@@ -20,10 +20,11 @@ import javafx.scene.layout.Pane;
 public class ContenedorMapa extends GridPane {
 	
 	private ContenedorCentral contenedorPadre;
-
+	private Mapa mapa;
 	
 	public ContenedorMapa(Mapa mapa) {
 		
+		this.mapa = mapa;
     	setAlignment(Pos.CENTER);
     	setGridLinesVisible(true);
         Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/terreno.jpg",
@@ -64,7 +65,10 @@ public class ContenedorMapa extends GridPane {
 	}
 
 	public void agregarVistaPosicionable(VistaPosicionable vistaPosicionable, Posicion posicion) {
-		obtenerNodo(posicion).setVistaPosicionable(vistaPosicionable);
+		
+		for(Posicion posicionActual : mapa.obtenerPosicionable(posicion).obtenerPosicionesOcupadasEnMapa()) {
+			obtenerNodo(posicionActual).setVistaPosicionable(vistaPosicionable);
+		}
 	}
 	
 	public VistaPosicionable obtenerVistaPosicionable(Posicion posicion) {
