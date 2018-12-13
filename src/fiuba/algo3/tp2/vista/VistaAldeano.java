@@ -5,10 +5,13 @@ import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
+import fiuba.algo3.tp2.construccion.Construible;
 import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
+import fiuba.algo3.tp2.movimiento.MovimientoBasico;
+import fiuba.algo3.tp2.reparacion.ReparadorEdificio;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
@@ -34,11 +37,35 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 	private VistaMapa vistaMapa;
 	private Juego juego;
 	
-	public VistaAldeano(ContenedorControles contenedorControles, ContenedorMapa contenedorMapa, VistaSeleccionador vistaSeleccionador, VistaMapa vistaMapa, Juego juego) {
+	private Button accionReparar;
+	private Button accionConstruirPlazaCentral;
+	private Button accionConstruirCuartel;
+	private GridPane accionesMovimiento;
+	
+	
+	public VistaAldeano(ContenedorControles contenedorControles, 
+						ContenedorMapa contenedorMapa, 
+						VistaSeleccionador vistaSeleccionador, 
+						VistaMapa vistaMapa, 
+						Juego juego,
+						Aldeano aldeano) {
+		
 		this.contenedorMapa = contenedorMapa;
 		this.vistaSeleccionador = vistaSeleccionador;
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
+		
+		this.accionReparar = crearAccionReparar(aldeano);
+		
+		this.accionConstruirPlazaCentral = new Button("Construir Plaza Central");
+		BotonConstruirPlazaCentralHandler botonConstruirPlazaCentral = new BotonConstruirPlazaCentralHandler(aldeano, vistaMapa, contenedorMapa, juego, vistaSeleccionador); 
+		accionConstruirPlazaCentral.setOnAction(botonConstruirPlazaCentral);
+		
+		this.accionConstruirCuartel = new Button("Construir Cuartel");
+		BotonConstruirCuartelHandler botonConstruirCuartel = new BotonConstruirCuartelHandler(aldeano, vistaMapa, ContenedorPartida.contenedorMapa, juego, vistaSeleccionador);
+		accionConstruirCuartel.setOnAction(botonConstruirCuartel);
+		
+		this.accionesMovimiento = new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones(aldeano);
 	}
 
 	@Override
@@ -60,25 +87,13 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		
 		ContenedorPartida.contenedorControles.setNombreUnidad("Aldeano");
 		ContenedorPartida.contenedorControles.setVida(aldeano.obtenerVida(), aldeano.obtenerVidaMaxima());
-
 		
 		Collection<Button> acciones = new ArrayList<>();
-		acciones.add(crearAccionReparar((Aldeano) posicionable));
+		acciones.add(this.accionReparar);
+		acciones.add(this.accionConstruirPlazaCentral);
+		acciones.add(this.accionConstruirCuartel);
 		
-		Button construirPlazaCentral = new Button("Construir Plaza Central");
-		BotonConstruirPlazaCentralHandler botonConstruirPlazaCentral = new BotonConstruirPlazaCentralHandler((Aldeano) posicionable, vistaMapa, contenedorMapa, juego, vistaSeleccionador); 
-		construirPlazaCentral.setOnAction(botonConstruirPlazaCentral);
-		acciones.add(construirPlazaCentral);
-		
-		Button construirCuartel = new Button("Construir Cuartel");
-		BotonConstruirCuartelHandler botonConstruirCuartel = new BotonConstruirCuartelHandler((Aldeano) posicionable, vistaMapa, ContenedorPartida.contenedorMapa, juego, vistaSeleccionador);
-		construirCuartel.setOnAction(botonConstruirCuartel);
-		acciones.add(construirCuartel);
-		
-		//Movimientos
-		GridPane botoneraMovimiento = new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones((Movible)posicionable);
-		ContenedorPartida.contenedorControles.getChildren().add(botoneraMovimiento);
-		
+		ContenedorPartida.contenedorControles.getChildren().add(this.accionesMovimiento);
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 
@@ -149,8 +164,31 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 	public void update(Observable o, Object arg) {
 		
 		Aldeano aldeano = (Aldeano)o;
-		Posicion posicionAnterior = (Posicion) arg;
 		
-		dibujarPosicionable(aldeano, posicionAnterior);
+		if(arg instanceof Posicion) {
+			
+			Posicion posicionAnterior = (Posicion)arg;
+			contenedorMapa.actualizarPosicionVistaPosicionable(this, posicionAnterior, aldeano.obtenerPosicion());
+			this.accionesMovimiento.setDisable(true);
+			dibujarPosicionable(aldeano, posicionAnterior);
+			
+		}else if(arg instanceof ReparadorEdificio
+				|| arg instanceof Construible) {
+			
+			this.accionesMovimiento.setDisable(true);
+			this.accionConstruirCuartel.setDisable(true);
+			this.accionConstruirPlazaCentral.setDisable(true);
+			this.accionReparar.setDisable(true);
+			
+		}else if(arg instanceof MovimientoBasico) {
+			
+			this.accionesMovimiento.setDisable(false);
+		}else {
+			
+			this.accionesMovimiento.setDisable(false);
+			this.accionConstruirCuartel.setDisable(false);
+			this.accionConstruirPlazaCentral.setDisable(false);
+			this.accionReparar.setDisable(false);
+		}
 	}
 }

@@ -53,7 +53,7 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 			cuartel.addObserver(vistaCuartel);
 			aldeano.construirConstruible(cuartel);
 			juego.obtenerJugadorActual().agregarEdificio(cuartel);
-			vistaMapa.dibujarPosicionables();
+			vistaCuartel.dibujarPosicionable(cuartel);
 			} 
 		catch(CeldaOcupadaException e) {
 			error.mostrarVentanaError("La celda en la que intentas contruir esta ocupada", "Intente nuevamente con otra celda libre");
@@ -74,7 +74,7 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 		}
 		finally {
 			vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, ContenedorPartida.contenedorMapa, vistaSeleccionador));
-			ContenedorPartida.contenedorMapa.setCursor(Cursor.DEFAULT);
+			ContenedorPartida.contenedorMapa.setCursorDefault();
 		}
 	}
 }

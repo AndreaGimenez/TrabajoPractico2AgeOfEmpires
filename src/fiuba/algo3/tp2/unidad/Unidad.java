@@ -101,6 +101,7 @@ public abstract class Unidad extends Observable implements Movible, Posicionable
 	@Override
 	public void recibirDanio(Ataque ataque) {
 		vida.restarVida(ataque.obtenerDanioUnidad());
+		notifyObservers(this.vida);
 	}
 	
 	public boolean estaMuerta() {

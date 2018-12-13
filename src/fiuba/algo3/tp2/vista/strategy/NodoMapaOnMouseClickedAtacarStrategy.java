@@ -59,7 +59,7 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 			
 			try {
 				atacador.atacar((Atacable)posicionable);
-				VistaPosicionableMultitone.getInstance(posicionable).dibujarPosicionable(posicionable, nodo);
+				//contenedorMapa.obtenerVistaPosicionable(new Posicion(colIndex, rowIndex)).dibujarPosicionable(posicionable, nodo);
 				
 				Shape nodoShape = new Rectangle(nodo.getWidth(), nodo.getHeight());
 				nodo.getChildren().add(nodoShape);
@@ -82,7 +82,7 @@ public class NodoMapaOnMouseClickedAtacarStrategy implements NodoMapaOnMouseClic
 			}
 			finally {
 				vistaMapa.setNodoMapaOnMouseClickedStrategy(new NodoMapaOnMouseClickedSeleccionarStrategy(juego, ContenedorPartida.contenedorMapa, vistaSeleccionador));
-				contenedorMapa.setCursorDefault();
+				ContenedorPartida.contenedorMapa.setCursorDefault();
 			}
 			
 		}

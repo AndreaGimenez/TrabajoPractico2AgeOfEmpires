@@ -9,9 +9,8 @@ import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
-import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Arquero;
-import fiuba.algo3.tp2.unidad.Atacador;
+import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonAtaque;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
@@ -24,6 +23,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
@@ -33,18 +33,25 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 	private VistaSeleccionador vistaSeleccionador;
 	private VistaMapa vistaMapa;
 	private Juego juego;
-	private Button botonAtacar;
+	
+	private Button accionAtacar;
+	private GridPane accionesMovimiento;
 
 	public VistaArquero(ContenedorControles contenedorControles, 
 						ContenedorMapa contenedorMapa, 
 						VistaSeleccionador vistaSeleccionador,
 						VistaMapa vistaMapa,
-						Juego juego) {
+						Juego juego,
+						Arquero arquero) {
+		
 		this.contenedorControles = contenedorControles;
 		this.contenedorMapa = contenedorMapa;
 		this.vistaSeleccionador = vistaSeleccionador;
 		this.vistaMapa = vistaMapa;
 		this.juego = juego;
+		
+		this.accionAtacar = new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa).crearBoton(arquero);
+		this.accionesMovimiento = new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones(arquero);
 	}
 
 	@Override
@@ -68,13 +75,9 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 		contenedorControles.setVida(arquero.obtenerVida(), arquero.obtenerVidaMaxima());
 
 		Collection<Button> acciones = new ArrayList<Button>();
+		acciones.add(accionAtacar);
 		
-		botonAtacar = new CreadorBotonAtaque(juego, vistaMapa, vistaSeleccionador, ContenedorPartida.contenedorMapa).crearBoton((Atacador)posicionable);
-		acciones.add(botonAtacar);
-		
-		//Movimientos
-		ContenedorPartida.contenedorControles.getChildren().add((new CreadorBotonesMovimiento(this, vistaSeleccionador, juego.obtenerMapa()).crearBotones((Movible)posicionable)));
-
+		ContenedorPartida.contenedorControles.getChildren().add((this.accionesMovimiento));
 		ContenedorPartida.contenedorControles.setAcciones(acciones);
 	}
 	
@@ -100,9 +103,24 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		Arquero arquero = (Arquero)o;
-		Posicion posicionAnterior = (Posicion) arg;
 		
-		dibujarPosicionable(arquero, posicionAnterior);
+		Arquero arquero = (Arquero)o;
+		
+		if(arg instanceof Posicion) {
+			
+			Posicion posicionAnterior = (Posicion)arg;
+			contenedorMapa.actualizarPosicionVistaPosicionable(this, posicionAnterior, arquero.obtenerPosicion());
+			this.accionesMovimiento.setDisable(true);
+			dibujarPosicionable(arquero, posicionAnterior);
+			
+		}else if(arg instanceof Ataque) {
+			
+			this.accionAtacar.setDisable(true);
+			
+		}else {
+			
+			this.accionesMovimiento.setDisable(false);
+			this.accionAtacar.setDisable(false);
+		}
 	}
 }

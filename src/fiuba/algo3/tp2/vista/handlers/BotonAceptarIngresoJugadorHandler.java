@@ -166,7 +166,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         
         
         Arquero arquero = new Arquero(new Posicion(10, 10), mapa);
-        VistaArquero vistaArquero = new VistaArquero(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
+        VistaArquero vistaArquero = new VistaArquero(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, arquero);
         arquero.addObserver(vistaArquero);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaArquero, arquero.obtenerPosicion());
         juego.obtenerJugadorActual().agregarUnidad(arquero, mapa, false);
@@ -194,13 +194,21 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-        VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
+		
         Aldeano aldeano = new Aldeano(new Posicion(13, 10), mapa);
+        VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, aldeano);
         aldeano.addObserver(vistaAldeano);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());
         vistaAldeano.dibujarPosicionable(aldeano);
         juego.obtenerJugadorActual().agregarUnidad(aldeano, mapa, false);
+        
+        arquero = new Arquero(new Posicion(0, 4), mapa);
+        vistaArquero = new VistaArquero(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, arquero);
+        arquero.addObserver(vistaArquero);
+        ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaArquero, arquero.obtenerPosicion());
+        juego.obtenerJugadorActual().agregarUnidad(arquero, mapa, false);
+        vistaArquero.dibujarPosicionable(arquero);
+        
         try {
 			juego.avanzarJugador();
 		} catch (EdificioNoAptoParaConstruccionException | EdificioConConstructorAsignadoException
@@ -227,22 +235,23 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         juego.obtenerJugadorActual().agregarEdificio(plazaCentral, false);
         vistaPlazaCentral.dibujarPosicionable(plazaCentral);
 		
-        VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
+        
         Aldeano aldeano = (Aldeano)mapa.obtenerPosicionable(PosicionesIniciales.POSICION_INICIAL_1);
+        VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, aldeano);
         aldeano.addObserver(vistaAldeano);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());
         vistaAldeano.dibujarPosicionable(aldeano);
         
         
-        vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
         aldeano = (Aldeano)mapa.obtenerPosicionable(PosicionesIniciales.POSICION_INICIAL_2);
+        vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, aldeano);
         aldeano.addObserver(vistaAldeano);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());
         vistaAldeano.dibujarPosicionable(aldeano);
         
         
-        vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
         aldeano = (Aldeano)mapa.obtenerPosicionable(PosicionesIniciales.POSICION_INICIAL_3);
+        vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, aldeano);
         aldeano.addObserver(vistaAldeano);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());
         vistaAldeano.dibujarPosicionable(aldeano);
@@ -265,22 +274,23 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         juego.obtenerJugadorActual().agregarEdificio(plazaCentral, false);
         vistaPlazaCentral.dibujarPosicionable(plazaCentral);
 		
-        VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
+        
         Aldeano aldeano = (Aldeano)mapa.obtenerPosicionable(new Posicion(mapa.getTamanioX()-6, mapa.getTamanioY()-4));
+        VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, aldeano);
         aldeano.addObserver(vistaAldeano);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());
         vistaAldeano.dibujarPosicionable(aldeano);
         
         
-        vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
         aldeano = (Aldeano)mapa.obtenerPosicionable(new Posicion(mapa.getTamanioX()-6, mapa.getTamanioY()-6));
+        vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, aldeano);
         aldeano.addObserver(vistaAldeano);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());
         vistaAldeano.dibujarPosicionable(aldeano);
         
         
-        vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego);
         aldeano = (Aldeano)mapa.obtenerPosicionable(new Posicion(mapa.getTamanioX()-4, mapa.getTamanioY()-6));
+        vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, ContenedorPartida.vistaSeleccionador, ContenedorPartida.vistaMapa, juego, aldeano);
         aldeano.addObserver(vistaAldeano);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());
         vistaAldeano.dibujarPosicionable(aldeano);
