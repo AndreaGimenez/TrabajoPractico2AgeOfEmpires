@@ -50,6 +50,7 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 			Mapa mapa = juego.obtenerMapa();
 			PlazaCentral plazaCentral= new PlazaCentral(new Posicion(colIndex, rowIndex), mapa);
 			VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego, plazaCentral);
+			ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaPlazaCentral, plazaCentral.obtenerPosicion());
 			plazaCentral.addObserver(vistaPlazaCentral);
 			aldeano.construirConstruible(plazaCentral);
 			juego.obtenerJugadorActual().agregarEdificio(plazaCentral);

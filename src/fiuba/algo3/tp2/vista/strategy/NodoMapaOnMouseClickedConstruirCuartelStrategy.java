@@ -50,6 +50,7 @@ public class NodoMapaOnMouseClickedConstruirCuartelStrategy implements NodoMapaO
 			Mapa mapa = juego.obtenerMapa();
 			Cuartel cuartel = new Cuartel(new Posicion(colIndex, rowIndex), mapa);
 			VistaCuartel vistaCuartel = new VistaCuartel(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego, cuartel);
+			ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaCuartel, cuartel.obtenerPosicion());
 			cuartel.addObserver(vistaCuartel);
 			aldeano.construirConstruible(cuartel);
 			juego.obtenerJugadorActual().agregarEdificio(cuartel);

@@ -46,6 +46,7 @@ public class NodoMapaOnMouseClickedCrearAldeanoStrategy implements NodoMapaOnMou
 			Mapa mapa = juego.obtenerMapa();
 			Aldeano aldeano = new Aldeano(new Posicion(colIndex, rowIndex), mapa);
 			VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego, aldeano);
+			ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaAldeano, aldeano.obtenerPosicion());
 			plazaCentral.crear(aldeano);
 			aldeano.addObserver(vistaAldeano);
 			juego.obtenerJugadorActual().agregarUnidad(aldeano, mapa);

@@ -49,6 +49,8 @@ public class NodoMapaOnMouseClickedCrearArqueroStrategy implements NodoMapaOnMou
 			Mapa mapa = juego.obtenerMapa();
 			Arquero arquero= new Arquero(new Posicion(colIndex, rowIndex), mapa);
 			VistaArquero vistaArquero = new VistaArquero(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego, arquero);
+			arquero.addObserver(vistaArquero);
+			ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaArquero, arquero.obtenerPosicion());
 			cuartel.crear(arquero);
 			arquero.addObserver(vistaArquero);
 			juego.obtenerJugadorActual().agregarUnidad(arquero, mapa);

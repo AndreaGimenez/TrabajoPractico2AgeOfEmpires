@@ -11,6 +11,7 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.vista.MensajeDeError;
+import fiuba.algo3.tp2.vista.VistaArmaAsedio;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
@@ -43,9 +44,12 @@ public class NodoMapaOnMouseClickedCrearArmaAsedioStrategy implements NodoMapaOn
 		try {
 			Mapa mapa = juego.obtenerMapa();
 			ArmaAsedio armaAsedio = new ArmaAsedio(new Posicion(colIndex, rowIndex), mapa);
+			VistaArmaAsedio vistaArmaAsedio = new VistaArmaAsedio(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego, armaAsedio);
+			armaAsedio.addObserver(vistaArmaAsedio);
+			ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaArmaAsedio, armaAsedio.obtenerPosicion());
 			castillo.crear(armaAsedio);
 			juego.obtenerJugadorActual().agregarUnidad(armaAsedio, mapa);
-			vistaMapa.dibujarPosicionables();
+			vistaArmaAsedio.dibujarPosicionable(armaAsedio);
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar El Arma de Asedio porque ya fue generada una en este turno","");

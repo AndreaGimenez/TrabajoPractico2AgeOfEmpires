@@ -104,11 +104,11 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		
 		String imagePath = "";
 		
-		if(cuartel.estaConstruido()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg";
+		if(!cuartel.estaConstruido() || cuartel.estaDestruido()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
 		}
 		else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg";
 		}
 		Image imagen = new Image(imagePath, 
 			       VistaMapa.TAMANIO_NODO,
@@ -154,12 +154,6 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	}
 
 	private void actualizarCambiosEnLaVida(int vidaActual, int vidaMaxima) {
-		//Si la vida esta entre el 50% y el 100%
-		if(vidaActual >= vidaMaxima/2 ) {
-			//mostrar foto del cuartel sin ddanios
-		}
-		else { 
-			//mostrar foto del cuartel con danios
-		}
+		dibujarPosicionable(cuartel);
 	}
 }

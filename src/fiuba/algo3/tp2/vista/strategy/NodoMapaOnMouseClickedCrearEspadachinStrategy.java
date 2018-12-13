@@ -49,6 +49,8 @@ public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOn
 			Mapa mapa = juego.obtenerMapa();
 			Espadachin espadachin = new Espadachin(new Posicion(colIndex, rowIndex), mapa);
 			VistaEspadachin vistaESpadachin = new VistaEspadachin(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego, espadachin);
+			espadachin.addObserver(vistaESpadachin);
+			ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaESpadachin, espadachin.obtenerPosicion());
 			cuartel.crear(espadachin);
 			juego.obtenerJugadorActual().agregarUnidad(espadachin, mapa);
 			vistaESpadachin.dibujarPosicionable(espadachin);
