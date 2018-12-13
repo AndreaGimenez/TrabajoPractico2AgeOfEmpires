@@ -53,9 +53,62 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		pane.setBackground(obtenerFondoCuartel((Cuartel)posicionable, pane));
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
+			pane.setBackground(obtenerFondoCuartelRojo((Cuartel)posicionable, pane));
+		else
+			pane.setBackground(obtenerFondoCuartelAzul((Cuartel)posicionable, pane));
 	}
-	
+
+	private Background obtenerFondoCuartelAzul(Cuartel cuartel, Pane pane) {
+		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
+		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
+		String nombreImagen = new Posicion(colIndex, rowIndex).restar(cuartel.obtenerPosicion()).toString();
+
+		String imagePath;
+
+		if(!cuartel.estaConstruido() || cuartel.estaDestruido()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
+		}
+		else {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg";
+		}
+		Image imagen = new Image(imagePath,
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoCuartel = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoCuartel);
+	}
+
+	private Background obtenerFondoCuartelRojo(Cuartel cuartel, Pane pane) {
+
+		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
+		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
+		String nombreImagen = new Posicion(colIndex, rowIndex).restar(cuartel.obtenerPosicion()).toString();
+
+		String imagePath;
+
+		if(!cuartel.estaConstruido() || cuartel.estaDestruido()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
+		}
+		else {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel_rojo/" + nombreImagen + ".jpg";
+		}
+		Image imagen = new Image(imagePath,
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoCuartel = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoCuartel);
+
+	}
+
 	public void dibujarPosicionable(Posicionable posicionable) {
 		
 		Cuartel cuartel = (Cuartel)posicionable;
@@ -94,31 +147,6 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		botonCrearArquero.setOnAction(new BotonCreadorDeArqueroEventHandler
 						(botonCrearArquero, this.cuartel, mapa, vistaMapa, contenedorMapa, juego, vistaSeleccionador));
 		return botonCrearArquero;
-	}
-	
-	private Background obtenerFondoCuartel(Posicionable posicionable, Pane pane) {
-	
-		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
-		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
-		String nombreImagen = new Posicion(colIndex, rowIndex).restar(cuartel.obtenerPosicion()).toString();
-		
-		String imagePath = "";
-		
-		if(!cuartel.estaConstruido() || cuartel.estaDestruido()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
-		}
-		else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg";
-		}
-		Image imagen = new Image(imagePath, 
-			       VistaMapa.TAMANIO_NODO,
-			 	   VistaMapa.TAMANIO_NODO,
-			       false,
-			       true);
-		
-		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-		
-		return new Background(fondoCastillo);     
 	}
 
 	@Override
