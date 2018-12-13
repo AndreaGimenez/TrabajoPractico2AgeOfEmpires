@@ -15,6 +15,7 @@ import fiuba.algo3.tp2.reparacion.ReparadorEdificio;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vida.VidaUnidad;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -121,9 +122,9 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		String imagePath = "";
 
 		if(aldeano.estaMuerta()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+			imagePath = Constantes.UNIDAD_MUERTA;
 		}else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano_azul.jpg";
+			imagePath = Constantes.ALDEANO_AZUL;
 		}
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,
@@ -142,9 +143,9 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		String imagePath;
 
 		if(aldeano.estaMuerta()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+			imagePath = Constantes.UNIDAD_MUERTA;
 		}else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano_rojo.jpg";
+			imagePath = Constantes.ALDEANO_ROJO;
 		}
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,

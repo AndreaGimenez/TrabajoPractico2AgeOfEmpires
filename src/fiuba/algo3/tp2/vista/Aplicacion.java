@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.vista;
 
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorIngresoJugadores;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorInicio;
 import fiuba.algo3.tp2.vista.musica.Musica;
@@ -10,7 +11,9 @@ import javafx.stage.Stage;
 
 public class Aplicacion extends Application {
 
-    public static void main(String[] args) {
+    
+
+	public static void main(String[] args) {
         launch(args);
     }
 
@@ -19,7 +22,7 @@ public class Aplicacion extends Application {
 
         stage.setTitle("Age of Empires");
         
-        Musica musica = new Musica("src/fiuba/algo3/tp2/vista/musica/MusicaDeInicio.mp3");
+        Musica musica = new Musica(Constantes.MUSICA_INICIO);
         musica.iniciarReproduccionMusica();
 
        

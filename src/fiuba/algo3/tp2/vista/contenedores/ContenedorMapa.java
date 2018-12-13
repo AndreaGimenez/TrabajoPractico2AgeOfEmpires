@@ -5,6 +5,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.vista.PaneMapa;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaPosicionable;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -25,7 +26,7 @@ public class ContenedorMapa extends GridPane {
 		this.mapa = mapa;
     	setAlignment(Pos.CENTER);
     	setGridLinesVisible(true);
-        Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/terreno.jpg",
+        Image imagen = new Image(Constantes.TERRENO,
         		mapa.getTamanioX()*VistaMapa.TAMANIO_NODO,
         		mapa.getTamanioY()*VistaMapa.TAMANIO_NODO,
         		false,

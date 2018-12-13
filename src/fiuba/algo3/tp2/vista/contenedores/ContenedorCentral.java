@@ -1,5 +1,6 @@
 package fiuba.algo3.tp2.vista.contenedores;
 
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -30,7 +31,7 @@ public class ContenedorCentral extends Pane {
 		
 		cursor.setBackground(new Background(
 								new BackgroundImage(
-										new Image("file:src/fiuba/algo3/tp2/vista/imagenes/cursor.png"), 
+										new Image(Constantes.CURSOR), 
 										BackgroundRepeat.NO_REPEAT, 
 										BackgroundRepeat.NO_REPEAT, 
 										BackgroundPosition.DEFAULT, 
@@ -58,14 +59,14 @@ public class ContenedorCentral extends Pane {
 	}
 
 	public void setCursorDefault() {
-		setImagenCursor(new Image("file:src/fiuba/algo3/tp2/vista/imagenes/cursor.png"));
+		setImagenCursor(new Image(Constantes.CURSOR));
 	}
 
 	public void setCursorAtaque() {
-		setImagenCursor(new Image("file:src/fiuba/algo3/tp2/vista/imagenes/cursor-atacar.png"));
+		setImagenCursor(new Image(Constantes.CURSOR_ATACAR));
 	}
 
 	public void setCursorReparar() {
-		setImagenCursor(new Image("file:src/fiuba/algo3/tp2/vista/imagenes/cursor-construir.png"));
+		setImagenCursor(new Image(Constantes.CURSOR_CONSTRUIR));
 	}
 }

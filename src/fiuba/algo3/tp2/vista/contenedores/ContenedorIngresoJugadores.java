@@ -3,6 +3,7 @@ package fiuba.algo3.tp2.vista.contenedores;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.handlers.BotonAceptarIngresoJugadorHandler;
 import fiuba.algo3.tp2.vista.handlers.BotonSalirEventHandler;
 import fiuba.algo3.tp2.vista.handlers.TextBoxNombreJugadorHandler;
@@ -41,7 +42,7 @@ public class ContenedorIngresoJugadores extends VBox {
 	    this.setPadding(new Insets(25));
 	    
 	    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-	    Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/fondo-inicio.jpg", 
+	    Image imagen = new Image(Constantes.FONDO_INICIO, 
 	    						 primaryScreenBounds.getWidth(), 
 	    						 primaryScreenBounds.getHeight(), 
 	    						 false, 

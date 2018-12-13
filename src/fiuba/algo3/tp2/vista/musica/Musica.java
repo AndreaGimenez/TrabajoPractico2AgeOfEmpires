@@ -2,6 +2,7 @@ package fiuba.algo3.tp2.vista.musica;
 
 import java.io.File;
 
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import javafx.scene.control.MenuItem;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -11,7 +12,7 @@ public class Musica {
 	Media cancion;
 	
 	public Musica(String cancionInicioJuego) {
-		String cancionInicioJuego1 = "src/fiuba/algo3/tp2/vista/musica/musicaJuego.mp3";
+		String cancionInicioJuego1 = Constantes.MUSICA_JUEGO;
 		this.cancion = new Media(new File(cancionInicioJuego1).toURI().toString());
 		this.mediaPlayer = new MediaPlayer(cancion);
 	}

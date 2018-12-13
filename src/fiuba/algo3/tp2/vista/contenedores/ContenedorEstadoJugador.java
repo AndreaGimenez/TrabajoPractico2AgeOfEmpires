@@ -3,6 +3,7 @@ package fiuba.algo3.tp2.vista.contenedores;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -54,7 +55,7 @@ public class ContenedorEstadoJugador extends HBox {
         this.setPrefHeight(60);
         
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/estado-jugador-background.jpg", 
+        Image imagen = new Image(Constantes.ESTADO_JUGADOR_BACKGROUND, 
         						 primaryScreenBounds.getWidth(), 
         						 this.getPrefHeight(), 
         						 false, 

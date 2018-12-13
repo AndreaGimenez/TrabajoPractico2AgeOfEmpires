@@ -14,6 +14,7 @@ import fiuba.algo3.tp2.movimiento.Movible;
 import fiuba.algo3.tp2.unidad.DireccionAbajo;
 import fiuba.algo3.tp2.vista.VistaPosicionable;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.handlers.BotonMovimientoHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -72,7 +73,7 @@ public class CreadorBotonesMovimiento {
 		
 		Pane centro = new Pane();
 
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/movimiento.jpg", 
+		Image imagen = new Image(Constantes.MOVIMIENTO, 
 								TAMANIO_BOTON, 
 								TAMANIO_BOTON, 
 								false, 

@@ -14,6 +14,7 @@ import fiuba.algo3.tp2.unidad.Ataque;
 import fiuba.algo3.tp2.vida.VidaUnidad;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonAtaque;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -104,9 +105,9 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 		String imagePath;
 
 		if(arquero.estaMuerta())
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+			imagePath = Constantes.UNIDAD_MUERTA;
 		else
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero.jpg";
+			imagePath = Constantes.ARQUERO;
 
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,
@@ -124,9 +125,9 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 		String imagePath;
 
 		if(arquero.estaMuerta())
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+			imagePath = Constantes.UNIDAD_MUERTA;
 		else
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero-rojo.jpg";
+			imagePath = Constantes.ARQUERO_ROJO;
 
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,

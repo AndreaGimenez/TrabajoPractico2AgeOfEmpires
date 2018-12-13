@@ -1,6 +1,7 @@
 package fiuba.algo3.tp2.vista.contenedores;
 
 import fiuba.algo3.tp2.vista.botones.BotonEnter;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.handlers.BotonComenzarPartidaEventHandler;
 import fiuba.algo3.tp2.vista.handlers.BotonSalirEventHandler;
 import javafx.geometry.Insets;
@@ -34,7 +35,7 @@ public class ContenedorInicio extends VBox {
         this.setPadding(new Insets(25));
         
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/fondo-inicio.jpg", 
+        Image imagen = new Image(Constantes.FONDO_INICIO, 
         						 primaryScreenBounds.getWidth(), 
         						 primaryScreenBounds.getHeight(), 
         						 false, 

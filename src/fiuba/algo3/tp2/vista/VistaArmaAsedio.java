@@ -15,6 +15,7 @@ import fiuba.algo3.tp2.unidad.GestionadorMontajeArmaAsedio;
 import fiuba.algo3.tp2.vida.VidaUnidad;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonAtaque;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -30,7 +31,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observer {
-
+	
 	private ContenedorControles contenedorControles;
 	private ContenedorMapa contenedorMapa;
 	private VistaSeleccionador vistaSeleccionador;
@@ -73,13 +74,13 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 		String imagePath = "";
 
 		if(armaAsedio.estaMontada()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada.jpg";
+			imagePath = Constantes.ARMA_ASEDIO_MONTADA;
 		}else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-desmontada.png";
+			imagePath = Constantes.ARMA_ASEDIO_DESMONTADA;
 		}
 
 		if(armaAsedio.estaMuerta())
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+			imagePath = Constantes.UNIDAD_MUERTA;
 
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,
@@ -97,12 +98,12 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 		String imagePath;
 
 		if(armaAsedio.estaMontada())
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada-roja.jpg";
+			imagePath = Constantes.ARMA_ASEDIO_MONTADA_ROJA;
 		else
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-desmontada-roja.jpg";
+			imagePath = Constantes.ARMA_ASEDIO_DESMONTADA_ROJA;
 
 		if(armaAsedio.estaMuerta())
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+			imagePath = Constantes.UNIDAD_MUERTA;
 
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,

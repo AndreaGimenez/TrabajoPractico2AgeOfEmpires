@@ -9,6 +9,7 @@ import fiuba.algo3.tp2.vista.VistaEstadoJugador;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaPosicionableMultitone;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.handlers.ButtonAvanzarTurnoHandler;
 import fiuba.algo3.tp2.vista.musica.Musica;
 import javafx.scene.Cursor;
@@ -53,7 +54,7 @@ public class ContenedorPartida extends BorderPane {
     private void setMusica() {
 		// TODO Auto-generated method stub
 		
-    	this.musica = new Musica("src/fiuba/algo3/tp2/vista/musica/musicaJuego.mp3");
+    	this.musica = new Musica(Constantes.MUSICA_JUEGO);
         this.musica.iniciarReproduccionMusica();
 	}
 
