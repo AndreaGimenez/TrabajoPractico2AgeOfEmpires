@@ -142,11 +142,12 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 	
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
+
+		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
+
 		if(this.juego.posicionablePerteneceAPrimerJugador(movible)) {
-			ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
 			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedioDeJugadorRojo((ArmaAsedio) movible), movible.obtenerPosicion());
 		}else{
-			ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
 			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedioDeJugadorAzul((ArmaAsedio) movible), movible.obtenerPosicion());
 		}
 	}

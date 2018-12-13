@@ -136,27 +136,6 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		return new Background(fondoAldeano);
 	}
 
-	private Background obtenerFondoAldeano(Aldeano aldeano) {
-
-		String imagePath = "";
-
-		if(aldeano.estaMuerta()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
-		}else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano.jpg";
-		}
-		Image imagen = new Image(imagePath,
-				VistaMapa.TAMANIO_NODO,
-				VistaMapa.TAMANIO_NODO,
-				false,
-				true);
-
-		BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-		return new Background(fondoAldeano);
-	
-	}
-
 	private Button crearAccionReparar(Aldeano aldeano) {
 		Button accionReparar = new Button("Reparar");
 		
