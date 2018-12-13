@@ -13,6 +13,7 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.vida.VidaEdificio;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -66,7 +67,13 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 
 		String nombreImagen = new Posicion(colIndex, rowIndex).restar(plazaCentral.obtenerPosicion()).toString();
 
-		String imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/plaza-central-" + color + "/" + nombreImagen + ".jpg";
+		String imagePath;
+
+		if(!plazaCentral.estaConstruido() || plazaCentral.estaDestruido()) {
+			imagePath = Constantes.EDIFICIO_CONSTRUCCION + nombreImagen + ".jpg";
+		} else {
+			imagePath = Constantes.PLAZA_CENTRAL + color + "/" + nombreImagen + ".jpg";
+		}
 
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,

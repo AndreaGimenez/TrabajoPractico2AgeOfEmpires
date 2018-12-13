@@ -13,6 +13,7 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.vida.VidaEdificio;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -64,7 +65,10 @@ public class VistaCastillo implements VistaPosicionable, Observer {
 		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
 
 		String nombreImagen = new Posicion(colIndex, rowIndex).restar(castillo.obtenerPosicion()).toString();
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/castillo-" + color + "/" + nombreImagen + ".jpg",
+
+		String imagePath = Constantes.CASTILLO + color + "/" + nombreImagen + ".jpg";
+
+		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,
 				VistaMapa.TAMANIO_NODO,
 				false,

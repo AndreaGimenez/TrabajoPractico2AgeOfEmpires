@@ -122,7 +122,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 																	    CeldaOcupadaException, 
 																	    CeldaInexistenteException, 
 																	    PoblacionMaximaAlcanzadaException, 
-																	    OroInsuficienteException, AtaqueInvalidoException {
+																	    OroInsuficienteException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
     	
     	Mapa mapa = new Mapa(35, 20);
         Juego juego = new Juego(mapa);
@@ -151,7 +151,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 		return resultado;
 	}
 	 
-	private void inicializarPosicionables(Mapa mapa, Juego juego) throws CeldaOcupadaException, CeldaInexistenteException, OroInsuficienteException, PoblacionMaximaAlcanzadaException, AtaqueInvalidoException {
+	private void inicializarPosicionables(Mapa mapa, Juego juego) throws CeldaOcupadaException, CeldaInexistenteException, OroInsuficienteException, PoblacionMaximaAlcanzadaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
 		
 		inicializarPosicionablesJugador1(mapa, juego);
 		inicializarPosicionablesJugador2(mapa, juego);
@@ -212,13 +212,14 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         vistaAldeano.dibujarPosicionable(aldeano);
 	}
 
-	private void inicializarPosicionablesJugador2(Mapa mapa, Juego juego) throws OroInsuficienteException {
+	private void inicializarPosicionablesJugador2(Mapa mapa, Juego juego) throws OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
 		
 		//Asigno a cada celda del mapa que contiene un edificio/unidad inicial del jugador 1 su vista
         VistaCastillo vistaCastillo = new VistaCastillo(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego);
         Castillo castillo = (Castillo)mapa.obtenerPosicionable(new Posicion(mapa.getTamanioX()-1, mapa.getTamanioY()-1));
         castillo.addObserver(vistaCastillo);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaCastillo, castillo.obtenerPosicion());
+        juego.avanzarJugador();
         juego.obtenerJugadorActual().agregarEdificio(castillo, false);
         vistaCastillo.dibujarPosicionable(castillo);
         

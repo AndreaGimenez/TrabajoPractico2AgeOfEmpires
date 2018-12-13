@@ -66,7 +66,10 @@ public class Juego {
 		Castillo castillo = new Castillo(buscarPosicionCastillo(), this.mapa);
 		
 		PlazaCentral plazaCentral = new PlazaCentral(buscarPosicionPlazaCentral(), this.mapa);
-		
+
+		for(int i = 0; i<3; i++)
+			plazaCentral.avanzarConstruccion();
+
 		boolean checkearRecursos = false;
 		jugador.agregarEdificio(castillo, checkearRecursos); 
 		

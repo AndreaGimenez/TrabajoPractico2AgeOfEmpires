@@ -13,6 +13,7 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.vida.VidaEdificio;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -71,11 +72,12 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		String imagePath;
 
 		if(!cuartel.estaConstruido() || cuartel.estaDestruido()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
+			imagePath = Constantes.EDIFICIO_CONSTRUCCION + nombreImagen + ".jpg";
 		}
 		else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel-" + color + "/" + nombreImagen + ".jpg";
+			imagePath = Constantes.CUARTEL + color + "/" + nombreImagen + ".jpg";
 		}
+
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,
 				VistaMapa.TAMANIO_NODO,

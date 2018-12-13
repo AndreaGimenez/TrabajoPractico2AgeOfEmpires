@@ -7,6 +7,14 @@ public class Constantes{
 	public static final String MUSICA_JUEGO = "src/fiuba/algo3/tp2/vista/musica/musicaJuego.mp3";
 	
 	public static final String UNIDAD_MUERTA = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+
+	public static final String CASTILLO = "file:src/fiuba/algo3/tp2/vista/imagenes/castillo-";
+
+	public static final String PLAZA_CENTRAL = "file:src/fiuba/algo3/tp2/vista/imagenes/plaza-central-";
+
+	public static final String CUARTEL = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel-";
+
+	public static final String EDIFICIO_CONSTRUCCION = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/";
 	
 	public static final String ALDEANO = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano_";
 	
