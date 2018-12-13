@@ -63,7 +63,38 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		pane.setBackground(obtenerFondoEspadachin());
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
+			pane.setBackground(obtenerFondoEspadachinDeJugadorRojo());
+		else
+			pane.setBackground(obtenerFondoEspadachinDeJugadorAzul());
+	}
+
+	private Background obtenerFondoEspadachinDeJugadorAzul() {
+
+		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/espadachin.jpg",
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoAldeano);
+
+	}
+
+	private Background obtenerFondoEspadachinDeJugadorRojo() {
+
+		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/espadachin-rojo.jpg",
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoAldeano);
+
 	}
 
 	public void dibujarPosicionable(Espadachin espadachin) {
@@ -91,20 +122,11 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		ContenedorPartida.contenedorMapa.setBackground(obtenerFondoEspadachin(), movible.obtenerPosicion());
-	}
-	
-	public Background obtenerFondoEspadachin() {
-		
-        Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/espadachin.jpg", 
-        		 VistaMapa.TAMANIO_NODO, 
-				 VistaMapa.TAMANIO_NODO,
-				 false, 
-				 true);
 
-        BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-        return new Background(fondoAldeano);
+		if(this.juego.posicionablePerteneceAPrimerJugador(movible))
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoEspadachinDeJugadorRojo(), movible.obtenerPosicion());
+		else
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoEspadachinDeJugadorAzul(), movible.obtenerPosicion());
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class Constantes{
 	public static final String ARMA_ASEDIO_MONTADA_ROJA = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada-roja.jpg";
 	public static final String ARMA_ASEDIO_DESMONTADA_ROJA = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-desmontada-roja.jpg";
 	
-	public static final String ARQUERO = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero.jpg";
+	public static final String ARQUERO = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero.jpeg";
 	public static final String ARQUERO_ROJO = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero-rojo.jpg";
 
 	public static final String MOVIMIENTO = "file:src/fiuba/algo3/tp2/vista/imagenes/movimiento.jpg";
