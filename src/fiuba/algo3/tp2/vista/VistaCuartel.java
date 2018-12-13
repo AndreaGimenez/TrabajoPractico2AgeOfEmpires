@@ -100,16 +100,10 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 		
 		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
 		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
-		
-		String imagePath = "";
 		String nombreImagen = new Posicion(colIndex, rowIndex).restar(cuartel.obtenerPosicion()).toString();
 		
-		if(cuartel.estaConstruido()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg";
-		}
-		else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
-		}
+		String imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg";
+
 		Image imagen = new Image(imagePath, 
 			       VistaMapa.TAMANIO_NODO,
 			 	   VistaMapa.TAMANIO_NODO,

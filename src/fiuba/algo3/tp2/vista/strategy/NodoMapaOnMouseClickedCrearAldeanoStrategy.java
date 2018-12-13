@@ -11,6 +11,7 @@ import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.vista.MensajeDeError;
+import fiuba.algo3.tp2.vista.VistaAldeano;
 import fiuba.algo3.tp2.vista.VistaMapa;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
@@ -44,9 +45,11 @@ public class NodoMapaOnMouseClickedCrearAldeanoStrategy implements NodoMapaOnMou
 		try {
 			Mapa mapa = juego.obtenerMapa();
 			Aldeano aldeano = new Aldeano(new Posicion(colIndex, rowIndex), mapa);
+			VistaAldeano vistaAldeano = new VistaAldeano(ContenedorPartida.contenedorControles, ContenedorPartida.contenedorMapa, vistaSeleccionador, vistaMapa, juego, aldeano);
 			plazaCentral.crear(aldeano);
+			aldeano.addObserver(vistaAldeano);
 			juego.obtenerJugadorActual().agregarUnidad(aldeano, mapa);
-			vistaMapa.dibujarPosicionables();
+			vistaAldeano.dibujarPosicionable(aldeano);
 		} 
 		catch(YaSeGeneraronUnidadesEnEsteTurnoException e) {
 			error.mostrarVentanaError("No es Posible Generar el aldeano porque ya fue generada una en este turno","");

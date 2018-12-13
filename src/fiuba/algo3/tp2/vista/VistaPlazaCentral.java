@@ -91,16 +91,10 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
 		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
 		
-		String imagePath = "";
 		String nombreImagen = new Posicion(colIndex, rowIndex).restar(plazaCentral.obtenerPosicion()).toString();
 		
-		if(plazaCentral.estaConstruido()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/plaza-central/" + nombreImagen + ".jpg";
-		}
-		else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
-		}
-			
+		String imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/plaza-central/" + nombreImagen + ".jpg";
+	
 		Image imagen = new Image(imagePath, 
 	       VistaMapa.TAMANIO_NODO,
 	 	   VistaMapa.TAMANIO_NODO,
@@ -117,19 +111,17 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 		if(objetoQueCambio instanceof VidaEdificio) {
 			//considerar si sufrio danio, se destruyo, se recupero vida,  se termino de reparar(vida full)
 			actualizarCambiosEnLaVida(((VidaEdificio) objetoQueCambio).obtenerVida(), ((VidaEdificio) objetoQueCambio).obtenerVidaMaxima());
-		}
-		
-		if(objetoQueCambio instanceof EstadoConstruccion) {
+		}else if(objetoQueCambio instanceof EstadoConstruccion) {
 			//considerar si se termino de construir o si se avanzo en la construccion
 			actualizarCambiosEnLaConstruccion(((EstadoConstruccion)objetoQueCambio));
-		}
-		
-		if(objetoQueCambio instanceof Generable) {
+		}else if(objetoQueCambio instanceof Generable) {
 			//considerar si se muestran o anulan los botones de generar unidad
-			actualizarCambiosEnLaGeneracion(objetoQueCambio);
-
+			actualizarCambiosEnLaGeneracion((Generable) objetoQueCambio);
+		}else {
+			actualizarCambiosEnLaGeneracion(null);
 		}
 	}
+	
 
 	private void actualizarCambiosEnLaGeneracion(Object objetoQueCambio) {
 		if(objetoQueCambio != null) {

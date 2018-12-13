@@ -29,11 +29,6 @@ public class PlazaCentral extends Edificio implements Construible{
 
 	}
 
-
-	@Override
-	public void actualizarEstadoParaSiguienteTurno() {
-		this.generable = null;
-	}
 	
 	@Override
 	public void avanzarConstruccion() {
