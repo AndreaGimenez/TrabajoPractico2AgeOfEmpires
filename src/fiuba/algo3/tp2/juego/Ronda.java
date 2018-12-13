@@ -6,9 +6,10 @@ import java.util.LinkedList;
 
 import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
 import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.mapa.Posicionable;
 
 public class Ronda {
-	Collection<Jugador> jugadores;
+	LinkedList<Jugador> jugadores;
 	Iterator<Jugador> iteradorJugadores;
 	Jugador jugadorActual;
 	
@@ -53,4 +54,8 @@ public class Ronda {
 		jugadorActual.sumarOroDelTurno();
 		
 	}
+
+    public boolean posicionablePerteneceAPrimerJugador(Posicionable posicionable) {
+		return this.jugadores.getFirst().posicionablePerteneceAJugador(posicionable);
+    }
 }

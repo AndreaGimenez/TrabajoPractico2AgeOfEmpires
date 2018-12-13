@@ -176,4 +176,8 @@ public class Juego {
 	public Mapa obtenerMapa() {
 		return mapa;
 	}
+
+	public boolean posicionablePerteneceAPrimerJugador(Posicionable posicionable){
+		return this.ronda.posicionablePerteneceAPrimerJugador(posicionable);
+	}
 }
