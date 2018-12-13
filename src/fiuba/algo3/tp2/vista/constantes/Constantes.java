@@ -8,16 +8,14 @@ public class Constantes{
 	
 	public static final String UNIDAD_MUERTA = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
 	
-	public static final String ALDEANO_AZUL = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano_azul.jpg";
-	public static final String ALDEANO_ROJO = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano_rojo.jpg";
+	public static final String ALDEANO = "file:src/fiuba/algo3/tp2/vista/imagenes/aldeano_";
 	
-	public static final String ARMA_ASEDIO_MONTADA = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada.jpg";
-	public static final String ARMA_ASEDIO_DESMONTADA = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-desmontada.png";
-	public static final String ARMA_ASEDIO_MONTADA_ROJA = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada-roja.jpg";
-	public static final String ARMA_ASEDIO_DESMONTADA_ROJA = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-desmontada-roja.jpg";
+	public static final String ARMA_ASEDIO_MONTADA = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada-";
+	public static final String ARMA_ASEDIO_DESMONTADA = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-desmontada-";
 	
-	public static final String ARQUERO = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero.jpeg";
-	public static final String ARQUERO_ROJO = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero-rojo.jpg";
+	public static final String ARQUERO = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero-";
+
+	public static final String ESPADACHIN = "file:src/fiuba/algo3/tp2/vista/imagenes/espadachin-";
 
 	public static final String MOVIMIENTO = "file:src/fiuba/algo3/tp2/vista/imagenes/movimiento.jpg";
 

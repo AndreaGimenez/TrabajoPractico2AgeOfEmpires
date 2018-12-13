@@ -50,13 +50,39 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 	}
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		pane.setBackground(obtenerFondoPlazaCentral(posicionable, pane));
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable)) {
+			String rojo = "rojo";
+			pane.setBackground(obtenerFondoPlazaCentral((PlazaCentral) posicionable, pane, rojo));
+		}else {
+			String azul = "azul";
+			pane.setBackground(obtenerFondoPlazaCentral((PlazaCentral) posicionable, pane, azul));
+		}
 	}
-	
+
+	private Background obtenerFondoPlazaCentral(PlazaCentral plazaCentral, Pane pane, String color) {
+
+		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
+		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
+
+		String nombreImagen = new Posicion(colIndex, rowIndex).restar(plazaCentral.obtenerPosicion()).toString();
+
+		String imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/plaza-central-" + color + "/" + nombreImagen + ".jpg";
+
+		Image imagen = new Image(imagePath,
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoPlazaCentral = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoPlazaCentral);
+
+	}
+
 	public void dibujarPosicionable(PlazaCentral plazaCentral) {
-		
-		PlazaCentral cuartel = (PlazaCentral)plazaCentral;
-		for(Posicion posicion : cuartel.obtenerPosicionesOcupadasEnMapa()) {
+
+		for(Posicion posicion : plazaCentral.obtenerPosicionesOcupadasEnMapa()) {
 			
 			Pane nodo = contenedorMapa.obtenerNodo(posicion);
 			dibujarPosicionable(plazaCentral, nodo);
@@ -84,26 +110,6 @@ public class VistaPlazaCentral implements VistaPosicionable, Observer {
 		crearAldeano.setOnAction(new BotonCreadorDeAldeanosEventHandler
 				(crearAldeano, plazaCentral, mapa, vistaMapa, ContenedorPartida.contenedorMapa, juego, vistaSeleccionador));
 		return crearAldeano;
-	}
-	
-	private Background obtenerFondoPlazaCentral(Posicionable posicionable, Pane pane) {
-		
-		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
-		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
-		
-		String nombreImagen = new Posicion(colIndex, rowIndex).restar(plazaCentral.obtenerPosicion()).toString();
-		
-		String imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/plaza-central/" + nombreImagen + ".jpg";
-	
-		Image imagen = new Image(imagePath, 
-	       VistaMapa.TAMANIO_NODO,
-	 	   VistaMapa.TAMANIO_NODO,
-	       false,
-	       true);
-		
-		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-		
-		return new Background(fondoCastillo);
 	}
 
 	@Override

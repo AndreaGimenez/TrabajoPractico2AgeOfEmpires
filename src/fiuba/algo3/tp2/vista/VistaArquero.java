@@ -62,10 +62,13 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
-			pane.setBackground(obtenerFondoArqueroDeJugadorRojo((Arquero) posicionable));
-		else
-			pane.setBackground(obtenerFondoArqueroDeJugadorAzul((Arquero) posicionable));
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable)) {
+			String rojo = "rojo";
+			pane.setBackground(obtenerFondoArquero((Arquero) posicionable, rojo));
+		}else {
+			String azul = "azul";
+			pane.setBackground(obtenerFondoArquero((Arquero) posicionable, azul));
+		}
 	}
 	
 	public void dibujarPosicionable(Arquero arquero) {
@@ -95,39 +98,22 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
 
 		if(this.juego.posicionablePerteneceAPrimerJugador(movible)) {
-			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArqueroDeJugadorRojo((Arquero) movible), movible.obtenerPosicion());
+			String rojo = "rojo";
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArquero((Arquero) movible, rojo), movible.obtenerPosicion());
 		}else{
-			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArqueroDeJugadorAzul((Arquero) movible), movible.obtenerPosicion());
+			String azul = "azul";
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArquero((Arquero) movible, azul), movible.obtenerPosicion());
 		}
 	}
 
-	private Background obtenerFondoArqueroDeJugadorAzul(Arquero arquero) {
-		String imagePath;
-
-		if(arquero.estaMuerta())
-			imagePath = Constantes.UNIDAD_MUERTA;
-		else
-			imagePath = Constantes.ARQUERO;
-
-		Image imagen = new Image(imagePath,
-				VistaMapa.TAMANIO_NODO,
-				VistaMapa.TAMANIO_NODO,
-				false,
-				true);
-
-		BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-		return new Background(fondoAldeano);
-	}
-
-	private Background obtenerFondoArqueroDeJugadorRojo(Arquero arquero) {
+	private Background obtenerFondoArquero(Arquero arquero, String color) {
 
 		String imagePath;
 
 		if(arquero.estaMuerta())
 			imagePath = Constantes.UNIDAD_MUERTA;
 		else
-			imagePath = Constantes.ARQUERO_ROJO;
+			imagePath = Constantes.ARQUERO + color + ".jpg";
 
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,

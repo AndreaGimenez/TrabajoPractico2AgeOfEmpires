@@ -25,6 +25,7 @@ public class Aplicacion extends Application {
         Musica musica = new Musica(Constantes.MUSICA_INICIO);
         musica.iniciarReproduccionMusica();
 
+
        
         ContenedorIngresoJugadores contenedorIngresoJugadores = new ContenedorIngresoJugadores(stage, musica);
         Scene escenaIngresoJugadores = new Scene(contenedorIngresoJugadores, 640, 480);

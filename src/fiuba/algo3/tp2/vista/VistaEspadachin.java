@@ -16,6 +16,7 @@ import fiuba.algo3.tp2.unidad.Espadachin;
 import fiuba.algo3.tp2.vida.VidaUnidad;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonAtaque;
 import fiuba.algo3.tp2.vista.botones.CreadorBotonesMovimiento;
+import fiuba.algo3.tp2.vista.constantes.Constantes;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorControles;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -63,29 +64,23 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
-			pane.setBackground(obtenerFondoEspadachinDeJugadorRojo());
-		else
-			pane.setBackground(obtenerFondoEspadachinDeJugadorAzul());
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable)) {
+			String rojo = "rojo";
+			pane.setBackground(obtenerFondoEspadachin((Espadachin) posicionable, rojo));
+		}else {
+			String azul = "azul";
+			pane.setBackground(obtenerFondoEspadachin((Espadachin) posicionable, azul));
+		}
 	}
 
-	private Background obtenerFondoEspadachinDeJugadorAzul() {
+	private Background obtenerFondoEspadachin(Espadachin espadachin, String color) {
 
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/espadachin.jpg",
-				VistaMapa.TAMANIO_NODO,
-				VistaMapa.TAMANIO_NODO,
-				false,
-				true);
+		String imagePath = Constantes.ESPADACHIN + color + ".jpg";
 
-		BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		if(espadachin.estaMuerta())
+			imagePath = Constantes.UNIDAD_MUERTA;
 
-		return new Background(fondoAldeano);
-
-	}
-
-	private Background obtenerFondoEspadachinDeJugadorRojo() {
-
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/espadachin-rojo.jpg",
+		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,
 				VistaMapa.TAMANIO_NODO,
 				false,
@@ -123,10 +118,13 @@ public class VistaEspadachin implements VistaPosicionable, VistaMovible, Observe
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
 
-		if(this.juego.posicionablePerteneceAPrimerJugador(movible))
-			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoEspadachinDeJugadorRojo(), movible.obtenerPosicion());
-		else
-			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoEspadachinDeJugadorAzul(), movible.obtenerPosicion());
+		if(this.juego.posicionablePerteneceAPrimerJugador(movible)) {
+			String rojo = "rojo";
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoEspadachin((Espadachin) movible, rojo), movible.obtenerPosicion());
+		}else {
+			String azul = "azul";
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoEspadachin((Espadachin) movible, azul), movible.obtenerPosicion());
+		}
 	}
 
 	@Override

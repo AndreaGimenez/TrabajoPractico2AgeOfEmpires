@@ -53,37 +53,16 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 	
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
-			pane.setBackground(obtenerFondoCuartelRojo((Cuartel)posicionable, pane));
-		else
-			pane.setBackground(obtenerFondoCuartelAzul((Cuartel)posicionable, pane));
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable)) {
+			String rojo = "rojo";
+			pane.setBackground(obtenerFondoCuartel((Cuartel) posicionable, pane, rojo));
+		}else {
+			String azul = "azul";
+			pane.setBackground(obtenerFondoCuartel((Cuartel) posicionable, pane, azul));
+		}
 	}
 
-	private Background obtenerFondoCuartelAzul(Cuartel cuartel, Pane pane) {
-		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
-		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
-		String nombreImagen = new Posicion(colIndex, rowIndex).restar(cuartel.obtenerPosicion()).toString();
-
-		String imagePath;
-
-		if(!cuartel.estaConstruido() || cuartel.estaDestruido()) {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
-		}
-		else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel/" + nombreImagen + ".jpg";
-		}
-		Image imagen = new Image(imagePath,
-				VistaMapa.TAMANIO_NODO,
-				VistaMapa.TAMANIO_NODO,
-				false,
-				true);
-
-		BackgroundImage fondoCuartel = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-		return new Background(fondoCuartel);
-	}
-
-	private Background obtenerFondoCuartelRojo(Cuartel cuartel, Pane pane) {
+	private Background obtenerFondoCuartel(Cuartel cuartel, Pane pane, String color) {
 
 		int colIndex = contenedorMapa.obtenerColumnIndex(pane);
 		int rowIndex = contenedorMapa.obtenerRowIndex(pane);
@@ -95,7 +74,7 @@ public class VistaCuartel implements VistaPosicionable, Observer {
 			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/construccion-2x2/" + nombreImagen + ".jpg";
 		}
 		else {
-			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel_rojo/" + nombreImagen + ".jpg";
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/cuartel-" + color + "/" + nombreImagen + ".jpg";
 		}
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,

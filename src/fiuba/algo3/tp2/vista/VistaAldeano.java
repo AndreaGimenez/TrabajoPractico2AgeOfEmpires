@@ -76,10 +76,13 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
-			pane.setBackground(obtenerFondoAldeanoDeJugadorRojo((Aldeano) posicionable));
-		else
-			pane.setBackground(obtenerFondoAldeanoDeJugadorAzul((Aldeano) posicionable));
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable)) {
+			String rojo = "rojo";
+			pane.setBackground(obtenerFondoAldeano((Aldeano) posicionable, rojo));
+		}else {
+			String azul = "azul";
+			pane.setBackground(obtenerFondoAldeano((Aldeano) posicionable, azul));
+		}
 	}
 	
 	public void dibujarPosicionable(Posicionable posicionable) {
@@ -112,40 +115,21 @@ public class VistaAldeano implements VistaPosicionable, VistaMovible, Observer {
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
 
 		if(this.juego.posicionablePerteneceAPrimerJugador(movible)){
-			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoAldeanoDeJugadorRojo((Aldeano) movible), movible.obtenerPosicion());
+			String rojo = "rojo";
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoAldeano((Aldeano) movible, rojo), movible.obtenerPosicion());
 		}else{
-			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoAldeanoDeJugadorAzul((Aldeano) movible), movible.obtenerPosicion());
+			String azul = "azul";
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoAldeano((Aldeano) movible, azul), movible.obtenerPosicion());
 		}
 	}
 
-	private Background obtenerFondoAldeanoDeJugadorAzul(Aldeano aldeano) {
-		String imagePath = "";
-
-		if(aldeano.estaMuerta()) {
-			imagePath = Constantes.UNIDAD_MUERTA;
-		}else {
-			imagePath = Constantes.ALDEANO_AZUL;
-		}
-		Image imagen = new Image(imagePath,
-				VistaMapa.TAMANIO_NODO,
-				VistaMapa.TAMANIO_NODO,
-				false,
-				true);
-
-		BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-		return new Background(fondoAldeano);
-	}
-
-
-	//COPIE Y PEGUE. LO VOY A CAMBIAR
-	private Background obtenerFondoAldeanoDeJugadorRojo(Aldeano aldeano) {
+	private Background obtenerFondoAldeano(Aldeano aldeano, String color) {
 		String imagePath;
 
 		if(aldeano.estaMuerta()) {
 			imagePath = Constantes.UNIDAD_MUERTA;
 		}else {
-			imagePath = Constantes.ALDEANO_ROJO;
+			imagePath = Constantes.ALDEANO + color + ".jpg";
 		}
 		Image imagen = new Image(imagePath,
 				VistaMapa.TAMANIO_NODO,

@@ -63,20 +63,23 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
-			pane.setBackground(obtenerFondoArmaAsedioDeJugadorRojo((ArmaAsedio) posicionable));
-		else
-			pane.setBackground(obtenerFondoArmaAsedioDeJugadorAzul((ArmaAsedio) posicionable));
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable)) {
+			String rojo = "rojo";
+			pane.setBackground(obtenerFondoArmaAsedio((ArmaAsedio) posicionable, rojo));
+		}else {
+			String azul = "azul";
+			pane.setBackground(obtenerFondoArmaAsedio((ArmaAsedio) posicionable, azul));
+		}
 	}
 
-	private Background obtenerFondoArmaAsedioDeJugadorAzul(ArmaAsedio armaAsedio) {
+	private Background obtenerFondoArmaAsedio(ArmaAsedio armaAsedio, String color) {
 
 		String imagePath = "";
 
 		if(armaAsedio.estaMontada()) {
-			imagePath = Constantes.ARMA_ASEDIO_MONTADA;
+			imagePath = Constantes.ARMA_ASEDIO_MONTADA + color + ".jpg";
 		}else {
-			imagePath = Constantes.ARMA_ASEDIO_DESMONTADA;
+			imagePath = Constantes.ARMA_ASEDIO_DESMONTADA + color + ".jpg";
 		}
 
 		if(armaAsedio.estaMuerta())
@@ -91,30 +94,6 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 		BackgroundImage fondoArmaAsedio = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
 		return new Background(fondoArmaAsedio);
-	}
-
-	private Background obtenerFondoArmaAsedioDeJugadorRojo(ArmaAsedio armaAsedio) {
-
-		String imagePath;
-
-		if(armaAsedio.estaMontada())
-			imagePath = Constantes.ARMA_ASEDIO_MONTADA_ROJA;
-		else
-			imagePath = Constantes.ARMA_ASEDIO_DESMONTADA_ROJA;
-
-		if(armaAsedio.estaMuerta())
-			imagePath = Constantes.UNIDAD_MUERTA;
-
-		Image imagen = new Image(imagePath,
-				VistaMapa.TAMANIO_NODO,
-				VistaMapa.TAMANIO_NODO,
-				false,
-				true);
-
-		BackgroundImage fondoArmaAsedio = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-		return new Background(fondoArmaAsedio);
-
 	}
 
 	public void dibujarPosicionable(ArmaAsedio armaAsedio) {
@@ -159,9 +138,11 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
 
 		if (this.juego.posicionablePerteneceAPrimerJugador(movible)) {
-			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedioDeJugadorRojo((ArmaAsedio) movible), movible.obtenerPosicion());
+			String rojo = "rojo";
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedio((ArmaAsedio) movible, rojo), movible.obtenerPosicion());
 		} else {
-			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedioDeJugadorAzul((ArmaAsedio) movible), movible.obtenerPosicion());
+			String azul = "azul";
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedio((ArmaAsedio) movible, azul), movible.obtenerPosicion());
 		}
 	}
 

@@ -47,37 +47,22 @@ public class VistaCastillo implements VistaPosicionable, Observer {
 	
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
-			pane.setBackground(obtenerFondoCastilloDeJugadorRojo((Castillo) posicionable, pane));
-		else
-			pane.setBackground(obtenerFondoCastilloDeJugadorAzul((Castillo) posicionable, pane));
+		if (this.juego.posicionablePerteneceAPrimerJugador(posicionable)){
+			String rojo = "rojo";
+			pane.setBackground(obtenerFondoCastillo((Castillo) posicionable, pane, rojo));
+		}else{
+			String azul = "azul";
+			pane.setBackground(obtenerFondoCastillo((Castillo) posicionable, pane, azul));
+		}
 	}
 
-	private Background obtenerFondoCastilloDeJugadorAzul(Castillo castillo, Pane pane) {
+	private Background obtenerFondoCastillo(Castillo castillo, Pane pane, String color) {
 
 		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
 		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
 
 		String nombreImagen = new Posicion(colIndex, rowIndex).restar(castillo.obtenerPosicion()).toString();
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/castillo/" + nombreImagen + ".jpg",
-				VistaMapa.TAMANIO_NODO,
-				VistaMapa.TAMANIO_NODO,
-				false,
-				true);
-
-		BackgroundImage fondoCastillo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-		return new Background(fondoCastillo);
-
-	}
-
-	private Background obtenerFondoCastilloDeJugadorRojo(Castillo castillo, Pane pane) {
-
-		int colIndex = ContenedorPartida.contenedorMapa.obtenerColumnIndex(pane);
-		int rowIndex = ContenedorPartida.contenedorMapa.obtenerRowIndex(pane);
-
-		String nombreImagen = new Posicion(colIndex, rowIndex).restar(castillo.obtenerPosicion()).toString();
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/castillo-rojo/" + nombreImagen + ".jpg",
+		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/castillo-" + color + "/" + nombreImagen + ".jpg",
 				VistaMapa.TAMANIO_NODO,
 				VistaMapa.TAMANIO_NODO,
 				false,
