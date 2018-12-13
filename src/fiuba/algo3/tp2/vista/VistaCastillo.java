@@ -47,10 +47,12 @@ public class VistaCastillo implements VistaPosicionable, Observer {
 	
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable)) {
 			pane.setBackground(obtenerFondoCastilloDeJugadorRojo((Castillo) posicionable, pane));
-		else
+		}
+		else {
 			pane.setBackground(obtenerFondoCastilloDeJugadorAzul((Castillo) posicionable, pane));
+		}
 	}
 
 	private Background obtenerFondoCastilloDeJugadorAzul(Castillo castillo, Pane pane) {
