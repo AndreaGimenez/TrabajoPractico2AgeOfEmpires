@@ -2,7 +2,6 @@ package fiuba.algo3.tp2.vista.strategy;
 
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
-import fiuba.algo3.tp2.edificio.Cuartel;
 import fiuba.algo3.tp2.edificio.PlazaCentral;
 import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
 import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
@@ -14,6 +13,7 @@ import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.AldeanoConConstruccionAsignadaException;
 import fiuba.algo3.tp2.vista.MensajeDeError;
 import fiuba.algo3.tp2.vista.VistaMapa;
+import fiuba.algo3.tp2.vista.VistaPlazaCentral;
 import fiuba.algo3.tp2.vista.VistaSeleccionador;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorMapa;
 import fiuba.algo3.tp2.vista.contenedores.ContenedorPartida;
@@ -23,7 +23,6 @@ import javafx.scene.layout.Pane;
 
 public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements NodoMapaOnMouseClickedStrategy {
 	
-	private ContenedorMapa contenedorMapa;
 	private Juego juego;
 	private Aldeano aldeano;
 	private VistaMapa vistaMapa;
@@ -31,7 +30,6 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 	
 	public NodoMapaOnMouseClickedConstruirPlazaCentralStrategy(ContenedorMapa contenedorMapa, Juego juego, Aldeano aldeano, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador) {
 		
-		this.contenedorMapa = contenedorMapa;
 		this.juego = juego;
 		this.aldeano = aldeano;
 		this.vistaMapa = vistaMapa;
@@ -50,7 +48,9 @@ public class NodoMapaOnMouseClickedConstruirPlazaCentralStrategy implements Nodo
 
 		try {
 			Mapa mapa = juego.obtenerMapa();
+			VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego);
 			PlazaCentral plazaCentral= new PlazaCentral(new Posicion(colIndex, rowIndex), mapa);
+			plazaCentral.addObserver(vistaPlazaCentral);
 			aldeano.construirConstruible(plazaCentral);
 			juego.obtenerJugadorActual().agregarEdificio(plazaCentral);
 			vistaMapa.dibujarPosicionables();

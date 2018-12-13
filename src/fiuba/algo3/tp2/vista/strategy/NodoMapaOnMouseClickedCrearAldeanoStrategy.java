@@ -21,14 +21,13 @@ import javafx.scene.layout.Pane;
 
 public class NodoMapaOnMouseClickedCrearAldeanoStrategy implements NodoMapaOnMouseClickedStrategy {
 	
-	private ContenedorMapa contenedorMapa;
 	private PlazaCentral plazaCentral;
 	private Juego juego;
 	private VistaMapa vistaMapa;
 	private VistaSeleccionador vistaSeleccionador;
 	
 	public NodoMapaOnMouseClickedCrearAldeanoStrategy(ContenedorMapa contenedorMapa, PlazaCentral plazaCentral, Juego juego, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador) {
-		this.contenedorMapa = contenedorMapa;
+
 		this.plazaCentral = plazaCentral;
 		this.juego = juego;
 		this.vistaMapa = vistaMapa;

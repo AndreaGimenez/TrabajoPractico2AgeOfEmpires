@@ -47,14 +47,13 @@ public abstract class Edificio extends Observable implements Posicionable, Ataca
 		this.generable = null;
 		posicionar(posicion);
 	}
-	
-    public Edificio() {
-		// TODO Auto-generated constructor stub
-	}
 
     @Override
 	public void actualizarEstadoParaSiguienteTurno() {
 		this.generable = null;
+		
+		setChanged();
+		notifyObservers(this.generable);
 	}
     
 	public void posicionar(Posicion posicion) throws CeldaOcupadaException, CeldaInexistenteException {
@@ -85,7 +84,8 @@ public abstract class Edificio extends Observable implements Posicionable, Ataca
 		}
 		
 		this.generable = generable;
-		
+		setChanged();
+		notifyObservers(this.generable);
 	}
 
 	public void reparar() throws EdificioNoAptoParaReparacionException{
@@ -95,6 +95,9 @@ public abstract class Edificio extends Observable implements Posicionable, Ataca
 	public void recibirDanio(Ataque ataque) {
 		this.vida.restarVida(ataque.obtenerDanioEdificio());
         this.reparacion = new ReparacionActivada();
+        
+        setChanged();
+        notifyObservers(this.vida);
 	}
 
 	public int obtenerVida(){

@@ -21,7 +21,6 @@ import javafx.scene.layout.Pane;
 
 public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOnMouseClickedStrategy {
 	
-	private ContenedorMapa contenedorMapa;
 	private Cuartel cuartel;
 	private Juego juego;
 	private VistaMapa vistaMapa;
@@ -30,7 +29,6 @@ public class NodoMapaOnMouseClickedCrearEspadachinStrategy implements NodoMapaOn
 	public NodoMapaOnMouseClickedCrearEspadachinStrategy(ContenedorMapa contenedorMapa, Cuartel cuartel, Juego juego,
 			VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador) {
 		
-		this.contenedorMapa = contenedorMapa;
 		this.cuartel = cuartel;
 		this.juego = juego;
 		this.vistaMapa = vistaMapa;

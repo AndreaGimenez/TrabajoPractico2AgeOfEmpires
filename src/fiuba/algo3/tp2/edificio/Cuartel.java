@@ -40,6 +40,8 @@ public class Cuartel extends Edificio implements Construible{
 	@Override
 	public void avanzarConstruccion() {
 		estadoConstruccion.avanzarConstruccion();
+		setChanged();
+		notifyObservers(this.estadoConstruccion);
 	}
 	
 	@Override

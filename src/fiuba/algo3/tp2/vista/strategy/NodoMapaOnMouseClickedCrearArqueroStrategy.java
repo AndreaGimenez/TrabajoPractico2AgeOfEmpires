@@ -9,7 +9,6 @@ import fiuba.algo3.tp2.juego.OroInsuficienteException;
 import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.vista.MensajeDeError;
 import fiuba.algo3.tp2.vista.VistaMapa;
@@ -22,7 +21,6 @@ import javafx.scene.layout.Pane;
 
 public class NodoMapaOnMouseClickedCrearArqueroStrategy implements NodoMapaOnMouseClickedStrategy {
 	
-	private ContenedorMapa contenedorMapa;
 	private Cuartel cuartel;
 	private Juego juego;
 	private VistaMapa vistaMapa;
@@ -30,7 +28,6 @@ public class NodoMapaOnMouseClickedCrearArqueroStrategy implements NodoMapaOnMou
 	
 	public NodoMapaOnMouseClickedCrearArqueroStrategy(ContenedorMapa contenedorMapa, Cuartel cuartel, Juego juego, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador) {
 		
-		this.contenedorMapa = contenedorMapa;
 		this.cuartel = cuartel;
 		this.juego = juego;
 		this.vistaMapa = vistaMapa;

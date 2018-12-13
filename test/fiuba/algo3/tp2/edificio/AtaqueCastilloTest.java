@@ -23,6 +23,7 @@ import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
+import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
 import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 
 public class AtaqueCastilloTest {
@@ -32,7 +33,7 @@ public class AtaqueCastilloTest {
 	
 	@Test
 	public void test_DadoUnAldeanoQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = mock(Castillo.class);
@@ -54,7 +55,7 @@ public class AtaqueCastilloTest {
 	
 	@Test
 	public void test_DadoUnAldeanoQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca4Veces_ElAldeanoDeberiaEstarMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = mock(Castillo.class);
@@ -77,7 +78,7 @@ public class AtaqueCastilloTest {
 	
 	@Test
 	public void test_DadoUnAldeanoQueSeEncuentraFueraDeLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarVivo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = mock(Castillo.class);
@@ -96,7 +97,7 @@ public class AtaqueCastilloTest {
 	
 	@Test
 	public void test_DadoUnCuartelQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca14Veces_ElEdificioDeberiaEstarDestruido() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = mock(Castillo.class);
@@ -119,7 +120,7 @@ public class AtaqueCastilloTest {
 	
 	@Test
 	public void test_DadoUnCuartelYUnAldeanoQueSeEncuentranEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca14Veces_ElEdificioDeberiaEstarDestruidoYElAldeanoMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, AtaqueInvalidoException {
 		
 		Mapa mapa = mock(Mapa.class);
 		AtacadorZona castillo = mock(Castillo.class);

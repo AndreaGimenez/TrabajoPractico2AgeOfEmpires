@@ -21,14 +21,12 @@ import javafx.scene.layout.Pane;
 
 public class NodoMapaOnMouseClickedCrearArmaAsedioStrategy implements NodoMapaOnMouseClickedStrategy {
 
-	private ContenedorMapa contenedorMapa;
 	private Castillo castillo;
 	private Juego juego;
 	private VistaMapa vistaMapa;
 	private VistaSeleccionador vistaSeleccionador;
 	
 	public NodoMapaOnMouseClickedCrearArmaAsedioStrategy(ContenedorMapa contenedorMapa, Castillo castillo, Juego juego, VistaMapa vistaMapa, VistaSeleccionador vistaSeleccionador) {
-		this.contenedorMapa = contenedorMapa;
 		this.castillo = castillo;
 		this.juego = juego;
 		this.vistaMapa = vistaMapa;

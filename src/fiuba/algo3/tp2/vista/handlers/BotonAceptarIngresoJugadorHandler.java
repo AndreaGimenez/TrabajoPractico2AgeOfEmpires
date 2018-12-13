@@ -79,7 +79,6 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 				try {
 					this.contenedorJuego = new ContenedorPartida(stage);
 					Juego juego = crearJuego(nombresJugadores);
-					//this.contenedorJuego = new ContenedorPartida(stage, juego);
 					Scene escenaJuego = new Scene(contenedorJuego);
 					AplicacionOnKeyPressEventHandler AplicacionOnKeyPressEventHandler = new AplicacionOnKeyPressEventHandler(stage, contenedorJuego.getBarraDeMenu());
 			        escenaJuego.setOnKeyPressed(AplicacionOnKeyPressEventHandler);

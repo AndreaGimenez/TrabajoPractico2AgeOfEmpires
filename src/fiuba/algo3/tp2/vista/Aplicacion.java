@@ -21,7 +21,7 @@ public class Aplicacion extends Application {
         
         Musica musica = new Musica("src/fiuba/algo3/tp2/vista/musica/MusicaDeInicio.mp3");
         musica.iniciarReproduccionMusica();
-        
+       
         ContenedorIngresoJugadores contenedorIngresoJugadores = new ContenedorIngresoJugadores(stage, musica);
         Scene escenaIngresoJugadores = new Scene(contenedorIngresoJugadores, 640, 480);
 
