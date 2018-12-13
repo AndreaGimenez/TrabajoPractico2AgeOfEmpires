@@ -9,6 +9,7 @@ import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Posicionable;
 import fiuba.algo3.tp2.movimiento.Movible;
+import fiuba.algo3.tp2.unidad.Aldeano;
 import fiuba.algo3.tp2.unidad.ArmaAsedio;
 import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Atacador;
@@ -65,9 +66,60 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		pane.setBackground(obtenerFondoArmaAsedio((ArmaAsedio)posicionable));
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
+			pane.setBackground(obtenerFondoArmaAsedioDeJugadorRojo((ArmaAsedio) posicionable));
+		else
+			pane.setBackground(obtenerFondoArmaAsedioDeJugadorAzul((ArmaAsedio) posicionable));
 	}
-	
+
+	private Background obtenerFondoArmaAsedioDeJugadorAzul(ArmaAsedio armaAsedio) {
+
+		String imagePath = "";
+
+		if(armaAsedio.estaMontada()) {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada.jpg";
+		}else {
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-desmontada.png";
+		}
+
+		if(armaAsedio.estaMuerta())
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+
+		Image imagen = new Image(imagePath,
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoArmaAsedio = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoArmaAsedio);
+	}
+
+	private Background obtenerFondoArmaAsedioDeJugadorRojo(ArmaAsedio armaAsedio) {
+
+		String imagePath;
+
+		if(armaAsedio.estaMontada())
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada-roja.jpg";
+		else
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-desmontada-roja.jpg";
+
+		if(armaAsedio.estaMuerta())
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+
+		Image imagen = new Image(imagePath,
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoArmaAsedio = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoArmaAsedio);
+
+	}
+
 	public void dibujarPosicionable(ArmaAsedio armaAsedio) {
 		Pane nodo = contenedorMapa.obtenerNodo(armaAsedio.obtenerPosicion());
 		dibujarPosicionable(armaAsedio, nodo);
@@ -106,31 +158,14 @@ public class VistaArmaAsedio implements VistaPosicionable, VistaMovible, Observe
 	
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
+
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedio((ArmaAsedio)movible), movible.obtenerPosicion());
-	}
-	
-	private Background obtenerFondoArmaAsedio(ArmaAsedio armaAsedio) {
-		
-		Image imagen = null;
-		if(armaAsedio.estaMontada()) {
-			imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-montada.jpg", 
-					 50, 
-					 50, 
-					 false, 
-					 true);
-		}else {
-			imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/arma-asedio-desmontada.png", 
-					 50, 
-					 50, 
-					 false, 
-					 true);
+
+		if (this.juego.posicionablePerteneceAPrimerJugador(movible)) {
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedioDeJugadorRojo((ArmaAsedio) movible), movible.obtenerPosicion());
+		} else {
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArmaAsedioDeJugadorAzul((ArmaAsedio) movible), movible.obtenerPosicion());
 		}
-		
-
-       BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-       return new Background(fondoAldeano);
 	}
 
 	@Override

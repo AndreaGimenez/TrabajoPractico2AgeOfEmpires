@@ -61,7 +61,10 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 
 	@Override
 	public void dibujarPosicionable(Posicionable posicionable, Pane pane) {
-		pane.setBackground(obtenerFondoArquero());
+		if(this.juego.posicionablePerteneceAPrimerJugador(posicionable))
+			pane.setBackground(obtenerFondoArqueroDeJugadorRojo((Arquero) posicionable));
+		else
+			pane.setBackground(obtenerFondoArqueroDeJugadorAzul((Arquero) posicionable));
 	}
 	
 	public void dibujarPosicionable(Arquero arquero) {
@@ -89,20 +92,51 @@ public class VistaArquero implements VistaPosicionable, VistaMovible, Observer {
 	@Override
 	public void dibujarPosicionable(Movible movible, Posicion posicionAnterior) {
 		ContenedorPartida.contenedorMapa.setBackground(Background.EMPTY, posicionAnterior);
-		ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArquero(), movible.obtenerPosicion());
+
+		if(this.juego.posicionablePerteneceAPrimerJugador(movible)) {
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArqueroDeJugadorRojo((Arquero) movible), movible.obtenerPosicion());
+		}else{
+			ContenedorPartida.contenedorMapa.setBackground(obtenerFondoArqueroDeJugadorAzul((Arquero) movible), movible.obtenerPosicion());
+		}
 	}
 
-	public Background obtenerFondoArquero() {
-		
-		Image imagen = new Image("file:src/fiuba/algo3/tp2/vista/imagenes/arquero.jpeg", 
-					 VistaMapa.TAMANIO_NODO, 
-					 VistaMapa.TAMANIO_NODO, 
-					 false, 
-					 true);
+	private Background obtenerFondoArqueroDeJugadorAzul(Arquero arquero) {
+		String imagePath;
 
-        BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		if(arquero.estaMuerta())
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+		else
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero.jpg";
 
-        return new Background(fondoAldeano);
+		Image imagen = new Image(imagePath,
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoAldeano);
+	}
+
+	private Background obtenerFondoArqueroDeJugadorRojo(Arquero arquero) {
+
+		String imagePath;
+
+		if(arquero.estaMuerta())
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/unidad-muerta.jpg";
+		else
+			imagePath = "file:src/fiuba/algo3/tp2/vista/imagenes/arquero-rojo.jpg";
+
+		Image imagen = new Image(imagePath,
+				VistaMapa.TAMANIO_NODO,
+				VistaMapa.TAMANIO_NODO,
+				false,
+				true);
+
+		BackgroundImage fondoAldeano = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+		return new Background(fondoAldeano);
 	}
 
 	@Override
