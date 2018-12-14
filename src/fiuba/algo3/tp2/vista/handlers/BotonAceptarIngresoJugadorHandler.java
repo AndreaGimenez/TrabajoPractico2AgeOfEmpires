@@ -155,6 +155,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
 		
 		inicializarPosicionablesJugador1(mapa, juego);
 		inicializarPosicionablesJugador2(mapa, juego);
+
 		try {
 			juego.avanzarJugador();
 		} catch (EdificioNoAptoParaConstruccionException | EdificioConConstructorAsignadoException

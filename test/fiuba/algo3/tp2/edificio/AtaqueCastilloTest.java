@@ -2,37 +2,40 @@ package fiuba.algo3.tp2.edificio;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
-import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
-import fiuba.algo3.tp2.mapa.Atacable;
-import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
-import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
-import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
-import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.Posicionable;
-import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
-import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
-import fiuba.algo3.tp2.unidad.Aldeano;
-import fiuba.algo3.tp2.unidad.Unidad;
 import fiuba.algo3.tp2.construccion.EdificioConConstructorAsignadoException;
 import fiuba.algo3.tp2.construccion.EdificioNoAptoParaConstruccionException;
 import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
 import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
+import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
+import fiuba.algo3.tp2.excepciones.CeldaInexistenteException;
+import fiuba.algo3.tp2.excepciones.CeldaOcupadaException;
+import fiuba.algo3.tp2.excepciones.EdificioConReparadorAsignadoException;
+import fiuba.algo3.tp2.excepciones.EdificioDestruidoException;
+import fiuba.algo3.tp2.excepciones.EdificioNoAptoParaReparacionException;
+import fiuba.algo3.tp2.excepciones.TamanioInvalidoException;
 import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
+import fiuba.algo3.tp2.juego.Juego;
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
+import fiuba.algo3.tp2.mapa.Atacable;
+import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.Posicionable;
+import fiuba.algo3.tp2.reparacion.YaSeReparoEnESteTurnoException;
+import fiuba.algo3.tp2.unidad.Aldeano;
+import fiuba.algo3.tp2.unidad.Unidad;
 
 public class AtaqueCastilloTest {
 
@@ -41,128 +44,105 @@ public class AtaqueCastilloTest {
 	
 	@Test
 	public void test_DadoUnAldeanoQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
-		Mapa mapa = mock(Mapa.class);
-		AtacadorZona castillo = mock(Castillo.class);
-		when(castillo.obtenerPosicion()).thenReturn(new Posicion(1,1));
-		Atacable aldeano = mock(Aldeano.class);
-		when(aldeano.obtenerPosicion()).thenReturn(new Posicion(4,1));
-		AtaqueZona ataque = new AtaqueCastillo(castillo, mapa);
+		Mapa mapa = new Mapa(20,20);
+		Juego juego = new Juego(mapa);
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
-		Collection<Posicionable> posicionables = new ArrayList<Posicionable>();
-		posicionables.add(aldeano);
-		when(mapa.obtenerPosicionables(any())).thenReturn(posicionables);
+		Castillo castillo =(Castillo)mapa.obtenerPosicionable(new Posicion(0,0));	
+		Aldeano aldeano = new Aldeano(new Posicion(0,4), mapa);
 		
-		ataque.atacar(posicionables);
-		castillo.actualizarEstadoParaSiguienteTurno();
-		ataque.atacar(posicionables);
-		castillo.actualizarEstadoParaSiguienteTurno();
-		ataque.atacar(posicionables); 
-		castillo.actualizarEstadoParaSiguienteTurno();
-		ataque.atacar(posicionables); 
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
 		
-		assertEquals(true,((Unidad)aldeano).estaMuerta());
+		jugador2.agregarUnidad(aldeano, mapa, false);
+		
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		
+		assertEquals(true,aldeano.estaMuerta());
+	}
+
+	@Test
+	public void test_DadoUnAldeanoQueSeEncuentraFueraDeLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarVivo() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
+		
+		Mapa mapa = new Mapa(20,20);
+		Juego juego = new Juego(mapa);
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
+		
+		Castillo castillo =(Castillo)mapa.obtenerPosicionable(new Posicion(0,0));	
+		Aldeano aldeano = new Aldeano(new Posicion(0,19), mapa);
+		
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
+		
+		jugador2.agregarUnidad(aldeano, mapa, false);
+		
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		
+		assertEquals(false,aldeano.estaMuerta());
 	}
 	
 	@Test
-	public void test_DadoUnAldeanoQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca4Veces_ElAldeanoDeberiaEstarMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException {
+	public void test_DadoUnCuartelQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca13Veces_ElEdificioDeberiaEstarDestruido() throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException{
 		
-		Mapa mapa = mock(Mapa.class);
-		AtacadorZona castillo = mock(Castillo.class);
-		when(castillo.obtenerPosicion()).thenReturn(new Posicion(1,1));
-		Atacable aldeano = mock(Aldeano.class);
-		when(aldeano.obtenerPosicion()).thenReturn(new Posicion(4,1));
-		AtaqueZona ataque = new AtaqueCastillo(castillo, mapa);
+		Mapa mapa = new Mapa(20,20);
+		Juego juego = new Juego(mapa);
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
-		Collection<Posicionable> posicionables = new ArrayList<Posicionable>();
-		posicionables.add(aldeano);
-		when(mapa.obtenerPosicionables(Mockito.any())).thenReturn(posicionables);
+		Castillo castillo =(Castillo)mapa.obtenerPosicionable(new Posicion(0,0));	
+		Cuartel cuartel = new Cuartel(new Posicion(0,5), mapa);
 		
-		ataque.atacar(posicionables);
-		ataque.atacar(posicionables);
-		ataque.atacar(posicionables);
-		ataque.atacar(posicionables);
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
 		
-		//? Como verificar que el aldeano esta muerto?
-	}
-	
-	@Test
-	public void test_DadoUnAldeanoQueSeEncuentraFueraDeLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarVivo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException {
+		jugador2.agregarEdificio(cuartel, false);
 		
-		Mapa mapa = mock(Mapa.class);
-		AtacadorZona castillo = mock(Castillo.class);
-		when(castillo.obtenerPosicion()).thenReturn(new Posicion(1,1));
-		AtaqueZona ataque = new AtaqueCastillo(castillo, mapa);
 		
-		Collection<Posicionable> posicionables = new ArrayList<Posicionable>();
-		when(mapa.obtenerPosicionables(any())).thenReturn(posicionables);
-		
-		ataque.atacar(posicionables);
-		ataque.atacar(posicionables);
-		ataque.atacar(posicionables);
-		
-		//Como checkear que el aldeano esta vivo?
-	}
-	
-	@Test
-	public void test_DadoUnCuartelQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca14Veces_ElEdificioDeberiaEstarDestruido() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, AtaqueInvalidoException {
-		
-		Mapa mapa = mock(Mapa.class);
-		AtacadorZona castillo = mock(Castillo.class);
-		when(castillo.obtenerPosicion()).thenReturn(new Posicion(1,1));
-		AtaqueZona ataque = new AtaqueCastillo(castillo, mapa);
-		
-		Atacable cuartel = mock(Cuartel.class);
-		when(castillo.obtenerPosicion()).thenReturn(new Posicion(3,1));
-		
-		Collection<Posicionable> posicionables = new ArrayList<Posicionable>();
-		posicionables.add(cuartel);
-		Mockito.when(mapa.obtenerPosicionables(Mockito.any())).thenReturn(posicionables);
-		
-		for(int i = 1; i <= 14; i++) {
-			ataque.atacar(posicionables);
+		for(int i = 0 ; i < 13 ; i ++) {
+			juego.avanzarJugador();/*ATAQUE*/
+			juego.avanzarJugador();
 		}
 		
-		//? Como verificar que el cuartel esta destruido?
+		assertEquals(true,cuartel.estaDestruido());
 	}
 	
 	@Test
-	public void test_DadoUnCuartelYUnAldeanoQueSeEncuentranEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca14Veces_ElEdificioDeberiaEstarDestruidoYElAldeanoMuerto() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, AtaqueInvalidoException {
+	public void test_DadoUnCuartelYUnAldeanoQueSeEncuentranEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca14Veces_ElEdificioDeberiaEstarDestruidoYElAldeanoMuerto() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
 		
-		Mapa mapa = mock(Mapa.class);
-		AtacadorZona castillo = mock(Castillo.class);
-		when(castillo.obtenerPosicion()).thenReturn(new Posicion(1,1));
-		Atacable cuartel = mock(Cuartel.class);
-		when(cuartel.obtenerPosicion()).thenReturn(new Posicion(3,1));
-		Atacable aldeano = mock(Aldeano.class);
-		when(aldeano.obtenerPosicion()).thenReturn(new Posicion(2,1));
-		AtaqueZona ataque = new AtaqueCastillo(castillo, mapa);
+		Mapa mapa = new Mapa(20,20);
+		Juego juego = new Juego(mapa);
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
-		Collection<Posicionable> posicionables = new ArrayList<Posicionable>();
-		posicionables.add(cuartel);
-		posicionables.add(aldeano);
-		when(mapa.obtenerPosicionables(Mockito.any())).thenReturn(posicionables);
+		Castillo castillo =(Castillo)mapa.obtenerPosicionable(new Posicion(0,0));	
+		Cuartel cuartel = new Cuartel(new Posicion(0,5), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(4,4), mapa);
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
 		
-		for(int i = 1; i <= 14; i++) {
-			ataque.atacar(posicionables);
+		jugador2.agregarEdificio(cuartel, false);
+		jugador2.agregarUnidad(aldeano, mapa, false);
+		
+		for(int i = 0 ; i < 3 ; i ++) {
+			juego.avanzarJugador();/*ATAQUE*/
+			juego.avanzarJugador();
 		}
+		assertEquals(true,aldeano.estaMuerta());
 		
-		//? Como verificar que el cuartel esta destruido y el aldeano muerto?
-		
-		/* ?
-		Ataque ataqueEspadachin = mock(AtaqueEspadachin.class);
-		when(ataqueEspadachin.obtenerDanioEdificio()).thenReturn(25);
-		exceptionRule.expect(EdificioDestruidoException.class);
-		cuartel.recibirDanio(ataqueEspadachin);
-		
-		exceptionRule.expect(UnidadMuertaException.class);
-		when(ataqueEspadachin.obtenerDanioEdificio()).thenReturn(15);
-		aldeano.recibirDanio(ataqueEspadachin);
-		*/
+		for(int i = 0 ; i < 10 ; i ++) {
+			juego.avanzarJugador();/*ATAQUE*/
+			juego.avanzarJugador();
+		}
+		assertEquals(true,cuartel.estaDestruido());
 	}
 }

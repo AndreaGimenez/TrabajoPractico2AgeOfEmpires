@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.integracion.entrega_2;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -25,11 +27,15 @@ import fiuba.algo3.tp2.unidad.Arquero;
 import fiuba.algo3.tp2.unidad.Atacador;
 import fiuba.algo3.tp2.excepciones.AtaqueFueraDeRangoException;
 import fiuba.algo3.tp2.excepciones.AtaqueInvalidoException;
+import fiuba.algo3.tp2.excepciones.CantidadDeJugadoresInvalidaException;
 import fiuba.algo3.tp2.unidad.Espadachin;
 import fiuba.algo3.tp2.unidad.MontajeInvalidoException;
 import fiuba.algo3.tp2.excepciones.UnidadMuertaException;
 import fiuba.algo3.tp2.excepciones.UnidadNoAtacableException;
+import fiuba.algo3.tp2.juego.Juego;
 import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.OroInsuficienteException;
+import fiuba.algo3.tp2.juego.PoblacionMaximaAlcanzadaException;
 
 /**
  * Tests de Ataques de unidades y castillo
@@ -209,152 +215,107 @@ public class Test03 {
 	}
 	
 	// ATAQUES DE CASTILLO
-	
 	@Test
-	public void testUnCastilloAtacaUnaZonaEnLaQueHayUnAldeanoHastaMatarlo() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+	public void test_DadoUnAldeanoQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarMuerto() 
+			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException {
 		
-		Mapa mapa = new Mapa(250, 250);
-		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
-		Atacador espadachin = new Espadachin(new Posicion(9,5), mapa);
-		Atacable aldeano = new Aldeano(new Posicion(10,5), mapa);
+		Mapa mapa = new Mapa(20,20);
+		Juego juego = new Juego(mapa);
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
-		castillo.atacar();
-		castillo.actualizarEstadoParaSiguienteTurno();
-		castillo.atacar();
-		castillo.actualizarEstadoParaSiguienteTurno();
-		castillo.atacar();
+		Castillo castillo =(Castillo)mapa.obtenerPosicionable(new Posicion(0,0));	
+		Aldeano aldeano = new Aldeano(new Posicion(0,4), mapa);
 		
-		exceptionRule.expect(UnidadMuertaException.class);
-		espadachin.atacar(aldeano);
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
+		
+		jugador2.agregarUnidad(aldeano, mapa, false);
+		
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		
+		assertEquals(true,aldeano.estaMuerta());
+	}
+
+	@Test
+	public void test_DadoUnAldeanoQueSeEncuentraFueraDeLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca3Veces_ElAldeanoDeberiaEstarVivo() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
+		
+		Mapa mapa = new Mapa(20,20);
+		Juego juego = new Juego(mapa);
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
+		
+		Castillo castillo =(Castillo)mapa.obtenerPosicionable(new Posicion(0,0));	
+		Aldeano aldeano = new Aldeano(new Posicion(0,19), mapa);
+		
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
+		
+		jugador2.agregarUnidad(aldeano, mapa, false);
+		
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		juego.avanzarJugador();/*ATAQUE*/
+		juego.avanzarJugador();
+		
+		assertEquals(false,aldeano.estaMuerta());
 	}
 	
 	@Test
-	public void testUnCastilloAtacaUnaZonaEnLaQueHayUnAldeanoHastaMatarloYContinuaAtacando() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+	public void test_DadoUnCuartelQueSeEncuentraEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca13Veces_ElEdificioDeberiaEstarDestruido() throws TamanioInvalidoException, CantidadDeJugadoresInvalidaException, CeldaOcupadaException, CeldaInexistenteException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException{
 		
-		Mapa mapa = new Mapa(250, 250);
-		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
-		Atacador espadachin = new Espadachin(new Posicion(9,5), mapa);
-		Atacable aldeano = new Aldeano(new Posicion(10,5), mapa);
+		Mapa mapa = new Mapa(20,20);
+		Juego juego = new Juego(mapa);
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
-		castillo.atacar();
-		castillo.actualizarEstadoParaSiguienteTurno();
-		castillo.atacar();
-		castillo.actualizarEstadoParaSiguienteTurno();
-		castillo.atacar();
-		castillo.actualizarEstadoParaSiguienteTurno();
-		castillo.atacar();
-		castillo.actualizarEstadoParaSiguienteTurno();
-		castillo.atacar();
-		castillo.actualizarEstadoParaSiguienteTurno();
-		castillo.atacar();
+		Castillo castillo =(Castillo)mapa.obtenerPosicionable(new Posicion(0,0));	
+		Cuartel cuartel = new Cuartel(new Posicion(0,5), mapa);
 		
-		exceptionRule.expect(UnidadMuertaException.class);
-		espadachin.atacar(aldeano);
-	}
-	
-	@Test
-	public void testUnCastilloAtacaUnaZonaConUnAldeanoFueraDeLaZonaAldeanoFueraDeLaZonaDeAtaque() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, 
-			UnidadMuertaException, EdificioDestruidoException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
 		
-		Mapa mapa = new Mapa(250, 250);
-		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
-		Atacador espadachin = new Espadachin(new Posicion(11,5), mapa);
-		Atacable aldeano = new Aldeano(new Posicion(12,5), mapa);
+		jugador2.agregarEdificio(cuartel, false);
 		
-		castillo.atacar();
-		castillo.actualizarEstadoParaSiguienteTurno();
-		castillo.atacar();
-		castillo.actualizarEstadoParaSiguienteTurno();
-		castillo.atacar();
 		
-		espadachin.atacar(aldeano);
-		espadachin.actualizarEstadoParaSiguienteTurno();
-		espadachin.atacar(aldeano);
-		espadachin.actualizarEstadoParaSiguienteTurno();
-		
-		exceptionRule.expect(UnidadMuertaException.class);
-		espadachin.atacar(aldeano);
-	}
-	
-	@Test
-	public void testUnCastilloAtacaUnCuartelQueSeEncuentraEnLaZonaDeAtaque() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException, EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
-		
-		Mapa mapa = new Mapa(250, 250);
-		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
-		Atacador espadachin = new Espadachin(new Posicion(10,5), mapa);
-		Atacable cuartel = new Cuartel(new Posicion(11,5), mapa);
-		
-		for(int i = 1; i <= 14; i++) {
-			castillo.atacar();
-			castillo.actualizarEstadoParaSiguienteTurno();
+		for(int i = 0 ; i < 13 ; i ++) {
+			juego.avanzarJugador();/*ATAQUE*/
+			juego.avanzarJugador();
 		}
 		
-		exceptionRule.expect(EdificioDestruidoException.class);
-		espadachin.atacar(cuartel);
+		assertEquals(true,cuartel.estaDestruido());
 	}
 	
 	@Test
-	public void testUnCastilloAtacaCuandoHayUnCuartelFueraDeLaZonaDeAtaque() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException,
-			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
+	public void test_DadoUnCuartelYUnAldeanoQueSeEncuentranEnLaZonaDeAtaqueDeUnCastillo_CuandoElCastilloAtaca14Veces_ElEdificioDeberiaEstarDestruidoYElAldeanoMuerto() throws TamanioInvalidoException, CeldaOcupadaException, CeldaInexistenteException, CantidadDeJugadoresInvalidaException, PoblacionMaximaAlcanzadaException, OroInsuficienteException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException, AtaqueInvalidoException {
 		
-		Mapa mapa = new Mapa(250, 250);
-		AtacadorZona castillo = new Castillo(new Posicion(5,5), mapa);
-		Atacador espadachin = new Espadachin(new Posicion(11,5), mapa);
-		Atacable cuartel = new Cuartel(new Posicion(12,5), mapa);
+		Mapa mapa = new Mapa(20,20);
+		Juego juego = new Juego(mapa);
+		juego.iniciar(new String[] {"Jugador 1", "Jugador 2"});
 		
-		for(int i = 1; i <= 14; i++) {
-			castillo.atacar();
-			castillo.actualizarEstadoParaSiguienteTurno();
+		Castillo castillo =(Castillo)mapa.obtenerPosicionable(new Posicion(0,0));	
+		Cuartel cuartel = new Cuartel(new Posicion(0,5), mapa);
+		Aldeano aldeano = new Aldeano(new Posicion(4,4), mapa);
+		juego.avanzarJugador();
+		Jugador jugador2 = juego.obtenerJugadorActual();
+		
+		jugador2.agregarEdificio(cuartel, false);
+		jugador2.agregarUnidad(aldeano, mapa, false);
+		
+		for(int i = 0 ; i < 3 ; i ++) {
+			juego.avanzarJugador();/*ATAQUE*/
+			juego.avanzarJugador();
 		}
+		assertEquals(true,aldeano.estaMuerta());
 		
-		for(int i = 1; i <= 17; i++) {
-			espadachin.atacar(cuartel);
-			espadachin.actualizarEstadoParaSiguienteTurno();
+		for(int i = 0 ; i < 10 ; i ++) {
+			juego.avanzarJugador();/*ATAQUE*/
+			juego.avanzarJugador();
 		}
-		exceptionRule.expect(EdificioDestruidoException.class);
-		espadachin.atacar(cuartel);
-	}
-	
-	@Test
-	public void testUnCastilloUbicadoEnLaEsquinaInferiorIzquierdaAtacaUnCuartelDentroDeLaZonaDeAtaque() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException,
-			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
-		
-		Mapa mapa = new Mapa(250, 250);
-		AtacadorZona castillo = new Castillo(new Posicion(0,0), mapa);
-		Atacador espadachin = new Espadachin(new Posicion(4,0), mapa);
-		Atacable cuartel = new Cuartel(new Posicion(5,0), mapa);
-		
-		for(int i = 1; i <= 14; i++) {
-			castillo.atacar();
-			castillo.actualizarEstadoParaSiguienteTurno();
-		}
-		
-		exceptionRule.expect(EdificioDestruidoException.class);
-		espadachin.atacar(cuartel);
-	}
-	
-	@Test
-	public void testUnCastilloUbicadoEnLaEsquinaSuperiorDerechoAtacaUnAldeanoDentroDeLaZonaDeAtaque() 
-			throws CeldaOcupadaException, CeldaInexistenteException, TamanioInvalidoException, AtaqueFueraDeRangoException,
-			EdificioDestruidoException, UnidadMuertaException, AtaqueInvalidoException, EdificioNoAptoParaReparacionException, EdificioConReparadorAsignadoException, EdificioNoAptoParaConstruccionException, EdificioConConstructorAsignadoException, YaSeReparoEnESteTurnoException {
-		
-		Mapa mapa = new Mapa(250, 250);
-		AtacadorZona castillo = new Castillo(new Posicion(246,246), mapa);
-		Atacador espadachin = new Espadachin(new Posicion(245,249), mapa);
-		Atacable aldeano = new Aldeano(new Posicion(244,249), mapa);
-		
-		for(int i = 1; i <= 3; i++) {
-			castillo.atacar();
-			castillo.actualizarEstadoParaSiguienteTurno();
-		}
-		
-		exceptionRule.expect(UnidadMuertaException.class);
-		espadachin.atacar(aldeano);
+		assertEquals(true,cuartel.estaDestruido());
 	}
 }
