@@ -188,4 +188,8 @@ public class Juego {
 	public boolean posicionablePerteneceAPrimerJugador(Posicionable posicionable){
 		return this.ronda.posicionablePerteneceAPrimerJugador(posicionable);
 	}
+
+	public void agregarEdificioASegundoJugador(Edificio edificio, boolean check) throws OroInsuficienteException {
+		this.ronda.agregarEdificioASegundoJugador(edificio, check);
+	}
 }

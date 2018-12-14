@@ -126,7 +126,7 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
     	
     	Mapa mapa = new Mapa(35, 20);
         Juego juego = new Juego(mapa);
-        juego.iniciar(nombresJugadores.toArray(new String[juego.CANTIDAD_DE_JUGADORES]));
+        juego.iniciar(nombresJugadores.toArray(new String[Juego.CANTIDAD_DE_JUGADORES]));
         
         this.contenedorJuego.setControles(juego);
         this.contenedorJuego.setMapa(juego, stage);
@@ -219,15 +219,14 @@ public class BotonAceptarIngresoJugadorHandler implements EventHandler<ActionEve
         Castillo castillo = (Castillo)mapa.obtenerPosicionable(new Posicion(mapa.getTamanioX()-1, mapa.getTamanioY()-1));
         castillo.addObserver(vistaCastillo);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaCastillo, castillo.obtenerPosicion());
-        juego.avanzarJugador();
-        juego.obtenerJugadorActual().agregarEdificio(castillo, false);
+        juego.agregarEdificioASegundoJugador(castillo, false);
         vistaCastillo.dibujarPosicionable(castillo);
         
         PlazaCentral plazaCentral = (PlazaCentral)mapa.obtenerPosicionable(new Posicion(mapa.getTamanioX()-7, mapa.getTamanioY()-2));
         VistaPlazaCentral vistaPlazaCentral = new VistaPlazaCentral(ContenedorPartida.contenedorMapa, ContenedorPartida.contenedorControles, ContenedorPartida.vistaMapa, ContenedorPartida.vistaSeleccionador, juego, plazaCentral);
         plazaCentral.addObserver(vistaPlazaCentral);
         ContenedorPartida.contenedorMapa.agregarVistaPosicionable(vistaPlazaCentral, plazaCentral.obtenerPosicion());
-        juego.obtenerJugadorActual().agregarEdificio(plazaCentral, false);
+		juego.agregarEdificioASegundoJugador(plazaCentral, false);
         vistaPlazaCentral.dibujarPosicionable(plazaCentral);
 		
         
